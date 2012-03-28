@@ -55,7 +55,9 @@ public class RestHelper {
 				data = "";
 			}
 			
-			connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
+			if(httpMethod.toUpperCase().equals("POST")){
+				connection.setFixedLengthStreamingMode(data.getBytes().length);
+			}
 			
 			if(!data.equals("")){
 				DataOutputStream wr = new DataOutputStream(connection.getOutputStream());

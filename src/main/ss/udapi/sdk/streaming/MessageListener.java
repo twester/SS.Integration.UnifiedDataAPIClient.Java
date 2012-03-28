@@ -55,6 +55,7 @@ public class MessageListener extends Thread {
 		
 		try{
 			ConnectionFactory connectionFactory = new ConnectionFactory();
+	
 			String host = amqpUri.getHost();
 			
 			if (host != null) {
