@@ -1,7 +1,7 @@
 This is the master repository for the Sporting Solutions Unified Data API Client for Java.
 The SDK provides an easy to use interface into the Sporting Solutions Unified Data API.  
 
-Usage of this SDK requires a GTP username and password (available on request), it’s usage is authorised only for current or prospective clients.
+Usage of this SDK requires a GTP username and password (available on request), itï¿½s usage is authorised only for current or prospective clients.
 
 Any bug reports, comments, feedback or enhancements requests are gratefully received.
 
@@ -17,7 +17,7 @@ Getting Started
 ----------------------
 ```java	
 Credentials credentials = new CredentialsImpl ("jim@bookies","password" );
-URL theURL = new URL("http://api.sportingsolutions.com");
+URL theURL = new URL("http://{enter url here}");
 Session theSession = SessionFactory.createSession(theURL, credentials);
 
 //Get the Unified Data API Service
