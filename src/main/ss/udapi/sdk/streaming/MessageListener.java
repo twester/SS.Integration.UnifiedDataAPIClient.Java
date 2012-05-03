@@ -68,7 +68,7 @@ public class MessageListener extends Thread {
 	        }
 	        
 	        String userInfo = amqpUri.getRawUserInfo();
-	        userInfo = URLDecoder.decode(userInfo);
+	        userInfo = URLDecoder.decode(userInfo,"UTF-8");
 	        if (userInfo != null) {
 	            String userPass[] = userInfo.split(":");
 	            if (userPass.length > 2) {
