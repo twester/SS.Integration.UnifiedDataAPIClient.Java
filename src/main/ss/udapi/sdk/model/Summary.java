@@ -25,22 +25,6 @@ public class Summary {
 		Id = id;
 	}
 
-	public String getDescription() {
-		return Description;
-	}
-
-	public void setDescription(String description) {
-		Description = description;
-	}
-	
-	public List<Participant> getParticipants(){
-		return Participants;
-	}
-	
-	public void setParticipnts(List<Participant> participants){
-		Participants = participants;
-	}
-
 	public String getDate() {
 		return Date;
 	}
@@ -57,43 +41,19 @@ public class Summary {
 		Tags = tags;
 	}
 
-	public String getDefinitionId() {
-		return DefinitionId;
+	public int getMatchStatus() {
+		return MatchStatus;
 	}
-
-	public void setDefinitionId(String definitionId) {
-		DefinitionId = definitionId;
-	}
-
-	public String getDefinitionName() {
-		return DefinitionName;
-	}
-
-	public void setDefinitionName(String definitionName) {
-		DefinitionName = definitionName;
-	}
-
-	public String getType() {
-		return Type;
-	}
-
-	public void setType(String type) {
-		Type = type;
+	
+	public void setMatchStatus(int matchStatus) {
+		MatchStatus = matchStatus;
 	}
 
 	private String Id;
      
-	private String Description;
-	
-	private List<Participant> Participants;
-
 	private String Date;
 	
 	private List<Tag> Tags;
-      
-	private String DefinitionId;
- 
-	private String DefinitionName;
-
-	private String Type;
+	
+	private int MatchStatus;
 }
