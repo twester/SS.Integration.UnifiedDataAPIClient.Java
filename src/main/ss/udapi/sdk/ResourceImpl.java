@@ -68,7 +68,7 @@ public class ResourceImpl extends Endpoint implements Resource {
 					}catch(MalformedURLException ex){
 						logger.log(Level.WARNING, "Malformed Login URL", ex);
 					}
-					return RestHelper.getResponse(theURL, null, "GET", "application/json", 60000, headers, false);
+					return RestHelper.getResponse(theURL, null, "GET", "application/json", 30000, headers, false);
 				}
 			}
 		}

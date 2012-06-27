@@ -52,10 +52,12 @@ public class MessageListener extends Thread {
 	public void run(){
 		Connection conn = null;
 		Channel channel = null;
+		QueueingConsumer consumer = null;
 		
 		try{
 			ConnectionFactory connectionFactory = new ConnectionFactory();
-	
+			
+			connectionFactory.setRequestedHeartbeat(5);
 			String host = amqpUri.getHost();
 			
 			if (host != null) {
@@ -95,7 +97,7 @@ public class MessageListener extends Thread {
 	        
 	        actionExecuter.execute(new ConnectedAction(events));
 	        
-	        QueueingConsumer consumer = new QueueingConsumer(channel);
+	        consumer = new QueueingConsumer(channel);
 			channel.basicConsume(queueName,true,consumer);
 			channel.basicQos(0, 10, false);
 			
@@ -113,23 +115,36 @@ public class MessageListener extends Thread {
 				queue.put(message);
 
 			}
-			channel.close();
-			conn.close();
+			
+			closeRMQChannel(channel, consumer, conn);
+			
 			actionExecuter.execute(new DisconnectedAction(events));
 			actionExecuter.shutdown();
 			
 		}catch(IOException ioe){
 			logger.log(Level.WARNING, "Error", ioe);
+			closeRMQChannel(channel, consumer, conn);
 		}
-		catch(InterruptedException e){
-			try{
-				channel.close();
-				conn.close();
-				actionExecuter.execute(new DisconnectedAction(events));
-				actionExecuter.shutdown();
-			}catch(IOException ex){
-				logger.log(Level.WARNING, "Error", ex);
-			}
+		catch(InterruptedException e){			
+			closeRMQChannel(channel, consumer, conn);
+			actionExecuter.execute(new DisconnectedAction(events));
+			actionExecuter.shutdown();			
+		}
+	
+	}
+	
+	private void closeRMQChannel(Channel channel, QueueingConsumer consumer,Connection conn)
+	{
+		try {
+			
+			if(consumer != null)
+				channel.basicCancel(consumer.getConsumerTag());
+			
+			channel.close();
+			conn.close();
+			
+		} catch (IOException ex) {
+			logger.log(Level.WARNING, "Error", ex);
 		}
 	}
 	
