@@ -44,7 +44,7 @@ public class Integration {
 		
 		URL theURL = null;
 		try{
-			theURL = new URL("http://api.sportingsolutions.com");
+			theURL = new URL("http://apiuat.spints.net");
 		}catch(MalformedURLException ex){
 			logger.log(Level.WARNING, "Malformed Login URL", ex);
 		}
@@ -87,5 +87,7 @@ public class Integration {
 		logger.log(Level.INFO, "Un-Pausing");
 		Thread.sleep(10000);
 		theResource.stopStreaming();
+		
+		logger.log(Level.INFO, "Stream stopped");		
 	}
 }

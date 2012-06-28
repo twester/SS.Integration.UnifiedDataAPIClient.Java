@@ -101,6 +101,8 @@ public class MessageListener extends Thread {
 			channel.basicConsume(queueName,true,consumer);
 			channel.basicQos(0, 10, false);
 			
+			StreamAction streamAction = new StreamAction(events);
+			
 			while(isStreaming){
 
 				synchronized(monitor){
@@ -112,7 +114,11 @@ public class MessageListener extends Thread {
 				Delivery del =consumer.nextDelivery();
 				String message = new String(del.getBody());
 				
-				queue.put(message);
+				try {
+					streamAction.execute(message);
+				} catch (Exception e) {
+					logger.log(Level.WARNING, "Error on message receive", e);
+				}				
 
 			}
 			

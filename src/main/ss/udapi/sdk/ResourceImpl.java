@@ -91,10 +91,10 @@ public class ResourceImpl extends Endpoint implements Resource {
 							queue = new LinkedBlockingQueue<String>(10);
 							isStreaming = true;
 							listener = new MessageListener(amqpAddress, queue, streamingEvents, isStreaming);
-							dispatcher = new MessageDispatcher(queue, streamingEvents, isStreaming);
+							//dispatcher = new MessageDispatcher(queue, streamingEvents, isStreaming);
 							
 							listener.start();
-							dispatcher.start();
+							//dispatcher.start();
 						}
 					}
 				}
@@ -107,9 +107,11 @@ public class ResourceImpl extends Endpoint implements Resource {
 		if(listener != null){
 			listener.interrupt();
 		}
-		if(dispatcher != null){
-			dispatcher.interrupt();
+		/*
+		 * if(dispatcher != null){
+			dispatcher.interrupt();			
 		}
+		*/
 	}
 	
 	public void pauseStreaming(){
