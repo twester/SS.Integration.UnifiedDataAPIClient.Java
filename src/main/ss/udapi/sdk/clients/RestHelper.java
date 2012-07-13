@@ -22,13 +22,13 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
+
+import org.apache.log4j.Logger;
 
 public class RestHelper {
 
-	private static Logger logger = Logger.getAnonymousLogger();
+	private static Logger logger = Logger.getLogger(RestHelper.class.getName());
 	
 	public static HttpURLConnection createConnection(URL url, String data, String httpMethod, String contentType, Integer timeout, Map<String,String> headers, Boolean gzip){
 		HttpURLConnection connection = null;
@@ -66,7 +66,7 @@ public class RestHelper {
 			}
 			
 		}catch(Exception ex){
-			logger.log(Level.WARNING, "Connection Creation Failed", ex );
+			logger.warn("Connection Creation Failed", ex );
 		}
 		return connection;
 	}
@@ -77,7 +77,7 @@ public class RestHelper {
 		try {
 			inputStream = theConnection.getInputStream();
 		} catch (IOException ex) {
-			logger.log(Level.WARNING, "Unable to read response", ex);
+			logger.warn("Unable to read response", ex);
 		}
 		return getResponse(inputStream, gzip);
 	}
@@ -100,7 +100,7 @@ public class RestHelper {
 		    }
 		    rd.close();
 	    }catch(Exception ex){
-	    	logger.log(Level.WARNING, "Get Response Failed", ex );	
+	    	logger.warn("Get Response Failed", ex );	
 	    } 
 	    
 	    return responseBuffer.toString();
