@@ -46,7 +46,6 @@
 			</manifest>
 		</jar>
 		<delete dir="build/SDKclasses"/>
-		<zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
     </target>
 	
 	<target name="buildExample" depends="jar">
@@ -65,6 +64,8 @@
 				<attribute name="Implementation-Version" value="${VersionNumber}"/>
 			</manifest>
 		</jar>
+		<delete dir="build/SDKclasses"/>
+		<zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
 	</target>
 	
 	<path id="example.lib">
