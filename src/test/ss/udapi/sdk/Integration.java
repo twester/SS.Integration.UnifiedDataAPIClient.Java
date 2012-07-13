@@ -48,7 +48,7 @@ public class Integration {
 		}catch(MalformedURLException ex){
 			logger.log(Level.WARNING, "Malformed Login URL", ex);
 		}
-		Credentials theCredentials = new CredentialsImpl("integration@jedco", "sporting");
+		Credentials theCredentials = new CredentialsImpl("integration@jimco", "sporting");
 		Session theSession = SessionFactory.createSession(theURL, theCredentials);
 		Service theService = theSession.getService("UnifiedDataAPI");
 		Feature theFeature = theService.getFeature("Tennis");
@@ -79,7 +79,7 @@ public class Integration {
 		});
 		
 		theResource.startStreaming(streamingEvents);
-		Thread.sleep(10000);
+		Thread.sleep(100000);
 		theResource.pauseStreaming();
 		logger.log(Level.INFO, "Pausing");
 		Thread.sleep(5000);

@@ -18,14 +18,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import ss.udapi.sdk.interfaces.Feature;
 import ss.udapi.sdk.interfaces.Service;
 import ss.udapi.sdk.model.RestItem;
 
 public class ServiceImpl extends Endpoint implements Service {
 
+	Logger logger = Logger.getLogger(ServiceImpl.class.getName());
+	
 	ServiceImpl(Map<String,String> headers, RestItem restItem){
 		super(headers,restItem);
+		logger.debug(String.format("Instantiated Service %1$s", restItem.getName()));
 	}
 	
 	public String getName() {
@@ -33,6 +38,7 @@ public class ServiceImpl extends Endpoint implements Service {
 	}
 
 	public List<Feature> getFeatures() {
+		logger.info(String.format("Get all available services from %1$s", getName()));
 		List<Feature> result = new ArrayList<Feature>();
 		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/features/list");
 		for(RestItem restItem:restItems){
@@ -42,6 +48,7 @@ public class ServiceImpl extends Endpoint implements Service {
 	}
 
 	public Feature getFeature(String featureName) {
+		logger.info(String.format("Get feature %1$s from %2$s", featureName, getName()));
 		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/features/list");
 		for(RestItem restItem:restItems){
 			if(restItem.getName().equals(featureName)){
