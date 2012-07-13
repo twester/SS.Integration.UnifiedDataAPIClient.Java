@@ -1,6 +1,21 @@
+//Copyright 2012 Spin Services Limited
+
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+
+//    http://www.apache.org/licenses/LICENSE-2.0
+
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+
 package ss.udapi.sdk.examples;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -85,26 +100,33 @@ public class StreamListener {
 			
 			if(fixtureDelta.getEpoch() > currentEpoch){
 				
-				logger.info(String.format("Epoch changed for %1$s from %2$s to %3$s", gtpFixture.getName(), currentEpoch, fixtureDelta.getEpoch()));
-				gtpFixture.pauseStreaming();
-				
-				logger.info(String.format("Get UDAPI Snapshot for %1$s", gtpFixture.getName()));
-				String snapshotString = gtpFixture.getSnapshot();
-				logger.info(String.format("Successfully retrieved UDAPI Snapshot for %1$s", gtpFixture.getName()));
-				
-				Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
-				currentEpoch = fixtureSnapshot.getEpoch();
-				
-				//process the snapshot here
-				logger.info(snapshotString);
-				
-				if(!fixtureDelta.getMatchStatus().equalsIgnoreCase("50")){
-					gtpFixture.unpauseStreaming();
-				}else{
-					logger.info(String.format("Stopping Streaming for %1$s with id %2$s, Match Status is Match Over", gtpFixture.getName(), gtpFixture.getId()));
+				if(fixtureDelta.getLastEpochChangeReason() != null && Arrays.asList(fixtureDelta.getLastEpochChangeReason()).contains(10)){
+					logger.info(String.format("Fixture %1$s has been deleted from the GTP Fixture Factory.", gtpFixture.getName()));
 					gtpFixture.stopStreaming();
 					this.fixtureEnded = true;
+				}else{
+					logger.info(String.format("Epoch changed for %1$s from %2$s to %3$s", gtpFixture.getName(), currentEpoch, fixtureDelta.getEpoch()));
+					gtpFixture.pauseStreaming();
+					
+					logger.info(String.format("Get UDAPI Snapshot for %1$s", gtpFixture.getName()));
+					String snapshotString = gtpFixture.getSnapshot();
+					logger.info(String.format("Successfully retrieved UDAPI Snapshot for %1$s", gtpFixture.getName()));
+					
+					Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
+					currentEpoch = fixtureSnapshot.getEpoch();
+					
+					//process the snapshot here
+					logger.info(snapshotString);
+					
+					if(!fixtureDelta.getMatchStatus().equalsIgnoreCase("50")){
+						gtpFixture.unpauseStreaming();
+					}else{
+						logger.info(String.format("Stopping Streaming for %1$s with id %2$s, Match Status is Match Over", gtpFixture.getName(), gtpFixture.getId()));
+						gtpFixture.stopStreaming();
+						this.fixtureEnded = true;
+					}
 				}
+				
 			}else if(fixtureDelta.getEpoch() == currentEpoch){
 				//process the delta
 				logger.info(fixtureDelta.getMarkets().size());
