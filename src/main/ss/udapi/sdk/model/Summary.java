@@ -33,6 +33,14 @@ public class Summary {
 		Date = date;
 	}
 	
+	public String getStartTime() {
+		return StartTime;
+	}
+
+	public void setStartTime(String startTime) {
+		StartTime = startTime;
+	}
+	
 	public List<Tag> getTags(){
 		return Tags;
 	}
@@ -52,6 +60,8 @@ public class Summary {
 	private String Id;
      
 	private String Date;
+	
+	private String StartTime;
 	
 	private List<Tag> Tags;
 	

@@ -15,12 +15,12 @@
 package ss.udapi.sdk.streaming;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 public class DisconnectedAction extends Action{
 	
-	private static Logger logger = Logger.getAnonymousLogger();
+	private static Logger logger = Logger.getLogger(DisconnectedAction.class.getName());
 	
 	public DisconnectedAction(List<Event> events) {
 		super(events, DisconnectedEvent.class);
@@ -34,7 +34,7 @@ public class DisconnectedAction extends Action{
 		}
 		catch(Exception ex)
 		{
-			logger.log(Level.WARNING, "Error", ex);
+			logger.warn("Error", ex);
 		}
 	}
 }

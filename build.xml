@@ -10,6 +10,7 @@
 			<include name="**/rabbitmq-client.jar" />
 			<include name="**/commons-cli-1.1.jar" />
 			<include name="**/commons-io-1.2.jar" />
+			<include name="**/log4j-1.2.17.jar" />
 		</fileset>
 		<pathelement path="build/classes" />
     </path>
@@ -27,8 +28,9 @@
 			<fileset dir="lib" includes="**/rabbitmq-client.jar"/>
 			<fileset dir="lib" includes="**/commons-cli-1.1.jar"/>
 			<fileset dir="lib" includes="**/commons-io-1.2.jar"/>
+			<fileset dir="lib" includes="**/log4j-1.2.17.jar"/>
 		</copy>
-		<copy file="runjava.bat" todir="build/SDK"/>
+		<copy file="conf/runjava.bat" todir="build/SDK"/>
 		<copy file="README.markdown" todir="build/SDK"/>
 		<copy file="LICENCE.txt" todir="build/SDK"/>
 	</target>
@@ -46,6 +48,36 @@
 		<delete dir="build/SDKclasses"/>
 		<zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
     </target>
+	
+	<target name="buildExample" depends="jar">
+		<mkdir dir="build/SDKclasses"/>
+		<copy file="conf/runExample.bat" todir="build/SDK"/>
+		<copy file="conf/log4j.properties" todir="build/SDK"/>
+		<copy file="conf/example.properties" todir="build/SDK"/>
+        <javac srcdir="src/test" destdir="build/SDKclasses" includeAntRuntime="false">
+			<classpath refid="example.lib" />
+		</javac>
+		<jar destfile="build/SDK/ss.udapi.sdk-example-${VersionNumber}.jar" basedir="build/SDKclasses" >
+			<manifest>
+				<attribute name="Built-By" value="Sporting Solutions"/>
+				<attribute name="Implementation-Vendor" value="Sporting Solutions"/>
+				<attribute name="Implementation-Title" value="Unified Data API Java Client Example"/>
+				<attribute name="Implementation-Version" value="${VersionNumber}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<path id="example.lib">
+        <fileset dir="build/SDK">
+			<include name="**/gson-2.0.jar" />
+			<include name="**/rabbitmq-client.jar" />
+			<include name="**/commons-cli-1.1.jar" />
+			<include name="**/commons-io-1.2.jar" />
+			<include name="**/log4j-1.2.17.jar" />
+			<include name="**/ss.udapi.sdk-*.jar" />
+		</fileset>
+		<pathelement path="build/classes" />
+    </path>
 	
 	<path id="classpath">
         <fileset dir="build/SDK" includes="**/*.jar"/>

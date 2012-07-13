@@ -72,7 +72,7 @@ public class RestHelper {
 	}
 	
 	public static String getResponse(URL url, String data, String httpMethod, String contentType, Integer timeout, Map<String,String> headers, Boolean gzip){
-		HttpURLConnection theConnection = RestHelper.createConnection(url, data, httpMethod, contentType, timeout, headers, gzip);
+		HttpURLConnection theConnection = createConnection(url, data, httpMethod, contentType, timeout, headers, gzip);
 		InputStream inputStream = null;
 		try {
 			inputStream = theConnection.getInputStream();
@@ -96,7 +96,7 @@ public class RestHelper {
 
 	    	while((line = rd.readLine()) != null) {
 		    	responseBuffer.append(line);
-		        responseBuffer.append('\n');
+		        //responseBuffer.append('\n');
 		    }
 		    rd.close();
 	    }catch(Exception ex){

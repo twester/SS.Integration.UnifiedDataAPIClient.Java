@@ -15,12 +15,12 @@
 package ss.udapi.sdk.streaming;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 public class StreamAction extends Action {
 	
-	private static Logger logger = Logger.getAnonymousLogger();
+	private static Logger logger = Logger.getLogger(StreamAction.class.getName());
 	
 	public StreamAction(List<Event> events) {
 		super(events, StreamEvent.class);
@@ -34,7 +34,7 @@ public class StreamAction extends Action {
 		}
 		catch(Exception ex)
 		{
-			logger.log(Level.WARNING, "Error", ex);
+			logger.warn("Error", ex);
 		}
 	}
 }
