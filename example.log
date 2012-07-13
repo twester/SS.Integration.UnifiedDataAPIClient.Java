@@ -1,0 +1,72 @@
+2012-07-13 15:36:49,590 [main] ERROR ss.udapi.sdk.examples.GTPService - Can't load the properties file.
+java.io.FileNotFoundException: example.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.examples.GTPService.<init>(GTPService.java:44)
+	at ss.udapi.sdk.examples.StreamingProgram.main(StreamingProgram.java:17)
+2012-07-13 15:36:49,592 [main] DEBUG ss.udapi.sdk.examples.GTPService - Starting GTPService
+2012-07-13 15:36:49,592 [main] INFO  ss.udapi.sdk.examples.GTPService - Connecting to UDAPI....
+2012-07-13 15:36:49,592 [main] ERROR ss.udapi.sdk.examples.GTPService - java.net.MalformedURLException
+2012-07-13 15:37:16,195 [main] ERROR ss.udapi.sdk.examples.GTPService - Can't load the properties file.
+java.io.FileNotFoundException: example.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.examples.GTPService.<init>(GTPService.java:44)
+	at ss.udapi.sdk.examples.StreamingProgram.main(StreamingProgram.java:17)
+2012-07-13 15:37:16,197 [main] DEBUG ss.udapi.sdk.examples.GTPService - Starting GTPService
+2012-07-13 15:37:16,197 [main] INFO  ss.udapi.sdk.examples.GTPService - Connecting to UDAPI....
+2012-07-13 15:37:16,198 [main] ERROR ss.udapi.sdk.examples.GTPService - java.net.MalformedURLException
+2012-07-13 15:37:44,293 [main] DEBUG ss.udapi.sdk.examples.GTPService - Starting GTPService
+2012-07-13 15:37:44,293 [main] INFO  ss.udapi.sdk.examples.GTPService - Connecting to UDAPI....
+2012-07-13 15:37:44,301 [main] DEBUG ss.udapi.sdk.SessionImpl - Connecting to http://api.sportingsolutions.com
+2012-07-13 15:37:44,338 [main] DEBUG ss.udapi.sdk.SessionImpl - Not authenticated. Logging on
+2012-07-13 15:37:44,614 [main] INFO  ss.udapi.sdk.SessionImpl - Logged in successfully
+2012-07-13 15:37:44,614 [main] INFO  ss.udapi.sdk.examples.GTPService - Successfully connected to UDAPI
+2012-07-13 15:37:44,614 [main] DEBUG ss.udapi.sdk.examples.GTPService - UDAPI, Getting Service
+2012-07-13 15:37:44,615 [main] INFO  ss.udapi.sdk.SessionImpl - Get Service UnifiedDataAPI
+2012-07-13 15:37:44,617 [main] DEBUG ss.udapi.sdk.ServiceImpl - Instantiated Service UnifiedDataAPI
+2012-07-13 15:37:44,617 [main] DEBUG ss.udapi.sdk.examples.GTPService - UDAPI, Retrieved Service
+2012-07-13 15:37:44,618 [main] INFO  ss.udapi.sdk.examples.GTPService - Starting Timer...
+2012-07-13 15:37:44,619 [Timer-0] INFO  ss.udapi.sdk.ServiceImpl - Get feature Tennis from UnifiedDataAPI
+2012-07-13 15:37:44,716 [Timer-0] DEBUG ss.udapi.sdk.FeatureImpl - Instantiated Feature Tennis
+2012-07-13 15:37:44,717 [Timer-0] INFO  ss.udapi.sdk.examples.GTPService - Get the list of available fixtures for Tennis from GTP
+2012-07-13 15:37:44,717 [Timer-0] INFO  ss.udapi.sdk.FeatureImpl - Get all available resources from Tennis
+2012-07-13 15:37:44,855 [Timer-0] INFO  ss.udapi.sdk.examples.GTPService - There are currently no Tennis fixtures in UDAPI
+2012-07-13 15:38:31,383 [main] ERROR ss.udapi.sdk.examples.GTPService - Can't load the properties file.
+java.io.FileNotFoundException: example.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.examples.GTPService.<init>(GTPService.java:44)
+	at ss.udapi.sdk.examples.StreamingProgram.main(StreamingProgram.java:17)
+2012-07-13 15:38:31,385 [main] DEBUG ss.udapi.sdk.examples.GTPService - Starting GTPService
+2012-07-13 15:38:31,385 [main] INFO  ss.udapi.sdk.examples.GTPService - Connecting to UDAPI....
+2012-07-13 15:38:31,386 [main] ERROR ss.udapi.sdk.examples.GTPService - java.net.MalformedURLException
+2012-07-13 15:44:06,070 [main] ERROR ss.udapi.sdk.examples.GTPService - Can't load the properties file.
+java.io.FileNotFoundException: example.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.examples.GTPService.<init>(GTPService.java:44)
+	at ss.udapi.sdk.examples.StreamingProgram.main(StreamingProgram.java:17)
+2012-07-13 15:44:06,072 [main] DEBUG ss.udapi.sdk.examples.GTPService - Starting GTPService
+2012-07-13 15:44:06,072 [main] INFO  ss.udapi.sdk.examples.GTPService - Connecting to UDAPI....
+2012-07-13 15:44:06,073 [main] ERROR ss.udapi.sdk.examples.GTPService - java.net.MalformedURLException
+2012-07-13 15:46:11,863 [main] DEBUG ss.udapi.sdk.examples.GTPService - Starting GTPService
+2012-07-13 15:46:11,863 [main] INFO  ss.udapi.sdk.examples.GTPService - Connecting to UDAPI....
+2012-07-13 15:46:11,871 [main] DEBUG ss.udapi.sdk.SessionImpl - Connecting to http://api.sportingsolutions.com
+2012-07-13 15:46:11,902 [main] DEBUG ss.udapi.sdk.SessionImpl - Not authenticated. Logging on
+2012-07-13 15:46:12,162 [main] INFO  ss.udapi.sdk.SessionImpl - Logged in successfully
+2012-07-13 15:46:12,162 [main] INFO  ss.udapi.sdk.examples.GTPService - Successfully connected to UDAPI
+2012-07-13 15:46:12,162 [main] DEBUG ss.udapi.sdk.examples.GTPService - UDAPI, Getting Service
+2012-07-13 15:46:12,162 [main] INFO  ss.udapi.sdk.SessionImpl - Get Service UnifiedDataAPI
+2012-07-13 15:46:12,165 [main] DEBUG ss.udapi.sdk.ServiceImpl - Instantiated Service UnifiedDataAPI
+2012-07-13 15:46:12,165 [main] DEBUG ss.udapi.sdk.examples.GTPService - UDAPI, Retrieved Service
+2012-07-13 15:46:12,165 [main] INFO  ss.udapi.sdk.examples.GTPService - Starting Timer...
+2012-07-13 15:46:12,167 [Timer-0] INFO  ss.udapi.sdk.ServiceImpl - Get feature Tennis from UnifiedDataAPI
+2012-07-13 15:46:12,259 [Timer-0] DEBUG ss.udapi.sdk.FeatureImpl - Instantiated Feature Tennis
+2012-07-13 15:46:12,260 [Timer-0] INFO  ss.udapi.sdk.examples.GTPService - Get the list of available fixtures for Tennis from GTP
+2012-07-13 15:46:12,260 [Timer-0] INFO  ss.udapi.sdk.FeatureImpl - Get all available resources from Tennis
+2012-07-13 15:46:12,392 [Timer-0] INFO  ss.udapi.sdk.examples.GTPService - There are currently no Tennis fixtures in UDAPI

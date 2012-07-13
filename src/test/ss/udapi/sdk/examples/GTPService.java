@@ -1,8 +1,11 @@
 package ss.udapi.sdk.examples;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
@@ -10,9 +13,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import ss.udapi.sdk.CredentialsImpl;
 import ss.udapi.sdk.SessionFactory;
@@ -23,6 +23,9 @@ import ss.udapi.sdk.interfaces.Resource;
 import ss.udapi.sdk.interfaces.Service;
 import ss.udapi.sdk.interfaces.Session;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class GTPService {
 	
 	private static Logger logger = Logger.getLogger(GTPService.class.getName());
@@ -32,7 +35,17 @@ public class GTPService {
 	private ConcurrentHashMap<String,StreamListener> listeners;
 	private ConcurrentHashMap<String,Boolean> activeFixtures;
 	
-	public GTPService(){
+	private Properties theProperties;
+	
+	public GTPService(String propertyFile){
+		
+		theProperties = new Properties();
+		try {
+			theProperties.load(new FileInputStream(propertyFile));
+		} catch (IOException ex) {
+			logger.error("Can't load the properties file.",ex);
+		}
+		
 		sportsList = new ArrayList<String>();
 		sportsList.add("Tennis");
 		listeners = new ConcurrentHashMap<String,StreamListener>();
@@ -43,8 +56,8 @@ public class GTPService {
 		try{
 			logger.debug("Starting GTPService");
 			logger.info("Connecting to UDAPI....");
-			Credentials credentials = new CredentialsImpl("integration@jimco","sporting");
-			Session theSession = SessionFactory.createSession(new URL("http://apiuat.spints.net"), credentials);
+			Credentials credentials = new CredentialsImpl(theProperties.getProperty("ss.username"),theProperties.getProperty("ss.password"));
+			Session theSession = SessionFactory.createSession(new URL(theProperties.getProperty("ss.url")), credentials);
 			logger.info("Successfully connected to UDAPI");
 			logger.debug("UDAPI, Getting Service");
 			final Service theService = theSession.getService("UnifiedDataAPI");
