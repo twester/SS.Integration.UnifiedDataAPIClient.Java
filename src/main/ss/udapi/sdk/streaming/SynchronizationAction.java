@@ -23,7 +23,7 @@ public class SynchronizationAction extends Action{
 	private static Logger logger = Logger.getLogger(SynchronizationAction.class.getName());
 	
 	public SynchronizationAction(List<Event> events) {
-		super(events, DisconnectedEvent.class);
+		super(events, SynchronizationEvent.class);
 	}
 	
 	@Override
