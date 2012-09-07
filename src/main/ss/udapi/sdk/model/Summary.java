@@ -41,6 +41,14 @@ public class Summary {
 		StartTime = startTime;
 	}
 	
+	public int getSequence(){
+		return Sequence;
+	}
+	
+	public void setSequence(int sequence){
+		Sequence = sequence;
+	}
+	
 	public List<Tag> getTags(){
 		return Tags;
 	}
@@ -62,6 +70,8 @@ public class Summary {
 	private String Date;
 	
 	private String StartTime;
+	
+	private int Sequence;
 	
 	private List<Tag> Tags;
 	
