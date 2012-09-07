@@ -15,21 +15,30 @@
 package ss.udapi.sdk;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.URLDecoder;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Timer;
-import java.util.TimerTask;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import org.apache.log4j.Logger;
 
+import ss.udapi.sdk.clients.RestHelper;
+import ss.udapi.sdk.extensions.JsonHelper;
 import ss.udapi.sdk.interfaces.Resource;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.RestLink;
+import ss.udapi.sdk.model.StreamEcho;
 import ss.udapi.sdk.model.Summary;
 import ss.udapi.sdk.streaming.ConnectedAction;
 import ss.udapi.sdk.streaming.DisconnectedAction;
@@ -64,6 +73,17 @@ public class ResourceImpl extends Endpoint implements Resource {
 	private Integer sequenceDiscrepancyThreshold;
 	private Integer sequenceCheckerInterval;
 	private Timer sequenceCheckerTimer;
+	
+	private String queueName;
+	private String virtualHost;
+	private int echoSenderInterval;
+	private int echoMaxDelay;
+	private String lastRecievedEchoGuid;
+	private Boolean isProcessingStreamEvent;
+	private final Object echoTimerMonitor = new Object();
+	private volatile boolean echoTimer = true;
+	private final Object echoResetMonitor = new Object();
+	private volatile boolean echoReset = false;
 	
 	private Boolean isReconnecting;
 	
@@ -103,7 +123,8 @@ public class ResourceImpl extends Endpoint implements Resource {
 		this.sequenceCheckerInterval = sequenceCheckerInterval;
 		this.sequenceDiscrepancyThreshold = sequenceDiscrepencyThreshold;
 		this.streamingEvents = events;
-		
+		this.echoSenderInterval = 10000;
+		this.echoMaxDelay = 3000;
 		Runnable runnable = new Runnable(){
 			@Override
 			public void run(){
@@ -117,6 +138,81 @@ public class ResourceImpl extends Endpoint implements Resource {
 		
 		Thread theThread = new Thread(runnable);
 		theThread.start();
+	}
+	
+	private void sendEcho() {
+		String guid = UUID.randomUUID().toString();
+		
+		while(isStreaming){
+			try{
+				synchronized(echoTimerMonitor){
+					while(!echoTimer){
+						echoTimerMonitor.wait(echoSenderInterval);
+					}
+					echoTimer = false;
+				}
+				
+				if(!isProcessingStreamEvent){
+					if(state != null){
+						for(RestLink restLink:state.getLinks()){
+							if(restLink.getRelation().equals("http://api.sportingsolutions.com/rels/stream/echo")){
+								URL theURL = null;
+								try{
+									theURL = new URL(restLink.getHref());
+								}catch(MalformedURLException ex){
+									logger.warn("Malformed Login URL", ex);
+								}
+								
+								StreamEcho streamEcho = new StreamEcho(); 
+								streamEcho.setHost(virtualHost);
+								streamEcho.setQueue(queueName);
+								
+								DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+								df.setTimeZone(TimeZone.getTimeZone("UTC"));
+								streamEcho.setMessage(guid + ";" + df.format(new Date()));
+								
+								String stringStreamEcho = JsonHelper.ToJson(streamEcho);
+								
+								RestHelper.getResponse(theURL, stringStreamEcho, "POST", "application/json", 3000, headers, false);
+							}
+						}
+					}
+				}
+			}catch(Exception ex){
+				logger.error("Unable to post echo", ex);
+			}
+			
+			Boolean echoArrived = false;
+			try{
+				synchronized(echoResetMonitor){
+					while(!echoReset){
+						echoResetMonitor.wait(echoMaxDelay);
+					}
+					echoReset = false;
+				}
+				
+				if(echoArrived){
+					if(guid.equals(lastRecievedEchoGuid)){
+						logger.debug("OK");
+					}else{
+						logger.error("Recieved Echo Messages from differerent client");
+					}
+				}else{
+					if(!isProcessingStreamEvent){
+						logger.debug("BAD");
+						isReconnecting = true;
+						reconnect();
+						synchronized(echoTimerMonitor){
+							echoTimer = true;
+							echoTimerMonitor.notify();
+						}
+						isReconnecting = false;
+					}
+				}
+			}catch(Exception ex){
+				logger.error("Unable to find echo", ex);
+			}
+		}
 	}
 	
 	private void streamData() throws IOException, InterruptedException{
@@ -145,13 +241,24 @@ public class ResourceImpl extends Endpoint implements Resource {
 				
 					String messageString = new String(message);
 					JsonObject jsonObject = new JsonParser().parse(messageString).getAsJsonObject();
-					currentSequence = jsonObject.get("Content").getAsJsonObject().get("Sequence").getAsInt();
-					
-					try {
-						streamAction.execute(messageString);
-					} catch (Exception e) {
-						logger.warn("Error on message receive", e);
-					}	
+					if(jsonObject.get("Relation").getAsString().equals("http://api.sportingsolutions.com/rels/stream/echo")){
+						String[] split = jsonObject.get("Content").getAsString().split(";");
+						lastRecievedEchoGuid = split[0];
+						
+						synchronized(echoResetMonitor){
+							echoReset = true;
+							echoResetMonitor.notify();
+						}
+					}else{
+						isProcessingStreamEvent = true;
+						try {
+							streamAction.execute(messageString);
+						} catch (Exception e) {
+							logger.warn("Error on message receive", e);
+						}	
+						isProcessingStreamEvent = false;
+					}
+					//currentSequence = jsonObject.get("Content").getAsJsonObject().get("Sequence").getAsInt();
 				}
 				disconnections = 0;
 			}catch(Exception ex){
@@ -209,12 +316,12 @@ public class ResourceImpl extends Endpoint implements Resource {
 							            	connectionFactory.setPassword(uriDecode(userPass[1]));
 							            }
 							        }
-							        String queueName = "";
+
 							        String path = amqpUri.getRawPath();
 							        if (path != null && path.length() > 0) {
 							        	queueName = path.substring(path.indexOf('/',1)+1);
-
-							            connectionFactory.setVirtualHost("/" + uriDecode(amqpUri.getPath().substring(1,path.indexOf('/',1))));
+							        	virtualHost = uriDecode(amqpUri.getPath().substring(1,path.indexOf('/',1)));
+							            connectionFactory.setVirtualHost("/" + virtualHost);
 							        }
 							        
 							        if(channel != null){
@@ -230,7 +337,7 @@ public class ResourceImpl extends Endpoint implements Resource {
 							        connection = connectionFactory.newConnection();
 							        logger.info(String.format("Successfully connected to Streaming Server for %1$s", getName()));
 							        
-							        if(sequenceCheckerTimer != null){
+							 /*       if(sequenceCheckerTimer != null){
 							        	sequenceCheckerTimer.cancel();
 							        	sequenceCheckerTimer = null;
 							        }
@@ -245,7 +352,7 @@ public class ResourceImpl extends Endpoint implements Resource {
 				        											checkSequence();
 				        										}
 				        								}, sequenceCheckerInterval, sequenceCheckerInterval);
-							        
+							        */
 							        actionExecuter.execute(new ConnectedAction(streamingEvents));
 							        
 							        channel = connection.createChannel();
@@ -265,23 +372,20 @@ public class ResourceImpl extends Endpoint implements Resource {
 						}
 					}
 				}
-			}catch(IOException ex){
+			}catch(Exception ex){
 				if(disconnections > maxRetries){
 					logger.error(String.format("Failed to reconnect Stream for %1$s",getName()));
 					stopStreaming();
-					throw ex;
 				}
 				
 				Thread.sleep(500);
 				disconnections++;
 				logger.warn(String.format("Failed to reconnect stream %1$s, Attempt %2$s", getName(),disconnections));
 			}
-			catch(Exception ex){
-				stopStreaming();
-				break;
-			}
 		}
 	}
+	
+	
 	
 	private void dispose(){
 		logger.info(String.format("Streaming stopped for %1$s",getName()));

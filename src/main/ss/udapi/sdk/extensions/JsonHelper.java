@@ -32,4 +32,14 @@ public class JsonHelper {
 		List<RestItem> links = gson.fromJson(json, myListType);
 		return links;
 	}
+	
+	public static String ToJson(Object objectToJson){
+		String serializedObject = null;
+		if(objectToJson != null){
+			GsonBuilder gsonBuilder = new GsonBuilder();
+			Gson gson = gsonBuilder.create();
+			serializedObject = gson.toJson(objectToJson);
+		}
+		return serializedObject;
+	}
 }
