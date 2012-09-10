@@ -26,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
-import java.util.Timer;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,7 +43,6 @@ import ss.udapi.sdk.streaming.ConnectedAction;
 import ss.udapi.sdk.streaming.DisconnectedAction;
 import ss.udapi.sdk.streaming.Event;
 import ss.udapi.sdk.streaming.StreamAction;
-import ss.udapi.sdk.streaming.SynchronizationAction;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -69,21 +67,16 @@ public class ResourceImpl extends Endpoint implements Resource {
 	private Channel channel;
 	private Connection connection;
 	
-	private Integer currentSequence;
-	private Integer sequenceDiscrepancyThreshold;
-	private Integer sequenceCheckerInterval;
-	private Timer sequenceCheckerTimer;
-	
 	private String queueName;
 	private String virtualHost;
 	private int echoSenderInterval;
 	private int echoMaxDelay;
 	private String lastRecievedEchoGuid;
-	private Boolean isProcessingStreamEvent;
+	private boolean isProcessingStreamEvent;
 	private final Object echoTimerMonitor = new Object();
-	private volatile boolean echoTimer = true;
 	private final Object echoResetMonitor = new Object();
 	private volatile boolean echoReset = false;
+	private Thread echoThread;
 	
 	private Boolean isReconnecting;
 	
@@ -115,16 +108,15 @@ public class ResourceImpl extends Endpoint implements Resource {
 	}
 
 	public void startStreaming(List<Event> events){
-		startStreaming(events,10000,2);
+		startStreaming(events,10000,3000);
 	}
 	
-	public void startStreaming(List<Event> events, Integer sequenceCheckerInterval, Integer sequenceDiscrepencyThreshold){
-		logger.info(String.format("Starting stream for %1$s with Sequence Checker Interval of %2$s and Discrepency Threshold of %3$s",getName(),sequenceCheckerInterval,sequenceDiscrepencyThreshold));
-		this.sequenceCheckerInterval = sequenceCheckerInterval;
-		this.sequenceDiscrepancyThreshold = sequenceDiscrepencyThreshold;
+	public void startStreaming(List<Event> events, Integer echoInterval, Integer echoMaxDelay){
+		logger.info(String.format("Starting stream for %1$s with Echo Interval of %2$s and Echo Max Delay of %3$s",getName(),echoInterval,echoMaxDelay));
 		this.streamingEvents = events;
 		this.echoSenderInterval = 10000;
 		this.echoMaxDelay = 3000;
+		
 		Runnable runnable = new Runnable(){
 			@Override
 			public void run(){
@@ -146,11 +138,13 @@ public class ResourceImpl extends Endpoint implements Resource {
 		while(isStreaming){
 			try{
 				synchronized(echoTimerMonitor){
-					while(!echoTimer){
-						echoTimerMonitor.wait(echoSenderInterval);
+						try{
+							echoTimerMonitor.wait(echoSenderInterval);
+						}catch(InterruptedException ex){
+							Thread.currentThread().interrupt();
+							break;
+						}
 					}
-					echoTimer = false;
-				}
 				
 				if(!isProcessingStreamEvent){
 					if(state != null){
@@ -182,31 +176,37 @@ public class ResourceImpl extends Endpoint implements Resource {
 				logger.error("Unable to post echo", ex);
 			}
 			
-			Boolean echoArrived = false;
 			try{
 				synchronized(echoResetMonitor){
-					while(!echoReset){
-						echoResetMonitor.wait(echoMaxDelay);
-					}
-					echoReset = false;
-				}
-				
-				if(echoArrived){
-					if(guid.equals(lastRecievedEchoGuid)){
-						logger.debug("OK");
-					}else{
-						logger.error("Recieved Echo Messages from differerent client");
-					}
-				}else{
-					if(!isProcessingStreamEvent){
-						logger.debug("BAD");
-						isReconnecting = true;
-						reconnect();
-						synchronized(echoTimerMonitor){
-							echoTimer = true;
-							echoTimerMonitor.notify();
+					try{
+						while(!echoReset){
+						
+							echoResetMonitor.wait(echoMaxDelay);
+						
+							//if not timeout
+							if(echoReset){
+								if(guid.equals(lastRecievedEchoGuid)){
+									logger.debug("OK");
+								}else{
+									logger.error("Recieved Echo Messages from differerent client");
+								}
+							}else{
+								if(!isProcessingStreamEvent){
+									logger.debug("BAD");
+									isReconnecting = true;
+									reconnect();
+									synchronized(echoTimerMonitor){
+										echoTimerMonitor.notify();
+									}
+									isReconnecting = false;
+								}
+								echoReset = true;
+							}
 						}
-						isReconnecting = false;
+						echoReset = false;
+					}catch(InterruptedException ex){
+						Thread.currentThread().interrupt();
+						break;
 					}
 				}
 			}catch(Exception ex){
@@ -258,12 +258,12 @@ public class ResourceImpl extends Endpoint implements Resource {
 						}	
 						isProcessingStreamEvent = false;
 					}
-					//currentSequence = jsonObject.get("Content").getAsJsonObject().get("Sequence").getAsInt();
 				}
 				disconnections = 0;
 			}catch(Exception ex){
 				logger.warn(String.format("Lost connection to stream %1$s", getName()));
 				if(!isReconnecting){
+					StopEcho();
 					reconnect();
 				}else{
 					Thread.sleep(1000);
@@ -336,23 +336,9 @@ public class ResourceImpl extends Endpoint implements Resource {
 							        
 							        connection = connectionFactory.newConnection();
 							        logger.info(String.format("Successfully connected to Streaming Server for %1$s", getName()));
+
+							        StartEcho();
 							        
-							 /*       if(sequenceCheckerTimer != null){
-							        	sequenceCheckerTimer.cancel();
-							        	sequenceCheckerTimer = null;
-							        }
-							        
-							        currentSequence = getSequenceAsInt();
-							        
-							        sequenceCheckerTimer = new Timer(true);
-							        sequenceCheckerTimer.scheduleAtFixedRate(
-				        								new TimerTask(){
-				        										public void run(){
-				        											
-				        											checkSequence();
-				        										}
-				        								}, sequenceCheckerInterval, sequenceCheckerInterval);
-							        */
 							        actionExecuter.execute(new ConnectedAction(streamingEvents));
 							        
 							        channel = connection.createChannel();
@@ -385,6 +371,29 @@ public class ResourceImpl extends Endpoint implements Resource {
 		}
 	}
 	
+	private void StartEcho(){
+		if(echoThread == null){
+			echoReset = false;
+			echoThread = new Thread(new Runnable(){
+									@Override
+									public void run(){
+										try {
+											sendEcho();
+										} catch (Exception ex) {
+											logger.error(String.format("There has been a serious error streaming %1$s . The stream cannot continue.", getName()),ex);
+										}
+									}});
+			echoThread.start();
+		}
+	}
+	
+	private void StopEcho(){
+		if(echoThread != null){
+			echoThread.interrupt();
+			echoThread = null;
+		}
+	}
+	
 	
 	
 	private void dispose(){
@@ -400,34 +409,38 @@ public class ResourceImpl extends Endpoint implements Resource {
 				connection = null;
 			}
 			
-			actionExecuter.execute(new DisconnectedAction(streamingEvents));
+			if(echoThread != null){
+				echoThread = null;
+			}
 		}catch(IOException ex){
 			logger.error(String.format("Problem while trying to shutdown stream for %1$s",getName()),ex);
 		}
+		actionExecuter.execute(new DisconnectedAction(streamingEvents));
 	}
 
 	public void pauseStreaming(){
 		logger.info(String.format("Streaming paused for %1$s", getName()));
 		pause = true;
+		StopEcho();
 	}
 	
 	public void unpauseStreaming(){
 		logger.info(String.format("Streaming un-paused for %1$s",getName()));
 		synchronized(monitor){
 			pause = false;
-			monitor.notifyAll();
+			monitor.notify();
 		}
+		StartEcho();
 	}
 	
 	public void stopStreaming(){
 		isStreaming = false;
 		if(consumer != null){
+			
+			StopEcho();
+			
 			try {
 				channel.basicCancel(consumer.getConsumerTag());
-				if(sequenceCheckerTimer != null){
-		        	sequenceCheckerTimer.cancel();
-		        	sequenceCheckerTimer = null;
-		        }
 			} catch (IOException ex) {
 				logger.error(String.format("There has been an error while trying to stop streaming for %1$s", getName()), ex);
 			}
@@ -444,40 +457,5 @@ public class ResourceImpl extends Endpoint implements Resource {
             throw new RuntimeException(e);
         }
     }
-	
-	private void checkSequence(){
-		Integer sequence = getSequenceAsInt();
-		Integer sequenceGap = Math.abs(sequence - currentSequence);
-		logger.debug(String.format("Sequence discrepency = %1$s for %2$s",sequenceGap,getName()));
-		if(sequenceGap > sequenceDiscrepancyThreshold){
-			if(sequenceCheckerTimer != null){
-				sequenceCheckerTimer.cancel();
-				sequenceCheckerTimer = null;
-			}
 
-			actionExecuter.execute(new SynchronizationAction(streamingEvents));
-			
-			isReconnecting = true;
-			
-			try {
-				reconnect();
-			} catch (Exception e) {
-				logger.error(String.format("Problem reconnecting after synchronization failure for %1$s", getName()));
-			}
-			isReconnecting = false;
-		}
-	}
-	
-	private int getSequenceAsInt(){
-		try{
-			String stringSequence = FindRelationAndFollowAsString("http://api.sportingsolutions.com/rels/sequence");
-			if(stringSequence != null && !stringSequence.isEmpty()){
-				Integer sequence = Integer.parseInt(stringSequence);
-				return sequence;
-			}
-		}catch(Exception ex){
-			logger.error(String.format("Unable to retrieve sequence for %1$s", getName()),ex);
-		}
-		return 0;
-	}
 }
