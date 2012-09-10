@@ -32,7 +32,7 @@
 		</copy>
 		<copy file="conf/runjava.bat" todir="build/SDK"/>
 		<copy file="README.markdown" todir="build/SDK"/>
-		<copy file="LICENCE.txt" todir="build/SDK"/>
+		<copy file="LICENCE.txt" todir="build/SDK"/>		
 	</target>
 	
 	<target name="jar" depends="compile, copyDependencies">
@@ -48,7 +48,7 @@
 		<delete dir="build/SDKclasses"/>
     </target>
 	
-	<target name="buildExample" depends="jar">
+	<target name="buildExample" depends="jar,generateDocs">
 		<mkdir dir="build/SDKclasses"/>
 		<copy file="conf/runExample.bat" todir="build/SDK"/>
 		<copy file="conf/log4j.properties" todir="build/SDK"/>
@@ -68,6 +68,19 @@
 		<zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
 	</target>
 	
+	<target name="generateDocs">
+	  <exec executable="C:\Program Files\doxygen\bin\doxygen.exe">
+	    <arg value="documentation/doxyfile"/>	    
+	  </exec>
+	  
+	  <mkdir dir="build/docs" />
+	  <copy todir="build/docs">
+		<fileset dir="documentation/html"/>
+	  </copy>
+	  
+	</target>
+	
+	
 	<path id="example.lib">
         <fileset dir="build/SDK">
 			<include name="**/gson-2.0.jar" />
@@ -83,5 +96,7 @@
 	<path id="classpath">
         <fileset dir="build/SDK" includes="**/*.jar"/>
     </path>
+	
+	
 	
 </project>
