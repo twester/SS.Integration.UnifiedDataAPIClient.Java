@@ -69,7 +69,10 @@
 	</target>
 	
 	<target name="generateDocs">
-	  <exec executable="C:\Program Files\doxygen\bin\doxygen.exe">
+	   <echo file="documentation/doxyfile" append="true">	   
+			PROJECT_NUMBER=${VersionNumber}
+		</echo>
+ 	  <exec executable="C:\Program Files\doxygen\bin\doxygen.exe">
 	    <arg value="documentation/doxyfile"/>	    
 	  </exec>
 	  
