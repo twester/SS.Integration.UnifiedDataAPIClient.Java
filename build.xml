@@ -6,7 +6,7 @@
 
 	<path id="project.lib">
         <fileset dir="lib">
-			<include name="**/gson-2.0.jar" />
+			<include name="**/gson-2.2.2.jar" />
 			<include name="**/rabbitmq-client.jar" />
 			<include name="**/commons-cli-1.1.jar" />
 			<include name="**/commons-io-1.2.jar" />
@@ -24,7 +24,7 @@
 	
 	<target name="copyDependencies">
 		<copy todir="build/SDK" flatten="true">
-			<fileset dir="lib" includes="**/gson-2.0.jar"/>
+			<fileset dir="lib" includes="**/gson-2.2.2.jar"/>
 			<fileset dir="lib" includes="**/rabbitmq-client.jar"/>
 			<fileset dir="lib" includes="**/commons-cli-1.1.jar"/>
 			<fileset dir="lib" includes="**/commons-io-1.2.jar"/>
@@ -86,7 +86,7 @@
 	
 	<path id="example.lib">
         <fileset dir="build/SDK">
-			<include name="**/gson-2.0.jar" />
+			<include name="**/gson-2.2.2.jar" />
 			<include name="**/rabbitmq-client.jar" />
 			<include name="**/commons-cli-1.1.jar" />
 			<include name="**/commons-io-1.2.jar" />

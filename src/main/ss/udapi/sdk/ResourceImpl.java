@@ -186,13 +186,13 @@ public class ResourceImpl extends Endpoint implements Resource {
 							//if not timeout
 							if(echoReset){
 								if(guid.equals(lastRecievedEchoGuid)){
-									logger.debug("OK");
+									logger.debug(String.format("Echo received for %1$s - %2$s", getId(), getName()));
 								}else{
 									logger.error("Recieved Echo Messages from differerent client");
 								}
 							}else{
 								if(!isProcessingStreamEvent){
-									logger.debug("BAD");
+									logger.debug(String.format("No echo received for %1$s - %2$s", getId(), getName()));
 									isReconnecting = true;
 									reconnect();
 									synchronized(echoTimerMonitor){
