@@ -22,7 +22,8 @@ import ss.udapi.sdk.interfaces.Session;
 
 public class SessionFactory {
 	
-	public static Session createSession(URL rootURL, Credentials credentials)  {
+	public static Session createSession(URL rootURL, Credentials credentials) throws Exception  
+	{
 		return new SessionImpl(rootURL, credentials);
 	}
 	

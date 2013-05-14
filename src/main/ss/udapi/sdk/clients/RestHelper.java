@@ -30,56 +30,82 @@ public class RestHelper {
 
 	private static Logger logger = Logger.getLogger(RestHelper.class.getName());
 	
-	public static HttpURLConnection createConnection(URL url, String data, String httpMethod, String contentType, Integer timeout, Map<String,String> headers, Boolean gzip){
+	public static HttpURLConnection createConnection(URL url, String data, String httpMethod, String contentType, Integer timeout,
+			Map<String, String> headers, Boolean gzip)
+	{
 		HttpURLConnection connection = null;
-		try{
-			connection = (HttpURLConnection)url.openConnection();
+		try
+		{
+			connection = (HttpURLConnection) url.openConnection();// proxy);
 			connection.setRequestMethod(httpMethod.toUpperCase());
 			connection.setRequestProperty("Content-Type", contentType);
 			connection.setReadTimeout(timeout);
 			connection.setUseCaches(false);
 			connection.setDoInput(true);
-	  		connection.setDoOutput(true);
-	  		
-			if(headers != null){
-				for(String key:headers.keySet()){
+			connection.setDoOutput(true);
+
+			if (headers != null)
+			{
+				for (String key : headers.keySet())
+				{
 					connection.setRequestProperty(key, headers.get(key));
 				}
 			}
-			
-			if(gzip){
+
+			if (gzip)
+			{
 				connection.setRequestProperty("Accept-Encoding", "gzip");
 			}
-			
-			if(data == null){
+
+			if (data == null)
+			{
 				data = "";
 			}
-			
-			if(httpMethod.toUpperCase().equals("POST")){
+
+			if (httpMethod.toUpperCase().equals("POST"))
+			{
 				connection.setFixedLengthStreamingMode(data.getBytes().length);
 			}
-			
-			if(!data.equals("")){
+
+			if (!data.equals(""))
+			{
 				DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
-			    wr.writeBytes(data); 
-			    wr.close();
+				wr.writeBytes(data);
+				wr.close();
 			}
-			
-		}catch(Exception ex){
-			logger.warn("Connection Creation Failed", ex );
+
+		} catch (Exception ex)
+		{
+			logger.warn("Connection Creation Failed", ex);
+			connection = null;
 		}
 		return connection;
 	}
 	
-	public static String getResponse(URL url, String data, String httpMethod, String contentType, Integer timeout, Map<String,String> headers, Boolean gzip){
+	public static String getResponse(URL url, String data, String httpMethod, String contentType, 
+			Integer timeout, Map<String,String> headers, Boolean gzip)
+	{
+		return getResponse(url, data, httpMethod, contentType, timeout, headers, gzip, "");
+	}
+
+	public static String getResponse(URL url, String data, String httpMethod, String contentType, Integer timeout, 
+			Map<String, String> headers, Boolean gzip, String errorResp)
+	{
 		HttpURLConnection theConnection = createConnection(url, data, httpMethod, contentType, timeout, headers, gzip);
-		InputStream inputStream = null;
-		try {
-			inputStream = theConnection.getInputStream();
-		} catch (IOException ex) {
-			logger.warn("Unable to read response", ex);
+		
+		if (theConnection != null)
+		{
+			try
+			{
+				InputStream inputStream = null;
+				inputStream = theConnection.getInputStream();
+				return getResponse(inputStream, gzip);
+			} catch (IOException ex)
+			{
+				logger.warn("Unable to read response " + ex.getMessage());
+			}
 		}
-		return getResponse(inputStream, gzip);
+		return errorResp;
 	}
 	
 	public static String getResponse(InputStream inputStream, Boolean gzip){

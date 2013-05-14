@@ -35,7 +35,7 @@ public abstract class Endpoint {
 	protected RestItem state;
 	
 	Endpoint(){
-		
+		System.setProperty("http.maxConnections","50");
 	}
 	
 	Endpoint(Map<String,String> headers, RestItem restItem){
@@ -43,13 +43,15 @@ public abstract class Endpoint {
 		this.state = restItem;
 	}
 	
-	List<RestItem> FindRelationAndFollow(String relation){
+	List<RestItem> FindRelationAndFollow(String relation)
+	{
 		List<RestItem> result = new ArrayList<RestItem>();
 		result = JsonHelper.toRestItems(FindRelationAndFollowAsString(relation));
 		return result;
 	}
 	
-	String FindRelationAndFollowAsString(String relation){
+	String FindRelationAndFollowAsString(String relation)
+	{
 		String result = "";
 		if(state != null){
 			for(RestLink restLink:state.getLinks()){

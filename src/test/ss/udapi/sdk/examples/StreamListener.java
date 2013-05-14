@@ -107,7 +107,6 @@ public class StreamListener {
 				}else{
 					logger.info(String.format("Epoch changed for %1$s from %2$s to %3$s", gtpFixture.getName(), currentEpoch, fixtureDelta.getEpoch()));
 					gtpFixture.pauseStreaming();
-					
 					logger.info(String.format("Get UDAPI Snapshot for %1$s", gtpFixture.getName()));
 					String snapshotString = gtpFixture.getSnapshot();
 					logger.info(String.format("Successfully retrieved UDAPI Snapshot for %1$s", gtpFixture.getName()));

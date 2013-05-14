@@ -44,79 +44,112 @@ public class SessionImpl extends Endpoint implements Session {
 	
 	private List<RestItem> serviceRestItems;
 	
-	public SessionImpl(URL serverURL, Credentials credentials){
+	public SessionImpl(URL serverURL, Credentials credentials) throws Exception
+	{
 		this.serverURL = serverURL;
 		headers = new HashMap<String,String>();
 		GetRoot(serverURL,credentials, true);
 	}
 	
-	private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
+	private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate) throws Exception
+	{
 		logger.debug(String.format("Connecting to %1$s", serverURL));
-		
+
 		HttpURLConnection theConnection = RestHelper.createConnection(serverURL, null, "GET", "application/json", 20000, headers, isCompressed);
-		
+
+		if (theConnection == null)
+		{
+			throw new Exception("Connection failure for " + serverURL.toExternalForm());
+		}
 		InputStream inputStream = null;
-		try{
-			if(authenticate){
-				if(theConnection.getResponseCode() == 401){
-					logger.debug("Not authenticated. Logging on");
-					inputStream = theConnection.getErrorStream();
-					
-					String rawJson = RestHelper.getResponse(inputStream, isCompressed);
-					List<RestItem> restItems = JsonHelper.toRestItems(rawJson);
-					
-					String url = "";
-					for(RestItem restItem:restItems){
-						for(RestLink restLink:restItem.getLinks()){
-							if(restLink.getRelation().equals("http://api.sportingsolutions.com/rels/login")){
-								url = restLink.getHref();
-								break;
-							}
-						}
-						if(!url.isEmpty()){
+
+		if (authenticate)
+		{
+			int httpCode = theConnection.getResponseCode();
+			
+			if (httpCode == 401)
+			{
+				logger.debug("Not authenticated. Logging on");
+				inputStream = theConnection.getErrorStream();
+
+				String rawJson = RestHelper.getResponse(inputStream, isCompressed);
+				List<RestItem> restItems = JsonHelper.toRestItems(rawJson);
+
+				String url = "";
+				for (RestItem restItem : restItems)
+				{
+					for (RestLink restLink : restItem.getLinks())
+					{
+						if (restLink.getRelation().equals("http://api.sportingsolutions.com/rels/login"))
+						{
+							url = restLink.getHref();
 							break;
 						}
 					}
-					URL theURL = null;
-					try{
-						theURL = new URL(url);
-					}catch(MalformedURLException ex){
-						logger.warn("Malformed Login URL", ex);
+					if (!url.isEmpty())
+					{
+						break;
 					}
-					
-					serviceRestItems = Login(theURL, credentials);
-					logger.info("Logged in successfully");
 				}
-			}else{
-				inputStream = theConnection.getInputStream();
-				
-				String rawJson = RestHelper.getResponse(inputStream, isCompressed);
-				serviceRestItems = JsonHelper.toRestItems(rawJson);
+				URL theURL = null;
+				try
+				{
+					theURL = new URL(url);
+				} catch (MalformedURLException ex)
+				{
+					logger.warn("Malformed Login URL", ex);
+				}
+
+				serviceRestItems = Login(theURL, credentials);
+				logger.info("Logged in successfully");
 			}
-		}catch(Exception ex){
-			logger.warn("Get Request Failed", ex);
+			else
+			{
+				throw new Exception("Connection to: " + serverURL + " failed. Expexted 401 but got:" + httpCode);
+			}
+		} else
+		{
+			inputStream = theConnection.getInputStream();
+
+			String rawJson = RestHelper.getResponse(inputStream, isCompressed);
+			serviceRestItems = JsonHelper.toRestItems(rawJson);
 		}
 	}
 	
-	private List<RestItem> Login(URL loginURL, Credentials credentials){
-		Map<String,String> headers = new HashMap<String,String>();
+	private List<RestItem> Login(URL loginURL, Credentials credentials) throws Exception
+	{
+		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("X-Auth-User", credentials.getUserName());
 		headers.put("X-Auth-Key", credentials.getPassword());
-		
+
 		HttpURLConnection theConnection = RestHelper.createConnection(loginURL, null, "POST", "application/json", 60000, headers, isCompressed);
-		Map<String, List<String>> responseMap = theConnection.getHeaderFields();
+
+		if (theConnection == null)
+		{
+			throw new Exception("Login post failure for " + serverURL.toExternalForm());
+		}
+		int httpCode = theConnection.getResponseCode();
 		
+		if (httpCode != 200)
+		{
+			throw new Exception("Login failed http return code: " + httpCode);
+		}
+		Map<String, List<String>> responseMap = theConnection.getHeaderFields();
+
 		this.headers.put("X-Auth-Token", responseMap.get("X-Auth-Token").get(0));
 		String rawJson = "";
-		try {
+		try
+		{
 			rawJson = RestHelper.getResponse(theConnection.getInputStream(), isCompressed);
-		} catch (IOException ex) {
+		} catch (IOException ex)
+		{
 			logger.warn("Unable to read response", ex);
 		}
 		return JsonHelper.toRestItems(rawJson);
 	}
 	
-	public Service getService(String name) {
+	public Service getService(String name) throws Exception 
+	{
 		logger.info(String.format("Get Service %1$s",name));
 		
 		if(serviceRestItems == null){
@@ -136,7 +169,7 @@ public class SessionImpl extends Endpoint implements Session {
 		return null;
 	}
 
-	public List<Service> getServices() {
+	public List<Service> getServices() throws Exception {
 		logger.info("Get all available services..");
 		
 		if(serviceRestItems == null){
