@@ -1849,4 +1849,6 @@ DOT_CLEANUP            = YES
 			PRODUCT_VERSION=2.0.0.0
 			   
 			PROJECT_NUMBER=2.0.0.0
+			   
+			PROJECT_NUMBER=${VersionNumber}
 		

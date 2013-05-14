@@ -28,6 +28,7 @@ public interface Resource {
 	public String getSnapshot();
 	public void startStreaming(List<Event> streamingEvents);
 	public void stopStreaming();
+	public boolean isStreaming();
 	public void pauseStreaming();	
 	public void unpauseStreaming();
 

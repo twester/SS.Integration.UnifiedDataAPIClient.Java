@@ -14,27 +14,38 @@
 
 package ss.udapi.sdk.streaming;
 
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.*;
 
 import org.apache.log4j.Logger;
 
 public class StreamAction extends Action {
 	
 	private static Logger logger = Logger.getLogger(StreamAction.class.getName());
+	ConcurrentLinkedQueue<String> msgList = new ConcurrentLinkedQueue<String>();
 	
 	public StreamAction(List<Event> events) {
 		super(events, StreamEvent.class);
 	}
 	
+	public void addMsg(String msg)
+	{
+		msgList.add(msg);
+	}
+	
 	@Override
-	public void run() {
-		try
+	public void run() 
+	{
+		while (msgList.peek() != null)
 		{
-			execute("Streaming message event");
-		}
-		catch(Exception ex)
-		{
-			logger.warn("Error", ex);
+			try
+			{
+				execute(msgList.poll());
+			}
+			catch(Exception ex)
+			{
+				logger.warn("Error", ex);
+			}
 		}
 	}
 }

@@ -37,7 +37,8 @@ public class ServiceImpl extends Endpoint implements Service {
 		return state.getName();
 	}
 
-	public List<Feature> getFeatures() {
+	public List<Feature> getFeatures() 
+	{
 		logger.info(String.format("Get all available services from %1$s", getName()));
 		List<Feature> result = new ArrayList<Feature>();
 		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/features/list");
@@ -47,7 +48,8 @@ public class ServiceImpl extends Endpoint implements Service {
 		return result;
 	}
 
-	public Feature getFeature(String featureName) {
+	public Feature getFeature(String featureName) 
+	{
 		logger.info(String.format("Get feature %1$s from %2$s", featureName, getName()));
 		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/features/list");
 		for(RestItem restItem:restItems){

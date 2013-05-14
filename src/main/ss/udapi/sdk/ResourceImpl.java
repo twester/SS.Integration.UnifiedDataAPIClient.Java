@@ -14,35 +14,23 @@
 
 package ss.udapi.sdk;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
-import java.util.UUID;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.log4j.Logger;
 
-import ss.udapi.sdk.clients.RestHelper;
-import ss.udapi.sdk.extensions.JsonHelper;
-import ss.udapi.sdk.interfaces.Resource;
+import ss.udapi.sdk.interfaces.*;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.RestLink;
-import ss.udapi.sdk.model.StreamEcho;
 import ss.udapi.sdk.model.Summary;
-import ss.udapi.sdk.streaming.ConnectedAction;
-import ss.udapi.sdk.streaming.DisconnectedAction;
-import ss.udapi.sdk.streaming.Event;
-import ss.udapi.sdk.streaming.StreamAction;
+import ss.udapi.sdk.streaming.*;
+import ss.udapi.sdk.streaming.FeedStatusAction.FeedStatus;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -52,17 +40,17 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
 
-public class ResourceImpl extends Endpoint implements Resource {
+public class ResourceImpl extends Endpoint implements EchoHandler, Resource {
 
 	private static Logger logger = Logger.getLogger(ResourceImpl.class.getName());
 
-	private Boolean isStreaming;
+	// Config values:
+	private final int MAX_RETRIES = 1;
+
+	private boolean isStreaming;
 	private List<Event> streamingEvents;
 	
-	
-	private ConnectionFactory connectionFactory;
-	private Integer maxRetries;
-	private Integer disconnections;
+	private ConnectionFactory connectionFactory = new ConnectionFactory();
 	private QueueingConsumer consumer;
 	private Channel channel;
 	private Connection connection;
@@ -72,20 +60,21 @@ public class ResourceImpl extends Endpoint implements Resource {
 	private int echoSenderInterval;
 	private int echoMaxDelay;
 	private String lastRecievedEchoGuid;
-	private boolean isProcessingStreamEvent;
-	private final Object echoTimerMonitor = new Object();
-	private final Object echoResetMonitor = new Object();
-	private volatile boolean echoReset = false;
-	private Thread echoThread;
 	
-	private Boolean isReconnecting;
+	private AtomicBoolean isReconnecting = new AtomicBoolean();
 	
 	private ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
 	
-	private final Object monitor = new Object();
-	private volatile boolean pause = false;
+	//private final Object monitor = new Object();
+	//private volatile boolean pause = false;
 	
-	ResourceImpl(Map<String,String> headers, RestItem restItem){
+	private Timer echoTimer;
+	private Echo echoHandler = null;
+	private Thread streamThread;
+	private FeedStatusAction feedStatusAction;
+	
+	ResourceImpl(Map<String,String> headers, RestItem restItem)
+	{
 		super(headers,restItem);
 		logger.debug(String.format("Instantiated Resource %1$s", restItem.getName()));
 	}
@@ -106,7 +95,7 @@ public class ResourceImpl extends Endpoint implements Resource {
 		logger.info(String.format("Get Snapshot for %1$s", getName()));
 		return FindRelationAndFollowAsString("http://api.sportingsolutions.com/rels/snapshot");
 	}
-
+	//--------------------------------------------------------------------------------------------
 	public void startStreaming(List<Event> events){
 		startStreaming(events,10000,3000);
 	}
@@ -114,336 +103,420 @@ public class ResourceImpl extends Endpoint implements Resource {
 	public void startStreaming(List<Event> events, Integer echoInterval, Integer echoMaxDelay){
 		logger.info(String.format("Starting stream for %1$s with Echo Interval of %2$s and Echo Max Delay of %3$s",getName(),echoInterval,echoMaxDelay));
 		this.streamingEvents = events;
+		feedStatusAction = new FeedStatusAction(streamingEvents);
+
 		this.echoSenderInterval = 10000;
 		this.echoMaxDelay = 3000;
 		
-		Runnable runnable = new Runnable(){
+		Runnable runnable = new Runnable()
+		{
 			@Override
-			public void run(){
-				try {
+			public void run()
+			{
+				try
+				{
+					logger.info("Streaming for " + getName() + " has STARTED");
 					streamData();
-				} catch (Exception ex) {
-					logger.error(String.format("There has been a serious error streaming %1$s . The stream cannot continue.", getName()),ex);
+				} catch (Exception ex)
+				{
+					logger.error(String.format("There has been a serious error streaming %1$s . The stream cannot continue.", getName()), ex);
+				}
+				finally
+				{
+					logger.info("Streaming for " + getName() + " has STOPPED");
+					feedDown();
 				}
 			}
 		};
 		
-		Thread theThread = new Thread(runnable);
-		theThread.start();
+		streamThread = new Thread(runnable);
+		streamThread.start();
 	}
-	
-	private void sendEcho() {
-		String guid = UUID.randomUUID().toString();
-		
-		while(isStreaming){
-			try{
-				synchronized(echoTimerMonitor){
-						try{
-							echoTimerMonitor.wait(echoSenderInterval);
-						}catch(InterruptedException ex){
-							Thread.currentThread().interrupt();
-							break;
-						}
-					}
-				
-				if(!isProcessingStreamEvent){
-					if(state != null){
-						for(RestLink restLink:state.getLinks()){
-							if(restLink.getRelation().equals("http://api.sportingsolutions.com/rels/stream/echo")){
-								URL theURL = null;
-								try{
-									theURL = new URL(restLink.getHref());
-								}catch(MalformedURLException ex){
-									logger.warn("Malformed Login URL", ex);
-								}
-								
-								StreamEcho streamEcho = new StreamEcho(); 
-								streamEcho.setHost(virtualHost);
-								streamEcho.setQueue(queueName);
-								
-								DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-								df.setTimeZone(TimeZone.getTimeZone("UTC"));
-								streamEcho.setMessage(guid + ";" + df.format(new Date()));
-								
-								String stringStreamEcho = JsonHelper.ToJson(streamEcho);
-								
-								RestHelper.getResponse(theURL, stringStreamEcho, "POST", "application/json", 3000, headers, false);
-							}
-						}
-					}
-				}
-			}catch(Exception ex){
-				logger.error("Unable to post echo", ex);
-			}
-			
-			try{
-				synchronized(echoResetMonitor){
-					try{
-						while(!echoReset){
-						
-							echoResetMonitor.wait(echoMaxDelay);
-						
-							//if not timeout
-							if(echoReset){
-								if(guid.equals(lastRecievedEchoGuid)){
-									logger.debug(String.format("Echo received for %1$s - %2$s", getId(), getName()));
-								}else{
-									logger.error("Recieved Echo Messages from differerent client");
-								}
-							}else{
-								if(!isProcessingStreamEvent){
-									logger.debug(String.format("No echo received for %1$s - %2$s", getId(), getName()));
-									isReconnecting = true;
-									reconnect();
-									synchronized(echoTimerMonitor){
-										echoTimerMonitor.notify();
-									}
-									isReconnecting = false;
-								}
-								echoReset = true;
-							}
-						}
-						echoReset = false;
-					}catch(InterruptedException ex){
-						Thread.currentThread().interrupt();
-						break;
-					}
-				}
-			}catch(Exception ex){
-				logger.error("Unable to find echo", ex);
-			}
-		}
-	}
-	
-	private void streamData() throws IOException, InterruptedException{
-		connectionFactory = new ConnectionFactory();
-		maxRetries = 10;
-		disconnections = 0;
-		isStreaming = true;
-		
-		reconnect();
-		logger.info(String.format("Initialised connection to Streaming Queue for %1$s", getName()));
-		
+	//--------------------------------------------------------------------------------------------
+	private void streamData() throws InterruptedException
+	{
 		StreamAction streamAction = new StreamAction(streamingEvents);
-		
-		while(isStreaming){
-			
-			synchronized(monitor){
+		reconnect();
+				
+		while(isStreaming)
+		{		
+			/*synchronized(monitor){
 				while(pause==true){
-					monitor.wait();
+					try{
+						monitor.wait();
+					}catch(InterruptedException iex){
+						logger.debug("WAIT INTERRUPTED");
+						return;
+					}
 				}
-			}
+			}*/
 			
 			try{
 				Delivery output = consumer.nextDelivery();
-				if(output != null){
+				if(output != null)
+				{
+					feedUp();
 					byte[] message = output.getBody();
 				
 					String messageString = new String(message);
+					
 					JsonObject jsonObject = new JsonParser().parse(messageString).getAsJsonObject();
-					if(jsonObject.get("Relation").getAsString().equals("http://api.sportingsolutions.com/rels/stream/echo")){
+					if(jsonObject.get("Relation").getAsString().equals("http://api.sportingsolutions.com/rels/stream/echo"))
+					{
 						String[] split = jsonObject.get("Content").getAsString().split(";");
 						lastRecievedEchoGuid = split[0];
 						
-						synchronized(echoResetMonitor){
-							echoReset = true;
-							echoResetMonitor.notify();
+						logger.debug("Received Echo guid: " + lastRecievedEchoGuid);
+						
+						if (echoHandler != null)
+						{
+							echoHandler.gotEcho(lastRecievedEchoGuid);
 						}
-					}else{
-						isProcessingStreamEvent = true;
-						try {
-							streamAction.execute(messageString);
+						else
+						{
+							logger.error("Had no echo handler");
+						}
+						//resetEcho();
+					}
+					else
+					{
+						try 
+						{
+							//resetEcho();
+							streamAction.addMsg(messageString);
+							actionExecuter.execute(streamAction);
 						} catch (Exception e) {
 							logger.warn("Error on message receive", e);
 						}	
-						isProcessingStreamEvent = false;
 					}
 				}
-				disconnections = 0;
-			}catch(Exception ex){
-				logger.warn(String.format("Lost connection to stream %1$s", getName()));
-				if(!isReconnecting){
-					StopEcho();
-					reconnect();
-				}else{
-					Thread.sleep(1000);
-				}
+			}catch (InterruptedException ie)
+			{
+				logger.debug("Streaming thread interrupted, stopping");
+			}
+			catch(Exception ex)
+			{
+				logger.warn(String.format("Error on stream " + getName()), ex);
+				stopStreaming();
 			}
 		}
 	}
-	
-	private void reconnect() throws IOException, InterruptedException{
-		Boolean success = false;
-		while(!success && isStreaming){
-			try{
+	private void reconnect() throws InterruptedException
+	{
+		if (isReconnecting.get())
+		{
+			logger.error("Reconnect but already reconnecting ...");
+		}
+
+		isStreaming = true;
+		isReconnecting.set(true);
+		int failures = 0;
+
+		while (isStreaming && isReconnecting.get())
+		{
+			try
+			{
 				List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/stream/amqp");
-				if(restItems != null){
-					for(RestItem restItem:restItems){
-						for(RestLink link:restItem.getLinks()){
-							if(link.getRelation().equals("amqp")){
-								URI amqpUri = null;
-								try {
-									amqpUri = new URI(link.getHref());
-								} catch (URISyntaxException ex) {
-									logger.warn("Malformed AMQP URL", ex);
+
+				if (restItems == null || restItems.size() == 0)
+				{
+					throw new Exception("Getting amqp info failed, not data returned");
+				}
+				for (RestItem restItem : restItems)
+				{
+					for (RestLink link : restItem.getLinks())
+					{
+						if (link.getRelation().equals("amqp"))
+						{
+							URI amqpUri = null;
+							try
+							{
+								amqpUri = new URI(link.getHref());
+							} catch (URISyntaxException ex)
+							{
+								logger.warn("Malformed AMQP URL", ex);
+							}
+
+							if (amqpUri != null)
+							{
+								connectionFactory.setRequestedHeartbeat(5);
+
+								String host = amqpUri.getHost();
+
+								if (host != null)
+								{
+									connectionFactory.setHost(host);
+								}
+
+								int port = amqpUri.getPort();
+								if (port != -1)
+								{
+									connectionFactory.setPort(port);
+								}
+
+								String userInfo = amqpUri.getRawUserInfo();
+								userInfo = URLDecoder.decode(userInfo, "UTF-8");
+								if (userInfo != null)
+								{
+									String userPass[] = userInfo.split(":");
+									if (userPass.length > 2)
+									{
+										throw new IllegalArgumentException("Bad user info in AMQP " + "URI: " + userInfo);
+									}
+									connectionFactory.setUsername(uriDecode(userPass[0]));
+
+									if (userPass.length == 2)
+									{
+										connectionFactory.setPassword(uriDecode(userPass[1]));
+									}
+								}
+
+								String path = amqpUri.getRawPath();
+								if (path != null && path.length() > 0)
+								{
+									queueName = path.substring(path.indexOf('/', 1) + 1);
+									virtualHost = uriDecode(amqpUri.getPath().substring(1, path.indexOf('/', 1)));
+									connectionFactory.setVirtualHost("/" + virtualHost);
+								}
+
+								connection = connectionFactory.newConnection();
+								logger.info(String.format("Connected to Streaming Server for %1$s", getName()));
+
+								channel = connection.createChannel();
+								consumer = new QueueingConsumer(channel)
+								{
+									@Override
+									public void handleCancelOk(String consumerTag)
+									{
+										super.handleCancelOk(consumerTag);
+									}
+								};
+
+								channel.basicConsume(queueName, true, consumer);
+								logger.info(String.format("Queue name: " + queueName + " for " + getName()));
+								channel.basicQos(0, 10, false);
+
+								actionExecuter.execute(new ConnectedAction(streamingEvents));
+								
+								URL echoURL = findEchoURL();								
+								if (echoURL != null)
+								{				
+									echoHandler = new Echo(getName(), this, echoURL, virtualHost, 
+											queueName, headers, this.echoMaxDelay);
+								}
+								else
+								{
+									logger.error("Failed to get echo url. Echoing disabled");
 								}
 								
-								if(amqpUri != null){
-									connectionFactory.setRequestedHeartbeat(5);
-									
-									String host = amqpUri.getHost();
-									
-									if (host != null) {
-							        	connectionFactory.setHost(host);
-							        }
-
-							        int port = amqpUri.getPort();
-							        if (port != -1) {
-							        	connectionFactory.setPort(port);
-							        }
-							        
-							        String userInfo = amqpUri.getRawUserInfo();
-							        userInfo = URLDecoder.decode(userInfo,"UTF-8");
-							        if (userInfo != null) {
-							            String userPass[] = userInfo.split(":");
-							            if (userPass.length > 2) {
-							                throw new IllegalArgumentException("Bad user info in AMQP " +
-							                                                   "URI: " + userInfo);
-							            }
-							            connectionFactory.setUsername(uriDecode(userPass[0]));
-
-							            if (userPass.length == 2) {
-							            	connectionFactory.setPassword(uriDecode(userPass[1]));
-							            }
-							        }
-
-							        String path = amqpUri.getRawPath();
-							        if (path != null && path.length() > 0) {
-							        	queueName = path.substring(path.indexOf('/',1)+1);
-							        	virtualHost = uriDecode(amqpUri.getPath().substring(1,path.indexOf('/',1)));
-							            connectionFactory.setVirtualHost("/" + virtualHost);
-							        }
-							        
-							        if(channel != null){
-							        	channel.close();
-							        	channel = null;
-							        }
-							        
-							        if(connection != null){
-							        	connection.close();
-							        	connection = null;
-							        }
-							        
-							        connection = connectionFactory.newConnection();
-							        logger.info(String.format("Successfully connected to Streaming Server for %1$s", getName()));
-
-							        StartEcho();
-							        
-							        actionExecuter.execute(new ConnectedAction(streamingEvents));
-							        
-							        channel = connection.createChannel();
-							        consumer = new QueueingConsumer(channel){
-							        	@Override
-							        	public void handleCancelOk(String consumerTag){
-							        		super.handleCancelOk(consumerTag);
-							        		dispose();
-							        	}
-							        };
-							        
-							        channel.basicConsume(queueName,true,consumer);
-							        channel.basicQos(0, 10, false);
-							        success = true;
-								}
+								startEcho();
+								isReconnecting.set(false);
 							}
 						}
 					}
 				}
-			}catch(Exception ex){
-				if(disconnections > maxRetries){
-					logger.error(String.format("Failed to reconnect Stream for %1$s",getName()));
+			} catch (Exception ex)
+			{
+				failures++;
+				logger.warn(String.format("Failed to connect stream %1$s, Error: %2$s Attempt %3$s", getName(), ex.getMessage(), failures));
+
+				if (failures < MAX_RETRIES)
+				{
+					dispose();
+					Thread.sleep(500);
+				} else
+				{
+					logger.error(String.format("Exceeded max retries. Stopping Stream for %1$s", getName()));
 					stopStreaming();
+					break;
 				}
-				
-				Thread.sleep(500);
-				disconnections++;
-				logger.warn(String.format("Failed to reconnect stream %1$s, Attempt %2$s", getName(),disconnections));
 			}
 		}
 	}
-	
-	private void StartEcho(){
-		if(echoThread == null){
-			echoReset = false;
-			echoThread = new Thread(new Runnable(){
-									@Override
-									public void run(){
-										try {
-											sendEcho();
-										} catch (Exception ex) {
-											logger.error(String.format("There has been a serious error streaming %1$s . The stream cannot continue.", getName()),ex);
-										}
-									}});
-			echoThread.start();
+	//-------------------------- Echo management --------------------------
+	private void startEcho()
+	{
+		if (echoTimer != null)
+		{
+			return;
+		}
+		if (!isStreaming)
+		{
+			logger.info("Not restarting echo timer. Streaming has stopped for" + getName());	
+			return;
+		}
+		try
+		{
+			if (echoHandler != null)
+			{				
+				String name = "EchoTimer " + this.getName(); 
+				echoTimer = new Timer(name);
+				echoTimer.schedule(new EchoTask(echoHandler), this.echoSenderInterval);
+			}
+			else
+			{
+				logger.error("Failed to find echo handler. Echoing disabled");
+			}
+		}
+		catch (Exception ex)
+		{
+			logger.error("Failed to start Echo timer", ex);
 		}
 	}
-	
-	private void StopEcho(){
-		if(echoThread != null){
-			echoThread.interrupt();
-			echoThread = null;
+	private void stopEcho()
+	{
+		if (echoTimer != null)
+		{
+			echoTimer.cancel();
+			if (echoHandler != null)
+			{
+				echoHandler.gotEcho(Echo.FINISHED);
+			}
+			echoTimer = null;
 		}
 	}
-	
-	
-	
-	private void dispose(){
-		logger.info(String.format("Streaming stopped for %1$s",getName()));
-		try{
-			if(channel != null){
+
+	@Override
+	public synchronized void resetEcho()
+	{
+		try
+		{
+			stopEcho();
+			startEcho();
+		}
+		catch (Exception ex)
+		{
+			logger.error("Resetting echo timer failed for " + getName(), ex);
+		}
+	}
+	@Override
+	public synchronized void echoTimeout()
+	{
+		if (isStreaming)
+		{
+			logger.error("Echo timed out for " + getName() + " Resetting connection");
+			stopStreaming();
+			//startStreaming(streamingEvents);
+		}
+	}
+	//--------------------------------------------------------------------------
+	private void stopChannel()
+	{
+		try
+		{
+			if (channel != null && channel.isOpen())
+			{
+				actionExecuter.execute(new DisconnectedAction(streamingEvents));
+				channel.basicCancel(consumer.getConsumerTag());
 				channel.close();
-				channel = null;
 			}
-			
-			if(connection != null){
-				connection.close();
-				connection = null;
-			}
-			
-			if(echoThread != null){
-				echoThread = null;
-			}
-		}catch(IOException ex){
-			logger.error(String.format("Problem while trying to shutdown stream for %1$s",getName()),ex);
+		} catch (Exception ex)
+		{
+			logger.error("Stopping the channel failed with " + ex.getMessage());
+		} finally
+		{
+			channel = null;
 		}
-		actionExecuter.execute(new DisconnectedAction(streamingEvents));
+	}
+
+	private void stopConnection()
+	{
+		try
+		{
+			if(connection != null && connection.isOpen())
+			{
+				connection.close();
+			}
+		}catch (Exception ex)
+		{
+			logger.error("Stopping the channel failed with " + ex.getMessage());
+		}
+		finally
+		{
+			connection = null;
+		}
+	}
+	
+	private void dispose()
+	{
+		logger.debug(String.format("Clean-up for %1$s",getName()));
+		try
+		{
+			//actionExecuter.shutdownNow();
+			stopEcho();
+			stopChannel();
+			stopConnection();
+			
+		}
+		catch(Exception ex)
+		{
+			logger.error(String.format("Problem while trying to clean-up stream for %1$s",getName()),ex);
+		}
 	}
 
 	public void pauseStreaming(){
 		logger.info(String.format("Streaming paused for %1$s", getName()));
-		pause = true;
-		StopEcho();
+		//pause = true;
+		//stopEcho();
 	}
 	
 	public void unpauseStreaming(){
 		logger.info(String.format("Streaming un-paused for %1$s",getName()));
-		synchronized(monitor){
-			pause = false;
-			monitor.notify();
-		}
-		StartEcho();
+	//	synchronized(monitor){
+	//		pause = false;
+	//		monitor.notify();
+	//	}
+	//	startEcho();
 	}
 	
-	public void stopStreaming(){
-		isStreaming = false;
-		if(consumer != null){
-			
-			StopEcho();
-			
-			try {
-				channel.basicCancel(consumer.getConsumerTag());
-			} catch (IOException ex) {
-				logger.error(String.format("There has been an error while trying to stop streaming for %1$s", getName()), ex);
+	public void stopStreaming()
+	{
+		try{
+			logger.info(String.format("Streaming stopped for %1$s",getName()));
+
+			isStreaming = false;
+			isReconnecting.set(false);
+			dispose();
+			//
+			// Echo just in case the timer has gone off
+			//
+			if (echoHandler != null)
+			{
+				echoHandler.gotEcho(Echo.FINISHED);
 			}
+
+			if (streamThread != null)
+			{
+				streamThread.interrupt();
+				streamThread = null;
+			}
+		}
+		catch (Exception ex){
+			logger.warn("Stopping streaming failed", ex);
+		}
+	}
+	
+	public boolean isStreaming(){
+		return isStreaming;
+	}
+	
+	public synchronized void feedUp(){
+		if (feedStatusAction.getStatus() == FeedStatus.Down){
+			try{
+				feedStatusAction.setStatus(FeedStatus.Up);
+				actionExecuter.execute(feedStatusAction);
+			} catch (Exception e){
+				logger.warn("send feed up failed for " + getName());
+			} 
+		}
+	}
+	
+	public synchronized void feedDown(){
+		try{
+			feedStatusAction.setStatus(FeedStatus.Down);
+			actionExecuter.execute(feedStatusAction);				
+		} catch (Exception e){
+			logger.warn("send feed down failed for " + getName());
 		}
 	}
 	
@@ -457,5 +530,18 @@ public class ResourceImpl extends Endpoint implements Resource {
             throw new RuntimeException(e);
         }
     }
-
+	
+	private URL findEchoURL(){
+		URL theURL = null;
+		for (RestLink restLink : state.getLinks()){
+			if (restLink.getRelation().equals("http://api.sportingsolutions.com/rels/stream/echo")){
+				try{
+					theURL = new URL(restLink.getHref());
+				} catch (MalformedURLException ex){
+					logger.warn("Malformed Echo URL", ex);
+				}
+			}
+		}
+		return theURL;
+	}
 }

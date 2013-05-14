@@ -48,7 +48,7 @@
 		<delete dir="build/SDKclasses"/>
     </target>
 	
-	<target name="buildExample" depends="jar,generateDocs">
+	<target name="buildExample" depends="jar">
 		<mkdir dir="build/SDKclasses"/>
 		<copy file="conf/runExample.bat" todir="build/SDK"/>
 		<copy file="conf/log4j.properties" todir="build/SDK"/>

@@ -62,11 +62,13 @@ public class GTPService {
 		
 		sportsList = new ArrayList<String>();
 		sportsList.add("Tennis");
-//		sportsList.add("Football");
-	//	sportsList.add("Basketball");
-	//	sportsList.add("Baseball");
-//		sportsList.add("IceHockey");
-//		sportsList.add("TestCricket");
+		sportsList.add("Football");
+		sportsList.add("Basketball");
+		sportsList.add("Baseball");
+		sportsList.add("IceHockey");
+		sportsList.add("TestCricket");
+		sportsList.add("AmericanFootball");
+		sportsList.add("Boxing");
 		listeners = new ConcurrentHashMap<String,StreamListener>();
 		activeFixtures = new ConcurrentHashMap<String,Boolean>();
 	}
