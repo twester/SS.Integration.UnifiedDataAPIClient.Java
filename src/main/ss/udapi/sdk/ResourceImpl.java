@@ -78,7 +78,7 @@ public class ResourceImpl extends Endpoint implements Resource {
 	private volatile boolean echoReset = false;
 	private Thread echoThread;
 	
-	private Boolean isReconnecting;
+	private Boolean isReconnecting = false;
 	
 	private ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
 	
