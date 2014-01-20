@@ -61,8 +61,8 @@ public class GTPService {
 		}
 		
 		sportsList = new ArrayList<String>();
-		sportsList.add("Tennis");
-//		sportsList.add("Football");
+//		sportsList.add("Tennis");
+		sportsList.add("Football");
 	//	sportsList.add("Basketball");
 	//	sportsList.add("Baseball");
 //		sportsList.add("IceHockey");

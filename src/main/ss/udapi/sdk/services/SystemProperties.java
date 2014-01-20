@@ -38,6 +38,10 @@ public final class SystemProperties
     propertiesHash.put("ss.http_login_timeout", "20");
     propertiesHash.put("ss.http_request_timeout", "60");
     propertiesHash.put("ss.conn_heartbeat", "5");
+    propertiesHash.put("ss.echo_sender_interval", "10");
+//    propertiesHash.put("ss.echo_max_delay", "3");
+    
+    propertiesHash.put("ss.echo_max_missed_echos", "3");
   }
 
 

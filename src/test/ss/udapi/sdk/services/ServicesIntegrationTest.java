@@ -23,6 +23,7 @@ public class ServicesIntegrationTest
   private ServiceRequest featureReq;
   private ServiceRequest resourceReq;
   private ServiceRequest amqpReq;
+  private ServiceRequest echoReq;
   String snapShotResponse;
   
   ConnectionFactory connFactory;
@@ -41,20 +42,20 @@ public class ServicesIntegrationTest
     featureReq = httpSvcs.processRequest(serviceReq, "http://api.sportingsolutions.com/rels/features/list", "UnifiedDataAPI");
     System.out.println("4-------------->" + featureReq.getServiceRestItems().get(0).getName());
 
-    
-//    resourceReq = httpSvcs.processRequest(featureReq, "http://api.sportingsolutions.com/rels/resources/list", null);
-//    System.out.println("5-------------->" + resourceReq.getServiceRestItems().get(0).getName());
-    
+
   
     resourceReq = httpSvcs.processRequest(featureReq, "http://api.sportingsolutions.com/rels/resources/list", "Football");
-    System.out.println("6-------------->" + resourceReq.getServiceRestItems().get(0).getName());
+    System.out.println("5-------------->" + resourceReq.getServiceRestItems().get(0).getName());
 
     amqpReq = httpSvcs.processRequest(resourceReq, "http://api.sportingsolutions.com/rels/stream/amqp", "Fernando v Jim");
-    System.out.println("7-------------->" + amqpReq.getServiceRestItems().get(0).getName());
+    System.out.println("6-------------->" + amqpReq.getServiceRestItems().get(0).getName());
+    System.out.println("6-------------->" + amqpReq.getServiceRestItems().get(0).getLinks().get(0).getHref());
     
 //    snapShotResponse = httpSvcs.getSnapshot(resourceReq, "http://api.sportingsolutions.com/rels/snapshot", "Fernando v Jim");
-//    System.out.println("8----------------->" + snapShotResponse);
+//    System.out.println("7----------------->" + snapShotResponse);
     
+    echoReq = httpSvcs.processRequest(resourceReq, "http://api.sportingsolutions.com/rels/stream/echo", "Fernando v Jim");
+    System.out.println("8--------------> echoRequest");
     
     
     

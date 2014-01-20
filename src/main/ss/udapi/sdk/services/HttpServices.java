@@ -117,9 +117,7 @@ public class HttpServices
     try {
       if (link.getVerbs()[0].contains("POST")) {
         httpAction = new HttpPost(link.getHref());
-      } else if (link.getVerbs()[0].contains("PUT")) {
-        httpAction = new HttpPut(link.getHref());
-      }
+      } 
       
       httpAction.setHeader("X-Auth-User", SystemProperties.get("ss.username"));
       httpAction.setHeader("X-Auth-Key", SystemProperties.get("ss.password"));
@@ -192,20 +190,44 @@ public class HttpServices
     
     
     try {
-      HttpGet httpGet = new HttpGet(link.getHref());
-      httpGet.setHeader("X-Auth-Token", request.getAuthToken());
-      logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
+      String responseBody = null;
+      if (link.getVerbs()[0].compareToIgnoreCase("Get") == 0) {
+        HttpGet httpGet = new HttpGet(link.getHref());
+        httpGet.setHeader("X-Auth-Token", request.getAuthToken());
+        logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
+        
+        ResponseHandler<String> responseHandler = getResponseHandler(200);
+        responseBody = httpClient.execute(httpGet, responseHandler);
+        serviceRestItems = JsonHelper.toRestItems(responseBody);
+      } else if (link.getVerbs()[0].compareToIgnoreCase("Post") == 0) {
+        HttpPost httpPost = new HttpPost(link.getHref());
 
-      ResponseHandler<String> responseHandler = getResponseHandler(200);
-      String responseBody = httpClient.execute(httpGet, responseHandler);
+        httpPost.setHeader("X-Auth-Token", request.getAuthToken());
+        httpPost.setHeader("Content-Type", "application/json");
+        
+        CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+        if (httpResponse.getStatusLine().getStatusCode() != 202) {
+          throw new ClientProtocolException("Unexpected response status: " + httpResponse.getStatusLine().getStatusCode());
+        }
+
+        HttpEntity entity = httpResponse.getEntity();
+        if (entity != null)
+        {
+          ServiceRequest serviceRequest = new ServiceRequest();
+          responseBody = new String(EntityUtils.toByteArray(entity));
+          serviceRestItems = JsonHelper.toRestItems(responseBody);
+        }
+      }
+
+        
       
-      serviceRestItems = JsonHelper.toRestItems(responseBody);
+      
       response.setServiceRestItems(serviceRestItems);
       response.setAuthToken(request.getAuthToken());
     } catch (ClientProtocolException protEx) {
-      logger.error("Invalid Client Protocol: " + protEx.getCause());
+      logger.error("Invalid Client Protocol: " + protEx.getMessage());
     } catch (IOException ioEx) {
-      logger.error("Communication error: " + ioEx.getCause());
+      logger.error("Communication error: " + ioEx.getMessage());
     } 
     return response;
   }

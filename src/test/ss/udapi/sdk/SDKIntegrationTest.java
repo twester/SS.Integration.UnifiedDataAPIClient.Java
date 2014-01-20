@@ -5,10 +5,16 @@ import static org.junit.Assert.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import ss.udapi.sdk.examples.StreamListener;
+import ss.udapi.sdk.examples.model.Fixture;
 import ss.udapi.sdk.interfaces.Credentials;
 import ss.udapi.sdk.interfaces.Feature;
 import ss.udapi.sdk.interfaces.Resource;
@@ -25,8 +31,10 @@ public class SDKIntegrationTest
 
   private HttpServices httpSvcs = new HttpServices();
   private ServiceRequest loginDetails;
+  private List<String> sportsList;
   RestItem restItem = new RestItem();
   
+  private ConcurrentHashMap<String,StreamListener> listeners;
   
   @Test
   public void test()
@@ -61,13 +69,32 @@ public class SDKIntegrationTest
       String snapShot = resource.getSnapshot();
       logger.debug("Snapshot retrieved" + snapShot.substring(0, 300));
       
+
+      
+      if (resource.getContent().getMatchStatus() != 50)
+      {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+        
+        Fixture fixtureSnapshot = gson.fromJson(snapShot, Fixture.class);
+        Integer epoch = fixtureSnapshot.getEpoch();
+
+        System.out.println("epoch----------------->" + epoch);
+        
+        StreamListener streamListener = new StreamListener(resource,epoch);
+        listeners.put(resource.getId(), streamListener);
+      }
+
+
+      
+      
       
     } catch (MalformedURLException ex) {
       logger.error(ex);
     }
-  
-    
     
   }
 
+  
+  
 }
