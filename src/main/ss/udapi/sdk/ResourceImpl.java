@@ -23,7 +23,7 @@ public class ResourceImpl implements Resource
   private static HttpServices httpSvcs = new HttpServices();
   
   private int echoSenderInterval;
-  private int echoMaxDelay;
+  private int maxMissedEchos;
   private List<Event> streamingEvents;
   
   
@@ -61,17 +61,22 @@ public class ResourceImpl implements Resource
   @Override
   public void startStreaming(List<Event> events)
   {
+    System.out.println("--------------->" + events.size() + SystemProperties.get("ss.echo_sender_interval")); 
+
     startStreaming(events,
               new Integer(SystemProperties.get("ss.echo_sender_interval")),
-              new Integer(SystemProperties.get("ss.echo_max_delay")));
+              new Integer(SystemProperties.get("ss.echo_max_missed_echos")));
   }
   
-  private void startStreaming(List<Event> events, int echoSenderInterval, int echoMaxDelay)
+
+  private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos)
   {
-    logger.info(String.format("Starting stream for %1$s with Echo Interval of %2$s and Echo Max Delay of %3$s",getName(),echoSenderInterval,echoMaxDelay));
+    System.out.println("--------------->" + events.size()); 
+
+    logger.info(String.format("Starting stream for %1$s with Echo Interval of %2$s and Max Missed Echos of %3$s",getName(),echoSenderInterval,maxMissedEchos));
     this.streamingEvents = events;
     this.echoSenderInterval = echoSenderInterval;
-    this.echoMaxDelay = echoMaxDelay;
+    this.maxMissedEchos = maxMissedEchos;
   
     
 //  AND THIS IS WHERE WE START CHANGING THINGS.  NOT ONE THREAD BUT GET NOTIFICATIONS FROM A MONITOR THREAD TO DO SOMETHING

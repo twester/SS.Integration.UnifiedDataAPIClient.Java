@@ -4,3 +4,4 @@ bin/
 build/
 *.log
 html/
+conf/client.properties

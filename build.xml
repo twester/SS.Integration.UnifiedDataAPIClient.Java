@@ -5,13 +5,16 @@
     </target>
 
 	<path id="project.lib">
-        <fileset dir="lib">
+    <fileset dir="lib">
 			<include name="**/gson-2.2.2.jar" />
 			<include name="**/rabbitmq-client.jar" />
 			<include name="**/commons-cli-1.1.jar" />
 			<include name="**/commons-io-1.2.jar" />
 			<include name="**/log4j-1.2.17.jar" />
-		</fileset>
+      <include name="**/commons-logging-1.1.3.jar" />
+      <include name="**/httpclient-4.3.1.jar" />
+      <include name="**/httpcore-4.3.jar" />
+    </fileset>
 		<pathelement path="build/classes" />
     </path>
 	
@@ -29,6 +32,9 @@
 			<fileset dir="lib" includes="**/commons-cli-1.1.jar"/>
 			<fileset dir="lib" includes="**/commons-io-1.2.jar"/>
 			<fileset dir="lib" includes="**/log4j-1.2.17.jar"/>
+      <fileset dir="lib" includes="**/commons-logging-1.1.3.jar"/>
+      <fileset dir="lib" includes="**/httpclient-4.3.1.jar"/>
+      <fileset dir="lib" includes="**/httpcore-4.3.jar"/>
 		</copy>
 		<copy file="conf/runjava.bat" todir="build/SDK"/>
 		<copy file="README.markdown" todir="build/SDK"/>
@@ -48,7 +54,9 @@
 		<delete dir="build/SDKclasses"/>
     </target>
 	
-	<target name="buildExample" depends="jar,generateDocs">
+  <!-- target name="buildExample" depends="jar,generateDocs" -->
+
+  <target name="buildExample" depends="jar">
 		<mkdir dir="build/SDKclasses"/>
 		<copy file="conf/runExample.bat" todir="build/SDK"/>
 		<copy file="conf/log4j.properties" todir="build/SDK"/>
