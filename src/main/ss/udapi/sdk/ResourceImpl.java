@@ -1,6 +1,14 @@
 package ss.udapi.sdk;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.log4j.Logger;
 
@@ -9,8 +17,12 @@ import com.rabbitmq.client.ConnectionFactory;
 import ss.udapi.sdk.interfaces.Resource;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
+import ss.udapi.sdk.model.StreamEcho;
 import ss.udapi.sdk.model.Summary;
+import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
+import ss.udapi.sdk.services.JsonHelper;
+import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.SystemProperties;
 import ss.udapi.sdk.streaming.Event;
 
@@ -27,30 +39,13 @@ public class ResourceImpl implements Resource
   private List<Event> streamingEvents;
   
   
+  
   protected ResourceImpl(RestItem restItem, ServiceRequest availableResources){
     this.restItem = restItem;
     this.availableResources = availableResources;
     logger.debug("Instantiated Resource: " + restItem.getName());
   }
   
-  
-  @Override
-  public String getId()
-  {
-    return restItem.getContent().getId();
-  }
-
-  @Override
-  public String getName()
-  {
-    return restItem.getName();
-  }
-
-  @Override
-  public Summary getContent()
-  {
-    return restItem.getContent();
-  }
 
   @Override
   public String getSnapshot()
@@ -61,8 +56,6 @@ public class ResourceImpl implements Resource
   @Override
   public void startStreaming(List<Event> events)
   {
-    System.out.println("--------------->" + events.size() + SystemProperties.get("ss.echo_sender_interval")); 
-
     startStreaming(events,
               new Integer(SystemProperties.get("ss.echo_sender_interval")),
               new Integer(SystemProperties.get("ss.echo_max_missed_echos")));
@@ -78,11 +71,11 @@ public class ResourceImpl implements Resource
     this.echoSenderInterval = echoSenderInterval;
     this.maxMissedEchos = maxMissedEchos;
   
+    streamData();
     
 //  AND THIS IS WHERE WE START CHANGING THINGS.  NOT ONE THREAD BUT GET NOTIFICATIONS FROM A MONITOR THREAD TO DO SOMETHING
   }
 
-  
   
   
   private void streamData()
@@ -90,10 +83,29 @@ public class ResourceImpl implements Resource
     ServiceRequest amqpRequest = new ServiceRequest();
     amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
     System.out.println("---------->" + amqpRequest);
-//    ConnectionFactory connectionFactory = new ConnectionFactory();
+    
+    String amqpURI = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
+    
+    Executor exec = Executors.newFixedThreadPool(3);
+    
+    MQListener mqListener = new MQListener(amqpURI, availableResources);
+    exec.execute(mqListener);
+
+
+    
+    
+    EchoSender echoSender = new EchoSender(amqpURI, availableResources);
+    exec.execute(echoSender);
+
+
+    
+    
+    
+    //    ConnectionFactory connectionFactory = new ConnectionFactory();
     
     
   }
+
   
   
   
@@ -118,7 +130,43 @@ public class ResourceImpl implements Resource
   public void unpauseStreaming()
   {
     // TODO Auto-generated method stub
-
   }
 
+  
+  @Override
+  public String getId()
+  {
+    return restItem.getContent().getId();
+  }
+
+  @Override
+  public String getName()
+  {
+    return restItem.getName();
+  }
+
+  @Override
+  public Summary getContent()
+  {
+    return restItem.getContent();
+  }
+
+
+  
+  
+
+  
+  
+  
 }
+
+
+
+
+
+
+
+
+
+
+

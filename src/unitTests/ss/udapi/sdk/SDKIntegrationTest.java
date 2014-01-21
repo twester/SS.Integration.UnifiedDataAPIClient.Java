@@ -79,8 +79,20 @@ public class SDKIntegrationTest
       String snapShot = resource.getSnapshot();
       logger.debug("Snapshot retrieved" + snapShot.substring(0, 300));
       
+    } catch (MalformedURLException ex) {
+      logger.error(ex);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+  }
 
-      int epoch = 0;
+/*      int epoch = 0;
       if (resource.getContent().getMatchStatus() != 50)
       {
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -216,4 +228,10 @@ public class SDKIntegrationTest
       resource.unpauseStreaming();
     }
   }
+
+*/
 }
+
+      
+      
+ 
