@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
 
@@ -18,15 +20,22 @@ import com.rabbitmq.client.QueueingConsumer.Delivery;
 
 public class MQListener implements Runnable
 {
-  private URI amqpURI;
-  private Logger logger = Logger.getLogger(MQListener.class);
+  private static URI amqpURI;
+  private static Logger logger = Logger.getLogger(MQListener.class);
   private Integer count;
-  private ServiceRequest request;
+  private static MQListener instance = null;
+  private ServiceRequest resources;
+  private static Channel channel;
+  private static QueueingConsumer consumer;
+  private static boolean MQListenerRunning = false;
+  
+  //TODO: this is the echo resource array but obviously has to be moved out as it's own class
+  private ConcurrentMap queueMap = new ConcurrentHashMap();
       
-  public MQListener (String amqpDest, ServiceRequest request)
+  public MQListener (String amqpDest, ServiceRequest resources)
   {
     try {
-      this.request = request;
+      this.resources = resources;
       this.amqpURI = new URI(amqpDest);
       this.count = count;
     } catch (Exception ex) {
@@ -34,9 +43,32 @@ public class MQListener implements Runnable
     }
   }
   
+  public static MQListener getMQListener(String amqpDest, ServiceRequest resources)
+  {
+    System.out.println("----------getting LIstener>" );
+    if (instance == null)
+    {
+      System.out.println("----------getting LIstener>");
+      instance = new MQListener(amqpDest, resources);
+    } 
+
+    String path = amqpURI.getRawPath();
+    String queue = path.substring(path.indexOf('/',1)+1);
+/*    try {
+      System.out.println ("basicConsume---------------------------->" + channel.basicConsume(queue, true, consumer) );
+    } catch (IOException ex){
+      logger.debug(ex);
+    }      
+*/
+
+    return instance;
+  }
+  
+  
   @Override
   public void run()
   {
+    MQListenerRunning = true;
     try {
       ConnectionFactory connectionFactory = new ConnectionFactory();
   
@@ -74,6 +106,7 @@ public class MQListener implements Runnable
       }
       
 
+
       
       if (port != -1) {
         connectionFactory.setPort(port);
@@ -81,20 +114,16 @@ public class MQListener implements Runnable
       
       Connection connection = connectionFactory.newConnection();
   
-      Channel channel = connection.createChannel();
-      QueueingConsumer consumer = new QueueingConsumer(channel);    
-      
-      
-      //this is where the for loop going over all the queues goes
-      channel.basicConsume(queue, false, consumer);
-      try {
-        channel.basicConsume(queue, false, consumer);
-      } catch (Exception ex) {
-        System.out.println("------------------>Connection5 ex " + ex);
-      }
+      channel = connection.createChannel();
+      consumer = new QueueingConsumer(channel);    
+
+      System.out.println ("basicConsume---------------------------->" + channel.basicConsume(queue, true, consumer) );      
 
       while (true) {
         Delivery delivery = consumer.nextDelivery();
+            
+        
+            
         String message = new String(delivery.getBody());
         System.out.println("-----------------Message Received> '" + message + "'");   
         
@@ -124,5 +153,11 @@ public class MQListener implements Runnable
     }
   }     
 
+  
+  
+  public boolean isRunning()
+  {
+    return MQListenerRunning;
+  }
   
 }

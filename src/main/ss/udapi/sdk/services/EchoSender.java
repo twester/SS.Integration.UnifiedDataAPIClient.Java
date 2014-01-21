@@ -95,7 +95,7 @@ public class EchoSender implements Runnable
     }
   }     
 
-  public boolean getEchoRunning()
+  public boolean isRunning()
   {
     return echoRunning;
   }

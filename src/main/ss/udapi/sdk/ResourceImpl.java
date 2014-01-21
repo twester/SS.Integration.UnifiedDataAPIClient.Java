@@ -64,7 +64,7 @@ public class ResourceImpl implements Resource
 
   private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos)
   {
-    System.out.println("--------------->" + events.size()); 
+    System.out.println("---------------eventSize>" + events.size()); 
 
     logger.info(String.format("Starting stream for %1$s with Echo Interval of %2$s and Max Missed Echos of %3$s",getName(),echoSenderInterval,maxMissedEchos));
     this.streamingEvents = events;
@@ -80,17 +80,27 @@ public class ResourceImpl implements Resource
   {
     ServiceRequest amqpRequest = new ServiceRequest();
     amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
-    System.out.println("---------->" + amqpRequest);
     
     String amqpURI = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
     
+    
+    //move to a separate static threadpool so we don't create three threads per resource :-)
     Executor exec = Executors.newFixedThreadPool(3);
+  
     
     MQListener mqListener = new MQListener(amqpURI, availableResources);
-    exec.execute(mqListener);
+    
+//    MQListener mqListener = MQListener.getMQListener(amqpURI, availableResources);
+    
+//    if (mqListener.isRunning() == false)
+    //{
+      exec.execute(mqListener);
+    //}
+    
     
     EchoSender echoSender = EchoSender.getEchoSender(amqpURI, availableResources);
-    if (echoSender.getEchoRunning() == false) {
+    if (echoSender.isRunning() == false)
+    {
       exec.execute(echoSender);
     }
 
