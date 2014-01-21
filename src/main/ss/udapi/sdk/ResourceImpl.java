@@ -72,8 +72,6 @@ public class ResourceImpl implements Resource
     this.maxMissedEchos = maxMissedEchos;
   
     streamData();
-    
-//  AND THIS IS WHERE WE START CHANGING THINGS.  NOT ONE THREAD BUT GET NOTIFICATIONS FROM A MONITOR THREAD TO DO SOMETHING
   }
 
   
@@ -90,18 +88,13 @@ public class ResourceImpl implements Resource
     
     MQListener mqListener = new MQListener(amqpURI, availableResources);
     exec.execute(mqListener);
-
-
     
-    
-    EchoSender echoSender = new EchoSender(amqpURI, availableResources);
-    exec.execute(echoSender);
-
+    EchoSender echoSender = EchoSender.getEchoSender(amqpURI, availableResources);
+    if (echoSender.getEchoRunning() == false) {
+      exec.execute(echoSender);
+    }
 
     
-    
-    
-    //    ConnectionFactory connectionFactory = new ConnectionFactory();
     
     
   }

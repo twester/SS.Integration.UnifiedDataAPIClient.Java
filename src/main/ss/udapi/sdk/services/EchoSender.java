@@ -18,12 +18,15 @@ import ss.udapi.sdk.model.StreamEcho;
 
 public class EchoSender implements Runnable
 {
+
   private URI amqpURI;
   private Logger logger = Logger.getLogger(EchoSender.class);
   private HttpServices httpSvcs = new HttpServices(); 
   private ServiceRequest resources = new ServiceRequest();
+  private static EchoSender instance = null;
+  private static boolean echoRunning = false;
   
-  public EchoSender(String amqpDest, ServiceRequest resources)
+  private EchoSender(String amqpDest, ServiceRequest resources)
   {
     this.resources = resources;
     try {
@@ -34,9 +37,21 @@ public class EchoSender implements Runnable
   }
 
   
+  
+  public static EchoSender getEchoSender(String amqpDest, ServiceRequest resources)
+  {
+    if (instance == null) {
+      instance = new EchoSender(amqpDest, resources);
+    }
+    return instance;
+  }
+  
+  
+  
   @Override
   public void run()
   {
+    echoRunning = true;
     while (true) {
       
       try {
@@ -58,7 +73,7 @@ public class EchoSender implements Runnable
         String stringStreamEcho = JsonHelper.ToJson(streamEcho);
         System.out.println("myEcho---------------->" + stringStreamEcho);
         
-        httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/echo", "Fernando v Jim", stringStreamEcho);
+        httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
    
         Thread.sleep(5000);
       } catch (InterruptedException ex) {
@@ -66,9 +81,6 @@ public class EchoSender implements Runnable
       }
     
     }
-    
-    // TODO Auto-generated method stub
-
   }
 
   
@@ -83,5 +95,11 @@ public class EchoSender implements Runnable
     }
   }     
 
+  public boolean getEchoRunning()
+  {
+    return echoRunning;
+  }
+  
+  
   
 }
