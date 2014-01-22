@@ -23,6 +23,7 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.services.MQListener;
+import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
 import ss.udapi.sdk.streaming.Event;
@@ -41,10 +42,13 @@ public class ResourceImpl implements Resource
   
   
   
-  protected ResourceImpl(RestItem restItem, ServiceRequest availableResources){
+  protected ResourceImpl(RestItem restItem, ServiceRequest availableResources)
+  {
     this.restItem = restItem;
     this.availableResources = availableResources;
     logger.debug("Instantiated Resource: " + restItem.getName());
+
+    ResourceWorkerMap.addUOW(getId(), this);
   }
   
 
@@ -83,6 +87,8 @@ public class ResourceImpl implements Resource
     String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
     logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
     
+    
+    //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
     MQListener mqListener = MQListener.getMQListener(amqpDest, availableResources);
     mqListener.setResources(amqpDest, availableResources);
     
@@ -93,6 +99,7 @@ public class ResourceImpl implements Resource
     } else { 
       ServiceThreadExecutor.executeTask(mqListener);
       try {
+        //TODO see if we need this anymore the singleton executor service should habve take care of this
         Thread.sleep(100);
       } catch (Exception ex) {
         logger.fatal("MQListener instantiation interrupted");

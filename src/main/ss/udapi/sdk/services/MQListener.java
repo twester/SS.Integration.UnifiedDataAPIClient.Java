@@ -130,15 +130,30 @@ public class MQListener implements Runnable
         logger.debug("--------------------->Initial basic consumer " + ctag + " added for queue " + queue);
         
         MQListenerRunning = true;
+
         
         while (true) {
           Delivery delivery = consumer.nextDelivery();
           if(delivery != null){    
             String message = new String(delivery.getBody());
             logger.debug("----------------->Message Received> [" + message + "]");   
-          
-//            count ++;
-//            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+
+            
+            String msgHead = message.substring(0, 64);
+//if things slow down parsing the header change to this which doesn't look as tidy
+//            if ((message.substring(0, 64).equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",")))
+            if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\","))
+            {
+              //TODO: echo processing
+              System.out.println("-------------------------->ADD ECHO PROCESSING:  " + msgHead);
+            } else {
+              System.out.println("-------------------------->NAY:  " + msgHead);
+              WorkQueue.addTask(message);
+              System.out.println("---------------------------->Reading of the Q" + WorkQueue.getTask());
+            }
+            
+            
+            
 
           }
         }
@@ -172,6 +187,8 @@ public class MQListener implements Runnable
       logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + newAmqpDest);
     }
   }
+  
+  
   
   
   

@@ -7,7 +7,9 @@ import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
 import ss.udapi.sdk.services.HttpServices;
+import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
+import ss.udapi.sdk.services.WorkQueue;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +33,14 @@ public class SessionImpl implements Session
   protected SessionImpl(URL serverURL, Credentials credentials){
     logger.debug("Logging into system at url: [" + serverURL.toExternalForm() + "]");
     this.serverURL = serverURL;
+    
+    
+    //not strictly part of the session but necessary implementation initialization
     ServiceThreadExecutor.createExecutor();
+    
+    //singletons so they only use up a reference to it and it's built by the time we need it
+    WorkQueue workQueue = WorkQueue.getWorkQueue(); 
+    ResourceWorkerMap workMap = ResourceWorkerMap.getWorkerMap(); 
     
     
     

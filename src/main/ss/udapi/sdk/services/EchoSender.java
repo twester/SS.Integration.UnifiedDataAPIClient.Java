@@ -77,7 +77,7 @@ public class EchoSender implements Runnable
             httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
        
             echoRunning=true;
-            Thread.sleep(5000);
+            Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
           } catch (InterruptedException ex) {
             logger.error("Echo Thread disrupted" + ex);
           }

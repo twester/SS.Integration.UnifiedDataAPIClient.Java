@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-
+//TODO do we need this?  i don't think so
 public final class Relationships
 {
   private static Map<String,String> relationNameMap = null;
