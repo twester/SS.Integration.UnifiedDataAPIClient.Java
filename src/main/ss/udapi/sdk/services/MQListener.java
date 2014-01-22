@@ -45,21 +45,12 @@ public class MQListener implements Runnable
   
   public static MQListener getMQListener(String amqpDest, ServiceRequest resources)
   {
-    System.out.println("----------getting LIstener>" );
+    logger.debug("------------------->Retrieving listener for name " + resources.getServiceRestItems().get(0).getName());
+    
     if (instance == null)
     {
-      System.out.println("----------getting LIstener>");
       instance = new MQListener(amqpDest, resources);
     } 
-
-    String path = amqpURI.getRawPath();
-    String queue = path.substring(path.indexOf('/',1)+1);
-/*    try {
-      System.out.println ("basicConsume---------------------------->" + channel.basicConsume(queue, true, consumer) );
-    } catch (IOException ex){
-      logger.debug(ex);
-    }      
-*/
 
     return instance;
   }
@@ -68,77 +59,98 @@ public class MQListener implements Runnable
   @Override
   public void run()
   {
-    MQListenerRunning = true;
-    try {
-      ConnectionFactory connectionFactory = new ConnectionFactory();
+    if (MQListenerRunning == false){
+
+      
+      synchronized(this) {
   
-      connectionFactory.setRequestedHeartbeat(5);
+        try {
+          ConnectionFactory connectionFactory = new ConnectionFactory();
       
-      String host = amqpURI.getHost();
-      connectionFactory.setHost(host);
+          connectionFactory.setRequestedHeartbeat(5);
+          
+          String host = amqpURI.getHost();
+          connectionFactory.setHost(host);
+          
+          String path = amqpURI.getRawPath();
       
+          String queue = path.substring(path.indexOf('/',1)+1);
+
+      
+          
+          String virtualHost = uriDecode(amqpURI.getPath().substring(1,path.indexOf('/',1)));
+      
+          connectionFactory.setVirtualHost("/" + virtualHost);
+          
+          int port = amqpURI.getPort();
+          
+          
+          String userInfo = amqpURI.getRawUserInfo();
+          userInfo = URLDecoder.decode(userInfo,"UTF-8");
+          if (userInfo != null) {
+              String userPass[] = userInfo.split(":");
+              if (userPass.length > 2) {
+                  throw new IllegalArgumentException("Bad user info in AMQP " +
+                                                     "URI: " + userInfo);
+              }
+              connectionFactory.setUsername(uriDecode(userPass[0]));
+      
+              if (userPass.length == 2) {
+                connectionFactory.setPassword(uriDecode(userPass[1]));
+              }
+          }
+          
+    
+    
+          
+          if (port != -1) {
+            connectionFactory.setPort(port);
+          }
+          
+          Connection connection = connectionFactory.newConnection();
+      
+          channel = connection.createChannel();
+          consumer = new QueueingConsumer(channel);    
+    
+          //add the ctag to array to keep track of which queue is for which response
+          String ctag=channel.basicConsume(queue, true, consumer);
+          logger.debug("--------------------->Initial basic consumer " + ctag + " added for queue " + queue);
+          
+          MQListenerRunning = true;
+          
+          while (true) {
+            Delivery delivery = consumer.nextDelivery();
+                
+            String message = new String(delivery.getBody());
+            logger.debug("----------------->Message Received> [" + message + "]");   
+            
+            count ++;
+            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+          }
+    
+        
+        } catch (IOException ex) {
+          System.out.println("Malformed AMQP URL" + ex);
+        } catch (InterruptedException ex) {
+          System.out.println("Malformed AMQP URL" + ex);
+        }
+
+      }
+
+    
+    } else {
       String path = amqpURI.getRawPath();
-  
       String queue = path.substring(path.indexOf('/',1)+1);
-      System.out.println("------------------>Queue>" + queue);
-  
-      
-      String virtualHost = uriDecode(amqpURI.getPath().substring(1,path.indexOf('/',1)));
-  
-      connectionFactory.setVirtualHost("/" + virtualHost);
-      
-      int port = amqpURI.getPort();
-      
-      
-      String userInfo = amqpURI.getRawUserInfo();
-      userInfo = URLDecoder.decode(userInfo,"UTF-8");
-      if (userInfo != null) {
-          String userPass[] = userInfo.split(":");
-          if (userPass.length > 2) {
-              throw new IllegalArgumentException("Bad user info in AMQP " +
-                                                 "URI: " + userInfo);
-          }
-          connectionFactory.setUsername(uriDecode(userPass[0]));
-  
-          if (userPass.length == 2) {
-            connectionFactory.setPassword(uriDecode(userPass[1]));
-          }
-      }
-      
+      try {
 
-
-      
-      if (port != -1) {
-        connectionFactory.setPort(port);
-      }
-      
-      Connection connection = connectionFactory.newConnection();
-  
-      channel = connection.createChannel();
-      consumer = new QueueingConsumer(channel);    
-
-      System.out.println ("basicConsume---------------------------->" + channel.basicConsume(queue, true, consumer) );      
-
-      while (true) {
-        Delivery delivery = consumer.nextDelivery();
-            
-        
-            
-        String message = new String(delivery.getBody());
-        System.out.println("-----------------Message Received> '" + message + "'");   
-        
-        count ++;
-        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-      }
-
-    
-    } catch (IOException ex) {
-      System.out.println("Malformed AMQP URL" + ex);
-    } catch (InterruptedException ex) {
-      System.out.println("Malformed AMQP URL" + ex);
+        String ctag=channel.basicConsume(queue, true, consumer);
+        logger.debug("--------------------->Additional basic consumer " + ctag + " added for queue " + queue);
+      } catch (IOException ex){
+        logger.debug(ex);
+      }     
     }
-    
-
+  
+  
   }
 
   
@@ -153,11 +165,4 @@ public class MQListener implements Runnable
     }
   }     
 
-  
-  
-  public boolean isRunning()
-  {
-    return MQListenerRunning;
-  }
-  
 }

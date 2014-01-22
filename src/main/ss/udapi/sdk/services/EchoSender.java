@@ -51,38 +51,41 @@ public class EchoSender implements Runnable
   @Override
   public void run()
   {
-    echoRunning = true;
-    while (true) {
-      
-      try {
-        String path = amqpURI.getRawPath();
-        String queue = path.substring(path.indexOf('/',1)+1);
-        String virtualHost = uriDecode(amqpURI.getPath().substring(1,path.indexOf('/',1)));
-        
-        
-        StreamEcho streamEcho = new StreamEcho(); 
-        streamEcho.setHost(virtualHost);
-        streamEcho.setQueue(queue);
-        
-        String guid = UUID.randomUUID().toString();
-        
-        DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        df.setTimeZone(TimeZone.getTimeZone("UTC"));
-        streamEcho.setMessage(guid + ";" + df.format(new Date()));
-        
-        String stringStreamEcho = JsonHelper.ToJson(streamEcho);
-        System.out.println("myEcho---------------->" + stringStreamEcho);
-        
-        httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
-   
-        Thread.sleep(5000);
-      } catch (InterruptedException ex) {
-        logger.error("Echo Thread disrupted" + ex);
+    if (echoRunning == false)    {
+      synchronized(this) {
+        while (true) {
+
+          try {
+            String path = amqpURI.getRawPath();
+            String queue = path.substring(path.indexOf('/',1)+1);
+            String virtualHost = uriDecode(amqpURI.getPath().substring(1,path.indexOf('/',1)));
+            
+            
+            StreamEcho streamEcho = new StreamEcho(); 
+            streamEcho.setHost(virtualHost);
+            streamEcho.setQueue(queue);
+            
+            String guid = UUID.randomUUID().toString();
+            
+            DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            df.setTimeZone(TimeZone.getTimeZone("UTC"));
+            streamEcho.setMessage(guid + ";" + df.format(new Date()));
+            
+            String stringStreamEcho = JsonHelper.ToJson(streamEcho);
+            logger.info("Batch echo sent: " + stringStreamEcho);
+            
+            httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
+       
+            echoRunning=true;
+            Thread.sleep(5000);
+          } catch (InterruptedException ex) {
+            logger.error("Echo Thread disrupted" + ex);
+          }
+        }
       }
-    
     }
   }
-
+  
   
   private String uriDecode(String s) {
     try {
@@ -94,12 +97,5 @@ public class EchoSender implements Runnable
         throw new RuntimeException(e);
     }
   }     
-
-  public boolean isRunning()
-  {
-    return echoRunning;
-  }
-  
-  
   
 }
