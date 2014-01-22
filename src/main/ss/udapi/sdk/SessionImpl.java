@@ -7,6 +7,7 @@ import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
 import ss.udapi.sdk.services.HttpServices;
+import ss.udapi.sdk.services.ServiceThreadExecutor;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,6 +31,12 @@ public class SessionImpl implements Session
   protected SessionImpl(URL serverURL, Credentials credentials){
     logger.debug("Logging into system at url: [" + serverURL.toExternalForm() + "]");
     this.serverURL = serverURL;
+    ServiceThreadExecutor.createExecutor();
+    
+    
+    
+    
+    
     GetRoot(serverURL,credentials, true);
   }
 

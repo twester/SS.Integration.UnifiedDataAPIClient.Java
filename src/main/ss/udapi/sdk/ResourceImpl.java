@@ -23,6 +23,7 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.services.MQListener;
+import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
 import ss.udapi.sdk.streaming.Event;
 
@@ -79,26 +80,33 @@ public class ResourceImpl implements Resource
     ServiceRequest amqpRequest = new ServiceRequest();
     amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
     
-    String amqpURI = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
-    System.out.println("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpURI);
+    String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
+    logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
     
     
-    //move to a separate static threadpool so we don't create three threads per resource :-)
-    Executor exec = Executors.newFixedThreadPool(3);
+    
   
     
-    MQListener mqListener = MQListener.getMQListener(amqpURI, availableResources);
-    
-//    MQListener mqListener = MQListener.getMQListener(amqpURI, availableResources);
-    
-//    if (mqListener.isRunning() == false)
-    //{
-      exec.execute(mqListener);
-    //}
+    MQListener mqListener = MQListener.getMQListener(amqpDest, availableResources);
+    mqListener.setResources(amqpDest, availableResources);
     
     
-    EchoSender echoSender = EchoSender.getEchoSender(amqpURI, availableResources);
-    exec.execute(echoSender);
+    if (mqListener.isRunning() == true)
+    {
+      mqListener.addQueue(amqpDest, availableResources);
+    } else { 
+      ServiceThreadExecutor.executeTask(mqListener);
+      try {
+        Thread.sleep(100);
+      } catch (Exception ex) {
+        logger.fatal("MQListener instantiation interrupted");
+      }
+    }    
+    
+
+    
+    EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
+    ServiceThreadExecutor.executeTask(echoSender);
 
     
     
