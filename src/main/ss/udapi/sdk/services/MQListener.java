@@ -24,7 +24,7 @@ public class MQListener implements Runnable
 {
   private URI amqpURI;
   private ServiceRequest resources;
-  private Integer count;
+  private int count;
 
   private static Logger logger = Logger.getLogger(MQListener.class);
   private static MQListener instance = null;
@@ -133,19 +133,22 @@ public class MQListener implements Runnable
         
         while (true) {
           Delivery delivery = consumer.nextDelivery();
-              
-          String message = new String(delivery.getBody());
-          logger.debug("----------------->Message Received> [" + message + "]");   
+          if(delivery != null){    
+            String message = new String(delivery.getBody());
+            logger.debug("----------------->Message Received> [" + message + "]");   
           
-          count ++;
-          channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+//            count ++;
+//            channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+
+          }
         }
-  
       
       } catch (IOException ex) {
         System.out.println("Malformed AMQP URL" + ex);
       } catch (InterruptedException ex) {
         System.out.println("Malformed AMQP URL" + ex);
+      } catch (Exception ex) {
+        ex.printStackTrace();
       }
 
     }

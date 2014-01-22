@@ -83,10 +83,6 @@ public class ResourceImpl implements Resource
     String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
     logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
     
-    
-    
-  
-    
     MQListener mqListener = MQListener.getMQListener(amqpDest, availableResources);
     mqListener.setResources(amqpDest, availableResources);
     
@@ -103,14 +99,8 @@ public class ResourceImpl implements Resource
       }
     }    
     
-
-    
     EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
     ServiceThreadExecutor.executeTask(echoSender);
-
-    
-    
-    
   }
 
   

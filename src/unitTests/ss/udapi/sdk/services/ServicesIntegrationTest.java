@@ -24,7 +24,7 @@ public class ServicesIntegrationTest
 {
 
   private static HttpServices httpSvcs = new HttpServices();
-  MQServices mqSvcs = new MQServices();
+
   
   private QueueingConsumer consumer;
   
