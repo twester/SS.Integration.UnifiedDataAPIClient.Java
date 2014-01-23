@@ -34,7 +34,7 @@ public class WorkQueueMonitor implements Runnable
     while(true)
     {
       String task = workQueue.getTask();
-      logger.debug("---------------->Queue Read: " + task.substring(0,150));
+      logger.debug("---------------->Queue Read: " + task.substring(0,40));
 
       try {
         FixtureActionProcessor processor = new FixtureActionProcessor(task);

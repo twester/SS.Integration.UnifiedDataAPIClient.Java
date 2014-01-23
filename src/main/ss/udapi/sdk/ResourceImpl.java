@@ -118,7 +118,7 @@ public class ResourceImpl implements Resource
     //TODO add check for isStreaming
     while (! myTasks.isEmpty() && (isStreaming == true)) {
       String task = myTasks.poll();
-      logger.debug("---------------------------->Streaming data:" + task.substring(0, 150));
+      logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));
       if(task.substring(13,24).equals("EchoFailure")) {
         logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
         synchronized(this) {

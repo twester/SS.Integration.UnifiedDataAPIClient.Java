@@ -140,7 +140,7 @@ public class MQListener implements Runnable
           Delivery delivery = consumer.nextDelivery();
           if(delivery != null){    
             String message = new String(delivery.getBody());
-            logger.debug("----------------->Message Received> [" + message.substring(0, 150) + "]");   
+            logger.debug("----------------->Message Received> [" + message.substring(0, 40) + "]");   
 
             
             String msgHead = message.substring(0, 64);
