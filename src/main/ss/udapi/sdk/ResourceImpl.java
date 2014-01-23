@@ -28,22 +28,28 @@ import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
+import ss.udapi.sdk.streaming.ConnectedAction;
 import ss.udapi.sdk.streaming.Event;
+import ss.udapi.sdk.streaming.StreamAction;
 
 public class ResourceImpl implements Resource
 {
   private Logger logger = Logger.getLogger(ResourceImpl.class.getName());
   
+  private ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
+  
   private boolean isStreamingStopped;
   private boolean isStreamingSuspended;
   private boolean connected;
+  
+  private StreamAction streamAction;
   
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
   private static HttpServices httpSvcs = new HttpServices();
   
   //TODO: this is where the work ends up
-  private LinkedBlockingQueue<JsonObject> myTasks = new LinkedBlockingQueue<JsonObject>();
+  private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
   
   private int echoSenderInterval;
   private int maxMissedEchos;
@@ -51,7 +57,7 @@ public class ResourceImpl implements Resource
   
   
   
-  public void addTask(JsonObject task)
+  public void addTask(String task)
   {
     myTasks.add(task);
   }
@@ -92,6 +98,7 @@ public class ResourceImpl implements Resource
     this.streamingEvents = events;
     this.echoSenderInterval = echoSenderInterval;
     this.maxMissedEchos = maxMissedEchos;
+    streamAction = new StreamAction(streamingEvents);
   
     isStreamingStopped = false;
     connect();
@@ -102,8 +109,18 @@ public class ResourceImpl implements Resource
   
   public void streamData()
   {
+    StreamAction streamAction = new StreamAction(streamingEvents);
+    
+    //TODO add check for isStreaming
     while (! myTasks.isEmpty()) {
-      JsonObject task = myTasks.poll();
+      String task = myTasks.poll();
+      logger.debug("---------------------------->streaming data" + task.substring(0, 150));
+      
+      try {
+        streamAction.execute(task);
+      } catch (Exception e) {
+        logger.warn("Error on message receive", e);
+      } 
     }
     
   }
@@ -127,6 +144,8 @@ public class ResourceImpl implements Resource
       {
         mqListener.addQueue(amqpDest, availableResources);
       } else { 
+        actionExecuter.execute(new ConnectedAction(streamingEvents));
+        
         ServiceThreadExecutor.executeTask(mqListener);
         
         EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);

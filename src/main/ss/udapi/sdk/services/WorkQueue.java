@@ -14,7 +14,7 @@ public class WorkQueue
   
   private WorkQueue()
   {
-    linkedQueue = new LinkedBlockingQueue<String>();
+    System.out.println("worQueue1------------->" + linkedQueue.size());
   }
   
   public static WorkQueue getWorkQueue()
@@ -26,18 +26,21 @@ public class WorkQueue
     return workQueue;
   }
   
-  public static void addTask(String task)
+  public void addTask(String task)
   {
+    System.out.println("worQueuein------------->" + linkedQueue.size());
     try {
       linkedQueue.put(task);
     } catch (Exception ex) {
       logger.error("WorkQueue management interrupted", ex);
     }
+    System.out.println("worQueuein------------->" + linkedQueue.size());
   }
   
-  public static String getTask()
+  public String getTask()
   {
     String task=null;
+    System.out.println("worQueueout------------->" + linkedQueue.size());
     try {
       task = linkedQueue.take();
     } catch (Exception ex) {

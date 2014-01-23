@@ -52,7 +52,7 @@ public class FeatureImpl implements Feature
   
   public List<Resource> getResources() {
     NDC.push("getResources: all resources for feature: " + restItem.getName());
-    logger.info("Retrieving all features");
+    logger.info("Retrieving all resources");
 
     ServiceRequest availableResources = httpSvcs.processRequest(availableFeatures, "http://api.sportingsolutions.com/rels/resources/list", restItem.getName());
     List<RestItem> restItems = availableResources.getServiceRestItems();

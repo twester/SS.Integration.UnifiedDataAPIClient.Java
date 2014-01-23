@@ -41,7 +41,8 @@ public class SessionImpl implements Session
     //TODO what about restarts?  we don't want to loose all this do we?
     //singletons so they only use up a reference to it and it's built by the time we need it
     ServiceThreadExecutor.createExecutor();
-    WorkQueue workQueue = WorkQueue.getWorkQueue(); 
+    //WorkQueue workQueue = WorkQueue.getWorkQueue(); 
+    
     ResourceWorkerMap workMap = ResourceWorkerMap.getWorkerMap();
 
     WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();

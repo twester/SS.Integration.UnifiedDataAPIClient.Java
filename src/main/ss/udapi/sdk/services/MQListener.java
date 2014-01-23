@@ -39,7 +39,7 @@ public class MQListener implements Runnable
       
   private MQListener (String amqpDest, ServiceRequest resources)
   {
-
+     
   }
   
   public static MQListener getMQListener(String amqpDest, ServiceRequest resources)
@@ -47,7 +47,7 @@ public class MQListener implements Runnable
     logger.debug("Retrieving listener or create it if it doesn't exist");
     if (instance == null)
     {
-      instance = new MQListener(amqpDest, resources);
+      instance = new MQListener(amqpDest, resources);  //not needed now
     } 
     return instance;
   }
@@ -149,7 +149,8 @@ public class MQListener implements Runnable
               System.out.println("-------------------------->ADD ECHO PROCESSING:  " + msgHead);
             } else {
               System.out.println("-------------------------->NAY:  " + msgHead);
-              WorkQueue.addTask(message);
+              WorkQueue myQueue = WorkQueue.getWorkQueue();
+              myQueue.addTask(message);
             }
             
             
