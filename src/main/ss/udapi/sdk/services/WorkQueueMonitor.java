@@ -30,15 +30,11 @@ public class WorkQueueMonitor implements Runnable
   @Override
   public void run()
   {
-    logger.debug("---------------->WorkQueueMonitor started");
+    
     while(true)
     {
-      
       String task = workQueue.getTask();
-
-      System.out.println("worQueue2------------->" + task);
-      
-
+      logger.debug("---------------->Queue Read: " + task.substring(0,150));
 
       try {
         FixtureActionProcessor processor = new FixtureActionProcessor(task);

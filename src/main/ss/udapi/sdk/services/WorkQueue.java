@@ -14,7 +14,6 @@ public class WorkQueue
   
   private WorkQueue()
   {
-    System.out.println("worQueue1------------->" + linkedQueue.size());
   }
   
   public static WorkQueue getWorkQueue()
@@ -28,19 +27,16 @@ public class WorkQueue
   
   public void addTask(String task)
   {
-    System.out.println("worQueuein------------->" + linkedQueue.size());
     try {
       linkedQueue.put(task);
     } catch (Exception ex) {
       logger.error("WorkQueue management interrupted", ex);
     }
-    System.out.println("worQueuein------------->" + linkedQueue.size());
   }
   
   public String getTask()
   {
     String task=null;
-    System.out.println("worQueueout------------->" + linkedQueue.size());
     try {
       task = linkedQueue.take();
     } catch (Exception ex) {

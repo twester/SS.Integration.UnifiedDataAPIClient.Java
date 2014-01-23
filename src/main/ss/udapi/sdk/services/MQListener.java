@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -25,6 +26,7 @@ public class MQListener implements Runnable
   private URI amqpURI;
   private ServiceRequest resources;
   private int count;
+  private HashMap<String,String> resourceChannMap = new HashMap<String,String>();
 
   private static Logger logger = Logger.getLogger(MQListener.class);
   private static MQListener instance = null;
@@ -37,17 +39,16 @@ public class MQListener implements Runnable
   //TODO: this is the echo resource array but obviously has to be moved out as it's own class
   private ConcurrentMap queueMap = new ConcurrentHashMap();
       
-  private MQListener (String amqpDest, ServiceRequest resources)
+  private MQListener ()
   {
-     
   }
   
-  public static MQListener getMQListener(String amqpDest, ServiceRequest resources)
+  public static MQListener getMQListener()
   {
     logger.debug("Retrieving listener or create it if it doesn't exist");
     if (instance == null)
     {
-      instance = new MQListener(amqpDest, resources);  //not needed now
+      instance = new MQListener();  //not needed now
     } 
     return instance;
   }
@@ -123,7 +124,9 @@ public class MQListener implements Runnable
         Connection connection = connectionFactory.newConnection();
     
         channel = connection.createChannel();
+        channel.basicQos(0, 10, false);
         consumer = new QueueingConsumer(channel);    
+
   
         //add the ctag to array to keep track of which queue is for which response
         String ctag=channel.basicConsume(queue, true, consumer);
@@ -137,7 +140,7 @@ public class MQListener implements Runnable
           Delivery delivery = consumer.nextDelivery();
           if(delivery != null){    
             String message = new String(delivery.getBody());
-            logger.debug("----------------->Message Received> [" + message + "]");   
+            logger.debug("----------------->Message Received> [" + message.substring(0, 150) + "]");   
 
             
             String msgHead = message.substring(0, 64);
@@ -172,7 +175,7 @@ public class MQListener implements Runnable
     
   }
 
-  public void addQueue(String newAmqpDest, ServiceRequest ewResources)
+  public void addQueue(String newAmqpDest, ServiceRequest ewResources, String resourceId)
   {
 
     try {
@@ -181,7 +184,9 @@ public class MQListener implements Runnable
       String queue = path.substring(path.indexOf('/',1)+1);
       
       String ctag=channel.basicConsume(queue, true, consumer);
-      logger.debug("--------------------->Additional basic consumer " + ctag + " added for queue " + queue);
+      resourceChannMap.put(resourceId, ctag);
+      
+      logger.debug("--------------------->Additional basic consumer " + ctag + " added for resource " + resourceId);
     } catch (IOException ex) {
       logger.debug(ex);
     } catch (URISyntaxException ex) {
@@ -189,7 +194,30 @@ public class MQListener implements Runnable
     }
   }
   
-  
+  public void reconnect (String resourceId, String amqpDest)
+  {
+    try {
+      URI newAmqpURI = new URI(amqpDest);
+      String path = amqpURI.getRawPath();
+      String queue = path.substring(path.indexOf('/',1)+1);
+
+      channel.basicCancel(resourceChannMap.get(resourceId));
+      //TODO: change the names around, the grammar is ugly
+      logger.debug("--------------------->Basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId + " disconnected");
+
+      String ctag=channel.basicConsume(queue, true, consumer);
+      resourceChannMap.put(resourceId, ctag);
+      logger.debug("--------------------->Basic consumer " + ctag + " reconnected for resource " + resourceId);
+
+      
+    } catch (IOException ex) {
+      logger.debug(ex);
+    } catch (URISyntaxException ex) {
+      logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + amqpDest);
+    }
+    
+    
+  }
   
   
   

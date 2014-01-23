@@ -5,6 +5,8 @@ import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -51,6 +53,8 @@ public class EchoSender implements Runnable
   @Override
   public void run()
   {
+    ResourceEchoMap echoMap = ResourceEchoMap.getEchoMap();
+    WorkQueue myQueue = WorkQueue.getWorkQueue();
     if (echoRunning == false)    {
       synchronized(this) {
         while (true) {
@@ -75,7 +79,17 @@ public class EchoSender implements Runnable
             logger.info("Batch echo sent: " + stringStreamEcho);
             
             httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
-       
+            Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval")));
+            
+            //TODO if the missing echos happen very frequently move this to another thread mind this thread is only dealing with echos so it should be ok
+            Iterator<String> keyIter = defaulters.iterator();
+            while(keyIter.hasNext()) {
+              String key = keyIter.next();
+              String task = "{\"Relation\":\"EchoFailure\",\"Content\":{\"Id\":" + key + "\",}}";
+              myQueue.addTask(task);
+            }
+            
+            
             echoRunning=true;
             Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
           } catch (InterruptedException ex) {
@@ -85,6 +99,8 @@ public class EchoSender implements Runnable
       }
     }
   }
+  
+  
   
   
   private String uriDecode(String s) {

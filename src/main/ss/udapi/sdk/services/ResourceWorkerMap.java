@@ -15,7 +15,6 @@ public class ResourceWorkerMap
   
   private ResourceWorkerMap()
   {
-    map = new ConcurrentHashMap<String,Resource>();
   }
   
   public static ResourceWorkerMap getWorkerMap(){

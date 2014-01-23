@@ -1,5 +1,6 @@
 package ss.udapi.sdk;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,6 +26,7 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.services.MQListener;
+import ss.udapi.sdk.services.ResourceEchoMap;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
@@ -38,17 +40,18 @@ public class ResourceImpl implements Resource
   
   private ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
   
-  private boolean isStreamingStopped;
-  private boolean isStreamingSuspended;
+  private boolean isStreaming;
   private boolean connected;
+  private MQListener mqListener;
   
   private StreamAction streamAction;
   
+  private String amqpDest;
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
   private static HttpServices httpSvcs = new HttpServices();
   
-  //TODO: this is where the work ends up
+  //this is where the work ends up
   private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
   
   private int echoSenderInterval;
@@ -74,6 +77,7 @@ public class ResourceImpl implements Resource
     logger.debug("Instantiated Resource: " + restItem.getName());
 
     ResourceWorkerMap.addUOW(getId(), this);
+    ResourceEchoMap.getEchoMap().addResource(getId());
   }
   
 
@@ -100,7 +104,7 @@ public class ResourceImpl implements Resource
     this.maxMissedEchos = maxMissedEchos;
     streamAction = new StreamAction(streamingEvents);
   
-    isStreamingStopped = false;
+    isStreaming = true;
     connect();
     streamData();
     
@@ -112,10 +116,15 @@ public class ResourceImpl implements Resource
     StreamAction streamAction = new StreamAction(streamingEvents);
     
     //TODO add check for isStreaming
-    while (! myTasks.isEmpty()) {
+    while (! myTasks.isEmpty() && (isStreaming == true)) {
       String task = myTasks.poll();
-      logger.debug("---------------------------->streaming data" + task.substring(0, 150));
-      
+      logger.debug("---------------------------->Streaming data:" + task.substring(0, 150));
+      if(task.substring(13,24).equals("EchoFailure")) {
+        logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
+        synchronized(this) {
+          mqListener.reconnect(getId(), amqpDest);
+        }
+      }
       try {
         streamAction.execute(task);
       } catch (Exception e) {
@@ -132,17 +141,19 @@ public class ResourceImpl implements Resource
       ServiceRequest amqpRequest = new ServiceRequest();
       amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
       
-      String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
+      amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
       logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
       
       
       //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
-      MQListener mqListener = MQListener.getMQListener(amqpDest, availableResources);
+      mqListener = MQListener.getMQListener();
       mqListener.setResources(amqpDest, availableResources);
       
       if (mqListener.isRunning() == true)
       {
-        mqListener.addQueue(amqpDest, availableResources);
+        synchronized(this) {
+          mqListener.addQueue(amqpDest, availableResources, getId());
+        }
       } else { 
         actionExecuter.execute(new ConnectedAction(streamingEvents));
         
@@ -169,20 +180,19 @@ public class ResourceImpl implements Resource
   @Override
   public void stopStreaming()
   {
-    isStreamingStopped = true;
+    isStreaming = true;
   }
 
   @Override
   public void pauseStreaming()
   {
-    isStreamingSuspended = true;
-
+    isStreaming = false;
   }
 
   @Override
   public void unpauseStreaming()
   {
-    isStreamingSuspended = false;
+    isStreaming = true;
   }
 
   

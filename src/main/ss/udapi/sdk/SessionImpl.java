@@ -7,6 +7,7 @@ import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
 import ss.udapi.sdk.services.HttpServices;
+import ss.udapi.sdk.services.ResourceEchoMap;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.WorkQueue;
@@ -44,14 +45,10 @@ public class SessionImpl implements Session
     //WorkQueue workQueue = WorkQueue.getWorkQueue(); 
     
     ResourceWorkerMap workMap = ResourceWorkerMap.getWorkerMap();
+    ResourceEchoMap echoMap = ResourceEchoMap.getEchoMap(); 
 
     WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
     ServiceThreadExecutor.executeTask(queueWorker);
-
-    
-   
-    
-    
     
     
     GetRoot(serverURL,credentials, true);
