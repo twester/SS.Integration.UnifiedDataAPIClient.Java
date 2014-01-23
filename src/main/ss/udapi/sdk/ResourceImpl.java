@@ -8,10 +8,12 @@ import java.util.TimeZone;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.JsonObject;
 import com.rabbitmq.client.ConnectionFactory;
 
 import ss.udapi.sdk.interfaces.Resource;
@@ -32,13 +34,30 @@ public class ResourceImpl implements Resource
 {
   private Logger logger = Logger.getLogger(ResourceImpl.class.getName());
   
+  private boolean isStreamingStopped;
+  private boolean isStreamingSuspended;
+  private boolean connected;
+  
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
   private static HttpServices httpSvcs = new HttpServices();
   
+  //TODO: this is where the work ends up
+  private LinkedBlockingQueue<JsonObject> myTasks = new LinkedBlockingQueue<JsonObject>();
+  
   private int echoSenderInterval;
   private int maxMissedEchos;
   private List<Event> streamingEvents;
+  
+  
+  
+  public void addTask(JsonObject task)
+  {
+    myTasks.add(task);
+  }
+  
+  
+  
   
   
   
@@ -74,44 +93,56 @@ public class ResourceImpl implements Resource
     this.echoSenderInterval = echoSenderInterval;
     this.maxMissedEchos = maxMissedEchos;
   
+    isStreamingStopped = false;
+    connect();
     streamData();
+    
   }
-
   
   
-  private void streamData()
+  public void streamData()
   {
-    ServiceRequest amqpRequest = new ServiceRequest();
-    amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
+    while (! myTasks.isEmpty()) {
+      JsonObject task = myTasks.poll();
+    }
     
-    String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
-    logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
-    
-    
-    //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
-    MQListener mqListener = MQListener.getMQListener(amqpDest, availableResources);
-    mqListener.setResources(amqpDest, availableResources);
-    
-    
-    if (mqListener.isRunning() == true)
-    {
-      mqListener.addQueue(amqpDest, availableResources);
-    } else { 
-      ServiceThreadExecutor.executeTask(mqListener);
-      try {
-        //TODO see if we need this anymore the singleton executor service should habve take care of this
-        Thread.sleep(100);
-      } catch (Exception ex) {
-        logger.fatal("MQListener instantiation interrupted");
-      }
-    }    
-    
-    EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
-    ServiceThreadExecutor.executeTask(echoSender);
   }
 
   
+  private void connect()
+  {
+    if (connected == false) {
+      ServiceRequest amqpRequest = new ServiceRequest();
+      amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
+      
+      String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
+      logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
+      
+      
+      //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
+      MQListener mqListener = MQListener.getMQListener(amqpDest, availableResources);
+      mqListener.setResources(amqpDest, availableResources);
+      
+      if (mqListener.isRunning() == true)
+      {
+        mqListener.addQueue(amqpDest, availableResources);
+      } else { 
+        ServiceThreadExecutor.executeTask(mqListener);
+        
+        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
+        ServiceThreadExecutor.executeTask(echoSender);
   
+        try {
+          //TODO see if we need this anymore the singleton executor service should habve take care of this
+          Thread.sleep(100);
+        } catch (Exception ex) {
+          logger.fatal("MQListener instantiation interrupted");
+        }
+      }    
+      connected = true;
+    }
+  }
+
   
   
   
@@ -119,21 +150,20 @@ public class ResourceImpl implements Resource
   @Override
   public void stopStreaming()
   {
-    // TODO Auto-generated method stub
-
+    isStreamingStopped = true;
   }
 
   @Override
   public void pauseStreaming()
   {
-    // TODO Auto-generated method stub
+    isStreamingSuspended = true;
 
   }
 
   @Override
   public void unpauseStreaming()
   {
-    // TODO Auto-generated method stub
+    isStreamingSuspended = false;
   }
 
   

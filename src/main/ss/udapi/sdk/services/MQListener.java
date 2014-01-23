@@ -132,6 +132,7 @@ public class MQListener implements Runnable
         MQListenerRunning = true;
 
         
+        
         while (true) {
           Delivery delivery = consumer.nextDelivery();
           if(delivery != null){    
@@ -149,7 +150,6 @@ public class MQListener implements Runnable
             } else {
               System.out.println("-------------------------->NAY:  " + msgHead);
               WorkQueue.addTask(message);
-              System.out.println("---------------------------->Reading of the Q" + WorkQueue.getTask());
             }
             
             

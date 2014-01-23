@@ -10,6 +10,7 @@ import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.WorkQueue;
+import ss.udapi.sdk.services.WorkQueueMonitor;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,12 +37,18 @@ public class SessionImpl implements Session
     
     
     //not strictly part of the session but necessary implementation initialization
-    ServiceThreadExecutor.createExecutor();
     
+    //TODO what about restarts?  we don't want to loose all this do we?
     //singletons so they only use up a reference to it and it's built by the time we need it
+    ServiceThreadExecutor.createExecutor();
     WorkQueue workQueue = WorkQueue.getWorkQueue(); 
-    ResourceWorkerMap workMap = ResourceWorkerMap.getWorkerMap(); 
+    ResourceWorkerMap workMap = ResourceWorkerMap.getWorkerMap();
+
+    WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
+    ServiceThreadExecutor.executeTask(queueWorker);
+
     
+   
     
     
     

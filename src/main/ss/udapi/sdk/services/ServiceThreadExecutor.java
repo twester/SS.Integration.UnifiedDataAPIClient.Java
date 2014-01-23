@@ -10,7 +10,6 @@ public class ServiceThreadExecutor
   private static Executor exec;
   
   public static void createExecutor() {
-    //move to a separate static threadpool so we don't create three threads per resource :-)
     exec = Executors.newFixedThreadPool(3);
   }
   
