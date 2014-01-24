@@ -7,13 +7,23 @@ import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
 import ss.udapi.sdk.services.HttpServices;
+import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.ResourceEchoMap;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
+import ss.udapi.sdk.services.StartupSyncObject;
 import ss.udapi.sdk.services.WorkQueue;
 import ss.udapi.sdk.services.WorkQueueMonitor;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.QueueingConsumer;
+import com.rabbitmq.client.QueueingConsumer.Delivery;
+
+import java.net.URI;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +40,27 @@ public class SessionImpl implements Session
   private ServiceRequest availableServices;
   private URL serverURL;
   private List<RestItem> serviceRestItems;
+  
+  
+  
+  
+  
+  
+  
+  private URI amqpURI;
+  private ServiceRequest resources;
+  private int count;
+  private HashMap<String,String> resourceChannMap = new HashMap<String,String>();
+
+
+  private static MQListener instance = null;
+  private static Channel channel;
+  private static QueueingConsumer consumer;
+  private static boolean MQListenerRunning = false;
+  private Integer syncLock;
+  
+  
+  
   
   
   protected SessionImpl(URL serverURL, Credentials credentials){
@@ -49,9 +80,12 @@ public class SessionImpl implements Session
 
     WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
     ServiceThreadExecutor.executeTask(queueWorker);
-    
+    StartupSyncObject syncObject = StartupSyncObject.getSyncObject(); 
     
     GetRoot(serverURL,credentials, true);
+    
+    
+    
   }
 
   
@@ -63,8 +97,49 @@ public class SessionImpl implements Session
     } else {
       availableServices = httpSvcs.processLogin(sessionResponse, "http://api.sportingsolutions.com/rels/login", "Login");
     }
+    
+    
+    ServiceRequest featureReq = httpSvcs.processRequest(availableServices, "http://api.sportingsolutions.com/rels/features/list", "UnifiedDataAPI");
+    ServiceRequest resourceReq = httpSvcs.processRequest(featureReq, "http://api.sportingsolutions.com/rels/resources/list", "Football");
+    
+    String instance = resourceReq.getServiceRestItems().get(0).getName();
+    
+    ServiceRequest amqpRequest = httpSvcs.processRequest(resourceReq, "http://api.sportingsolutions.com/rels/stream/amqp", instance);
+
+    
+    String amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
+    
+    
+  
+    MQListener mqListener = MQListener.getMQListener();
+      
+    mqListener.setResources(amqpDest);   
+    
+    ServiceThreadExecutor.executeTask(mqListener);
+    
+  
+  
   }
 
+  
+  
+  
+  
+  private String uriDecode(String s) {
+    try {
+        // URLDecode decodes '+' to a space, as for
+        // form encoding.  So protect plus signs.
+        return URLDecoder.decode(s.replace("+", "%2B"), "US-ASCII");
+    }
+    catch (java.io.UnsupportedEncodingException e) {
+        throw new RuntimeException(e);
+    }
+  }     
+  
+  
+  
+  
+  
   
   public Service getService(String svcName) {
     NDC.push("getService: " + svcName);

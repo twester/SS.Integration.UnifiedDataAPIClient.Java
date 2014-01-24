@@ -9,6 +9,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.Semaphore;
 
 import org.apache.log4j.Logger;
 
@@ -33,6 +34,10 @@ public class MQListener implements Runnable
   private static Channel channel;
   private static QueueingConsumer consumer;
   private static boolean MQListenerRunning = false;
+  private Integer syncLock;
+
+  private static StartupSyncObject syncObject = StartupSyncObject.getSyncObject();
+  
 
   
   
@@ -49,6 +54,10 @@ public class MQListener implements Runnable
     } 
     return instance;
   }
+  
+
+
+
   
  
   /*
@@ -77,6 +86,8 @@ public class MQListener implements Runnable
     if (MQListenerRunning == false){
   
       try {
+
+
         ConnectionFactory connectionFactory = new ConnectionFactory();
     
         connectionFactory.setRequestedHeartbeat(5);
@@ -126,10 +137,16 @@ public class MQListener implements Runnable
 
   
         //add the ctag to array to keep track of which queue is for which response
+
+        
         String ctag=channel.basicConsume(queue, true, consumer);
         logger.debug("--------------------->Initial basic consumer " + ctag + " added for queue " + queue);
         
         MQListenerRunning = true;
+        logger.debug("--------------------->here ");
+
+
+        logger.debug("--------------------->here ");
 
         
         
@@ -152,10 +169,6 @@ public class MQListener implements Runnable
               WorkQueue myQueue = WorkQueue.getWorkQueue();
               myQueue.addTask(message);
             }
-            
-            
-            
-
           }
         }
       
@@ -168,13 +181,11 @@ public class MQListener implements Runnable
       }
 
     }
-
     
   }
 
   public void addQueue(String newAmqpDest, ServiceRequest ewResources, String resourceId)
   {
-
     try {
       URI newAmqpURI = new URI(newAmqpDest);
       String path = amqpURI.getRawPath();
@@ -189,6 +200,8 @@ public class MQListener implements Runnable
     } catch (URISyntaxException ex) {
       logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + newAmqpDest);
     }
+
+  
   }
   
   public void reconnect (String resourceId, String amqpDest)
@@ -237,7 +250,7 @@ public class MQListener implements Runnable
   }
 
   
-  public void setResources(String amqpDest, ServiceRequest resources)
+  public void setResources(String amqpDest)
   {
     try {
       this.amqpURI = new URI(amqpDest);

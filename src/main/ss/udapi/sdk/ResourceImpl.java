@@ -29,6 +29,7 @@ import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.ResourceEchoMap;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
+import ss.udapi.sdk.services.StartupSyncObject;
 import ss.udapi.sdk.services.SystemProperties;
 import ss.udapi.sdk.streaming.ConnectedAction;
 import ss.udapi.sdk.streaming.Event;
@@ -42,7 +43,6 @@ public class ResourceImpl implements Resource
   
   private boolean isStreaming;
   private boolean connected;
-  private MQListener mqListener;
   
   private StreamAction streamAction;
   
@@ -53,12 +53,16 @@ public class ResourceImpl implements Resource
   
   //this is where the work ends up
   private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
+  private static StartupSyncObject syncObject = StartupSyncObject.getSyncObject();
   
   private int echoSenderInterval;
   private int maxMissedEchos;
   private List<Event> streamingEvents;
   
+  private MQListener mqListener;
   
+  private Integer syncLock = 1;
+
   
   public void addTask(String task)
   {
@@ -67,17 +71,17 @@ public class ResourceImpl implements Resource
   
   
   
-  
-  
-  
   protected ResourceImpl(RestItem restItem, ServiceRequest availableResources)
   {
     this.restItem = restItem;
     this.availableResources = availableResources;
     logger.debug("Instantiated Resource: " + restItem.getName());
+     
 
     ResourceWorkerMap.addUOW(getId(), this);
     ResourceEchoMap.getEchoMap().addResource(getId());
+    
+    mqListener = MQListener.getMQListener();
   }
   
 
@@ -107,7 +111,6 @@ public class ResourceImpl implements Resource
     isStreaming = true;
     connect();
     streamData();
-    
   }
   
   
@@ -120,9 +123,7 @@ public class ResourceImpl implements Resource
       logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));
       if(task.substring(13,24).equals("EchoFailure")) {
         logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
-        synchronized(this) {
-          mqListener.reconnect(getId(), amqpDest);
-        }
+        mqListener.reconnect(getId(), amqpDest);
       }
       try {
         streamAction.execute(task);
@@ -145,31 +146,33 @@ public class ResourceImpl implements Resource
       
       
       //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
-      mqListener = MQListener.getMQListener();
-      mqListener.setResources(amqpDest, availableResources);
+
+      mqListener.setResources(amqpDest);
+
       
       if (mqListener.isRunning() == true)
       {
-        synchronized(this) {
-          mqListener.addQueue(amqpDest, availableResources, getId());
-        }
+        mqListener.addQueue(amqpDest, availableResources, getId());
+        
+        logger.debug("---------------->YES");
       } else { 
+        logger.debug("---------------->NO");
+        
+        
+        logger.debug("---------------->mqListener Running: connected" + mqListener.isRunning());
         actionExecuter.execute(new ConnectedAction(streamingEvents));
         
-        ServiceThreadExecutor.executeTask(mqListener);
         
-        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
-        ServiceThreadExecutor.executeTask(echoSender);
-  
-        try {
-          //TODO see if we need this anymore the singleton executor service should habve take care of this
-          Thread.sleep(100);
-        } catch (Exception ex) {
-          logger.fatal("MQListener instantiation interrupted");
-        }
-      }    
+            ServiceThreadExecutor.executeTask(mqListener);
+
+        
+        
+
+
+      }
       connected = true;
     }
+    
   }
 
   
