@@ -85,7 +85,7 @@ public class EchoSender implements Runnable
             Iterator<String> keyIter = defaulters.iterator();
             while(keyIter.hasNext()) {
               String key = keyIter.next();
-              String task = "{\"Relation\":\"EchoFailure\",\"Content\":{\"Id\":" + key + "\",}   \"Content\":{\"FixtureName\":\"Fernando v Jim\",\"Id\":\"4x0lAft_P7JnfqLK0J4o1y_Rgtg\",\"Sequence\":21}}";
+              String task = "Relation\":\"EchoFailure\",\"Content\":{\"Id\":\"4x0lAft_P7JnfqL\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
               myQueue.addTask(task);
             }
             
