@@ -115,7 +115,6 @@ public class ResourceImpl implements Resource
   {
     StreamAction streamAction = new StreamAction(streamingEvents);
     
-    //TODO add check for isStreaming
     while (! myTasks.isEmpty() && (isStreaming == true)) {
       String task = myTasks.poll();
       logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));

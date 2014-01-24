@@ -61,6 +61,7 @@
 		<copy file="conf/runExample.bat" todir="build/SDK"/>
 		<copy file="conf/log4j.properties" todir="build/SDK"/>
 		<copy file="conf/example.properties" todir="build/SDK"/>
+    <copy file="conf/sdk.properties" todir="build/SDK"/>
         <javac srcdir="src/test" destdir="build/SDKclasses" includeAntRuntime="false">
 			<classpath refid="example.lib" />
 		</javac>

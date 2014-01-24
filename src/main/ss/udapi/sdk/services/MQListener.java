@@ -36,9 +36,6 @@ public class MQListener implements Runnable
 
   
   
-  //TODO: this is the echo resource array but obviously has to be moved out as it's own class
-  private ConcurrentMap queueMap = new ConcurrentHashMap();
-      
   private MQListener ()
   {
   }
@@ -148,7 +145,7 @@ public class MQListener implements Runnable
 //            if ((message.substring(0, 64).equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",")))
             if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\","))
             {
-              //TODO: echo processing
+
               System.out.println("-------------------------->ADD ECHO PROCESSING:  " + msgHead);
             } else {
               System.out.println("-------------------------->NAY:  " + msgHead);
@@ -202,13 +199,14 @@ public class MQListener implements Runnable
       String queue = path.substring(path.indexOf('/',1)+1);
 
       channel.basicCancel(resourceChannMap.get(resourceId));
+      //TODO: raise disconnect event
       //TODO: change the names around, the grammar is ugly
       logger.debug("--------------------->Basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId + " disconnected");
 
-      String ctag=channel.basicConsume(queue, true, consumer);
+/*      String ctag=channel.basicConsume(queue, true, consumer);
       resourceChannMap.put(resourceId, ctag);
       logger.debug("--------------------->Basic consumer " + ctag + " reconnected for resource " + resourceId);
-
+*/
       
     } catch (IOException ex) {
       logger.debug(ex);
