@@ -38,7 +38,7 @@ public class FixtureActionProcessor implements Runnable
     
     System.out.println("------------------------->Processing started");
     
-    String msgHead = task.substring(0, 40);
+    String msgHead = task.substring(0, 200);
     int idStart = msgHead.indexOf("Id")+5; 
     String fixtureId = msgHead.substring(idStart,idStart+27);
     
