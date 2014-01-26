@@ -32,6 +32,7 @@ import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
 import ss.udapi.sdk.streaming.ConnectedAction;
+import ss.udapi.sdk.streaming.DisconnectedAction;
 import ss.udapi.sdk.streaming.Event;
 import ss.udapi.sdk.streaming.StreamAction;
 
@@ -115,13 +116,19 @@ public class ResourceImpl implements Resource
   public void streamData()
   {
     StreamAction streamAction = new StreamAction(streamingEvents);
+    DisconnectedAction disconnectAction = new DisconnectedAction(streamingEvents);
     
     while (! myTasks.isEmpty() && (isStreaming == true)) {
       String task = myTasks.poll();
       logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));
-      if(task.substring(13,24).equals("EchoFailure")) {
+      if(task.substring(14,25).equals("EchoFailure")) {
         logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
-       MQListener.reconnect(getId(), amqpDest);
+        MQListener.disconnect(getId(), amqpDest);
+        try {
+          disconnectAction.execute(task);
+        } catch (Exception e) {
+          logger.warn("Error on fixture disconnect receive", e);
+        } 
       }
       try {
         streamAction.execute(task);

@@ -29,10 +29,12 @@ public class MissingRabbitMqConsumer extends DefaultConsumer
   private String body;
   
   private static Logger logger = Logger.getLogger(MissingRabbitMqConsumer.class);
+  private EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
   
   public MissingRabbitMqConsumer(Channel channel)
   {
     super(channel);
+    
   }
 
   
@@ -51,7 +53,8 @@ public class MissingRabbitMqConsumer extends DefaultConsumer
 //    if ((message.substring(0, 64).equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",")))
     if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\","))
     {
-      logger.debug("-------------------------->ADD ECHO PROCESSING:  " + msgHead + " : " + envelope.getRoutingKey() );
+      echoMap.decrEchoCount(CtagResourceMap.getResource(cTag));
+
     } else {
       logger.debug("-------------------------->NAY:  " + msgHead);
       WorkQueue myQueue = WorkQueue.getWorkQueue();

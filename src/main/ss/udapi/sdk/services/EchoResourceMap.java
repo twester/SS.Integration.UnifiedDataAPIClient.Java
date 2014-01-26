@@ -1,15 +1,12 @@
 package ss.udapi.sdk.services;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import ss.udapi.sdk.interfaces.Resource;
 
 public class EchoResourceMap
 {
@@ -32,7 +29,9 @@ public class EchoResourceMap
   public void addResource(String resourceId)
   {
     synchronized(this) {
-      map.put(resourceId, 0);
+      if (map.containsKey(resourceId) == false){
+        map.put(resourceId, 0);
+      }
     }
   }
   
@@ -48,33 +47,28 @@ public class EchoResourceMap
   {
     synchronized(this)
     {
-      map.replace(resourceId, map.get(resourceId)-1);
-    }
+      map.put(resourceId, map.get(resourceId)-1);
+     }
   }
   
   public Set<String> incrAll(int retries)
   {
-    Set<String> keys;
-    Set<String> defaulters = new HashSet();
-    
-    synchronized(this)
-    {
+      Set<String> keys;
+      Set<String> defaulters = new HashSet<String>();
+      
       keys = map.keySet();
       Iterator<String> keyIter = keys.iterator();
 
       while(keyIter.hasNext()) {
         String key = keyIter.next();
-        Integer count = map.get(key);
-
-        if (count == 3){
+        int count = (map.get(key));
+        if (count == (retries)){
           defaulters.add(key);
         }
-          
-        map.replace(key, count+1);
+        map.put(key, count+1);
       }
-    }
+      return defaulters;
     
-    return defaulters;
     
   }
   

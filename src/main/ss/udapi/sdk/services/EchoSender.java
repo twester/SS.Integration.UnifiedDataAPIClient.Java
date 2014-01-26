@@ -49,7 +49,7 @@ public class EchoSender implements Runnable
   }
   
   
-  
+
   @Override
   public void run()
   {
@@ -79,13 +79,13 @@ public class EchoSender implements Runnable
             logger.info("Batch echo sent: " + stringStreamEcho);
             
             httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
-            Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval")));
+            Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
             
             //TODO if the missing echos happen very frequently move this to another thread mind this thread is only dealing with echos so it should be ok
             Iterator<String> keyIter = defaulters.iterator();
             while(keyIter.hasNext()) {
               String key = keyIter.next();
-              String task = "Relation\":\"EchoFailure\",\"Content\":{\"Id\":\"4x0lAft_P7JnfqL\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+              String task = "Relation\":\"EchoFailure\",\"Content\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
               myQueue.addTask(task);
             }
             
