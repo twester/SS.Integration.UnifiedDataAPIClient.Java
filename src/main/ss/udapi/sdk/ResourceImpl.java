@@ -26,7 +26,7 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.services.MQListener;
-import ss.udapi.sdk.services.ResourceEchoMap;
+import ss.udapi.sdk.services.EchoResourceMap;
 import ss.udapi.sdk.services.ResourceSession;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
@@ -78,7 +78,7 @@ public class ResourceImpl implements Resource
     logger.debug("Instantiated Resource: " + restItem.getName());
 
     ResourceWorkerMap.addUOW(getId(), this);
-    ResourceEchoMap.getEchoMap().addResource(getId());
+    EchoResourceMap.getEchoMap().addResource(getId());
   }
   
 

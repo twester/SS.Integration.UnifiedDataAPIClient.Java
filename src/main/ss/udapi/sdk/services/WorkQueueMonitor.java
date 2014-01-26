@@ -30,7 +30,7 @@ public class WorkQueueMonitor implements Runnable
   @Override
   public void run()
   {
-    
+    logger.debug("--------------------->Work queue Monitor initialized and waiting");
     while(true)
     {
       String task = workQueue.getTask();

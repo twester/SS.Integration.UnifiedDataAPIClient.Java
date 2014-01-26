@@ -27,9 +27,11 @@ import ss.udapi.sdk.model.ServiceRequest;
 
 
 
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.QueueingConsumer.Delivery;
 
@@ -46,7 +48,7 @@ public class MQListener implements Runnable
   private static Logger logger = Logger.getLogger(MQListener.class);
   private static MQListener instance = null;
   private static Channel channel;
-  private static QueueingConsumer consumer;
+  private static MissingRabbitMqConsumer consumer;
   private static boolean MQListenerRunning = false;
   
   private static Lock creationLock = new ReentrantLock();
@@ -154,7 +156,7 @@ public class MQListener implements Runnable
             
                 channel = connection.createChannel();
                 channel.basicQos(0, 10, false);
-                consumer = new QueueingConsumer(channel);  
+                consumer = new MissingRabbitMqConsumer(channel);  
                 
 
           
@@ -181,8 +183,6 @@ public class MQListener implements Runnable
 
 
         while (true) {
-System.out.println("----------------->We are looping" + resourceSessionList.size());   
-
 
           while (resourceSessionList.isEmpty() == false) {
           
@@ -197,11 +197,12 @@ System.out.println("----------------->We are looping" + resourceSessionList.size
               String path = newAmqpURI.getRawPath();
               String queue = path.substring(path.indexOf('/',1)+1);
               
-              String ctag=channel.basicConsume(queue, true, consumer);
-              resourceChannMap.put(session.getResourceId(), ctag);
-
-              
-              logger.debug("--------------------->Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+              if (resourceChannMap.containsKey(session.getResourceId()) == false)
+              {
+                String ctag=channel.basicConsume(queue, true, consumer);
+                resourceChannMap.put(session.getResourceId(), ctag);
+                logger.debug("--------------------->Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+              }
             } catch (IOException ex) {
               logger.debug(ex);
             } catch (URISyntaxException ex) {
@@ -210,37 +211,13 @@ System.out.println("----------------->We are looping" + resourceSessionList.size
 
           }
 
-        
+          Thread.sleep(1000);
 
-          Delivery delivery = consumer.nextDelivery();
-          logger.debug("----------------->and got something");
           
-          if(delivery != null){    
-            String message = new String(delivery.getBody());
-            logger.debug("----------------->Message Received> [" + message + "]");   
-
-            
-            String msgHead = message.substring(0, 64);
-//if things slow down parsing the header change to this which doesn't look as tidy
-//            if ((message.substring(0, 64).equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",")))
-            if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\","))
-            {
-
-              logger.debug("-------------------------->ADD ECHO PROCESSING:  " + msgHead + " : " + delivery.getEnvelope().getRoutingKey() );
-            } else {
-              logger.debug("-------------------------->NAY:  " + msgHead);
-              WorkQueue myQueue = WorkQueue.getWorkQueue();
-              myQueue.addTask(message);
-            }
-            
-            
-            
-
-          }
         }
       
-      } catch (InterruptedException ex) {
-        System.out.println("Malformed AMQP URL" + ex);
+//      } catch (InterruptedException ex) {
+//        System.out.println("Malformed AMQP URL" + ex);
       } catch (Exception ex) {
         ex.printStackTrace();
       }

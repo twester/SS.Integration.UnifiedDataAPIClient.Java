@@ -11,20 +11,20 @@ import org.apache.log4j.Logger;
 
 import ss.udapi.sdk.interfaces.Resource;
 
-public class ResourceEchoMap
+public class EchoResourceMap
 {
-  private static ResourceEchoMap echoMap= null;
+  private static EchoResourceMap echoMap= null;
   private static ConcurrentHashMap<String,Integer> map = new ConcurrentHashMap<String,Integer>();
   
-  private static Logger logger = Logger.getLogger(ResourceEchoMap.class);
+  private static Logger logger = Logger.getLogger(EchoResourceMap.class);
   
-  private ResourceEchoMap()
+  private EchoResourceMap()
   {
   }
   
-  public static ResourceEchoMap getEchoMap(){
+  public static EchoResourceMap getEchoMap(){
     if (echoMap == null) {
-      echoMap = new ResourceEchoMap();
+      echoMap = new EchoResourceMap();
     }
     return echoMap;
   }
