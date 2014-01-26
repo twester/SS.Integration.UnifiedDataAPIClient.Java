@@ -27,6 +27,7 @@ import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.ResourceEchoMap;
+import ss.udapi.sdk.services.ResourceSession;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
@@ -42,7 +43,7 @@ public class ResourceImpl implements Resource
   
   private boolean isStreaming;
   private boolean connected;
-  private MQListener mqListener;
+  
   
   private StreamAction streamAction;
   
@@ -120,9 +121,7 @@ public class ResourceImpl implements Resource
       logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));
       if(task.substring(13,24).equals("EchoFailure")) {
         logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
-        synchronized(this) {
-          mqListener.reconnect(getId(), amqpDest);
-        }
+       MQListener.reconnect(getId(), amqpDest);
       }
       try {
         streamAction.execute(task);
@@ -141,33 +140,36 @@ public class ResourceImpl implements Resource
       amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
       
       amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
-      logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest);
+      logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest + " : " + getId()) ;
       
       
       //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
-      mqListener = MQListener.getMQListener();
-      mqListener.setResources(amqpDest, availableResources);
-      
-      if (mqListener.isRunning() == true)
+
+        
+      logger.debug("---------------listener running " + MQListener.isRunning() );
+      if (MQListener.isRunning() == false)
       {
-        synchronized(this) {
-          mqListener.addQueue(amqpDest, availableResources, getId());
-        }
-      } else { 
-        actionExecuter.execute(new ConnectedAction(streamingEvents));
+
         
-        ServiceThreadExecutor.executeTask(mqListener);
         
+        MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
+        
+        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest, availableResources));
+
+        
+        System.out.println("--------------------------> Starting Echo");
         EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
         ServiceThreadExecutor.executeTask(echoSender);
-  
-        try {
-          //TODO see if we need this anymore the singleton executor service should habve take care of this
-          Thread.sleep(100);
-        } catch (Exception ex) {
-          logger.fatal("MQListener instantiation interrupted");
-        }
+
+        
+        actionExecuter.execute(new ConnectedAction(streamingEvents));
+
+        //TODO move down once listener is running
+        
+      } else { 
+        System.out.println("--------------------------> Second bit");
       }    
+      MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
       connected = true;
     }
   }
