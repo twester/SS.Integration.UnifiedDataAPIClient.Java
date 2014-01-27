@@ -116,27 +116,31 @@ public class ResourceImpl implements Resource
   public void streamData()
   {
     StreamAction streamAction = new StreamAction(streamingEvents);
-    DisconnectedAction disconnectAction = new DisconnectedAction(streamingEvents);
+    
+    System.out.println("-----------------------> streaming" + myTasks.isEmpty() + isStreaming);
     
     while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
-      logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));
-      if(task.substring(14,25).equals("EchoFailure")) {
+      logger.debug("---------------------------->Streaming data:" + task.substring(0, 60));
+      if(task.substring(13,24).equals("EchoFailure")) {
         logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
-        MQListener.disconnect(getId(), amqpDest);
+//        MQListener.disconnect(getId(), amqpDest);
         try {
-          disconnectAction.execute(task);
+//          disconnectAction.execute(task);
+          
+          actionExecuter.execute(new DisconnectedAction(streamingEvents));
         } catch (Exception e) {
           logger.warn("Error on fixture disconnect receive", e);
         } 
+      } else {
+        try {
+          streamAction.execute(task);
+        } catch (Exception e) {
+          logger.warn("Error on message receive", e);
+        } 
       }
-      try {
-        streamAction.execute(task);
-      } catch (Exception e) {
-        logger.warn("Error on message receive", e);
-      } 
     }
-    
+      
   }
 
   
