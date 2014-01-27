@@ -30,22 +30,17 @@ public final class SystemProperties
     return systemProperties.getProperty(key); 
   }
 
-//TODO: read from file
-  public static void getSystemProperties()
+
+  private static void getSystemProperties()
   {
     systemProperties = new Properties();
 
-    
-    systemProperties.put("ss.url", "http://apicui.sportingsolutions.com");
-    systemProperties.put("ss.username", "sportingsolutions@jimco");
-    systemProperties.put("ss.password", "sporting");
     systemProperties.put("ss.http_login_timeout", "20");
     systemProperties.put("ss.http_request_timeout", "60");
     systemProperties.put("ss.conn_heartbeat", "5");
     systemProperties.put("ss.echo_sender_interval", "20");
     systemProperties.put("ss.workerThreads", "20");
     systemProperties.put("ss.echo_max_missed_echos", "3");  
-    
     
     try {
       systemProperties.load(new FileInputStream("sdk.properties"));
@@ -55,13 +50,13 @@ public final class SystemProperties
     }
     
     logger.debug("properties file loaded: " + systemProperties.getProperty("ss.http_login_timeout"));
-
-  
-    
-
   }
 
 
+  public static void setProperty(String key, String value)
+  {
+    systemProperties.put(key, value);
+  }
   
   
 }

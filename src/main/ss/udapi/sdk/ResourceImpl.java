@@ -1,30 +1,25 @@
+//Copyright 2012 Spin Services Limited
+
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+
+//    http://www.apache.org/licenses/LICENSE-2.0
+
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+
 package ss.udapi.sdk;
-
-import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-
-import org.apache.log4j.Logger;
-
-import com.google.gson.JsonObject;
-import com.rabbitmq.client.ConnectionFactory;
 
 import ss.udapi.sdk.interfaces.Resource;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
-import ss.udapi.sdk.model.StreamEcho;
 import ss.udapi.sdk.model.Summary;
 import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
-import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.EchoResourceMap;
 import ss.udapi.sdk.services.ResourceSession;
@@ -36,44 +31,36 @@ import ss.udapi.sdk.streaming.DisconnectedAction;
 import ss.udapi.sdk.streaming.Event;
 import ss.udapi.sdk.streaming.StreamAction;
 
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import org.apache.log4j.Logger;
+
+
 public class ResourceImpl implements Resource
 {
-  private Logger logger = Logger.getLogger(ResourceImpl.class.getName());
-  
-  private ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
-  
+  private static Logger logger = Logger.getLogger(ResourceImpl.class.getName());
+  private static HttpServices httpSvcs = new HttpServices();
+  private static ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
   private boolean isStreaming;
   private boolean connected;
-  
-  
-  private StreamAction streamAction;
-  
   private String amqpDest;
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
-  private static HttpServices httpSvcs = new HttpServices();
+  private List<Event> streamingEvents;
   
   //this is where the work ends up
   private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
   
-  private int echoSenderInterval;
-  private int maxMissedEchos;
-  private List<Event> streamingEvents;
   
-  
-  
-  public void addTask(String task)
-  {
+  public void addTask(String task) {
     myTasks.add(task);
   }
+
   
-  
-  
-  
-  
-  
-  protected ResourceImpl(RestItem restItem, ServiceRequest availableResources)
-  {
+  protected ResourceImpl(RestItem restItem, ServiceRequest availableResources) {
     this.restItem = restItem;
     this.availableResources = availableResources;
     logger.debug("Instantiated Resource: " + restItem.getName());
@@ -84,58 +71,83 @@ public class ResourceImpl implements Resource
   
 
   @Override
-  public String getSnapshot()
-  {
+  public String getSnapshot() {
     return httpSvcs.getSnapshot(availableResources, "http://api.sportingsolutions.com/rels/snapshot", restItem.getName());
   }
 
+  
   @Override
-  public void startStreaming(List<Event> events)
-  {
+  public void startStreaming(List<Event> events) {
     startStreaming(events,
               new Integer(SystemProperties.get("ss.echo_sender_interval")),
               new Integer(SystemProperties.get("ss.echo_max_missed_echos")));
   }
   
 
-  private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos)
-  {
-    logger.info(String.format("Starting stream for %1$s with Echo Interval of %2$s and Max Missed Echos of %3$s",getName(),echoSenderInterval,maxMissedEchos));
+  private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos) {
+    /*looks slightly odd we're setting the same values we read above, but the client could set these directly so 
+     * we have to allow for that */
+    SystemProperties.setProperty("ss.echo_sender_interval", Integer.toString(echoSenderInterval));
+    SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));
+    
+    logger.info(String.format("Starting stream for " + getName() + 
+                " with Echo Interval of " + echoSenderInterval +  " and Max Missed Echos of " + maxMissedEchos));
     this.streamingEvents = events;
-    this.echoSenderInterval = echoSenderInterval;
-    this.maxMissedEchos = maxMissedEchos;
-    streamAction = new StreamAction(streamingEvents);
-  
     isStreaming = true;
     connect();
     streamData();
-    
+  }
+
+  
+  private void connect() {
+    if (connected == false) {
+      ServiceRequest amqpRequest = new ServiceRequest();
+      amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
+      amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
+      logger.info("Starting new streaming services, name: " + getName() +" queue: " + amqpDest + " fixture ID: " + getId()) ;
+
+      /* Because we have many client threads starting at the same time they can all get here before MQ Listener is fully
+       * initialized so MQListener.isRunning can be false for quite a while.  MQListener.getSender is locked so only one thread
+       * will ever be able to initialize it.  As it and echoSender are singletons they can only run once so the rest if the if
+       * can be dropped through safely.  Eventually MQListener.isRunning will be true so this only happens for the first few
+       * threads anyway.
+       */
+      if (MQListener.isRunning() == false)
+      {
+        MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
+        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest, availableResources));
+        
+        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
+        ServiceThreadExecutor.executeTask(echoSender);
+      }   
+      
+      //MQListener.setResources does not allow duplicates so fall throughs from the above false will be ignored
+      MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
+      actionExecuter.execute(new ConnectedAction(streamingEvents));
+      connected = true;
+    }
   }
   
   
-  public void streamData()
-  {
+  public void streamData() {
     StreamAction streamAction = new StreamAction(streamingEvents);
-    
-    System.out.println("-----------------------> streaming" + myTasks.isEmpty() + isStreaming);
-    
     while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
-      logger.debug("---------------------------->Streaming data:" + task.substring(0, 60));
+      logger.debug("Streaming data: " + task.substring(0, 60));
       if(task.substring(13,24).equals("EchoFailure")) {
-        logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
-//        MQListener.disconnect(getId(), amqpDest);
+        logger.error("Echo Retry exceeded out for stream" + getName());
         try {
           isStreaming = false;
+          MQListener.disconnect(getId(), amqpDest);
           actionExecuter.execute(new DisconnectedAction(streamingEvents));
-        } catch (Exception e) {
-          logger.warn("Error on fixture disconnect receive", e);
+        } catch (Exception ex) {
+          logger.warn("Error on fixture disconnect, could have already been disconnected: ", ex);
         } 
       } else {
         try {
           streamAction.execute(task);
-        } catch (Exception e) {
-          logger.warn("Error on message receive", e);
+        } catch (Exception ex) {
+          logger.warn("Error on message receive", ex);
         } 
       }
     }
@@ -149,50 +161,6 @@ public class ResourceImpl implements Resource
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
   }
   
-  private void connect()
-  {
-    if (connected == false) {
-      ServiceRequest amqpRequest = new ServiceRequest();
-      amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
-      
-      amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
-      logger.debug("------------>Starting new streaming services: name " + restItem.getName() + " with queue " + amqpDest + " : " + getId()) ;
-      
-      
-      //TODO: this looks nasty - it's needed but it should be tidied up, same parameters
-
-        
-      logger.debug("---------------listener running " + MQListener.isRunning() );
-      if (MQListener.isRunning() == false)
-      {
-
-        
-        
-        MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
-        
-        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest, availableResources));
-
-        
-        System.out.println("--------------------------> Starting Echo");
-        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
-        ServiceThreadExecutor.executeTask(echoSender);
-
-        
-        actionExecuter.execute(new ConnectedAction(streamingEvents));
-
-        //TODO move down once listener is running
-        
-      } else { 
-        System.out.println("--------------------------> Second bit");
-      }    
-      MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
-      connected = true;
-    }
-  }
-
-  
-  
-  
 
   @Override
   public void stopStreaming()
@@ -200,12 +168,14 @@ public class ResourceImpl implements Resource
     isStreaming = true;
   }
 
+  
   @Override
   public void pauseStreaming()
   {
     isStreaming = false;
   }
 
+  
   @Override
   public void unpauseStreaming()
   {
@@ -219,25 +189,19 @@ public class ResourceImpl implements Resource
     return restItem.getContent().getId();
   }
 
+  
   @Override
   public String getName()
   {
     return restItem.getName();
   }
 
+  
   @Override
   public Summary getContent()
   {
     return restItem.getContent();
   }
-
-
-  
-  
-
-  
-  
-  
 }
 
 

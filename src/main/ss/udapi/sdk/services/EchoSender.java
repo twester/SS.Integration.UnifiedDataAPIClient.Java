@@ -53,6 +53,7 @@ public class EchoSender implements Runnable
   @Override
   public void run()
   {
+    logger.info("starting echo");
     EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
     WorkQueue myQueue = WorkQueue.getWorkQueue();
     if (echoRunning == false)    {
