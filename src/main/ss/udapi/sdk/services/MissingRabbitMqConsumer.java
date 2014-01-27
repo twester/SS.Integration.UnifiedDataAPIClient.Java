@@ -12,19 +12,6 @@ import com.rabbitmq.client.Envelope;
 public class MissingRabbitMqConsumer extends DefaultConsumer
 {
 
-  /*
-   *  A consumer for rabbitMq message queueing system, because the rabbitMq message queueing system does not come 
-   *  with a single method to enable dequeuing of any messages put in the message queueing system.
-   *  A bit of an oversight for a message queueing system not to provide the means to do anything with the messages 
-   *  once they go into the queue if I'm honest!
-   *  
-   *  Perhaps I'm the first person ever who has had the need to read off a queue in the qabbitMq message queueing system,
-   *  in that case I can understand how they missed this glaring basic functionality off, but otherwise I must admit I'm a bit confused.
-   *  
-   *  Fern
-   * 
-   */
-  
   private String cTag;
   private String body;
   

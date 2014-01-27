@@ -78,7 +78,7 @@ public class EchoSender implements Runnable
             String stringStreamEcho = JsonHelper.ToJson(streamEcho);
             logger.info("Batch echo sent: " + stringStreamEcho);
             
-            httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", "Fernando v Jim", stringStreamEcho);
+            httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", resources.getServiceRestItems().get(0).getName(), stringStreamEcho);
             Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
             
             //TODO if the missing echos happen very frequently move this to another thread mind this thread is only dealing with echos so it should be ok

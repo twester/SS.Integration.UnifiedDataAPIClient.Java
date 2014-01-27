@@ -14,7 +14,6 @@ public final class SystemProperties
 {
   private static boolean propertiesLoaded = false;
   private static Properties systemProperties;
-  private static Hashtable<String, String> propertiesHash = new Hashtable<String, String>();
   private static Logger logger = Logger.getLogger(SystemProperties.class);
 
   private SystemProperties()
@@ -26,24 +25,27 @@ public final class SystemProperties
   {
     if (propertiesLoaded == false) {
       getSystemProperties();
+      propertiesLoaded = true;
     }
-    return propertiesHash.get(key); 
+    return systemProperties.getProperty(key); 
   }
 
 //TODO: read from file
   public static void getSystemProperties()
   {
-/*    systemProperties = new Properties();
+    systemProperties = new Properties();
     try {
       systemProperties.load(new FileInputStream("sdk.properties"));
+      systemProperties.load(new FileInputStream("example.properties"));
     } catch (IOException ex) {
       logger.error("Can't load the properties file.",ex);
     }
-    logger.debug("properties file loaded");
-
-  */  
     
-    propertiesHash.put("ss.url", "http://apicui.sportingsolutions.com");
+    logger.debug("properties file loaded: " + systemProperties.getProperty("ss.http_login_timeout"));
+
+  
+    
+/*    propertiesHash.put("ss.url", "http://apicui.sportingsolutions.com");
     propertiesHash.put("ss.username", "sportingsolutions@jimco");
     propertiesHash.put("ss.password", "sporting");
     propertiesHash.put("ss.http_login_timeout", "20");
@@ -51,7 +53,7 @@ public final class SystemProperties
     propertiesHash.put("ss.conn_heartbeat", "5");
     propertiesHash.put("ss.echo_sender_interval", "20");
     propertiesHash.put("ss.workerThreads", "20");
-    propertiesHash.put("ss.echo_max_missed_echos", "3");  
+    propertiesHash.put("ss.echo_max_missed_echos", "3");  */  
   }
 
 
