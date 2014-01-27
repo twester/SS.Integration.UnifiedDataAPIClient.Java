@@ -3,5 +3,3 @@ bin/
 build/
 *.log
 html/
-conf/client.properties
-conf/example.properties

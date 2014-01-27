@@ -14,7 +14,9 @@
 
 package ss.udapi.sdk.interfaces;
 
-public interface Credentials {
+
+public interface Credentials
+{
 	
 	public String getPassword();
 
