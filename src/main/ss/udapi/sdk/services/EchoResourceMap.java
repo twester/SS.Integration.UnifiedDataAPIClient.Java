@@ -71,7 +71,11 @@ public class EchoResourceMap
      }
   }
 
-  
+
+  /*Not overly tidy, but in order to avoid looping twice through this set (once here and once in EchoSender we prepare the
+   * list of defaulters here.  Could be moved to EchoSender and it would still work, just means iterating through this set
+   * twice
+   */
   public Set<String> incrAll(int retries)
   {
       Set<String> keys;

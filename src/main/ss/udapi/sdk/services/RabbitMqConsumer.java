@@ -50,12 +50,23 @@ public class RabbitMqConsumer extends DefaultConsumer
     }
   }
 
+/*  Something like
+ *   ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
+ 
+
+  resource.addTask(task);
   
+  resource.streamData();
+
+
+*/
+
   @Override
   public void handleCancelOk(String cTag)
   {
     this.cTag = cTag;
     String resourceId = CtagResourceMap.getResource(cTag);
+    //TODO: make sure instance is running, if it isn't then start it up to notify it
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();
   }
@@ -65,6 +76,7 @@ public class RabbitMqConsumer extends DefaultConsumer
   {
     this.cTag = cTag;
     String resourceId = CtagResourceMap.getResource(cTag);
+    //TODO: make sure instance is running, if it isn't then start it up to notify it
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();
   }

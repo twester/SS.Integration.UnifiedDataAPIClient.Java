@@ -75,7 +75,7 @@ public class ResourceImpl implements Resource
     return httpSvcs.getSnapshot(availableResources, "http://api.sportingsolutions.com/rels/snapshot", restItem.getName());
   }
 
-  
+  //TODO: add more parameters??
   @Override
   public void startStreaming(List<Event> events) {
     startStreaming(events,
