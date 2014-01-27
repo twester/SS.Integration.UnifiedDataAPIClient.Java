@@ -145,6 +145,7 @@ public class ResourceImpl implements Resource
   
   public void mqDisconnectEvent()
   {
+    isStreaming = false;
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
   }
   
