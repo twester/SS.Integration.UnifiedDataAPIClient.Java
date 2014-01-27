@@ -118,7 +118,7 @@ public class ResourceImpl implements Resource
     StreamAction streamAction = new StreamAction(streamingEvents);
     DisconnectedAction disconnectAction = new DisconnectedAction(streamingEvents);
     
-    while (! myTasks.isEmpty() && (isStreaming == true)) {
+    while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
       logger.debug("---------------------------->Streaming data:" + task.substring(0, 40));
       if(task.substring(14,25).equals("EchoFailure")) {
