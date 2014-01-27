@@ -126,8 +126,7 @@ public class ResourceImpl implements Resource
         logger.error("----------------------->Echo Retry exceeded out for stream" + getId());
 //        MQListener.disconnect(getId(), amqpDest);
         try {
-//          disconnectAction.execute(task);
-          
+          isStreaming = false;
           actionExecuter.execute(new DisconnectedAction(streamingEvents));
         } catch (Exception e) {
           logger.warn("Error on fixture disconnect receive", e);
@@ -143,6 +142,11 @@ public class ResourceImpl implements Resource
       
   }
 
+  
+  public void mqDisconnectEvent()
+  {
+    actionExecuter.execute(new DisconnectedAction(streamingEvents));
+  }
   
   private void connect()
   {

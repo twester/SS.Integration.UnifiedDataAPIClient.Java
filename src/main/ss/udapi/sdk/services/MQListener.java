@@ -36,7 +36,7 @@ public class MQListener implements Runnable
   private static Logger logger = Logger.getLogger(MQListener.class);
   private static MQListener instance = null;
   private static Channel channel;
-  private static MissingRabbitMqConsumer consumer;
+  private static RabbitMqConsumer consumer;
   private static boolean MQListenerRunning = false;
   
   private static Lock creationLock = new ReentrantLock();
@@ -125,7 +125,7 @@ public class MQListener implements Runnable
             
                 channel = connection.createChannel();
                 channel.basicQos(0, 10, false);
-                consumer = new MissingRabbitMqConsumer(channel);  
+                consumer = new RabbitMqConsumer(channel);  
                 
 
           
