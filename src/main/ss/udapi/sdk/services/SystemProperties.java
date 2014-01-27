@@ -34,6 +34,19 @@ public final class SystemProperties
   public static void getSystemProperties()
   {
     systemProperties = new Properties();
+
+    
+    systemProperties.put("ss.url", "http://apicui.sportingsolutions.com");
+    systemProperties.put("ss.username", "sportingsolutions@jimco");
+    systemProperties.put("ss.password", "sporting");
+    systemProperties.put("ss.http_login_timeout", "20");
+    systemProperties.put("ss.http_request_timeout", "60");
+    systemProperties.put("ss.conn_heartbeat", "5");
+    systemProperties.put("ss.echo_sender_interval", "20");
+    systemProperties.put("ss.workerThreads", "20");
+    systemProperties.put("ss.echo_max_missed_echos", "3");  
+    
+    
     try {
       systemProperties.load(new FileInputStream("sdk.properties"));
       systemProperties.load(new FileInputStream("example.properties"));
@@ -45,15 +58,7 @@ public final class SystemProperties
 
   
     
-/*    propertiesHash.put("ss.url", "http://apicui.sportingsolutions.com");
-    propertiesHash.put("ss.username", "sportingsolutions@jimco");
-    propertiesHash.put("ss.password", "sporting");
-    propertiesHash.put("ss.http_login_timeout", "20");
-    propertiesHash.put("ss.http_request_timeout", "60");
-    propertiesHash.put("ss.conn_heartbeat", "5");
-    propertiesHash.put("ss.echo_sender_interval", "20");
-    propertiesHash.put("ss.workerThreads", "20");
-    propertiesHash.put("ss.echo_max_missed_echos", "3");  */  
+
   }
 
 
