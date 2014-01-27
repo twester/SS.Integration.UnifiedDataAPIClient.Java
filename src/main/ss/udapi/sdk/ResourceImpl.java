@@ -139,6 +139,7 @@ public class ResourceImpl implements Resource
         try {
           isStreaming = false;
           MQListener.disconnect(getId(), amqpDest);
+          EchoResourceMap.getEchoMap().addResource(getId());
           actionExecuter.execute(new DisconnectedAction(streamingEvents));
         } catch (Exception ex) {
           logger.warn("Error on fixture disconnect, could have already been disconnected: ", ex);
@@ -158,6 +159,7 @@ public class ResourceImpl implements Resource
   public void mqDisconnectEvent()
   {
     isStreaming = false;
+    EchoResourceMap.getEchoMap().removeResource(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
   }
   

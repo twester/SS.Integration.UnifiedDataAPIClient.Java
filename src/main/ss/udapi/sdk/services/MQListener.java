@@ -57,7 +57,6 @@ public class MQListener implements Runnable
     {
     }
     try {
-      logger.debug("------------------------->Only called once right?");
       creationLock.lock();
       logger.debug("Retrieving listener or create it if it doesn't exist");
       if (instance == null)
