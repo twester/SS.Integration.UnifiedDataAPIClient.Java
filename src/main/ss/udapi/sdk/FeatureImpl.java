@@ -26,7 +26,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 
-public class FeatureImpl implements Feature {
+public class FeatureImpl implements Feature 
+{
   private static Logger logger = Logger.getLogger(FeatureImpl.class.getName());
   private static HttpServices httpSvcs = new HttpServices();
   private ServiceRequest availableFeatures;

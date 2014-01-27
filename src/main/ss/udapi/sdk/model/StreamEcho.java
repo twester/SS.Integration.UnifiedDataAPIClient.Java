@@ -14,8 +14,8 @@
 
 package ss.udapi.sdk.model;
 
-public class StreamEcho {
-	
+public class StreamEcho
+{
 	private String host;
 	private String queue;
 	private String message;
@@ -23,18 +23,28 @@ public class StreamEcho {
 	public String getHost() {
 		return host;
 	}
+
+	
 	public void setHost(String host) {
 		this.host = host;
 	}
+	
+	
 	public String getQueue() {
 		return queue;
 	}
+	
+	
 	public void setQueue(String queue) {
 		this.queue = queue;
 	}
+	
+	
 	public String getMessage() {
 		return message;
 	}
+	
+	
 	public void setMessage(String message) {
 		this.message = message;
 	}
