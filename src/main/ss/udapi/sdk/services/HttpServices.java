@@ -104,7 +104,6 @@ public class HttpServices
     List<RestItem> serviceRestItems = null;
     ServiceRequest serviceRequest = new ServiceRequest();
     
-    
     RestItem loginDetails = null;
     Iterator<RestItem> loginRestIterator = loginReq.getServiceRestItems().iterator();
     do {
@@ -129,7 +128,6 @@ public class HttpServices
 
     if (link == null)
       logger.error("No login relation found for: [" + relation +"]");
-
     
     CloseableHttpResponse response = null;
     HttpUriRequest httpAction = null;
@@ -173,18 +171,41 @@ public class HttpServices
   }
 
 
+  
+  
+  
+  
   public ServiceRequest processRequest(ServiceRequest request, String relation, String name)
   {
     return processRequest(request, relation, name, "n/a");
   }
-  
-  
-  
-  
-  
-  
+
   
   public ServiceRequest processRequest(ServiceRequest request, String relation, String name, String entity)
+  {
+    ServiceRequest response = new ServiceRequest();
+    String body = retrieveBody(request, relation, name, entity);
+    List<RestItem> serviceRestItems = JsonHelper.toRestItems(body);
+
+    response.setServiceRestItems(serviceRestItems);
+    response.setAuthToken(request.getAuthToken());
+    
+    return response;
+  }
+  
+  
+  public String getSnapshot(ServiceRequest snapShot, String relation, String fixture)
+  {
+    return retrieveBody(snapShot, relation, fixture, "n/a");
+    
+  }
+
+  
+  
+  
+  
+  
+  private String retrieveBody(ServiceRequest request, String relation, String name, String entity)
   {
     List<RestItem> serviceRestItems = null;
     ServiceRequest response = new ServiceRequest();
@@ -219,9 +240,11 @@ public class HttpServices
     {
       logger.error("No link found for relation: [" + relation +"]");
     }
-    
+
+    String responseBody = null;    
       try {
 
+        
         if (relation.equals("http://api.sportingsolutions.com/rels/stream/batchecho"))
         {
           HttpPost httpPost = new HttpPost(link.getHref());
@@ -240,11 +263,10 @@ public class HttpServices
           if (responseEntity != null)
           {
             ServiceRequest serviceRequest = new ServiceRequest();
-            String responseBody = new String(EntityUtils.toByteArray(responseEntity));
-            serviceRestItems = JsonHelper.toRestItems(responseBody);
+            responseBody = new String(EntityUtils.toByteArray(responseEntity));
           }
         } else {
-          String responseBody = null;
+            responseBody = null;
 
           HttpGet httpGet = new HttpGet(link.getHref());
           httpGet.setHeader("X-Auth-Token", request.getAuthToken());
@@ -252,27 +274,17 @@ public class HttpServices
           
           ResponseHandler<String> responseHandler = getResponseHandler(200);
           responseBody = httpClient.execute(httpGet, responseHandler);
-          serviceRestItems = JsonHelper.toRestItems(responseBody);
-      
-          
-          response.setServiceRestItems(serviceRestItems);
-          response.setAuthToken(request.getAuthToken());
         }
         
         
         
-        response.setServiceRestItems(serviceRestItems);
-        response.setAuthToken(request.getAuthToken());
       } catch (ClientProtocolException protEx) {
         logger.error("Invalid Client Protocol: " + protEx.getMessage());
       } catch (IOException ioEx) {
         logger.error("Communication error: " + ioEx.getMessage());
       } 
-      
     
-    
-    
-    return response;
+    return responseBody;
   }
 
   
@@ -293,9 +305,9 @@ public class HttpServices
   
   
 
-  public String getSnapshot(ServiceRequest snapShot, String relation, String fixture)
-  {
-    String snapShotResponse = null;
+
+        /*
+        String snapShotResponse = null;
     CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
 
     
@@ -343,7 +355,7 @@ public class HttpServices
   }
 
 
-
+*/
   private ResponseHandler<String> getResponseHandler(final int validStatus)
   {
     return new ResponseHandler<String>() {
