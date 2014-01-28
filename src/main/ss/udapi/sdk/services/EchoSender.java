@@ -83,9 +83,9 @@ public class EchoSender implements Runnable
           String stringStreamEcho = JsonHelper.ToJson(streamEcho);
           logger.info("Batch echo sent: " + stringStreamEcho);
           
-          httpSvcs.processEcho(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", resources.getServiceRestItems().get(0).getName(), stringStreamEcho);
+          httpSvcs.processRequest(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", resources.getServiceRestItems().get(0).getName(), stringStreamEcho);
 
-          //TODO: tidy up all the echo stuff when we move from gson
+          //TODO: if a simple json library is available move to that for this poison pill 
           Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
           Iterator<String> keyIter = defaulters.iterator();
           while(keyIter.hasNext()) {
@@ -106,8 +106,7 @@ public class EchoSender implements Runnable
   
   private String uriDecode(String s) {
     try {
-        // URLDecode decodes '+' to a space, as for
-        // form encoding.  So protect plus signs.
+        // URLDecode decodes '+' to a space, as for form encoding.  So protect plus signs.
         return URLDecoder.decode(s.replace("+", "%2B"), "US-ASCII");
     }
     catch (java.io.UnsupportedEncodingException e) {

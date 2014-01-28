@@ -173,86 +173,10 @@ public class HttpServices
   }
 
 
-
   public ServiceRequest processRequest(ServiceRequest request, String relation, String name)
   {
-    List<RestItem> serviceRestItems = null;
-    ServiceRequest response = new ServiceRequest();
-    CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
-    
-    RestItem serviceDetails = null;
-    if (name != null)
-    {
-      Iterator<RestItem> serviceRestIterator = request.getServiceRestItems().iterator();
-      do {
-        serviceDetails = serviceRestIterator.next();
-        if (serviceDetails.getName().compareTo(name) != 0) {
-          serviceDetails = null;
-        }
-      } while ( serviceRestIterator.hasNext() && (serviceDetails == null) ) ;
-      
-      if (serviceDetails == null){
-        logger.error("No relation found for: [" + relation +"]");
-      }
-    }
-    
-    RestLink link = null;
-    Iterator<RestLink> linkIterator = serviceDetails.getLinks().iterator();
-    do {
-      link = linkIterator.next();
-      if (link.getRelation().compareTo(relation) != 0) {
-        link = null;
-      }
-    } while ( linkIterator.hasNext() && (link == null) );
-
-    if (link == null)
-      logger.error("No link found for relation: [" + relation +"]");
-    
-    
-    try {
-      String responseBody = null;
-      if (link.getVerbs()[0].compareToIgnoreCase("Get") == 0) {
-        HttpGet httpGet = new HttpGet(link.getHref());
-        httpGet.setHeader("X-Auth-Token", request.getAuthToken());
-        logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
-        
-        ResponseHandler<String> responseHandler = getResponseHandler(200);
-        responseBody = httpClient.execute(httpGet, responseHandler);
-        serviceRestItems = JsonHelper.toRestItems(responseBody);
-      } else if (link.getVerbs()[0].compareToIgnoreCase("Post") == 0) {
-        HttpPost httpPost = new HttpPost(link.getHref());
-
-        httpPost.setHeader("X-Auth-Token", request.getAuthToken());
-        httpPost.setHeader("Content-Type", "application/json");
-
-
-        
-        CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-        System.out.println("Response --------------->" +httpResponse);
-        if (httpResponse.getStatusLine().getStatusCode() != 202) {
-          throw new ClientProtocolException("Unexpected response status: " + httpResponse.getStatusLine().getStatusCode());
-        }
-
-        HttpEntity responseEntity = httpResponse.getEntity();
-        if (responseEntity != null)
-        {
-          ServiceRequest serviceRequest = new ServiceRequest();
-          responseBody = new String(EntityUtils.toByteArray(responseEntity));
-          serviceRestItems = JsonHelper.toRestItems(responseBody);
-        }
-      }
-
-      
-      response.setServiceRestItems(serviceRestItems);
-      response.setAuthToken(request.getAuthToken());
-    } catch (ClientProtocolException protEx) {
-      logger.error("Invalid Client Protocol: " + protEx.getMessage());
-    } catch (IOException ioEx) {
-      logger.error("Communication error: " + ioEx.getMessage());
-    } 
-    return response;
+    return processRequest(request, relation, name, "n/a");
   }
-
   
   
   
@@ -260,11 +184,7 @@ public class HttpServices
   
   
   
-  
-  
-  
-  
-  public ServiceRequest processEcho(ServiceRequest request, String relation, String name, String entity)
+  public ServiceRequest processRequest(ServiceRequest request, String relation, String name, String entity)
   {
     List<RestItem> serviceRestItems = null;
     ServiceRequest response = new ServiceRequest();
@@ -296,52 +216,62 @@ public class HttpServices
     } while ( linkIterator.hasNext() && (link == null) );
 
     if (link == null)
+    {
       logger.error("No link found for relation: [" + relation +"]");
+    }
     
-    
-    try {
-      String responseBody = null;
-      if (link.getVerbs()[0].compareToIgnoreCase("Get") == 0) {
-        HttpGet httpGet = new HttpGet(link.getHref());
-        httpGet.setHeader("X-Auth-Token", request.getAuthToken());
-        logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
-        
-        ResponseHandler<String> responseHandler = getResponseHandler(200);
-        responseBody = httpClient.execute(httpGet, responseHandler);
-        serviceRestItems = JsonHelper.toRestItems(responseBody);
-      } else if (link.getVerbs()[0].compareToIgnoreCase("Post") == 0) {
-        HttpPost httpPost = new HttpPost(link.getHref());
+      try {
 
-        httpPost.setHeader("X-Auth-Token", request.getAuthToken());
-        httpPost.setHeader("Content-Type", "application/json");
-        
-        
-        HttpEntity myEntity = new StringEntity(entity);
-        httpPost.setEntity(myEntity);
-        
-        CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-        System.out.println("Response --------------->" +httpResponse);
-        if (httpResponse.getStatusLine().getStatusCode() != 202) {
-          throw new ClientProtocolException("Unexpected response status: " + httpResponse.getStatusLine().getStatusCode());
-        }
-
-        HttpEntity responseEntity = httpResponse.getEntity();
-        if (responseEntity != null)
+        if (relation.equals("http://api.sportingsolutions.com/rels/stream/batchecho"))
         {
-          ServiceRequest serviceRequest = new ServiceRequest();
-          responseBody = new String(EntityUtils.toByteArray(responseEntity));
-          serviceRestItems = JsonHelper.toRestItems(responseBody);
-        }
-      }
+          HttpPost httpPost = new HttpPost(link.getHref());
+          httpPost.setHeader("X-Auth-Token", request.getAuthToken());
+          httpPost.setHeader("Content-Type", "application/json");
+          HttpEntity myEntity = new StringEntity(entity);
+          httpPost.setEntity(myEntity);
+          
+          CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+          System.out.println("Response --------------->" +httpResponse);
+          if (httpResponse.getStatusLine().getStatusCode() != 202) {
+            throw new ClientProtocolException("Unexpected response status: " + httpResponse.getStatusLine().getStatusCode());
+          }
+  
+          HttpEntity responseEntity = httpResponse.getEntity();
+          if (responseEntity != null)
+          {
+            ServiceRequest serviceRequest = new ServiceRequest();
+            String responseBody = new String(EntityUtils.toByteArray(responseEntity));
+            serviceRestItems = JsonHelper.toRestItems(responseBody);
+          }
+        } else {
+          String responseBody = null;
 
+          HttpGet httpGet = new HttpGet(link.getHref());
+          httpGet.setHeader("X-Auth-Token", request.getAuthToken());
+          logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
+          
+          ResponseHandler<String> responseHandler = getResponseHandler(200);
+          responseBody = httpClient.execute(httpGet, responseHandler);
+          serviceRestItems = JsonHelper.toRestItems(responseBody);
       
-      response.setServiceRestItems(serviceRestItems);
-      response.setAuthToken(request.getAuthToken());
-    } catch (ClientProtocolException protEx) {
-      logger.error("Invalid Client Protocol: " + protEx.getMessage());
-    } catch (IOException ioEx) {
-      logger.error("Communication error: " + ioEx.getMessage());
-    } 
+          
+          response.setServiceRestItems(serviceRestItems);
+          response.setAuthToken(request.getAuthToken());
+        }
+        
+        
+        
+        response.setServiceRestItems(serviceRestItems);
+        response.setAuthToken(request.getAuthToken());
+      } catch (ClientProtocolException protEx) {
+        logger.error("Invalid Client Protocol: " + protEx.getMessage());
+      } catch (IOException ioEx) {
+        logger.error("Communication error: " + ioEx.getMessage());
+      } 
+      
+    
+    
+    
     return response;
   }
 
@@ -351,7 +281,7 @@ public class HttpServices
   
   
   
-  
+
   
   
   

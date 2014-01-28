@@ -18,11 +18,6 @@ import org.apache.log4j.Logger;
 
 import ss.udapi.sdk.ResourceImpl;
 
-/*import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-*/
-
 public class FixtureActionProcessor implements Runnable
 {
   private static Logger logger = Logger.getLogger(FixtureActionProcessor.class);
@@ -36,7 +31,7 @@ public class FixtureActionProcessor implements Runnable
   @Override
   public void run()
   {
-    /*TODO the jsonObject produced here gets corrupted it cannot be processed if the string is too big as
+    /*TODO the jsonObject produced here gets corrupted, it cannot be processed if the string is too big as
      *is the case with feature suspension, this is gson it works when fromGson() is called to map an Object
      *    JsonObject jsonObject = new JsonParser().parse(task).getAsJsonObject();
      *even this fails
@@ -48,7 +43,7 @@ public class FixtureActionProcessor implements Runnable
      *    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
      *    at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
      *    at java.lang.Thread.run(Thread.java:744)
-     *so instead I have to get the string header and parse it manually  */
+     *so instead I have to get the string header and parse it manually, that's faster anyway  */
     
     String msgHead = task.substring(0, 200);
     int idStart = msgHead.indexOf("Id\":")+5;
@@ -58,7 +53,6 @@ public class FixtureActionProcessor implements Runnable
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
     resource.addTask(task);
     resource.streamData();
-    
     
   }
 
