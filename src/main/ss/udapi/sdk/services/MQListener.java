@@ -1,3 +1,18 @@
+//Copyright 2012 Spin Services Limited
+
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+
+//    http://www.apache.org/licenses/LICENSE-2.0
+
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+
+
 package ss.udapi.sdk.services;
 
 import ss.udapi.sdk.model.ServiceRequest;
@@ -20,7 +35,6 @@ import com.rabbitmq.client.*;
 public class MQListener implements Runnable
 {
   private static Logger logger = Logger.getLogger(MQListener.class);
-  private static URI amqpURI;
   private static HashMap<String,String> resourceChannMap = new HashMap<String,String>();
   private static MQListener instance = null;
   private static Channel channel;
@@ -33,6 +47,8 @@ public class MQListener implements Runnable
   private MQListener ()
   {
   }
+  
+  
   
   public static MQListener getMQListener(String amqpDest, ServiceRequest resources) {
     while(!creationLock.tryLock())
@@ -50,9 +66,10 @@ public class MQListener implements Runnable
     }
   }
   
+  
+  
   @Override
-  public void run()
-  {
+  public void run() {
     ResourceSession session = null;
     MQListenerRunning  = true;
     
@@ -150,8 +167,7 @@ public class MQListener implements Runnable
 
   
   
-  public static void disconnect (String resourceId)
-  {
+  public static void disconnect (String resourceId) {
     try {
       channel.basicCancel(resourceChannMap.get(resourceId));
       CtagResourceMap.removeCtag(resourceChannMap.get(resourceId));
@@ -177,15 +193,13 @@ public class MQListener implements Runnable
 
   
   
-  public static boolean isRunning()
-  {
+  public static boolean isRunning() {
     return MQListenerRunning;
   }
 
   
   
-  public static void setResources(ResourceSession resourceSession)
-  {
+  public static void setResources(ResourceSession resourceSession) {
     resourceSessionList.add(resourceSession);
     logger.debug("Adding new resource queue listener request for: " + resourceSession.getAmqpDest());
   }

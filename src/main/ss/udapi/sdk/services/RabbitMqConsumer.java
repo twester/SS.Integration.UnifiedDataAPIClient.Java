@@ -1,12 +1,23 @@
+//Copyright 2012 Spin Services Limited
+
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+
+//    http://www.apache.org/licenses/LICENSE-2.0
+
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+
+
 package ss.udapi.sdk.services;
 
-import java.io.IOException;
+import ss.udapi.sdk.ResourceImpl;
 
 import org.apache.log4j.Logger;
-
-import ss.udapi.sdk.ResourceImpl;
-import ss.udapi.sdk.interfaces.Resource;
-
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.DefaultConsumer;
@@ -14,69 +25,45 @@ import com.rabbitmq.client.Envelope;
 
 public class RabbitMqConsumer extends DefaultConsumer
 {
-
-  private String cTag;
-  private String body;
-  
   private static Logger logger = Logger.getLogger(RabbitMqConsumer.class);
   private EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
+
   
-  public RabbitMqConsumer(Channel channel)
-  {
+  public RabbitMqConsumer(Channel channel){
     super(channel);
     
   }
 
   
   
-//THROW DISCONNECT EVENT ON: handleCancel, handleCancelOk 
-  
-  @Override public void handleDelivery(String cTag, Envelope envelope, AMQP.BasicProperties properties, byte[] bodyByteArray) throws IOException
-  {
-    this.cTag = cTag;
-    body = new String(bodyByteArray);
-    
-    logger.debug("---------------->In the consumer" + body.substring(0,100) + " ----- " + cTag);
-    
+  @Override
+  public void handleDelivery(String cTag, Envelope envelope, AMQP.BasicProperties properties, byte[] bodyByteArray) {
+    String body = new String(bodyByteArray);
     String msgHead = body.substring(0, 64);
-    if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\","))
-    {
+    
+    logger.debug("Consumer: " + cTag + " received message: " + msgHead);
+    if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",")) {
       echoMap.decrEchoCount(CtagResourceMap.getResource(cTag));
-
     } else {
-      logger.debug("-------------------------->NAY:  " + msgHead);
       WorkQueue myQueue = WorkQueue.getWorkQueue();
       myQueue.addTask(body);
     }
   }
 
-/*  Something like
- *   ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
- 
-
-  resource.addTask(task);
   
-  resource.streamData();
-
-
-*/
-
+  
   @Override
-  public void handleCancelOk(String cTag)
-  {
-    this.cTag = cTag;
+  public void handleCancelOk(String cTag) {
     String resourceId = CtagResourceMap.getResource(cTag);
-    //TODO: make sure instance is running, if it isn't then start it up to notify it
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();
   }
 
+  
+  
   @Override
-  public void handleCancel(String cTag)
-  {
-    this.cTag = cTag;
+  public void handleCancel(String cTag) {
     String resourceId = CtagResourceMap.getResource(cTag);
-    //TODO: make sure instance is running, if it isn't then start it up to notify it
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();
   }

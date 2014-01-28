@@ -99,7 +99,7 @@ public class ResourceImpl implements Resource
     eventsMap.addEvents(getId(), events);
     
     logger.info(String.format("Starting stream for " + getName() + 
-                " with Echo Interval of " + echoSenderInterval +  " and Max Missed Echos of " + maxMissedEchos));
+                " with Echo Interval of: " + echoSenderInterval +  " and Max Missed Echos of: " + maxMissedEchos));
     this.streamingEvents = events;
     isStreaming = true;
     connect();
@@ -138,7 +138,7 @@ public class ResourceImpl implements Resource
   
   
   public void streamData() {
-    logger.debug("In resource " + getId() + " number of items received: " + myTasks.size() + isStreaming);
+    logger.debug("In resource " + getId() + " number of items received: " + myTasks.size() + " streaming status: " + isStreaming);
     StreamAction streamAction = new StreamAction(streamingEvents);
     while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
@@ -170,8 +170,6 @@ public class ResourceImpl implements Resource
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
-    System.out.println("----------------------------->disconnect events" + streamingEvents.size());
-    
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
   }
   

@@ -12,12 +12,13 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
+
 package ss.udapi.sdk.services;
+
+import ss.udapi.sdk.streaming.Event;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
-import ss.udapi.sdk.streaming.Event;
 
 
 public class ResourceEventsMap
@@ -31,13 +32,15 @@ public class ResourceEventsMap
   }
 
   
-  public static ResourceEventsMap getEventMap(){
+  
+  public static ResourceEventsMap getEventMap() {
     if (eventsMap == null) {
       eventsMap = new ResourceEventsMap();
     }
     return eventsMap;
   }
   
+
   
   public void addEvents(String resourceId, List<Event> events) {
     synchronized(this) {
@@ -46,6 +49,7 @@ public class ResourceEventsMap
   }
   
 
+  
   public List<Event> getEvents(String resourceId) {
     synchronized(this) {
       return map.get(resourceId);
@@ -53,12 +57,12 @@ public class ResourceEventsMap
   }
   
   
-  public void removeResource(String resourceId)
-  {
+  
+  public void removeResource(String resourceId) {
     synchronized(this) {
       map.remove(resourceId);
     }
   }
-  
-  
+
+
 }

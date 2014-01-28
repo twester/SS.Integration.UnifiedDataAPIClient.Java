@@ -36,7 +36,7 @@ public class JsonHelper
 	}
 	
   
-	public static String ToJson(Object objectToJson){
+	public static String ToJson(Object objectToJson) {
 		String serializedObject = null;
 		if(objectToJson != null){
 			GsonBuilder gsonBuilder = new GsonBuilder();
