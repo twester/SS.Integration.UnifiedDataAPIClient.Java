@@ -147,7 +147,7 @@ public class ResourceImpl implements Resource
         logger.error("Echo Retry exceeded out for stream" + getName());
         try {
           isStreaming = false;
-          MQListener.disconnect(getId(), amqpDest);
+          MQListener.disconnect(getId());
           EchoResourceMap.getEchoMap().addResource(getId());
           actionExecuter.execute(new DisconnectedAction(streamingEvents));
         } catch (Exception ex) {

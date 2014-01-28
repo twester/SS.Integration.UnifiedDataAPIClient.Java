@@ -1,229 +1,164 @@
 package ss.udapi.sdk.services;
 
+import ss.udapi.sdk.model.ServiceRequest;
+
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.*;
+
+import javax.management.BadAttributeValueExpException;
 
 import org.apache.log4j.Logger;
 
-import ss.udapi.sdk.model.ServiceRequest;
-
-
-
-
-
-
-
-
-
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.*;
 
 public class MQListener implements Runnable
 {
-  private static URI amqpURI;
-  private ServiceRequest resources;
-  private String queue;
-  private int count;
-  private static HashMap<String,String> resourceChannMap = new HashMap<String,String>();
-
   private static Logger logger = Logger.getLogger(MQListener.class);
+  private static URI amqpURI;
+  private static HashMap<String,String> resourceChannMap = new HashMap<String,String>();
   private static MQListener instance = null;
   private static Channel channel;
   private static RabbitMqConsumer consumer;
   private static boolean MQListenerRunning = false;
-  
   private static Lock creationLock = new ReentrantLock();
-  private static Lock queueCreationLock = new ReentrantLock();
-  private static Lock setterLock = new ReentrantLock();
-  
   private static ConcurrentLinkedQueue<ResourceSession> resourceSessionList = new ConcurrentLinkedQueue<ResourceSession>();
 
-  
   
   private MQListener ()
   {
   }
   
-  public static MQListener getMQListener(String amqpDest, ServiceRequest resources)
-  {
+  public static MQListener getMQListener(String amqpDest, ServiceRequest resources) {
     while(!creationLock.tryLock())
-    {
-    }
+    {}
+
     try {
       creationLock.lock();
-      logger.debug("Retrieving listener or create it if it doesn't exist");
-      if (instance == null)
-      {
+      logger.debug("Retrieving MQListener or create it if it doesn't exist");
+      if (instance == null) {
         instance = new MQListener(); 
-        
       } 
       return instance;
     } finally {
-      System.out.println("---------------> all done");
       creationLock.unlock();
     }
   }
- 
   
   @Override
   public void run()
   {
+    ResourceSession session = null;
     MQListenerRunning  = true;
-      try {
-            try {
-              
-              ResourceSession session = resourceSessionList.remove();
-
-
-                ConnectionFactory connectionFactory = new ConnectionFactory();
-                connectionFactory.setRequestedHeartbeat(5);
-
-                
-                URI newAmqpURI = new URI(session.getAmqpDest());
-                String path = newAmqpURI.getRawPath();
-                String queue = path.substring(path.indexOf('/',1)+1);
-                
-                String host = newAmqpURI.getHost();
-                connectionFactory.setHost(host);
-            
-                String virtualHost = uriDecode(newAmqpURI.getPath().substring(1,path.indexOf('/',1)));
-                connectionFactory.setVirtualHost("/" + virtualHost);
-                
-                int port = newAmqpURI.getPort();
-                
-                
-                String userInfo = newAmqpURI.getRawUserInfo();
-                userInfo = URLDecoder.decode(userInfo,"UTF-8");
-                if (userInfo != null) {
-                    String userPass[] = userInfo.split(":");
-                    if (userPass.length > 2) {
-                        throw new IllegalArgumentException("Bad user info in AMQP " +
-                                                           "URI: " + userInfo);
-                    }
-                    connectionFactory.setUsername(uriDecode(userPass[0]));
-            
-                    if (userPass.length == 2) {
-                      connectionFactory.setPassword(uriDecode(userPass[1]));
-                    }
-                }
-                
-          
-                
-                if (port != -1) {
-                  connectionFactory.setPort(port);
-                }
-                
-                Connection connection = connectionFactory.newConnection();
-            
-                channel = connection.createChannel();
-                channel.basicQos(0, 10, false);
-                consumer = new RabbitMqConsumer(channel);  
-                
-
-          
-                //add the ctag to array to keep track of which queue is for which response
-                String ctag=channel.basicConsume(queue, true, consumer);
-                resourceChannMap.put(session.getResourceId(), ctag);
-                CtagResourceMap.addCtag(ctag, session.getResourceId());
-                logger.debug("--------------------->Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
-
-              
-              
-                
-              
-            } catch (IOException ex) {
-              System.out.println("Malformed AMQP URL" + ex);
-            } catch (Exception ex) {
-              logger.debug(ex);
-            }
-        
-
-        
-        
+    
+    /* 
+     * This section happens only once when the thread is kicked off
+     */
+    try {
+      session = resourceSessionList.remove();
+      URI resourceQURI = new URI(session.getAmqpDest());
+      String path = resourceQURI.getRawPath();
+      String queue = path.substring(path.indexOf('/',1)+1);
+      String userInfo = resourceQURI.getRawUserInfo();
       
-      
+      ConnectionFactory connectionFactory = new ConnectionFactory();
+      connectionFactory.setRequestedHeartbeat(Integer.parseInt(SystemProperties.get("ss.conn_heartbeat")));
+      String host = resourceQURI.getHost();
+      connectionFactory.setHost(host);
+      String virtualHost = uriDecode(path.substring(1,path.indexOf('/',1)));
+      connectionFactory.setVirtualHost("/" + virtualHost);
 
-
-        while (true) {
-
-          while (resourceSessionList.isEmpty() == false) {
-          
-
-            ResourceSession session = resourceSessionList.remove();
-          
-            logger.debug("------------------>" + session.getAmqpDest());
-           
-            try {
-
-              URI newAmqpURI = new URI(session.getAmqpDest());
-              String path = newAmqpURI.getRawPath();
-              String queue = path.substring(path.indexOf('/',1)+1);
-              
-              if (resourceChannMap.containsKey(session.getResourceId()) == false)
-              {
-                String ctag=channel.basicConsume(queue, true, consumer);
-                resourceChannMap.put(session.getResourceId(), ctag);
-                CtagResourceMap.addCtag(ctag, session.getResourceId());
-                logger.debug("--------------------->Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
-              }
-            } catch (IOException ex) {
-              logger.debug(ex);
-            } catch (URISyntaxException ex) {
-              logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + session.getAmqpDest());
-            }
-
+      userInfo = URLDecoder.decode(userInfo,"UTF-8");
+      if (userInfo != null) {
+          String userPass[] = userInfo.split(":");
+          if (userPass.length > 2) {
+              throw new BadAttributeValueExpException("Invalid user details format in AMQP URI: " + userInfo);
           }
-
-          Thread.sleep(1000);
-
-          
-        }
+          connectionFactory.setUsername(uriDecode(userPass[0]));
+          if (userPass.length == 2) {
+            connectionFactory.setPassword(uriDecode(userPass[1]));
+          }
+      }
       
-//      } catch (InterruptedException ex) {
-//        System.out.println("Malformed AMQP URL" + ex);
-      } catch (Exception ex) {
-        ex.printStackTrace();
+      int port = resourceQURI.getPort();
+      if (port != -1) {
+        connectionFactory.setPort(port);
+      }
+      
+      Connection connection;
+      try {
+        connection = connectionFactory.newConnection();
+      } catch (IOException ex) {
+        throw new IOException("Failure creating connection factory");
       }
 
-    
-//    }
-    
+      String ctag;
+      try {
+        channel = connection.createChannel();
+        channel.basicQos(0, 10, false);
+        consumer = new RabbitMqConsumer(channel);  
+        ctag=channel.basicConsume(queue, true, consumer);
+      } catch (IOException ex) {
+        throw new IOException("Failure creating channel");
+      }
+      resourceChannMap.put(session.getResourceId(), ctag);
+      CtagResourceMap.addCtag(ctag, session.getResourceId());
+      logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+
+      /*
+       * This section is the loop which uses the connection opened above and adds additional consumers as they are requested
+       */
+      while (true) {
+        while (resourceSessionList.isEmpty() == false) {
+          session = resourceSessionList.remove();
+          try {
+            resourceQURI = new URI(session.getAmqpDest());
+            path = resourceQURI.getRawPath();
+            queue = path.substring(path.indexOf('/',1)+1);
+            
+            if (resourceChannMap.containsKey(session.getResourceId()) == false) {
+              ctag=channel.basicConsume(queue, true, consumer);
+              resourceChannMap.put(session.getResourceId(), ctag);
+              CtagResourceMap.addCtag(ctag, session.getResourceId());
+              logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+            }
+          } catch (IOException ex) {
+            logger.debug(ex);
+          } catch (URISyntaxException ex) {
+            logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + session.getAmqpDest());
+          }
+        }
+        Thread.sleep(1000);
+      } 
+
+    } catch(URISyntaxException | UnsupportedEncodingException ex) {
+      logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
+      ex.printStackTrace();
+    } catch(BadAttributeValueExpException ex) {
+      logger.error (ex.getMessage());
+    } catch(IOException ex) {
+      logger.error ("Connection creation failure:" + ex.getMessage());
+    } catch(InterruptedException ex) {
+      logger.warn("MQListener was awoken from it's sleep.  No further action required, but what caused it?");
+    }
   }
 
   
-  public static void disconnect (String resourceId, String amqpDest)
+  
+  public static void disconnect (String resourceId)
   {
     try {
-      URI newAmqpURI = new URI(amqpDest);
-      String path = amqpURI.getRawPath();
-      String queue = path.substring(path.indexOf('/',1)+1);
-
       channel.basicCancel(resourceChannMap.get(resourceId));
-      //TODO: raise disconnect event
-      //TODO: change the names around, the grammar is ugly
-
       CtagResourceMap.removeCtag(resourceChannMap.get(resourceId));
       resourceChannMap.remove(resourceId);
-      logger.debug("--------------------->Basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId + " disconnected");
-
-      
-      
-/*      String ctag=channel.basicConsume(queue, true, consumer);
-      resourceChannMap.put(resourceId, ctag);
-      logger.debug("--------------------->Basic consumer " + ctag + " reconnected for resource " + resourceId);
-*/
-      
+      logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
     } catch (IOException ex) {
-      logger.debug(ex);
-    } catch (URISyntaxException ex) {
-      logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + amqpDest);
+      logger.error("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
     }
     
   }
@@ -232,9 +167,8 @@ public class MQListener implements Runnable
   
   private static String uriDecode(String s) {
     try {
-        // URLDecode decodes '+' to a space, as for
-        // form encoding.  So protect plus signs.
-        return URLDecoder.decode(s.replace("+", "%2B"), "US-ASCII");
+      // URLDecode decodes '+' to a space, as for form encoding.  So protect plus signs.
+      return URLDecoder.decode(s.replace("+", "%2B"), "US-ASCII");
     }
     catch (java.io.UnsupportedEncodingException e) {
         throw new RuntimeException(e);
@@ -242,22 +176,18 @@ public class MQListener implements Runnable
   }     
 
   
+  
   public static boolean isRunning()
   {
     return MQListenerRunning;
   }
 
   
+  
   public static void setResources(ResourceSession resourceSession)
   {
-    try {
-      resourceSessionList.add(resourceSession);
-      logger.debug("----------------->adding new entry" + resourceSession.getAmqpDest() + resourceSessionList.size());
-    } finally {
-
-    }
-    
+    resourceSessionList.add(resourceSession);
+    logger.debug("Adding new resource queue listener request for: " + resourceSession.getAmqpDest());
   }
-
   
 }

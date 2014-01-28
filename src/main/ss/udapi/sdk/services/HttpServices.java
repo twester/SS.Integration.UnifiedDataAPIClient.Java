@@ -13,11 +13,6 @@
 //limitations under the License.
 
 
-
-//TODO: add header info to logger
-
-
-
 package ss.udapi.sdk.services;
 
 import ss.udapi.sdk.services.JsonHelper;
