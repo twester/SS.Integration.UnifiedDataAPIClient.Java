@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ public class ResourceImpl implements Resource
     
     if(ResourceWorkerMap.exists(getId()) == true) {
       isStreaming = true;
-//      streamingEvents = eventsMap.getEvents(getId());
+      streamingEvents = eventsMap.getEvents(getId());
     } else {
       ResourceWorkerMap.addUOW(getId(), this);
       EchoResourceMap.getEchoMap().addResource(getId());

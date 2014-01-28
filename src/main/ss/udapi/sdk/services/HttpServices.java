@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -52,11 +52,12 @@ public class HttpServices
     List<RestItem> loginRestItems = null;
     ServiceRequest loginResp = new ServiceRequest();
 
+    CloseableHttpClient httpClient = null;
     try {
       logger.info("Retrieving connection actions from url: " + url);
       new URL(url);     //this is only to check whether the URL format is correct
       HttpGet httpGet = new HttpGet(url);
-      CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
+      httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
       ResponseHandler<String> responseHandler = getResponseHandler(401);
       String responseBody = httpClient.execute(httpGet, responseHandler);
       
@@ -72,6 +73,12 @@ public class HttpServices
       logger.error("Invalid Client Protocol: " + protEx.getCause());
     } catch (IOException ioEx) {
       logger.error("Communication error: to URL [" + url + "]");
+    } finally {
+      try {
+        httpClient.close();
+      } catch (IOException ex) {
+        //Can safely be ignored, either the server closed the connection or we didn't open it so there's nothing to do
+      }
     }
     loginResp.setServiceRestItems(loginRestItems);
     return loginResp;
@@ -120,12 +127,11 @@ public class HttpServices
       logger.error("Communication error" + ioEx.getCause() + " while retrieving services for: " + name);
     } finally {
       try {
-        response.close();
-      } catch (Exception ex){
-        //We're not too concerned, it's a limited lifetime stream, if we can't close it the server will (it may have already).
+        httpClient.close();
+      } catch (IOException ex) {
+        //Can safely be ignored, either the server closed the connection or we didn't open it so there's nothing to do
       }
     }
-
     return serviceRequest;
   }
   
@@ -203,7 +209,13 @@ public class HttpServices
       logger.error("Invalid Client Protocol: " + protEx.getMessage());
     } catch (IOException ioEx) {
       logger.error("Communication error: " + ioEx.getMessage());
-    } 
+    } finally {
+      try {
+        httpClient.close();
+      } catch (IOException ex) {
+        //Can safely be ignored, either the server closed the connection or we didn't open it so there's nothing to do
+      }
+    }
     return responseBody;
   }
 

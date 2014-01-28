@@ -77,6 +77,9 @@
 		<zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
 	</target>
 	
+  
+  
+  
 	<target name="generateDocs">
 	   <echo file="documentation/doxyfile" append="true">	   
 			PROJECT_NUMBER=${VersionNumber}
