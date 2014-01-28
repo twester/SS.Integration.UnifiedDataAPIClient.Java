@@ -43,25 +43,19 @@ public class ResourceEventsMap
 
   
   public void addEvents(String resourceId, List<Event> events) {
-    synchronized(this) {
-      map.put(resourceId, events);
-    }
+    map.put(resourceId, events);
   }
   
 
   
   public List<Event> getEvents(String resourceId) {
-    synchronized(this) {
-      return map.get(resourceId);
-    }
+    return map.get(resourceId);
   }
   
   
   
   public void removeResource(String resourceId) {
-    synchronized(this) {
-      map.remove(resourceId);
-    }
+    map.remove(resourceId);
   }
 
 

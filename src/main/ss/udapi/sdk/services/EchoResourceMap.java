@@ -40,35 +40,25 @@ public class EchoResourceMap
   
   
   public void addResource(String resourceId) {
-    synchronized(this) {
-      map.put(resourceId, 0);
-    }
+    map.put(resourceId, 0);
   }
   
   
   public void removeResource(String resourceId)
   {
-    synchronized(this) {
-      map.remove(resourceId);
-    }
+    map.remove(resourceId);
   }
   
   
   public void incrEchoCount(String resourceId)
   {
-    synchronized(this)
-    {
-      map.replace(resourceId, map.get(resourceId)+1);
-    }
+    map.replace(resourceId, map.get(resourceId)+1);
   }
 
   
   public void decrEchoCount(String resourceId)
   {
-    synchronized(this)
-    {
-      map.replace(resourceId, map.get(resourceId)-1);
-     }
+    map.replace(resourceId, map.get(resourceId)-1);
   }
 
 
@@ -78,22 +68,22 @@ public class EchoResourceMap
    */
   public Set<String> incrAll(int retries)
   {
-      Set<String> keys;
-      Set<String> defaulters = new HashSet<String>();
-      
-      keys = map.keySet();
-      Iterator<String> keyIter = keys.iterator();
-      synchronized(this) {
-        while(keyIter.hasNext()) {
-          String key = keyIter.next();
-          int count = (map.get(key));
-          if (count == (retries)){
-            defaulters.add(key);
-          }
-          map.put(key, count+1);
-        }
+    Set<String> keys;
+    Set<String> defaulters = new HashSet<String>();
+    
+    keys = map.keySet();
+    Iterator<String> keyIter = keys.iterator();
+
+    while(keyIter.hasNext()) {
+      String key = keyIter.next();
+      int count = (map.get(key));
+      if (count == (retries)){
+        defaulters.add(key);
       }
-      return defaulters;
+      map.replace(key, count+1);
+    }
+
+    return defaulters;
   }
   
   
