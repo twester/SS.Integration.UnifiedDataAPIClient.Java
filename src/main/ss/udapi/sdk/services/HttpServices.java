@@ -12,75 +12,62 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
+
+
+//TODO: add header info to logger
+
+
+
 package ss.udapi.sdk.services;
+
+import ss.udapi.sdk.services.JsonHelper;
+import ss.udapi.sdk.model.RestItem;
+import ss.udapi.sdk.model.RestLink;
+import ss.udapi.sdk.model.ServiceRequest;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TimeZone;
 
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.client.*;
+import org.apache.http.client.methods.*;
 import org.apache.http.conn.ConnectionKeepAliveStrategy;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.*;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
-import ss.udapi.sdk.services.JsonHelper;
-import ss.udapi.sdk.model.RestItem;
-import ss.udapi.sdk.model.RestLink;
-import ss.udapi.sdk.model.ServiceRequest;
-import ss.udapi.sdk.model.StreamEcho;
-
-
-//TODO: abstract the common http stuff into a superclass and add header info to logger
-//TODO: change to static methods and return new instances (immutability), not thread safe so synchronize
-//TODO: rename httpServices to something more descriptive
 
 public class HttpServices
 {
   private static Logger logger = Logger.getLogger(HttpServices.class);
-  
   private static ConnectionKeepAliveStrategy requestTimeout = buildTimeout(Integer.parseInt(SystemProperties.get("ss.http_request_timeout")));
   private static ConnectionKeepAliveStrategy loginTimeout = buildTimeout(Integer.parseInt(SystemProperties.get("ss.http_login_timeout")));
   private static String serviceAuthToken = null;
   
-  public ServiceRequest getSession(String url)
-  {
+  
+  
+  public ServiceRequest getSession(String url) {
     List<RestItem> loginRestItems = null;
     ServiceRequest loginResp = new ServiceRequest();
 
     try {
-      URL discardOnlyToCheckURLFormat = new URL(url);
-      
-      logger.debug("Retrieving Connection actions from url: " + url);
-
+      logger.info("Retrieving connection actions from url: " + url);
+      new URL(url);     //this is only to check whether the URL format is correct
       HttpGet httpGet = new HttpGet(url);
       CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
-      
       ResponseHandler<String> responseHandler = getResponseHandler(401);
       String responseBody = httpClient.execute(httpGet, responseHandler);
       
       loginRestItems = JsonHelper.toRestItems(responseBody);
-
       ArrayList<String> names = new ArrayList<String>();
-      for (RestItem item : loginRestItems)
-      {
+      for (RestItem item : loginRestItems) {
         names.add(item.getName());  
       }
       logger.debug("Retrieved connection details: " + names.toString());
@@ -91,74 +78,51 @@ public class HttpServices
     } catch (IOException ioEx) {
       logger.error("Communication error: to URL [" + url + "]");
     }
-    
     loginResp.setServiceRestItems(loginRestItems);
     return loginResp;
   }
   
   
-  public ServiceRequest processLogin(ServiceRequest loginReq, String relation, String name)
-  {
+  
+  public ServiceRequest processLogin(ServiceRequest loginReq, String relation, String name) {
+    logger.info("Retrieving services for: " + name);
     CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(loginTimeout).build();
-    
     List<RestItem> serviceRestItems = null;
     ServiceRequest serviceRequest = new ServiceRequest();
-    
-    RestItem loginDetails = null;
-    Iterator<RestItem> loginRestIterator = loginReq.getServiceRestItems().iterator();
-    do {
-      loginDetails = loginRestIterator.next();
-      if (loginDetails.getName().compareTo(name) != 0) {
-        loginDetails = null;
-      }
-    } while ( loginRestIterator.hasNext() && (loginDetails == null) ) ;
 
-    if (loginDetails == null)
-      logger.error("No login details found.");
-
-    
-    RestLink link = null;
-    Iterator<RestLink> linkIterator = loginDetails.getLinks().iterator();
-    do {
-      link = linkIterator.next();
-      if (link.getRelation().compareTo(relation) != 0) {
-        link = null;
-      }
-    } while ( linkIterator.hasNext() && (link == null) );
-
-    if (link == null)
-      logger.error("No login relation found for: [" + relation +"]");
-    
-    CloseableHttpResponse response = null;
-    HttpUriRequest httpAction = null;
-    
-    try {
-      if (link.getVerbs()[0].contains("POST")) {
-        httpAction = new HttpPost(link.getHref());
-      } 
+    RestItem loginDetails = getRestItems(loginReq, name);
+    if (loginDetails == null) {
+      logger.error("Login details not found for " + name);
+    }
       
+    RestLink link = getLink(loginDetails, relation);
+    if (link == null) {
+      logger.error("Login relation not found for relation: " + relation +" for " + name);
+    }
+      
+    CloseableHttpResponse response = null;
+    try {
+      HttpUriRequest httpAction = new HttpPost(link.getHref());
       httpAction.setHeader("X-Auth-User", SystemProperties.get("ss.username"));
       httpAction.setHeader("X-Auth-Key", SystemProperties.get("ss.password"));
       httpAction.setHeader("Content-Type", "application/json");
-      
+
       response = httpClient.execute(httpAction);
       if (response.getStatusLine().getStatusCode() != 200) {
-        throw new ClientProtocolException("Unexpected response status: " + response.getStatusLine().getStatusCode());
+        throw new ClientProtocolException("Unexpected response status: " + response.getStatusLine().getStatusCode() +
+                    " while retrieving services for: " + name);
       }
 
       serviceAuthToken = response.getFirstHeader("X-Auth-Token").getValue();
       serviceRequest.setAuthToken(serviceAuthToken);
-
       HttpEntity entity = response.getEntity();
       String jsonResponse = new String(EntityUtils.toByteArray(entity));
-
       serviceRestItems = JsonHelper.toRestItems(jsonResponse);
-
       serviceRequest.setServiceRestItems(serviceRestItems);
     } catch (ClientProtocolException protEx) {
-      logger.error("Invalid Client Protocol: " + protEx.getMessage());
+      logger.error("Invalid Client Protocol: " + protEx.getMessage() + " while retrieving services for: " + name);
     } catch (IOException ioEx) {
-      logger.error("Communication error" + ioEx.getCause());
+      logger.error("Communication error" + ioEx.getCause() + " while retrieving services for: " + name);
     } finally {
       try {
         response.close();
@@ -169,204 +133,125 @@ public class HttpServices
 
     return serviceRequest;
   }
-
-
   
   
   
-  
-  public ServiceRequest processRequest(ServiceRequest request, String relation, String name)
-  {
+  public ServiceRequest processRequest(ServiceRequest request, String relation, String name) {
     return processRequest(request, relation, name, "n/a");
   }
 
   
-  public ServiceRequest processRequest(ServiceRequest request, String relation, String name, String entity)
-  {
+  
+  public ServiceRequest processRequest(ServiceRequest request, String relation, String name, String entity) {
     ServiceRequest response = new ServiceRequest();
     String body = retrieveBody(request, relation, name, entity);
     List<RestItem> serviceRestItems = JsonHelper.toRestItems(body);
 
     response.setServiceRestItems(serviceRestItems);
     response.setAuthToken(request.getAuthToken());
-    
     return response;
   }
   
   
-  public String getSnapshot(ServiceRequest snapShot, String relation, String fixture)
-  {
+  
+  public String getSnapshot(ServiceRequest snapShot, String relation, String fixture) {
     return retrieveBody(snapShot, relation, fixture, "n/a");
-    
   }
 
-  
-  
-  
-  
-  
-  private String retrieveBody(ServiceRequest request, String relation, String name, String entity)
-  {
-    List<RestItem> serviceRestItems = null;
-    ServiceRequest response = new ServiceRequest();
+
+
+  private String retrieveBody(ServiceRequest request, String relation, String name, String entity) {
     CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
     
     RestItem serviceDetails = null;
-    if (name != null)
-    {
-      Iterator<RestItem> serviceRestIterator = request.getServiceRestItems().iterator();
-      do {
-        serviceDetails = serviceRestIterator.next();
-        if (serviceDetails.getName().compareTo(name) != 0) {
-          serviceDetails = null;
-        }
-      } while ( serviceRestIterator.hasNext() && (serviceDetails == null) ) ;
-      
-      if (serviceDetails == null){
-        logger.error("No relation found for: [" + relation +"]");
+    if (name != null) {
+      serviceDetails = getRestItems(request, name);
+      if (serviceDetails == null) {
+        logger.error("No details found for: " + relation + " on " + name);
       }
     }
     
-    RestLink link = null;
-    Iterator<RestLink> linkIterator = serviceDetails.getLinks().iterator();
-    do {
-      link = linkIterator.next();
-      if (link.getRelation().compareTo(relation) != 0) {
-        link = null;
-      }
-    } while ( linkIterator.hasNext() && (link == null) );
-
-    if (link == null)
-    {
-      logger.error("No link found for relation: [" + relation +"]");
+    RestLink link = getLink(serviceDetails, relation);
+    if (link == null) {
+      logger.error("No links found for: " + relation + " on " + name);
     }
-
+    
     String responseBody = null;    
-      try {
-
+    try {
+      if (relation.equals("http://api.sportingsolutions.com/rels/stream/batchecho"))
+      {
+        HttpPost httpPost = new HttpPost(link.getHref());
+        httpPost.setHeader("X-Auth-Token", request.getAuthToken());
+        httpPost.setHeader("Content-Type", "application/json");
+        HttpEntity myEntity = new StringEntity(entity);
+        httpPost.setEntity(myEntity);
         
-        if (relation.equals("http://api.sportingsolutions.com/rels/stream/batchecho"))
-        {
-          HttpPost httpPost = new HttpPost(link.getHref());
-          httpPost.setHeader("X-Auth-Token", request.getAuthToken());
-          httpPost.setHeader("Content-Type", "application/json");
-          HttpEntity myEntity = new StringEntity(entity);
-          httpPost.setEntity(myEntity);
-          
-          CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
-          System.out.println("Response --------------->" +httpResponse);
-          if (httpResponse.getStatusLine().getStatusCode() != 202) {
-            throw new ClientProtocolException("Unexpected response status: " + httpResponse.getStatusLine().getStatusCode());
-          }
-  
-          HttpEntity responseEntity = httpResponse.getEntity();
-          if (responseEntity != null)
-          {
-            ServiceRequest serviceRequest = new ServiceRequest();
-            responseBody = new String(EntityUtils.toByteArray(responseEntity));
-          }
-        } else {
-            responseBody = null;
-
-          HttpGet httpGet = new HttpGet(link.getHref());
-          httpGet.setHeader("X-Auth-Token", request.getAuthToken());
-          logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
-          
-          ResponseHandler<String> responseHandler = getResponseHandler(200);
-          responseBody = httpClient.execute(httpGet, responseHandler);
+        CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
+        if (httpResponse.getStatusLine().getStatusCode() != 202) {
+          throw new ClientProtocolException("Unexpected response status for echo request: " 
+                      + httpResponse.getStatusLine().getStatusCode());
         }
-        
-        
-        
-      } catch (ClientProtocolException protEx) {
-        logger.error("Invalid Client Protocol: " + protEx.getMessage());
-      } catch (IOException ioEx) {
-        logger.error("Communication error: " + ioEx.getMessage());
-      } 
-    
+
+        HttpEntity responseEntity = httpResponse.getEntity();
+        if (responseEntity != null) {
+          responseBody = new String(EntityUtils.toByteArray(responseEntity));
+        }
+      } else {
+        HttpGet httpGet = new HttpGet(link.getHref());
+        httpGet.setHeader("X-Auth-Token", request.getAuthToken());
+        logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
+        ResponseHandler<String> responseHandler = getResponseHandler(200);
+
+        responseBody = httpClient.execute(httpGet, responseHandler);
+      }
+    } catch (ClientProtocolException protEx) {
+      logger.error("Invalid Client Protocol: " + protEx.getMessage());
+    } catch (IOException ioEx) {
+      logger.error("Communication error: " + ioEx.getMessage());
+    } 
     return responseBody;
   }
 
   
   
-  
-  
-  
-  
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-        /*
-        String snapShotResponse = null;
-    CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
-
-    
-    RestItem serviceDetails = null;
-    Iterator<RestItem> serviceRestIterator = snapShot.getServiceRestItems().iterator();
+  private RestItem getRestItems(ServiceRequest request, String name) {
+    RestItem matchingRest = null;
+    Iterator<RestItem> itemRestIterator = request.getServiceRestItems().iterator();
     do {
-      serviceDetails = serviceRestIterator.next();
-      if (serviceDetails.getName().compareTo(fixture) != 0) {
-        serviceDetails = null;
+      matchingRest = itemRestIterator.next();
+      if (matchingRest.getName().compareTo(name) != 0) {
+        matchingRest = null;
       }
-    } while ( serviceRestIterator.hasNext() && (serviceDetails == null) ) ;
-    
-    if (serviceDetails == null)
-      logger.error("No relation found for: [" + relation +"]");
-    
-
+    } while ( itemRestIterator.hasNext() && (matchingRest == null) ) ;
+    return matchingRest;
+  }  
+  
+  
+  
+  private RestLink getLink(RestItem request, String relation) {
     RestLink link = null;
-    Iterator<RestLink> linkIterator = serviceDetails.getLinks().iterator();
+    Iterator<RestLink> linkIterator = request.getLinks().iterator();
     do {
       link = linkIterator.next();
       if (link.getRelation().compareTo(relation) != 0) {
         link = null;
       }
     } while ( linkIterator.hasNext() && (link == null) );
-
-    if (link == null)
-      logger.error("No link found for relation: [" + relation +"]");
-    
-    
-    try {
-      HttpGet httpGet = new HttpGet(link.getHref());
-
-      httpGet.setHeader("X-Auth-Token", snapShot.getAuthToken());
-      
-      logger.debug("Sending request for snapshot for relation :[" + relation + "] fixture:[" + fixture + "] to href:[" + link.getHref() +"]");
-      
-      ResponseHandler<String> responseHandler = getResponseHandler(200);
-      snapShotResponse = httpClient.execute(httpGet, responseHandler);
-    } catch (ClientProtocolException protEx) {
-      logger.error("Invalid Client Protocol" + protEx.getCause());
-    } catch (IOException ioEx) {
-      logger.error("Communication error" + ioEx.getCause());
-    } 
-    return snapShotResponse;
+    return link;
   }
-
-
-*/
-  private ResponseHandler<String> getResponseHandler(final int validStatus)
-  {
+  
+  
+  
+  private ResponseHandler<String> getResponseHandler(final int validStatus) {
     return new ResponseHandler<String>() {
       public String handleResponse(final HttpResponse response) throws ClientProtocolException, IOException {
         int responseStatus = response.getStatusLine().getStatusCode();
         if (responseStatus == validStatus) {
-          logger.debug("Connetion status" + responseStatus);
+          logger.debug("Http connetion status " + responseStatus);
           HttpEntity entity = response.getEntity();
           return entity != null ? EntityUtils.toString(entity) : null;
         } else {
-          throw new ClientProtocolException("Unexpected response status: " + responseStatus);
+          throw new ClientProtocolException("Unexpected http connection response status: " + responseStatus);
         }
       }
     };
@@ -374,27 +259,13 @@ public class HttpServices
 
 
   
-  private static ConnectionKeepAliveStrategy buildTimeout(final int timeout)
-  {
-    ConnectionKeepAliveStrategy myStrategy = new ConnectionKeepAliveStrategy() {
-
-      @Override
+  private static ConnectionKeepAliveStrategy buildTimeout(final int timeout) {
+    return new ConnectionKeepAliveStrategy() {
       public long getKeepAliveDuration(HttpResponse response, HttpContext context) {
         return timeout * 1000;
       }
-
     };
-    
-    return myStrategy;
   }
-    
-  
-  
-  
-
-
-    
-
     
 }
 
