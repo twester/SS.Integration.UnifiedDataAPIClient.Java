@@ -22,6 +22,7 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.EchoResourceMap;
+import ss.udapi.sdk.services.ResourceEventsMap;
 import ss.udapi.sdk.services.ResourceSession;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
@@ -44,6 +45,7 @@ public class ResourceImpl implements Resource
   private static Logger logger = Logger.getLogger(ResourceImpl.class.getName());
   private static HttpServices httpSvcs = new HttpServices();
   private static ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
+  private static ResourceEventsMap eventsMap = ResourceEventsMap.getEventMap();
   private boolean isStreaming;
   private boolean connected;
   private String amqpDest;
@@ -64,9 +66,14 @@ public class ResourceImpl implements Resource
     this.restItem = restItem;
     this.availableResources = availableResources;
     logger.debug("Instantiated Resource: " + restItem.getName());
-
-    ResourceWorkerMap.addUOW(getId(), this);
-    EchoResourceMap.getEchoMap().addResource(getId());
+    
+    if(ResourceWorkerMap.exists(getId()) == true) {
+      isStreaming = true;
+//      streamingEvents = eventsMap.getEvents(getId());
+    } else {
+      ResourceWorkerMap.addUOW(getId(), this);
+      EchoResourceMap.getEchoMap().addResource(getId());
+    }
   }
   
 
@@ -89,6 +96,7 @@ public class ResourceImpl implements Resource
      * we have to allow for that */
     SystemProperties.setProperty("ss.echo_sender_interval", Integer.toString(echoSenderInterval));
     SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));
+    eventsMap.addEvents(getId(), events);
     
     logger.info(String.format("Starting stream for " + getName() + 
                 " with Echo Interval of " + echoSenderInterval +  " and Max Missed Echos of " + maxMissedEchos));
@@ -130,6 +138,7 @@ public class ResourceImpl implements Resource
   
   
   public void streamData() {
+    logger.debug("In resource " + getId() + " number of items received: " + myTasks.size() + isStreaming);
     StreamAction streamAction = new StreamAction(streamingEvents);
     while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
@@ -158,8 +167,11 @@ public class ResourceImpl implements Resource
   
   public void mqDisconnectEvent()
   {
+    logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
+    System.out.println("----------------------------->disconnect events" + streamingEvents.size());
+    
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
   }
   
@@ -167,7 +179,7 @@ public class ResourceImpl implements Resource
   @Override
   public void stopStreaming()
   {
-    isStreaming = true;
+    isStreaming = false;
   }
 
   

@@ -33,5 +33,10 @@ public class ResourceWorkerMap
   {
     return map.get(resourceId);
   }
+ 
+  public static boolean exists(String resourceId)
+  {
+    return map.containsKey(resourceId);
+  }
   
 }
