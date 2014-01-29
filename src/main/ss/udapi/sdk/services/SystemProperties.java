@@ -17,8 +17,12 @@ package ss.udapi.sdk.services;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.Properties;
 
+
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
@@ -26,6 +30,7 @@ public final class SystemProperties
 {
   private static boolean propertiesLoaded = false;
   private static Properties systemProperties;
+  private static ConcurrentHashMap<String,String> ourMap = new ConcurrentHashMap<String,String>(); 
   private static Logger logger = Logger.getLogger(SystemProperties.class);
 
   private SystemProperties()
@@ -38,25 +43,35 @@ public final class SystemProperties
       getSystemProperties();
       propertiesLoaded = true;
     }
-    return systemProperties.getProperty(key); 
+    return ourMap.get(key); 
   }
 
 
   private static void getSystemProperties() {
     systemProperties = new Properties();
+    
     logger.debug("Loading properties file");
 
     // These are default properties in case the file is inaccessible or property is missing from file
-    systemProperties.put("ss.http_login_timeout", "20");
-    systemProperties.put("ss.http_request_timeout", "60");
-    systemProperties.put("ss.conn_heartbeat", "5");
-    systemProperties.put("ss.echo_sender_interval", "20");
-    systemProperties.put("ss.workerThreads", "20");
-    systemProperties.put("ss.echo_max_missed_echos", "3");  
+    ourMap.put("ss.http_login_timeout", "20");
+    ourMap.put("ss.http_request_timeout", "60");
+    ourMap.put("ss.conn_heartbeat", "5");
+    ourMap.put("ss.echo_sender_interval", "20");
+    ourMap.put("ss.workerThreads", "20");
+    ourMap.put("ss.echo_max_missed_echos", "3");  
     
     try {
       systemProperties.load(new FileInputStream("sdk.properties"));
       systemProperties.load(new FileInputStream("endpoint.properties"));
+
+      //Need to use concurrent map as values can chnage during initialization depending on supplied arguments.
+      Set<String> keys = systemProperties.stringPropertyNames();
+      for (String key: keys) {
+        ourMap.put(key, systemProperties.getProperty(key));
+      }
+      
+    
+    
     } catch (IOException ex) {
       logger.error("Can't load the properties file.",ex);
     }
@@ -64,7 +79,7 @@ public final class SystemProperties
 
 
   public static void setProperty(String key, String value) {
-    systemProperties.put(key, value);
+    ourMap.put(key, value);
   }
   
   

@@ -62,12 +62,13 @@ public class SessionImpl implements Session
   
   private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
     if (authenticate = true) {
-      SystemProperties.setProperty("ss.username", credentials.getUserName());
-      SystemProperties.setProperty("ss.password", credentials.getPassword());
-      SystemProperties.setProperty("ss.url", serverURL.getPath());
-      
-      System.out.println("----------------->" + serverURL.toString());
-      
+      if (serverURL.toString().length() > 0) {
+        SystemProperties.setProperty("ss.url", serverURL.getPath());
+      }
+      if (credentials != null) {
+        SystemProperties.setProperty("ss.username", credentials.getUserName());
+        SystemProperties.setProperty("ss.password", credentials.getPassword());
+      }
       sessionResponse = httpSvcs.getSession(serverURL.toExternalForm());
       availableServices = httpSvcs.processLogin(sessionResponse, "http://api.sportingsolutions.com/rels/login", "Login");
     } else {
