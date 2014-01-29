@@ -41,7 +41,7 @@ public class CredentialsImpl implements Credentials
 
 	
 /**
- * @return   The password value currently held in this instance of credentials.
+ * @return   The user name currently held in this instance of credentials.
  */
 	public String getUserName()	{
 		return userName;

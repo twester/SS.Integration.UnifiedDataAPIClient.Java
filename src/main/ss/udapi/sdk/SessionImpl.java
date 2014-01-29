@@ -80,8 +80,9 @@ public class SessionImpl implements Session
 
   
 /**
+ * Retrieves a specific service from those available for this account.
  * 
- * @param svcName       Name for service
+ * @param svcName       Service name which will be retrieved from  all available services available for this account.
  */
   public Service getService(String svcName) {
     logger.info("Retrieving service: " + svcName);
@@ -104,7 +105,10 @@ public class SessionImpl implements Session
     return null;
   }
   
-  
+
+/**
+ * Retrieves all available services available for this account.
+ */
   public List<Service> getServices() {
     logger.info("Rerieving all services...");
     
@@ -123,10 +127,4 @@ public class SessionImpl implements Session
     return serviceSet;
   }
 
-
-  public ServiceRequest getAvailableServices()
-  {
-    return availableServices;
-  }
- 
 }

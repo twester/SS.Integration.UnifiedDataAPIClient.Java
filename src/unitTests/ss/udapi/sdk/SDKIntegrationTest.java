@@ -58,9 +58,6 @@ public class SDKIntegrationTest
       Session session = SessionFactory.createSession(new URL(SystemProperties.get("ss.url")), credentials);
       logger.info("Successfully connected to UDAPI");
 
-      //Downcasting is not necessary for operation, only being done to get details to verify in this/unit tests.  As is this long access path :-)
-      logger.debug("UDAPI, Getting Service: " + ((SessionImpl)session).getAvailableServices().getServiceRestItems().get(0).getLinks().get(0).getHref());
-
       Service service = session.getService("UnifiedDataAPI");
       logger.debug("UDAPI, Retrieved " + service.getName() + " service");
 

@@ -153,7 +153,17 @@ public class MQListener implements Runnable
         Thread.sleep(1000);
       } 
 
-    } catch(URISyntaxException | UnsupportedEncodingException ex) {
+ /* for java 1.7 this syntax is preferable
+  *  } catch(URISyntaxException | UnsupportedEncodingException ex) {
+  *    logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
+  *    ex.printStackTrace();
+  * 
+  */
+      
+    } catch(URISyntaxException ex) {
+      logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
+      ex.printStackTrace();
+    } catch( UnsupportedEncodingException ex) {
       logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
       ex.printStackTrace();
     } catch(BadAttributeValueExpException ex) {
