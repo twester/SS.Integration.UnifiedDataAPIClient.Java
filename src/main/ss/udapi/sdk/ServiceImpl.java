@@ -25,7 +25,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-
+/**
+ * Services provide access to available features for that service.
+ *
+ */
 public class ServiceImpl implements Service
 {
   private Logger logger = Logger.getLogger(ServiceImpl.class.getName());
@@ -40,7 +43,12 @@ public class ServiceImpl implements Service
     logger.info("Instantiated Service: " + restItem.getName());
   }
 
-  
+
+  /**
+   * Retrieves a specific feature from those available for this service.
+   * 
+   * @param featureName       Name of feature which will be retrieved from all features available for this service.
+   */  
   public Feature getFeature(String featureName) {
     logger.info("Retrieving feature: " + featureName);
     
@@ -53,8 +61,12 @@ public class ServiceImpl implements Service
     }
     return null;
   }
+
   
-  
+
+  /**
+   * Retrieves all available features available for this service.
+   */
   public List<Feature> getFeatures() {
     logger.info("Retrieving all features");
     
@@ -67,7 +79,11 @@ public class ServiceImpl implements Service
     return featureSet;
   }
 
+
   
+  /**
+   * Retrieves the service name.
+   */
   public String getName() {
     return restItem.getName();
   }

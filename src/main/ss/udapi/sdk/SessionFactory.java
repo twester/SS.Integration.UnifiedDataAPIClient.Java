@@ -28,11 +28,11 @@ public class SessionFactory
 {
 
   
-/**
- * @param   rootURL       Server endpoint as supplied by Sporting Solutions.
- * @param   credentials   Credentials associated with a valid account grating access to the Sporting Solutions Service.
- * @return                A session which provides access to services.
- */
+  /**
+   * @param   rootURL       Server endpoint as supplied by Sporting Solutions.
+   * @param   credentials   Credentials associated with a valid account grating access to the Sporting Solutions Service.
+   * @return                A session which provides access to services.
+   */
   public static Session createSession(URL rootURL, Credentials credentials)  {
 		return new SessionImpl(rootURL, credentials);
 	}

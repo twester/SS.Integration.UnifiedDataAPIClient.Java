@@ -41,7 +41,7 @@ public class ServicesIntegrationTest
   @Test
   public void testGetSession()
   {
-    loginReq = httpSvcs.getSession("http://apicui.sportingsolutions.com");
+    loginReq = httpSvcs.getSession("http://apicui.sportingsolutions.com",false);
     assertTrue((loginReq.getServiceRestItems().size()) == 2);
     System.out.println("1-------------->" + loginReq.getServiceRestItems().get(0).getName());
     System.out.println("2-------------->" + loginReq.getServiceRestItems().get(1).getName());

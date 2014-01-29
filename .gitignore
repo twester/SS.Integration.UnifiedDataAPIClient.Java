@@ -4,4 +4,4 @@ build/
 dist/
 example.log.*
 html/
-conf/*properties
+conf/

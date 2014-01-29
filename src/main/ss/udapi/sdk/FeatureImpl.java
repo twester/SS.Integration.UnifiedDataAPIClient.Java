@@ -25,7 +25,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-
+/**
+ * Features provide access to available resources for that feature.
+ *
+ */
 public class FeatureImpl implements Feature 
 {
   private static Logger logger = Logger.getLogger(FeatureImpl.class.getName());
@@ -41,6 +44,11 @@ public class FeatureImpl implements Feature
   }
 
   
+  /**
+   * Retrieves a specific resource from those available for this feature.
+   * 
+   * @param resourceName    Name of resource which will be retrieved from all resources available for this account.
+   */
   public Resource getResource(String resourceName) {
     logger.info("Retrieving resource" + resourceName);
     
@@ -55,6 +63,9 @@ public class FeatureImpl implements Feature
   }
   
   
+  /**
+   * Retrieves all available resources available for this feature.
+   */
   public List<Resource> getResources()
   {
     logger.info("Retrieving all resources");
@@ -69,6 +80,9 @@ public class FeatureImpl implements Feature
   }
 
   
+  /**
+   * Retrieves the feature name.
+   */
   public String getName() {
     return restItem.getName();
   }

@@ -39,7 +39,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
 
-
+/**
+ * An object of this class represents an instance of a resource a.k.a fixture.
+ * It provides a means of controlling monitoring of an active resource for the client system(s).
+ *
+ */
 public class ResourceImpl implements Resource
 {
   private static Logger logger = Logger.getLogger(ResourceImpl.class.getName());
@@ -53,15 +57,27 @@ public class ResourceImpl implements Resource
   private RestItem restItem = new RestItem();
   private List<Event> streamingEvents;
   
-  //this is where the work ends up
+  /*
+   * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
+   * from Sporting Solutions end up here as well as internal echo control commands.
+   */
   private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
   
   
+  /**
+   * Internal application method.  Use of this method will result in undefined system behaviour.
+   */
+  /*
+   * The above comment is for javadoc.  This method is used to provide access to myTasks (see comment above).
+   */
   public void addTask(String task) {
     myTasks.add(task);
   }
 
   
+  /*
+   * Constructor initializes and resets internal state in case it is re-initialized by the client code.  
+   */
   protected ResourceImpl(RestItem restItem, ServiceRequest availableResources) {
     this.restItem = restItem;
     this.availableResources = availableResources;
@@ -77,12 +93,22 @@ public class ResourceImpl implements Resource
   }
   
 
+  /**
+   * Requests a full snapshot from Sporting Solutions.  The snapshot will be returned via the resource's MQ queue.
+   */
   @Override
   public String getSnapshot() {
     return httpSvcs.getSnapshot(availableResources, "http://api.sportingsolutions.com/rels/snapshot", restItem.getName());
   }
 
-  //TODO: add more parameters??
+
+  /**
+   * Starts the monitoring for this resource's MQ queue.  
+   */
+  /*
+   * The monitoring is virtual.  On the main, ResourceImpl instances will not be running.  But logically the monitoring is done by this  
+   * method, not MQListener.
+   */
   @Override
   public void startStreaming(List<Event> events) {
     startStreaming(events,
@@ -91,9 +117,12 @@ public class ResourceImpl implements Resource
   }
   
 
+  
+  /*
+   * This looks slightly odd as we're setting the same values we read above, but the client could set these directly so 
+   * we have to allow for that
+   */
   private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos) {
-    /*looks slightly odd we're setting the same values we read above, but the client could set these directly so 
-     * we have to allow for that */
     SystemProperties.setProperty("ss.echo_sender_interval", Integer.toString(echoSenderInterval));
     SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));
     eventsMap.addEvents(getId(), events);
@@ -114,7 +143,8 @@ public class ResourceImpl implements Resource
       amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
       logger.info("Starting new streaming services, name: " + getName() +" queue: " + amqpDest + " fixture ID: " + getId()) ;
 
-      /* Because we have many client threads starting at the same time they can all get here before MQ Listener is fully
+      /* 
+       * Because we have many client threads starting at the same time they can all get here before MQ Listener is fully
        * initialized so MQListener.isRunning can be false for quite a while.  MQListener.getSender is locked so only one thread
        * will ever be able to initialize it.  As it and echoSender are singletons they can only run once so the rest if the if
        * can be dropped through safely.  Eventually MQListener.isRunning will be true so this only happens for the first few
@@ -177,6 +207,7 @@ public class ResourceImpl implements Resource
   @Override
   public void stopStreaming()
   {
+    MQListener.disconnect(getId());
     isStreaming = false;
   }
 

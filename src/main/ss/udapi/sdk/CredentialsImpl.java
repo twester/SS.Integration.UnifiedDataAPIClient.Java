@@ -29,10 +29,11 @@ public class CredentialsImpl implements Credentials
 	private String password;
 	
 	
-/** 
- * @param   userName  User name associated with a valid account grating access to the Sporting Solutions Service.
- * @param   password  Password associated with a valid account grating access to the Sporting Solutions Service.
- */
+
+  /** 
+   * @param   userName  User name associated with a valid account grating access to the Sporting Solutions Service.
+   * @param   password  Password associated with a valid account grating access to the Sporting Solutions Service.
+   */
 	public CredentialsImpl(String userName, String password) {
 		this.userName = userName;
 		this.password = password;
@@ -40,18 +41,18 @@ public class CredentialsImpl implements Credentials
 
 
 	
-/**
- * @return   The user name currently held in this instance of credentials.
- */
+  /**
+   * @return   The user name currently held in this instance of credentials.
+   */
 	public String getUserName()	{
 		return userName;
 	}
 
 	
 	
-/**
- * @return   The password value currently held in this instance of credentials. 
- */
+  /**
+   * @return   The password value currently held in this instance of credentials. 
+   */
   public String getPassword() {
 	  return password;
 	}
