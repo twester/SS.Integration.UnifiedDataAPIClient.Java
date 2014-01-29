@@ -34,7 +34,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Object which logs into a Sporting Solutions server and provides access to subscribed services.  Sessions cannot
- * be instantiated directly but can only be created through the SessionFactory class. 
+ * be instantiated directly, they can only be created through the SessionFactory class. 
  *
  */
 public class SessionImpl implements Session
@@ -46,12 +46,17 @@ public class SessionImpl implements Session
   private URL serverURL;
   private List<RestItem> serviceRestItems;
   
-  
+  /*
+   * Constructor used by the factory to create new instances.
+   */
   protected SessionImpl(URL serverURL, Credentials credentials) {
     logger.info("Logging into system at url: [" + serverURL.toExternalForm() + "]");
     this.serverURL = serverURL;
     
-    //Not strictly part of the session initialization but needed for the session and it is part of the system's initilization
+    /*
+     * This is not strictly part of the session initialization but is needed for the the information retrieved via the session
+     * to be of use.  It's really part of the system's overall initilization
+     */
     ServiceThreadExecutor.createExecutor();
     WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
     ServiceThreadExecutor.executeTask(queueWorker);
@@ -61,13 +66,15 @@ public class SessionImpl implements Session
   }
 
 
-  
+  /*
+   * Carries out the initial login into the system.
+   */
   private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
     boolean compressionEnabled = false;
+    if (serverURL.toString().length() > 0) {
+      SystemProperties.setProperty("ss.url", serverURL.getPath());
+    }
     if (authenticate = true) {
-      if (serverURL.toString().length() > 0) {
-        SystemProperties.setProperty("ss.url", serverURL.getPath());
-      }
       if (credentials != null) {
         SystemProperties.setProperty("ss.username", credentials.getUserName());
         SystemProperties.setProperty("ss.password", credentials.getPassword());
