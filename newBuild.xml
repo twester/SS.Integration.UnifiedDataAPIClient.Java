@@ -28,7 +28,7 @@
   <property name="build" location="build" />
   <property name="dist" location="dist" />
   <property name="libs" location="lib" />
-  <property name="version" value="2.0.1" />
+  <property name="version" value="1.5.1" />
 
 
 
@@ -79,13 +79,36 @@
   </target>
 
 
+
   <target name="copyResources" description="copy Resources">
     <echo>-- Copying SDK resources</echo>
+    <copy todir="${build}" flatten="true">
+      <file file="${libs}/apache-log4j-1.2.17/log4j-1.2.17.jar"/>
+      <file file="${libs}/google-gson-2.2.2/gson-2.2.2.jar"/>
+      <file file="${libs}/rabbitmq-java-client-bin-2.8.6/rabbitmq-client.jar"/>
+      <file file="${libs}/commons-logging-1.1.3.jar"/>
+      <file file="${libs}/httpclient-4.3.1.jar"/>
+      <file file="${libs}/httpcore-4.3.jar"/>
+    </copy>
     <echo>-- Copied SDK resources</echo>
   </target>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   <target name="jarSDK" description="create SDK jar">
     <echo>-- Jaring up SDK project</echo>
+    <jar destfile="${dist}/SportingSolutions.Udapi.Sdk.Java-${version}.jar" basedir="${build}"/>
     <echo>-- Jared up SDK project</echo>
   </target>
   

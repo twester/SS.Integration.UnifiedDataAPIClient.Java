@@ -1,5 +1,7 @@
 <project  name="Unified Data API Client Java" basedir="." default="compile">
 
+  <property name="VersionNumber" value="1.5.1" />
+  
     <target name="clean">
         <delete dir="build"/>
     </target>
@@ -8,8 +10,6 @@
     <fileset dir="lib">
 			<include name="**/gson-2.2.2.jar" />
 			<include name="**/rabbitmq-client.jar" />
-			<include name="**/commons-cli-1.1.jar" />
-			<include name="**/commons-io-1.2.jar" />
 			<include name="**/log4j-1.2.17.jar" />
       <include name="**/commons-logging-1.1.3.jar" />
       <include name="**/httpclient-4.3.1.jar" />
@@ -29,8 +29,6 @@
 		<copy todir="build/SDK" flatten="true">
 			<fileset dir="lib" includes="**/gson-2.2.2.jar"/>
 			<fileset dir="lib" includes="**/rabbitmq-client.jar"/>
-			<fileset dir="lib" includes="**/commons-cli-1.1.jar"/>
-			<fileset dir="lib" includes="**/commons-io-1.2.jar"/>
 			<fileset dir="lib" includes="**/log4j-1.2.17.jar"/>
       <fileset dir="lib" includes="**/commons-logging-1.1.3.jar"/>
       <fileset dir="lib" includes="**/httpclient-4.3.1.jar"/>
@@ -100,8 +98,6 @@
         <fileset dir="build/SDK">
 			<include name="**/gson-2.2.2.jar" />
 			<include name="**/rabbitmq-client.jar" />
-			<include name="**/commons-cli-1.1.jar" />
-			<include name="**/commons-io-1.2.jar" />
 			<include name="**/log4j-1.2.17.jar" />
 			<include name="**/ss.udapi.sdk-*.jar" />
 		</fileset>

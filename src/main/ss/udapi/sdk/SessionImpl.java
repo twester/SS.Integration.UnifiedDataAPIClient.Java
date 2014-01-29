@@ -23,6 +23,7 @@ import ss.udapi.sdk.ServiceImpl;
 import ss.udapi.sdk.services.CtagResourceMap;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
+import ss.udapi.sdk.services.SystemProperties;
 import ss.udapi.sdk.services.WorkQueueMonitor;
 
 import java.net.URL;
@@ -30,7 +31,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
+/**
+ * Object to log into 
+ * @author FGonzalez149
+ *
+ */
 public class SessionImpl implements Session
 {
   private static Logger logger = Logger.getLogger(SessionImpl.class.getName());
@@ -57,6 +62,12 @@ public class SessionImpl implements Session
   
   private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
     if (authenticate = true) {
+      SystemProperties.setProperty("ss.username", credentials.getUserName());
+      SystemProperties.setProperty("ss.password", credentials.getPassword());
+      SystemProperties.setProperty("ss.url", serverURL.getPath());
+      
+      System.out.println("----------------->" + serverURL.toString());
+      
       sessionResponse = httpSvcs.getSession(serverURL.toExternalForm());
       availableServices = httpSvcs.processLogin(sessionResponse, "http://api.sportingsolutions.com/rels/login", "Login");
     } else {

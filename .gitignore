@@ -1,6 +1,7 @@
 bin/
 .project
 build/
+dist/
 example.log.*
 html/
 conf/
