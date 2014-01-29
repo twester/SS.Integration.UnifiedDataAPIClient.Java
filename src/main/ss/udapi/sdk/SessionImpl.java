@@ -31,9 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
 /**
- * Object to log into 
- * @author FGonzalez149
+ * Object which logs into a Sporting Solutions server and provides access to subscribed services.  Sessions cannot
+ * be instantiated directly but can only be created through the SessionFactory class. 
  *
  */
 public class SessionImpl implements Session
@@ -59,6 +60,7 @@ public class SessionImpl implements Session
     GetRoot(serverURL,credentials, true);
   }
 
+
   
   private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
     if (authenticate = true) {
@@ -77,6 +79,10 @@ public class SessionImpl implements Session
   }
 
   
+/**
+ * 
+ * @param svcName       Name for service
+ */
   public Service getService(String svcName) {
     logger.info("Retrieving service: " + svcName);
     
