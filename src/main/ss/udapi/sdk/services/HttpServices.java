@@ -45,10 +45,12 @@ public class HttpServices
   private static ConnectionKeepAliveStrategy requestTimeout = buildTimeout(Integer.parseInt(SystemProperties.get("ss.http_request_timeout")));
   private static ConnectionKeepAliveStrategy loginTimeout = buildTimeout(Integer.parseInt(SystemProperties.get("ss.http_login_timeout")));
   private static String serviceAuthToken = null;
+  private static boolean compressionEnabled;
   
   
   
-  public ServiceRequest getSession(String url) {
+  public ServiceRequest getSession(String url, boolean compressionEnabled) {
+    HttpServices.compressionEnabled = compressionEnabled;
     List<RestItem> loginRestItems = null;
     ServiceRequest loginResp = new ServiceRequest();
 
@@ -57,6 +59,9 @@ public class HttpServices
       logger.info("Retrieving connection actions from url: " + url);
       new URL(url);     //this is only to check whether the URL format is correct
       HttpGet httpGet = new HttpGet(url);
+      if (compressionEnabled == true){
+        httpGet.setHeader("Accept-Encoding", "gzip");
+      }
       httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
       ResponseHandler<String> responseHandler = getResponseHandler(401);
       String responseBody = httpClient.execute(httpGet, responseHandler);
@@ -105,6 +110,9 @@ public class HttpServices
     CloseableHttpResponse response = null;
     try {
       HttpUriRequest httpAction = new HttpPost(link.getHref());
+      if (compressionEnabled == true){
+        httpAction.setHeader("Accept-Encoding", "gzip");
+      }
       httpAction.setHeader("X-Auth-User", SystemProperties.get("ss.username"));
       httpAction.setHeader("X-Auth-Key", SystemProperties.get("ss.password"));
       httpAction.setHeader("Content-Type", "application/json");
@@ -184,6 +192,9 @@ public class HttpServices
         HttpPost httpPost = new HttpPost(link.getHref());
         httpPost.setHeader("X-Auth-Token", request.getAuthToken());
         httpPost.setHeader("Content-Type", "application/json");
+        if (compressionEnabled == true){
+          httpPost.setHeader("Accept-Encoding", "gzip");
+        }
         HttpEntity myEntity = new StringEntity(entity);
         httpPost.setEntity(myEntity);
         
@@ -200,6 +211,9 @@ public class HttpServices
       } else {
         HttpGet httpGet = new HttpGet(link.getHref());
         httpGet.setHeader("X-Auth-Token", request.getAuthToken());
+        if (compressionEnabled == true){
+          httpGet.setHeader("Accept-Encoding", "gzip");
+        }
         logger.debug("Sending request for relation:["+ relation + "] name:[" + name + "] to href:[" + link.getHref() +"]");
         ResponseHandler<String> responseHandler = getResponseHandler(200);
 

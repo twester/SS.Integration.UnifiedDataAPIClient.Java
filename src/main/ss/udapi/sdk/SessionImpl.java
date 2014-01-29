@@ -63,6 +63,7 @@ public class SessionImpl implements Session
 
   
   private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
+    boolean compressionEnabled = false;
     if (authenticate = true) {
       if (serverURL.toString().length() > 0) {
         SystemProperties.setProperty("ss.url", serverURL.getPath());
@@ -71,7 +72,7 @@ public class SessionImpl implements Session
         SystemProperties.setProperty("ss.username", credentials.getUserName());
         SystemProperties.setProperty("ss.password", credentials.getPassword());
       }
-      sessionResponse = httpSvcs.getSession(serverURL.toExternalForm());
+      sessionResponse = httpSvcs.getSession(serverURL.toExternalForm(), compressionEnabled);
       availableServices = httpSvcs.processLogin(sessionResponse, "http://api.sportingsolutions.com/rels/login", "Login");
     } else {
       availableServices = httpSvcs.processLogin(sessionResponse, "http://api.sportingsolutions.com/rels/login", "Login");
