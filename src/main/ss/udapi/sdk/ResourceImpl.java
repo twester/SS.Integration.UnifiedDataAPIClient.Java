@@ -176,6 +176,14 @@ public class ResourceImpl implements Resource
       String task = myTasks.poll();
       logger.debug("Streaming data: " + task.substring(0, 60));
       System.out.println("--------------------->Echo failure testing:" + task.substring(13,24));
+
+      try {
+        streamAction.execute(task);
+      } catch (Exception ex) {
+        logger.warn("Error on message receive", ex);
+      } 
+
+/*      
       if(task.substring(13,24).equals("EchoFailure")) {
         logger.error("Echo Retry exceeded out for stream" + getName());
         try {
@@ -193,18 +201,28 @@ public class ResourceImpl implements Resource
           logger.warn("Error on message receive", ex);
         } 
       }
+  */  
+    
     }
       
   }
 
+
+  public void echoFailure()
+  {
+    System.out.println("--------------->disconnecting resource" + getId());
+    actionExecuter.execute(new DisconnectedAction(streamingEvents));
+    MQListener.disconnect(getId());
+  }
+  
   
   public void mqDisconnectEvent()
   {
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
-    ResourceWorkQueue.removeQueue(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
+//    ResourceWorkQueue.removeQueue(getId());
 //    ResourceWorkerMap.removeUOW(getId());
   }
   
