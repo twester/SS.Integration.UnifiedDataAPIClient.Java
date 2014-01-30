@@ -14,6 +14,9 @@
 
 package ss.udapi.sdk.streaming;
 
+/**
+ *  Please see Interface 
+ */
 public interface SynchronizationEvent extends Event {
 
 }

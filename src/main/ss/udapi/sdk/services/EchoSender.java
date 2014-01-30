@@ -64,7 +64,7 @@ public class EchoSender implements Runnable
   public void run() {
     logger.info("Starting echoes.");
     EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
-    WorkQueue workQueue = WorkQueue.getWorkQueue();
+//    WorkQueue workQueue = WorkQueue.getWorkQueue();
     if (echoRunning == false)    {
       while (true) {
         try {
@@ -86,28 +86,14 @@ public class EchoSender implements Runnable
           
           httpSvcs.processRequest(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", resources.getServiceRestItems().get(0).getName(), stringStreamEcho);
 
-          //TODO: if a simple json library is available move to that for this poison pill 
           Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
           Iterator<String> keyIter = defaulters.iterator();
           while(keyIter.hasNext()) {
-            
-            
-            
-            
-            
             String resourceId = keyIter.next();
             System.out.println("------>Echo error for resource[" + resourceId + "]");
-//            String task = "{\"Relation\":\"EchoFailure\",\"Id\":\"" + resourceId +"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-//            workQueue.addTask(task);
-            
             ResourceImpl x = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
             System.out.println("---------------------> resource in echo error" + x.toString());
-//            x.echoFailure();
             MQListener.disconnect(resourceId);
-            
-            
-            
-//            ((ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId)).mqDisconnectEvent();
           }
 
           echoRunning=true;

@@ -14,6 +14,9 @@
 
 package ss.udapi.sdk.model;
 
+/**
+ * Model used for JSON mapping - Direct use of this class will lead to undefined behaviour. 
+ */
 public class StreamEcho
 {
 	private String host;

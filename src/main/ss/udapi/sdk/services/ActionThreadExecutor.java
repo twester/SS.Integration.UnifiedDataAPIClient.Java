@@ -17,19 +17,32 @@ package ss.udapi.sdk.services;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-
 public class ActionThreadExecutor
 {
   private static  Executor exec;
-
+  private static ActionThreadExecutor instance = null;
   
-  public static void createExecutor() {
+  private ActionThreadExecutor()
+  {
     int workerThreads = Integer.parseInt(SystemProperties.get("ss.workerThreads"));
     exec = Executors.newFixedThreadPool(workerThreads);
   }
+
+  protected static ActionThreadExecutor createActionThreadExecutor()
+  {
+    if (instance ==null) {
+      new ActionThreadExecutor();
+    }
+    return instance;
+  }
   
+/*  protected static void createExecutor() {
+    int workerThreads = Integer.parseInt(SystemProperties.get("ss.workerThreads"));
+    exec = Executors.newFixedThreadPool(workerThreads);
+  }
+  */
   
-  public static void executeTask(Runnable task)
+  protected static void executeTask(Runnable task)
   {
     exec.execute(task);
   }

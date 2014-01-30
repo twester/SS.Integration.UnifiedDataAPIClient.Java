@@ -19,14 +19,26 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 
+/**
+ *  Please see superclass.
+ */
 public class ConnectedAction extends Action {
 
 	private static Logger logger = Logger.getLogger(ConnectedAction.class.getName());
 	
+  
+  
+  /**
+   * We're listening for MQ Disconnect events.
+   * @param events     List of events the client code wants to be informed about. 
+   */
 	public ConnectedAction(List<Event> events) {
 		super(events, ConnectedEvent.class);
 	}
 
+	 /**
+   * Notifications are executed in their own thread.
+   */
 	@Override
 	public void run() {
 		try

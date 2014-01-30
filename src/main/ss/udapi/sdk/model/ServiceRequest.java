@@ -16,6 +16,13 @@ package ss.udapi.sdk.model;
 
 import java.util.List;
 
+/**
+ * Model used for HTTP Communications - Direct use of this class will lead to undefined behaviour. 
+ */
+/*
+ * Used to pass token and RestItem colletions between HTTP calls during normal communications with the 
+ * Sporting Solutions system endpoint. 
+ */
 public class ServiceRequest
 {
   private String authToken = null;

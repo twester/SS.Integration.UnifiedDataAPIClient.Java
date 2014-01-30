@@ -17,7 +17,9 @@ package ss.udapi.sdk.streaming;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Actions communicable to the client code via observers. 
+ */
 public abstract class Action implements Runnable {
 	
 	// Only the events that match the subtype Action i.e.
@@ -25,6 +27,11 @@ public abstract class Action implements Runnable {
 	// matchedEvent list
 	private List<Event> matchedEvents;
 	
+	/**
+	 * Select the type of event the client wishes to be notified about. 
+	 * @param events       List of events the client code wants to be informed about. 
+	 * @param eventClass   Which event is pertinent for this type of action.
+	 */
 	public Action(List<Event> events, Class<?> eventClass) {
 		// copying prevents possible downstream concurrent mod issues
 		// and filters the list for on the directly related events
@@ -38,6 +45,12 @@ public abstract class Action implements Runnable {
 		}
 	}
 
+	/**
+	 * Called by SDK nees to inform client about this event, typically by passing the payload received from the MQ system. 
+	 * 
+	 * @param message      Message from RabbitMQ to be passed onto the client code for this type of event.
+	 * @throws Exception   Unexpected event occured while communicating with client code
+	 */
 	public void execute(String message) throws Exception {
 			for (Event event : matchedEvents ) {
 					event.onEvent(message);

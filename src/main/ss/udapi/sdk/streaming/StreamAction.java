@@ -18,22 +18,32 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+
+/**
+ *  Please see superclass.
+ */
 public class StreamAction extends Action {
 	
 	private static Logger logger = Logger.getLogger(StreamAction.class.getName());
 	
+	
+	 /**
+   * We're listening for MQ Disconnect events.
+   * @param events     List of events the client code wants to be informed about. 
+   */
 	public StreamAction(List<Event> events) {
 		super(events, StreamEvent.class);
 	}
 	
+	 /**
+   * Notifications are executed in their own thread.
+   */
 	@Override
 	public void run() {
-		try
-		{
+		try {
 			execute("Streaming message event");
 		}
-		catch(Exception ex)
-		{
+		catch(Exception ex)	{
 			logger.warn("Error", ex);
 		}
 	}

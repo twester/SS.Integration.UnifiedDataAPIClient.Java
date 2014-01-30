@@ -16,6 +16,9 @@ package ss.udapi.sdk.model;
 
 import java.util.List;
 
+/**
+ * Model used for JSON mapping - Direct use of this class will lead to undefined behaviour. 
+ */
 public class RestItem {
   /*Using Upper case so that deserialization from json works*/
 	private String Name;

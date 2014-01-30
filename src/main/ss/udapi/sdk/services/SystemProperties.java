@@ -17,7 +17,6 @@ package ss.udapi.sdk.services;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Properties;
 
 

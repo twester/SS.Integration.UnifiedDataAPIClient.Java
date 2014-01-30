@@ -35,17 +35,17 @@ public class CtagResourceMap
   }
   
   
-  public static void addCtag(String cTag, String resource) {
+  protected static void addCtag(String cTag, String resource) {
     map.put(cTag, resource);
   }
   
   
-  public static String getResource(String cTag) {
+  protected static String getResource(String cTag) {
     return map.get(cTag);
   }
   
   
-  public static void removeCtag(String cTag) {
+  protected static void removeCtag(String cTag) {
     map.remove(cTag);
   }
   
