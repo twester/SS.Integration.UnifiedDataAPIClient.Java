@@ -31,7 +31,9 @@ import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.model.StreamEcho;
 
-
+/*
+ * Uses EchoResourceMap to manage the count of echo failures for each resource/fixture.
+ */
 public class EchoSender implements Runnable
 {
   private static Logger logger = Logger.getLogger(EchoSender.class);
@@ -64,30 +66,42 @@ public class EchoSender implements Runnable
   public void run() {
     logger.info("Starting echoes.");
     EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
-//    WorkQueue workQueue = WorkQueue.getWorkQueue();
+
+    // Get the connection details for the MQ box.
+    String path = amqpURI.getRawPath();
+    String queue = path.substring(path.indexOf('/',1)+1);
+    String virtualHost = uriDecode(amqpURI.getPath().substring(1,path.indexOf('/',1)));
+    
+    // Prepare a simple message to send to the echo system.  This message will come back in each resource's MQ queue.
+    StreamEcho streamEcho = new StreamEcho(); 
+    streamEcho.setHost(virtualHost);
+    streamEcho.setQueue(queue);
+    String guid = UUID.randomUUID().toString();
+    DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+    df.setTimeZone(TimeZone.getTimeZone("UTC"));
+    streamEcho.setMessage(guid + ";" + df.format(new Date()));
+    String stringStreamEcho = JsonHelper.ToJson(streamEcho);
+
     if (echoRunning == false)    {
       while (true) {
         try {
-          String path = amqpURI.getRawPath();
-          String queue = path.substring(path.indexOf('/',1)+1);
-          String virtualHost = uriDecode(amqpURI.getPath().substring(1,path.indexOf('/',1)));
-          
-          StreamEcho streamEcho = new StreamEcho(); 
-          streamEcho.setHost(virtualHost);
-          streamEcho.setQueue(queue);
-          
-          String guid = UUID.randomUUID().toString();
-          DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-          df.setTimeZone(TimeZone.getTimeZone("UTC"));
-          streamEcho.setMessage(guid + ";" + df.format(new Date()));
-          
-          String stringStreamEcho = JsonHelper.ToJson(streamEcho);
+
+          //Send the message to the Sporting Solution's endpoint.
+          httpSvcs.processRequest(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", resources.getServiceRestItems().get(0).getName(), stringStreamEcho);
           logger.info("Batch echo sent: " + stringStreamEcho);
           
-          httpSvcs.processRequest(resources, "http://api.sportingsolutions.com/rels/stream/batchecho", resources.getServiceRestItems().get(0).getName(), stringStreamEcho);
-
+          //Ater the message is sent increase the numebr of echos sent for all resources.
+          //The number of missed echoes is configured in: conf/sdk.properties using "ss.echo_max_missed_echos" 
           Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
           Iterator<String> keyIter = defaulters.iterator();
+
+          /* EchoMap returns a list of resources which appear to have unresponsive queues (the number of echo retries
+           * has been exceeded.
+           * 
+           * At this point we disconnect the queue consumer from the MQ service. This triggers an action in RabbitMQ 
+           * which alerts the resource/fixture of the failure.  The resource is then responsible for communicating the problem
+           * to the client code. 
+           */
           while(keyIter.hasNext()) {
             String resourceId = keyIter.next();
             System.out.println("------>Echo error for resource[" + resourceId + "]");
@@ -97,6 +111,7 @@ public class EchoSender implements Runnable
           }
 
           echoRunning=true;
+          //The interval between echoes is configured in: conf/sdk.properties using "ss.echo_max_missed_echos"
           Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
         } catch (InterruptedException ex) {
           logger.error("Echo Thread disrupted" + ex);
@@ -106,6 +121,9 @@ public class EchoSender implements Runnable
   }
   
   
+  /*
+   * Tidy up the path to something usable
+   */
   private String uriDecode(String s) {
     try {
         // URLDecode decodes '+' to a space, as for form encoding.  So protect plus signs.

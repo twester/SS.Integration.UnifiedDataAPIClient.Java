@@ -16,6 +16,14 @@ package ss.udapi.sdk.services;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+/*
+ * Used by MQLIstener to maintain a relationship between MQ Channels and resources/fixtures every time a queue consumer is
+ * created.
+ * 
+ * All messsages received by RabbitMQListener are tagged with the channel tag (cTag).  This allows RabbitMQListener to
+ * communicate with a fixture in the event of a connection failure and helps it manage the echo processing logic.
+ *  
+ */
 public class CtagResourceMap
 {
   private static CtagResourceMap cTagMap= null;
@@ -27,7 +35,7 @@ public class CtagResourceMap
   }
 
   
-  public static CtagResourceMap getCtagMap() {
+  protected static CtagResourceMap getCtagMap() {
     if (cTagMap == null) {
       cTagMap = new CtagResourceMap();
     }

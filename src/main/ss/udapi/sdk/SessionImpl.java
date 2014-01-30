@@ -20,7 +20,6 @@ import ss.udapi.sdk.interfaces.Session;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
-import ss.udapi.sdk.services.CtagResourceMap;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
@@ -60,7 +59,6 @@ public class SessionImpl implements Session
     ServiceThreadExecutor.createExecutor();
     WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
     ServiceThreadExecutor.executeTask(queueWorker);
-    CtagResourceMap.getCtagMap();
 
     GetRoot(serverURL,credentials, true);
   }
