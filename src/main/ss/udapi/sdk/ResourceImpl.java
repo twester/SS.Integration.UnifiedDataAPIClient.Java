@@ -180,12 +180,8 @@ public class ResourceImpl implements Resource
       logger.debug("Streaming data: " + task.substring(0, 60));
       try {
         streamAction.execute(task);
-        /*
-         * Resetting echo count.  We just received a message on this queue so we know it's ok.
-         */
-        EchoResourceMap.getEchoMap().resetEchoCount(getId());
       } catch (Exception ex) {
-        logger.warn("Error on message receive", ex);
+        logger.warn("Error while communicating with client code for Id:" + getId());
       } 
     }
   }

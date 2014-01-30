@@ -111,7 +111,7 @@ public class EchoSender implements Runnable
           }
 
           echoRunning=true;
-          //The interval between echoes is configured in: conf/sdk.properties using "ss.echo_max_missed_echos"
+          //The interval between echoes is configured in: conf/sdk.properties using "ss.echo_sender_interval"
           Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
         } catch (InterruptedException ex) {
           logger.error("Echo Thread disrupted" + ex);

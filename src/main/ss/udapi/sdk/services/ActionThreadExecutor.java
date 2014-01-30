@@ -20,9 +20,9 @@ import java.util.concurrent.Executors;
 /*
  * Activity tasks received from the Sporting Solutions systems via the MQ System (RabbitMQ) are placed on an instance of 
  * WorkQueue.
- * The WorkQueueMonitor picks up a task, assigns to the ResourceImpl associated with that MQ Queue (which corresponds
- * to a fixture and executes it using one of the threads from this executor service's thread pool.  When the task completes
- * the thread is returned to the threadpool by the JVM.
+ * The WorkQueueMonitor picks up a taskfrom MQ, assigns to the ResourceImpl associated with that MQ Queue (which corresponds
+ * to a fixture and executes it using one of the threads from this executor service's thread pool.  The task from MQ is 
+ * wrapped up in a FixtureActionProcessor.  When the task completes the thread is returned to the threadpool by the JVM.
 
  * The number of threads allocated is configured in: conf/sdk.properties using "ss.workerThreads"
  */

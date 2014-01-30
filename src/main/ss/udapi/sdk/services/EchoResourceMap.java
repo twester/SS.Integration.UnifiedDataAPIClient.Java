@@ -81,7 +81,7 @@ public class EchoResourceMap
   /*
    * We got some activity for this resource's queue so the queue must be OK.
    */
-  public void resetEchoCount(String resourceId)
+  protected void resetEchoCount(String resourceId)
   {
     map.replace(resourceId, 0);
     logger.info("Echo received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));

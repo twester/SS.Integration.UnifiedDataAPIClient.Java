@@ -20,7 +20,7 @@ import ss.udapi.sdk.streaming.Event;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-
+/* Used to maintain a list of events for each resource.  In case it is reinstantiated instead of created afresh. */
 public class ResourceEventsMap
 {
   private static ResourceEventsMap eventsMap= null;
