@@ -19,9 +19,12 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.log4j.Logger;
+
 
 public class EchoResourceMap
 {
+  private static Logger logger = Logger.getLogger(EchoResourceMap.class);
   private static EchoResourceMap echoMap= null;
   private static ConcurrentHashMap<String,Integer> map = new ConcurrentHashMap<String,Integer>();
   
@@ -58,6 +61,7 @@ public class EchoResourceMap
   
   public void decrEchoCount(String resourceId)
   {
+    logger.info("Echo received for ficture Id: " + resourceId);
     map.replace(resourceId, map.get(resourceId)-1);
   }
 

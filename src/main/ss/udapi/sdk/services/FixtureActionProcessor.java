@@ -50,9 +50,13 @@ public class FixtureActionProcessor implements Runnable
     int idStart = msgHead.indexOf("Id\":")+5;
     String fixtureId = msgHead.substring(idStart,idStart+27);
     logger.debug("Processing started for fixture/resource: " + fixtureId);
-    
+  
+    System.out.println("------------->" + fixtureId);
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
-    resource.addTask(task);
+
+    ResourceWorkQueue.addUOW(fixtureId, task);
+    
+//    resource.addTask(task);
     resource.streamData();
     
   }

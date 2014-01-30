@@ -24,6 +24,7 @@ import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.EchoResourceMap;
 import ss.udapi.sdk.services.ResourceEventsMap;
 import ss.udapi.sdk.services.ResourceSession;
+import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
@@ -50,6 +51,7 @@ public class ResourceImpl implements Resource
   private static HttpServices httpSvcs = new HttpServices();
   private static ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
   private static ResourceEventsMap eventsMap = ResourceEventsMap.getEventMap();
+  private static LinkedBlockingQueue<String> myTasks;
   private boolean isStreaming;
   private boolean connected;
   private String amqpDest;
@@ -65,7 +67,7 @@ public class ResourceImpl implements Resource
    * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
    * from Sporting Solutions end up here as well as internal echo control commands.  RabbitMQConsumer and EchoSender place objects here. 
    */
-  private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
+//  private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
   
   
   /**
@@ -74,9 +76,9 @@ public class ResourceImpl implements Resource
   /*
    * The above comment is for javadoc.  This method is used to provide access to myTasks (see comment above).
    */
-  public void addTask(String task) {
-    myTasks.add(task);
-  }
+//  public void addTask(String task) {
+//    myTasks.add(task);
+//  }
 
   
   /*
@@ -85,6 +87,7 @@ public class ResourceImpl implements Resource
   protected ResourceImpl(RestItem restItem, ServiceRequest availableResources) {
     this.restItem = restItem;
     this.availableResources = availableResources;
+    myTasks = ResourceWorkQueue.addQueue(getId());
     logger.debug("Instantiated Resource: " + restItem.getName());
     
     if(ResourceWorkerMap.exists(getId()) == true) {
