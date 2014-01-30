@@ -49,7 +49,7 @@ public abstract class Action implements Runnable {
 	 * Called by SDK nees to inform client about this event, typically by passing the payload received from the MQ system. 
 	 * 
 	 * @param message      Message from RabbitMQ to be passed onto the client code for this type of event.
-	 * @throws Exception   Unexpected event occured while communicating with client code
+	 * @throws Exception   Unexpected event occured while communicating with client code.
 	 */
 	public void execute(String message) throws Exception {
 			for (Event event : matchedEvents ) {

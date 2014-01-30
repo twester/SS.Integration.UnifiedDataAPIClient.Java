@@ -80,11 +80,13 @@
   
 	<target name="generateDocs">
       <javadoc packagenames="ss.udapi.sdk.*"
+               excludepackagenames="ss.udapi.sdk.model,ss.udapi.sdk.services"
                sourcepath="src/main"
                destdir="documentation"
                author="false"
                version="false"
                use="true"
+               public="true"
                windowtitle="Unified_Data_API_Client_Java API - Sporting Solutions">
         <bottom><![CDATA[<i>Copyright &#169; 2014 Sporting Solutions. All Rights Reserved.</i> - Licensed under the Apache License, Version 2.0]]></bottom>
       </javadoc>
