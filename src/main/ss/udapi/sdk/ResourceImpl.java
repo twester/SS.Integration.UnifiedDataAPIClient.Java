@@ -55,11 +55,15 @@ public class ResourceImpl implements Resource
   private String amqpDest;
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
+  
+  /*
+   * This is used whenever a Resource is Reinstantiated, in case
+   */
   private List<Event> streamingEvents;
   
   /*
    * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
-   * from Sporting Solutions end up here as well as internal echo control commands.
+   * from Sporting Solutions end up here as well as internal echo control commands.  RabbitMQConsumer and EchoSender place objects here. 
    */
   private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
   
@@ -120,12 +124,18 @@ public class ResourceImpl implements Resource
   
   /*
    * This looks slightly odd as we're setting the same values we read above, but the client could set these directly so 
-   * we have to allow for that
+   * we have to allow for the values to change.
    */
   private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos) {
-    SystemProperties.setProperty("ss.echo_sender_interval", Integer.toString(echoSenderInterval));
-    SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));
-    eventsMap.addEvents(getId(), events);
+    if (events != null) {
+      eventsMap.addEvents(getId(), events);
+    }
+    if (echoSenderInterval > 0) {
+      SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));
+    }
+    if (maxMissedEchos > 0) {
+      SystemProperties.setProperty("ss.echo_sender_interval", Integer.toString(echoSenderInterval));
+    }
     
     logger.info(String.format("Starting stream for " + getName() + 
                 " with Echo Interval of: " + echoSenderInterval +  " and Max Missed Echos of: " + maxMissedEchos));
@@ -201,6 +211,7 @@ public class ResourceImpl implements Resource
     isStreaming = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
+    ResourceWorkerMap.removeUOW(getId());
   }
   
 

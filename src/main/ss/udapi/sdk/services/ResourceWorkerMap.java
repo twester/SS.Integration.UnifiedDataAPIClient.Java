@@ -47,10 +47,18 @@ public class ResourceWorkerMap
   public static Resource getResourceImpl(String resourceId) {
     return map.get(resourceId);
   }
- 
+
+
+  
+  public static Resource removeUOW(String resourceId) {
+    return map.remove(resourceId);
+  }
+
+  
   
   public static boolean exists(String resourceId) {
     return map.containsKey(resourceId);
   }
+  
   
 }
