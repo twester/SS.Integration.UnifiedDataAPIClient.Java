@@ -1,1 +1,5 @@
 ss.udapi.sdk
+ss.udapi.sdk.interfaces
+ss.udapi.sdk.model
+ss.udapi.sdk.services
+ss.udapi.sdk.streaming

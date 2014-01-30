@@ -132,6 +132,7 @@ public class ResourceImpl implements Resource
     streamData();
   }
 
+  
   /*
    * Attaches the application to the MQ service if there is no connection, otherwise it binds a new consume process
    * to an additional queue. 
@@ -165,6 +166,8 @@ public class ResourceImpl implements Resource
       connected = true;
     }
   }
+
+  
   
   /**
    * Starts callback services to the client code whenever an event is received for this resource/fixture.
@@ -175,58 +178,40 @@ public class ResourceImpl implements Resource
     while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
       logger.debug("Streaming data: " + task.substring(0, 60));
-      System.out.println("--------------------->Echo failure testing:" + task.substring(13,24));
-
       try {
         streamAction.execute(task);
+        /*
+         * Resetting echo count.  We just received a message on this queue so we know it's ok.
+         */
+        EchoResourceMap.getEchoMap().resetEchoCount(getId());
       } catch (Exception ex) {
         logger.warn("Error on message receive", ex);
       } 
-
-/*      
-      if(task.substring(13,24).equals("EchoFailure")) {
-        logger.error("Echo Retry exceeded out for stream" + getName());
-        try {
-          isStreaming = false;
-          MQListener.disconnect(getId());
-          EchoResourceMap.getEchoMap().addResource(getId());
-          actionExecuter.execute(new DisconnectedAction(streamingEvents));
-        } catch (Exception ex) {
-          logger.warn("Error on fixture disconnect, could have already been disconnected: ", ex);
-        } 
-      } else {
-        try {
-          streamAction.execute(task);
-        } catch (Exception ex) {
-          logger.warn("Error on message receive", ex);
-        } 
-      }
-  */  
-    
     }
-      
   }
 
 
-  public void echoFailure()
-  {
-    System.out.println("--------------->disconnecting resource" + getId());
-    actionExecuter.execute(new DisconnectedAction(streamingEvents));
-    MQListener.disconnect(getId());
-  }
   
-  
+  /**
+   * DO NOT USE.  Use of this method will cause undefined behaviour
+   */
+  /*
+   * Used internally for MQ polling events.  RabbitMqConsumer passes queue consumer closure events to this method,
+   * this in turn notifies the client code that such an event has taken place. 
+   */
   public void mqDisconnectEvent()
   {
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
-//    ResourceWorkQueue.removeQueue(getId());
-//    ResourceWorkerMap.removeUOW(getId());
+    ResourceWorkQueue.removeQueue(getId());
   }
   
 
+  /**
+   * Stops the monitoring for this resource's MQ queue.  
+   */
   @Override
   public void stopStreaming()
   {
@@ -234,14 +219,18 @@ public class ResourceImpl implements Resource
     isStreaming = false;
   }
 
-  
+  /**
+   * Pauses the monitoring for this resource's MQ queue. Resume queue monitoring with unpauseStreaming.  
+   */
   @Override
   public void pauseStreaming()
   {
     isStreaming = false;
   }
 
-  
+  /**
+   * Resumes the monitoring for this resource's MQ queue if it has been paused.  
+   */
   @Override
   public void unpauseStreaming()
   {

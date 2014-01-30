@@ -14,7 +14,9 @@
 
 package ss.udapi.sdk.interfaces;
 
-
+/**
+ *  Please see implementing classes
+ */
 public interface Credentials
 {
 	

@@ -102,7 +102,9 @@ public class EchoSender implements Runnable
             
             ResourceImpl x = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
             System.out.println("---------------------> resource in echo error" + x.toString());
-            x.echoFailure();
+//            x.echoFailure();
+            MQListener.disconnect(resourceId);
+            
             
             
 //            ((ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId)).mqDisconnectEvent();

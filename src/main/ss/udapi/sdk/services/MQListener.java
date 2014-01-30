@@ -180,15 +180,19 @@ public class MQListener implements Runnable
   public static void disconnect (String resourceId) {
     try {
       channel.basicCancel(resourceChannMap.get(resourceId));
-      CtagResourceMap.removeCtag(resourceChannMap.get(resourceId));
-      resourceChannMap.remove(resourceId);
-      logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+      logger.info("Disconnecting basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
     } catch (IOException ex) {
       logger.error("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
     }
     
   }
   
+  
+  protected static void removeMapping(String cTag)
+  {
+    resourceChannMap.remove(CtagResourceMap.getResource(cTag));
+    CtagResourceMap.removeCtag(cTag);
+  }
   
   
   private static String uriDecode(String s) {

@@ -59,9 +59,12 @@ public class EchoResourceMap
   }
 
   
-  public void decrEchoCount(String resourceId)
+  public void resetEchoCount(String resourceId)
   {
-    map.replace(resourceId, map.get(resourceId)-1);
+    /*
+     * Resetting echo count.  We just received a message on this queue so we know it's ok.
+     */
+    map.replace(resourceId, 0);
     logger.info("Echo received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
   }
 

@@ -19,7 +19,9 @@ import ss.udapi.sdk.streaming.Event;
 
 import java.util.List;
 
-
+/**
+ *  Please see implementing classes
+ */
 public interface Resource 
 {
 

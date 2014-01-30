@@ -16,7 +16,9 @@ package ss.udapi.sdk.interfaces;
 
 import java.util.List;
 
-
+/**
+ *  Please see implementing classes
+ */
 public interface Feature 
 {
 

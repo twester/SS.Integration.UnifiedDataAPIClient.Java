@@ -79,20 +79,21 @@
   
   
 	<target name="generateDocs">
-	   <echo file="documentation/doxyfile" append="true">	   
-			PROJECT_NUMBER=${VersionNumber}
-		</echo>
- 	  <exec executable="C:\Program Files\doxygen\bin\doxygen.exe">
-	    <arg value="documentation/doxyfile"/>	    
-	  </exec>
-	  
-	  <mkdir dir="build/docs" />
-	  <copy todir="build/docs">
-		<fileset dir="documentation/html"/>
-	  </copy>
-	  
+      <javadoc packagenames="ss.udapi.sdk.*"
+               sourcepath="src/main"
+               destdir="documentation"
+               author="false"
+               version="false"
+               use="true"
+               windowtitle="Unified_Data_API_Client_Java API - Sporting Solutions">
+        <bottom><![CDATA[<i>Copyright &#169; 2014 Sporting Solutions. All Rights Reserved.</i> - Licensed under the Apache License, Version 2.0]]></bottom>
+      </javadoc>
 	</target>
 	
+  
+  
+  
+  
 	
 	<path id="example.lib">
         <fileset dir="build/SDK">
