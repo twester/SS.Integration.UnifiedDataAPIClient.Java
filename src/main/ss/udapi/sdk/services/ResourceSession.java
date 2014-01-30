@@ -17,6 +17,9 @@ package ss.udapi.sdk.services;
 
 import ss.udapi.sdk.model.ServiceRequest;
 
+/* Object used by ResourceImpl to pass details about details to MQListener requesting that a resouce by bound to a queue on MQ
+ * Consists of the resouceID, all resources available 
+ */
 public class ResourceSession
 {
   private String amqpDest = null;
@@ -31,6 +34,7 @@ public class ResourceSession
       this.resourceId = resourceId;
     }
   }
+
 
   public String getAmqpDest() {
     synchronized(this) {

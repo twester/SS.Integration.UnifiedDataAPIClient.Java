@@ -22,7 +22,7 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.EchoResourceMap;
-import ss.udapi.sdk.services.ResourceEventsMap;
+//import ss.udapi.sdk.services.ResourceEventsMap;
 import ss.udapi.sdk.services.ResourceSession;
 import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
@@ -50,7 +50,7 @@ public class ResourceImpl implements Resource
   private static Logger logger = Logger.getLogger(ResourceImpl.class.getName());
   private static HttpServices httpSvcs = new HttpServices();
   private static ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
-  private static ResourceEventsMap eventsMap = ResourceEventsMap.getEventMap();
+//  private static ResourceEventsMap eventsMap = ResourceEventsMap.getEventMap();
 
   /*
    * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
@@ -76,7 +76,7 @@ public class ResourceImpl implements Resource
     
     if(ResourceWorkerMap.exists(getId()) == true) {
       isStreaming = true;
-      streamingEvents = eventsMap.getEvents(getId());
+//      streamingEvents = eventsMap.getEvents(getId());
     } else {
       ResourceWorkerMap.addResource(getId(), this);
       EchoResourceMap.getEchoMap().addResource(getId());
@@ -115,7 +115,7 @@ public class ResourceImpl implements Resource
    */
   private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos) {
     if (events != null) {
-      eventsMap.addEvents(getId(), events);
+//      eventsMap.addEvents(getId(), events);
     }
     if (echoSenderInterval > 0) {
       SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));

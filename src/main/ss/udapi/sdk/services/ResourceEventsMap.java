@@ -20,6 +20,8 @@ import ss.udapi.sdk.streaming.Event;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+
+//TODO: delete this if multiple consumers do not affect each other.  This can be tested once we get rid of the echo failure test.
 /* Used to maintain a list of events for each resource.  In case it is reinstantiated instead of created afresh. */
 public class ResourceEventsMap
 {
