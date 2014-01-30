@@ -26,6 +26,7 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 
+import ss.udapi.sdk.ResourceImpl;
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.model.StreamEcho;
@@ -63,7 +64,7 @@ public class EchoSender implements Runnable
   public void run() {
     logger.info("Starting echoes.");
     EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
-    WorkQueue myQueue = WorkQueue.getWorkQueue();
+    WorkQueue workQueue = WorkQueue.getWorkQueue();
     if (echoRunning == false)    {
       while (true) {
         try {
@@ -89,9 +90,22 @@ public class EchoSender implements Runnable
           Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
           Iterator<String> keyIter = defaulters.iterator();
           while(keyIter.hasNext()) {
-            String key = keyIter.next();
-            String task = "{\"Relation\":\"EchoFailure\",\"Id\":\"" + key +"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
-            myQueue.addTask(task);
+            
+            
+            
+            
+            
+            String resourceId = keyIter.next();
+            System.out.println("------>Echo error for resource[" + resourceId + "]");
+//            String task = "{\"Relation\":\"EchoFailure\",\"Id\":\"" + resourceId +"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+//            workQueue.addTask(task);
+            
+            ResourceImpl x = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
+            System.out.println("---------------------> resource in echo error" + x.toString());
+            x.mqDisconnectEvent();
+            
+            
+//            ((ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId)).mqDisconnectEvent();
           }
 
           echoRunning=true;

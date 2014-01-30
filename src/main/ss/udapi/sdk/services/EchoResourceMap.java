@@ -61,8 +61,8 @@ public class EchoResourceMap
   
   public void decrEchoCount(String resourceId)
   {
-    logger.info("Echo received for ficture Id: " + resourceId);
     map.replace(resourceId, map.get(resourceId)-1);
+    logger.info("Echo received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
   }
 
 
@@ -79,12 +79,14 @@ public class EchoResourceMap
     Iterator<String> keyIter = keys.iterator();
 
     while(keyIter.hasNext()) {
-      String key = keyIter.next();
-      int count = (map.get(key));
+      String resourceId = keyIter.next();
+      int count = (map.get(resourceId));
       if (count == (retries)){
-        defaulters.add(key);
+        defaulters.add(resourceId);
       }
-      map.replace(key, count+1);
+      map.replace(resourceId, count+1);
+
+      System.out.println("--------------->echo count increased for: " + resourceId + ". Current count " + (map.get(resourceId)));
     }
 
     return defaulters;

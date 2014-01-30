@@ -39,18 +39,24 @@ public class ResourceWorkerMap
   }
   
   
-  public static void addUOW(String resourceId, Resource resourceImpl) {
+  public static void addResource(String resourceId, Resource resourceImpl) {
+    System.out.println("----------->added resourceImpl[" + resourceId + "]" + resourceImpl.toString());
+    
     map.put(resourceId, resourceImpl);
   }
   
   
   public static Resource getResourceImpl(String resourceId) {
+    System.out.println("----------->retrieving resourceImpl[" + resourceId + "]" + map.get(resourceId).toString());
+
+    
     return map.get(resourceId);
   }
 
 
   
-  public static Resource removeUOW(String resourceId) {
+  public static Resource removeResource(String resourceId) {
+    System.out.println("----------->remove resourceImpl[" + resourceId + "]" );
     return map.remove(resourceId);
   }
 

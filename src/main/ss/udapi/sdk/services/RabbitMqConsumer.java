@@ -43,7 +43,11 @@ public class RabbitMqConsumer extends DefaultConsumer
     
     logger.debug("Consumer: " + cTag + " received message: " + msgHead);
     if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",")) {
-      echoMap.decrEchoCount(CtagResourceMap.getResource(cTag));
+      if (CtagResourceMap.getResource(cTag).equals("4x0lAft_P7JnfqLK0J4o1y_Rgtg")){
+        System.out.println("--------------->Disregarding echo response for 4x0lAft_P7JnfqLK0J4o1y_Rgtg, Fernando v Jim");
+      } else {
+        echoMap.decrEchoCount(CtagResourceMap.getResource(cTag));
+      }
     } else {
       WorkQueue myQueue = WorkQueue.getWorkQueue();
       myQueue.addTask(body);

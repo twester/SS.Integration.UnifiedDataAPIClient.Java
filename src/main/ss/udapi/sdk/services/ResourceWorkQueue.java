@@ -31,8 +31,14 @@ public class ResourceWorkQueue
   
   
   public static LinkedBlockingQueue<String> addQueue(String resourceId) {
+    System.out.println("---------------->added queue [" + resourceId + "]");
     map.put(resourceId, new LinkedBlockingQueue<String>());
     return map.get(resourceId);
+  }
+  
+
+  public static void removeQueue(String resourceId) {
+    map.remove(resourceId);
   }
   
   
@@ -45,6 +51,7 @@ public class ResourceWorkQueue
   
   
   public static void addUOW(String resourceId, String task) {
+    System.out.println("--------------->echo testing: added echo alert" + task.substring(0,60) + " for [" + resourceId + "]");
     LinkedBlockingQueue<String> queue = map.get(resourceId);
     queue.add(task);
   }

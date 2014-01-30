@@ -51,35 +51,19 @@ public class ResourceImpl implements Resource
   private static HttpServices httpSvcs = new HttpServices();
   private static ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
   private static ResourceEventsMap eventsMap = ResourceEventsMap.getEventMap();
+
+  /*
+   * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
+   * from Sporting Solutions end up here as well as internal echo control commands.  RabbitMQConsumer and EchoSender place objects here. 
+   */
   private static LinkedBlockingQueue<String> myTasks;
   private boolean isStreaming;
   private boolean connected;
   private String amqpDest;
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
-  
-  /*
-   * This is used whenever a Resource is Reinstantiated, in case
-   */
   private List<Event> streamingEvents;
   
-  /*
-   * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
-   * from Sporting Solutions end up here as well as internal echo control commands.  RabbitMQConsumer and EchoSender place objects here. 
-   */
-//  private LinkedBlockingQueue<String> myTasks = new LinkedBlockingQueue<String>();
-  
-  
-  /**
-   * Internal application method.  Use of this method will result in undefined system behaviour.
-   */
-  /*
-   * The above comment is for javadoc.  This method is used to provide access to myTasks (see comment above).
-   */
-//  public void addTask(String task) {
-//    myTasks.add(task);
-//  }
-
   
   /*
    * Constructor initializes and resets internal state in case it is re-initialized by the client code.  
@@ -94,7 +78,7 @@ public class ResourceImpl implements Resource
       isStreaming = true;
       streamingEvents = eventsMap.getEvents(getId());
     } else {
-      ResourceWorkerMap.addUOW(getId(), this);
+      ResourceWorkerMap.addResource(getId(), this);
       EchoResourceMap.getEchoMap().addResource(getId());
     }
   }
@@ -148,7 +132,10 @@ public class ResourceImpl implements Resource
     streamData();
   }
 
-  
+  /*
+   * Attaches the application to the MQ service if there is no connection, otherwise it binds a new consume process
+   * to an additional queue. 
+   */
   private void connect() {
     if (connected == false) {
       ServiceRequest amqpRequest = new ServiceRequest();
@@ -179,13 +166,16 @@ public class ResourceImpl implements Resource
     }
   }
   
-  
+  /**
+   * Starts callback services to the client code whenever an event is received for this resource/fixture.
+   */
   public void streamData() {
     logger.debug("In resource " + getId() + " number of items received: " + myTasks.size() + " streaming status: " + isStreaming);
     StreamAction streamAction = new StreamAction(streamingEvents);
     while ((! myTasks.isEmpty()) && (isStreaming == true)) {
       String task = myTasks.poll();
       logger.debug("Streaming data: " + task.substring(0, 60));
+      System.out.println("--------------------->Echo failure testing:" + task.substring(13,24));
       if(task.substring(13,24).equals("EchoFailure")) {
         logger.error("Echo Retry exceeded out for stream" + getName());
         try {
@@ -213,8 +203,9 @@ public class ResourceImpl implements Resource
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
+    ResourceWorkQueue.removeQueue(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
-    ResourceWorkerMap.removeUOW(getId());
+//    ResourceWorkerMap.removeUOW(getId());
   }
   
 

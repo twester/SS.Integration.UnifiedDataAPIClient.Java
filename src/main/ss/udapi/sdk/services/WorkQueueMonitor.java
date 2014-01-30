@@ -43,7 +43,7 @@ public class WorkQueueMonitor implements Runnable
     logger.info("Work queue Monitor initialized and waiting");
     while(true) {
       String task = workQueue.getTask();
-      logger.debug("---------------->Queue Read: " + task.substring(0,40));
+      logger.debug("Queue Read: " + task.substring(0,40));
       try {
         FixtureActionProcessor processor = new FixtureActionProcessor(task);
         ActionThreadExecutor.executeTask(processor);

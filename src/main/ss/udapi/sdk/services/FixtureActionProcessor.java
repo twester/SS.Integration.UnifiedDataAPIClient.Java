@@ -51,11 +51,12 @@ public class FixtureActionProcessor implements Runnable
     String fixtureId = msgHead.substring(idStart,idStart+27);
     logger.debug("Processing started for fixture/resource: " + fixtureId);
   
-    System.out.println("------------->" + fixtureId);
+    System.out.println("----------------->For Echo testing: " + msgHead);
+    
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
 
     ResourceWorkQueue.addUOW(fixtureId, task);
-    
+      
 //    resource.addTask(task);
     resource.streamData();
     
