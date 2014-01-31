@@ -21,11 +21,11 @@ public class ModelTestHelper
   private Summary summary = new Summary();
 
   private RestItem restItem1 = new RestItem();
+  private RestItem restItem2 = new RestItem();
   private List<RestItem> restItems = new ArrayList<RestItem>();
   
   
-  public void buildTags()
-  {
+  public void buildTags() {
     tag1.setId(111);
     tag1.setKey("tag1Key");
     tag1.setValue("tag1Value");
@@ -39,14 +39,12 @@ public class ModelTestHelper
   }
 
   
-  public List<Tag> getTags() 
-  {
+  public List<Tag> getTags() {
     return tags;
   }
   
   
-  public void buildSummary() 
-  {
+  public void buildSummary() {
     buildTags();
     summary.setId("ABC-123");
     summary.setDate("2014-01-14");
@@ -57,22 +55,20 @@ public class ModelTestHelper
   }
   
   
-  public Summary getSummary() 
-  {
+  public Summary getSummary() {
     return summary;
   }
 
   
-  public void buildLinks() 
-  {
+  public void buildLinks() {
     link1.setRelation("amqp");
     link1.setHref("http://endpoint1");
-    String[] verbs1 = {"pause", "unpause"};
+    String[] verbs1 = {"GET"};
     link1.setVerbs(verbs1);
     
     link2.setRelation("http");
     link2.setHref("http://endpoint2");
-    String[] verbs2 = {"stop", "start"};
+    String[] verbs2 = {"POST"};
     link2.setVerbs(verbs2);
     
     Links.add(link1);
@@ -80,25 +76,33 @@ public class ModelTestHelper
   }
   
   
-  public List<RestLink> getLinks() 
-  {
+  public List<RestLink> getLinks() {
     return Links;
   }
   
   
-  public void buildRestItems()
-  {
+  public void buildRestItems() {
     buildSummary();
     buildLinks();
     restItem1.setName("Tennis");
     restItem1.setContent(summary);
     restItem1.setLinks(Links);
-
     restItems.add(restItem1);
+
+    restItem2.setName("Football");
+    restItem2.setContent(summary);
+    restItem2.setLinks(Links);
+    restItems.add(restItem2);
   }
 
-  public List<RestItem> getRestItems()
-  {
+  
+  public RestItem getRestItem() {
+    return restItems.get(0);
+  }
+  
+  
+  
+  public List<RestItem> getRestItems() {
     return restItems;
   }
   

@@ -1,10 +1,13 @@
 package ss.udapi.sdk.examples.model;
-/*
+
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import ss.udapi.sdk.model.RestItem;
+import ss.udapi.sdk.model.RestLink;
+import ss.udapi.sdk.model.Summary;
 import static org.junit.Assert.*;
 
 //These are to make sure beans still work once they become immutable
@@ -18,7 +21,7 @@ public class RestItemTest
   public void prepRestItem()
   {
     testHelper = new ModelTestHelper();
-    testHelper.buildRestItem();
+    testHelper.buildRestItems();
     restItem = testHelper.getRestItem();
   }
   
@@ -49,4 +52,3 @@ public class RestItemTest
   }
 
 }
-*/

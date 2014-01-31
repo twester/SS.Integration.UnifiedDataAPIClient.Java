@@ -1,4 +1,4 @@
-package ss.udapi.sdk.services;
+/*package ss.udapi.sdk.services;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -211,8 +211,9 @@ and since the autoAck = false above, you must also call Channel.basicAck to ackn
         throw new RuntimeException(e);
     }
 
-        */
+  
 
   }     
 
 }
+*/

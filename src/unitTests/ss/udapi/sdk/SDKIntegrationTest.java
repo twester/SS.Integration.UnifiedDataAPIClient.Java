@@ -1,4 +1,4 @@
-package ss.udapi.sdk;
+/*package ss.udapi.sdk;
 
 import static org.junit.Assert.*;
 
@@ -226,9 +226,9 @@ public class SDKIntegrationTest
     }
   }
 
-*/
+
 }
 
       
-      
+ */     
  

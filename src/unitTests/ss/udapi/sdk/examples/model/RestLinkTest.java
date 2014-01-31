@@ -9,7 +9,8 @@ import static org.junit.Assert.*;
 
 public class RestLinkTest
 {
-  private RestLink restLink;
+  private RestLink restLink1;
+  private RestLink restLink2;
   private ModelTestHelper testHelper; 
   
   
@@ -18,31 +19,32 @@ public class RestLinkTest
   {
     testHelper = new ModelTestHelper();
     testHelper.buildLinks();
-    restLink = testHelper.getLinks().get(0);
+    restLink1 = testHelper.getLinks().get(0);
+    restLink2 = testHelper.getLinks().get(1);
   }
   
   
   @Test
   public void testSetGetRelation()
   {
-    assertEquals("amqp", restLink.getRelation());
+    assertEquals("amqp", restLink1.getRelation());
   }
 
   
   @Test
   public void testSetGetHref()
   {
-    assertEquals("http://endpoint1", restLink.getHref());
+    assertEquals("http://endpoint1", restLink1.getHref());
   }
 
   
   @Test
   public void testSetGetVerbs()
   {
-    String verb1 = restLink.getVerbs()[0];
-    String verb2 = restLink.getVerbs()[1];
-    assertEquals("pause", verb1);
-    assertEquals("unpause", verb2);
+    String verb1 = restLink1.getVerbs()[0];
+    String verb2 = restLink2.getVerbs()[0];
+    assertEquals("GET", verb1);
+    assertEquals("POST", verb2);
   }
 
 }

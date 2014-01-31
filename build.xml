@@ -1,116 +1,198 @@
-<project  name="Unified Data API Client Java" basedir="." default="compile">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE peacockInt>
 
-  <property name="VersionNumber" value="1.5.1" />
+<!--  =================================================================
+      25 Jan 2013       11:45:22
+
+      project           Unified_API
+      description       build, test and document tasks
+
+      =================================================================
+ -->
+<project  name="Unified Data API Client Java" basedir="." default="compileSDK">
+
   
-    <target name="clean">
-        <delete dir="build"/>
-    </target>
+  
+  
+  
+  <!--  =================================
+        Environment values
+        =================================
+  -->    
+    
+  <property name="VersionNumber" value="1.5.1" />
 
-	<path id="project.lib">
+  
+  <path id="project.lib">
     <fileset dir="lib">
-			<include name="**/gson-2.2.2.jar" />
-			<include name="**/rabbitmq-client.jar" />
-			<include name="**/log4j-1.2.17.jar" />
+      <include name="**/gson-2.2.2.jar" />
+      <include name="**/rabbitmq-client.jar" />
+      <include name="**/log4j-1.2.17.jar" />
       <include name="**/commons-logging-1.1.3.jar" />
       <include name="**/httpclient-4.3.1.jar" />
       <include name="**/httpcore-4.3.jar" />
     </fileset>
-		<pathelement path="build/classes" />
-    </path>
-	
-    <target name="compile" depends="clean">
-        <mkdir dir="build/SDKclasses"/>
-        <javac srcdir="src/main" destdir="build/SDKclasses" includeAntRuntime="false">
-			<classpath refid="project.lib" />
-		</javac>
-    </target>
-	
-	<target name="copyDependencies">
-		<copy todir="build/SDK" flatten="true">
-			<fileset dir="lib" includes="**/gson-2.2.2.jar"/>
-			<fileset dir="lib" includes="**/rabbitmq-client.jar"/>
-			<fileset dir="lib" includes="**/log4j-1.2.17.jar"/>
+    <pathelement path="build/classes" />
+  </path>
+  
+  
+  <path id="example.lib">
+    <fileset dir="build/SDK">
+      <include name="**/gson-2.2.2.jar" />
+      <include name="**/rabbitmq-client.jar" />
+      <include name="**/log4j-1.2.17.jar" />
+      <include name="**/ss.udapi.sdk-*.jar" />
+    </fileset>
+    <pathelement path="build/classes" />
+  </path>
+
+  
+  <path id="test.lib">
+    <fileset dir="testLibs">
+      <include name="**/junit-4.11.jar" />
+      <include name="**/hamcrest-core.1.3.jar" />
+      <include name="**/mockito-all-1.9.5.jar" />
+    </fileset>
+  </path>
+  
+  
+  <path id="sdk.lib">
+    <fileset dir="build/SDK">
+      <include name="**/ss.udapi.sdk-${VersionNumber}.jar"/>
+    </fileset>
+  </path>
+    
+  
+  
+  
+  
+  <!--  =================================
+        Environment prep tasks
+        =================================
+  -->    
+    
+  <target name="clean">
+    <delete dir="build"/>
+  </target>
+
+
+  <target name="copyDependencies">
+    <copy todir="build/SDK" flatten="true">
+      <fileset dir="lib" includes="**/gson-2.2.2.jar"/>
+      <fileset dir="lib" includes="**/rabbitmq-client.jar"/>
+      <fileset dir="lib" includes="**/log4j-1.2.17.jar"/>
       <fileset dir="lib" includes="**/commons-logging-1.1.3.jar"/>
       <fileset dir="lib" includes="**/httpclient-4.3.1.jar"/>
       <fileset dir="lib" includes="**/httpcore-4.3.jar"/>
-		</copy>
-		<copy file="conf/runjava.bat" todir="build/SDK"/>
-		<copy file="README.markdown" todir="build/SDK"/>
-		<copy file="LICENCE.txt" todir="build/SDK"/>		
-	</target>
-	
-	<target name="jar" depends="compile, copyDependencies">
-        <mkdir dir="build/SDK"/>
-        <jar destfile="build/SDK/ss.udapi.sdk-${VersionNumber}.jar" basedir="build/SDKclasses" >
-			<manifest>
-				<attribute name="Built-By" value="Sporting Solutions"/>
-				<attribute name="Implementation-Vendor" value="Sporting Solutions"/>
-				<attribute name="Implementation-Title" value="Unified Data API Java Client"/>
-				<attribute name="Implementation-Version" value="${VersionNumber}"/>
-			</manifest>
-		</jar>
-		<delete dir="build/SDKclasses"/>
-    </target>
-	
-  <!-- target name="buildExample" depends="jar,generateDocs" -->
+    </copy>
+    <copy file="conf/runjava.bat" todir="build/SDK"/>
+    <copy file="README.markdown" todir="build/SDK"/>
+    <copy file="LICENCE.txt" todir="build/SDK"/>
+  </target>
+
+  
+  
+  
+  
+  <!--  =================================
+        Build tasks
+        =================================
+  -->    
+  
+  <target name="compileSDK" depends="clean">
+    <mkdir dir="build/SDKclasses"/>
+    <javac srcdir="src/main" destdir="build/SDKclasses" includeAntRuntime="false">
+      <classpath refid="project.lib" />
+    </javac>
+  </target>
+
+  
+  <target name="jar" depends="compileSDK, copyDependencies">
+    <mkdir dir="build/SDK"/>
+    <jar destfile="build/SDK/ss.udapi.sdk-${VersionNumber}.jar" basedir="build/SDKclasses" >
+      <manifest>
+        <attribute name="Built-By" value="Sporting Solutions"/>
+        <attribute name="Implementation-Vendor" value="Sporting Solutions"/>
+        <attribute name="Implementation-Title" value="Unified Data API Java Client"/>
+        <attribute name="Implementation-Version" value="${VersionNumber}"/>
+      </manifest>
+    </jar>
+    <delete dir="build/SDKclasses"/>
+  </target>
+
 
   <target name="buildExample" depends="jar">
-		<mkdir dir="build/SDKclasses"/>
-		<copy file="conf/runExample.bat" todir="build/SDK"/>
-		<copy file="conf/log4j.properties" todir="build/SDK"/>
-		<copy file="conf/endpoint.properties" todir="build/SDK"/>
+    <mkdir dir="build/SDKclasses"/>
+    <copy file="conf/runExample.bat" todir="build/SDK"/>
+    <copy file="conf/log4j.properties" todir="build/SDK"/>
+    <copy file="conf/endpoint.properties" todir="build/SDK"/>
     <copy file="conf/sdk.properties" todir="build/SDK"/>
-        <javac srcdir="src/test" destdir="build/SDKclasses" includeAntRuntime="false">
-			<classpath refid="example.lib" />
-		</javac>
-		<jar destfile="build/SDK/ss.udapi.sdk-example-${VersionNumber}.jar" basedir="build/SDKclasses" >
-			<manifest>
-				<attribute name="Built-By" value="Sporting Solutions"/>
-				<attribute name="Implementation-Vendor" value="Sporting Solutions"/>
-				<attribute name="Implementation-Title" value="Unified Data API Java Client Example"/>
-				<attribute name="Implementation-Version" value="${VersionNumber}"/>
-			</manifest>
-		</jar>
-		<delete dir="build/SDKclasses"/>
-		<zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
-	</target>
-	
-  
-  
-  
-	<target name="generateDocs">
-      <javadoc packagenames="ss.udapi.sdk.*"
-               excludepackagenames="ss.udapi.sdk.model,ss.udapi.sdk.services"
-               sourcepath="src/main"
-               destdir="documentation"
-               author="false"
-               version="false"
-               use="true"
-               public="true"
-               windowtitle="Unified_Data_API_Client_Java API - Sporting Solutions">
-        <bottom><![CDATA[<i>Copyright &#169; 2014 Sporting Solutions. All Rights Reserved.</i> - Licensed under the Apache License, Version 2.0]]></bottom>
-      </javadoc>
-	</target>
-	
+    <javac srcdir="src/test" destdir="build/SDKclasses" includeAntRuntime="false">
+      <classpath refid="example.lib" />
+    </javac>
+    <jar destfile="build/SDK/ss.udapi.sdk-example-${VersionNumber}.jar" basedir="build/SDKclasses" >
+      <manifest>
+        <attribute name="Built-By" value="Sporting Solutions"/>
+        <attribute name="Implementation-Vendor" value="Sporting Solutions"/>
+        <attribute name="Implementation-Title" value="Unified Data API Java Client Example"/>
+        <attribute name="Implementation-Version" value="${VersionNumber}"/>
+      </manifest>
+    </jar>
+    <delete dir="build/SDKclasses"/>
+    <zip destfile="build/SportingSolutions.Udapi.Sdk.Java-${VersionNumber}.zip" basedir="build"/>
+  </target>
+
   
   
   
   
-	
-	<path id="example.lib">
-        <fileset dir="build/SDK">
-			<include name="**/gson-2.2.2.jar" />
-			<include name="**/rabbitmq-client.jar" />
-			<include name="**/log4j-1.2.17.jar" />
-			<include name="**/ss.udapi.sdk-*.jar" />
-		</fileset>
-		<pathelement path="build/classes" />
-    </path>
-	
-	<path id="classpath">
-        <fileset dir="build/SDK" includes="**/*.jar"/>
-    </path>
-	
-	
-	
+  
+  <target name="buildTests" depends="jar">
+    <mkdir dir="build/unitTests"/>
+    <javac srcdir="src/unitTests" destdir="build/unitTests" includeAntRuntime="false">
+      <classpath refid="project.lib" />
+      <classpath refid="test.lib" />
+      <classpath refid="sdk.lib" />
+    </javac>
+  </target>
+  
+  
+  
+  <target name="testModels">
+    <junit printsummary="yes" fork="yes" haltonfailure="yes">
+      <classpath refid="test.lib" />
+      <formatter type="plain"/>
+      <classpath refid="project.lib" />
+      <classpath refid="test.lib" />
+      <classpath refid="sdk.lib" />
+      <test name="my.test.TestCase"/>
+    </junit>
+  </target>
+  
+  
+  
+
+  
+  
+  
+  
+  <!--  =================================
+        Documentation task
+        =================================
+  -->    
+  
+  <target name="generateDocs">
+    <javadoc packagenames="ss.udapi.sdk.*"
+             excludepackagenames="ss.udapi.sdk.model,ss.udapi.sdk.services"
+             sourcepath="src/main"
+             destdir="documentation"
+             author="false"
+             version="false"
+             use="true"
+             public="true"
+             windowtitle="Unified_Data_API_Client_Java API - Sporting Solutions">
+      <bottom><![CDATA[<i>Copyright &#169; 2014 Sporting Solutions. All Rights Reserved.</i> - Licensed under the Apache License, Version 2.0]]></bottom>
+    </javadoc>
+  </target>
+
 </project>
