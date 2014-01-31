@@ -17,7 +17,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import ss.udapi.sdk.examples.model.Fixture;
+import ss.udapi.sdk.model.Fixture;
 import ss.udapi.sdk.interfaces.Credentials;
 import ss.udapi.sdk.interfaces.Feature;
 import ss.udapi.sdk.interfaces.Resource;

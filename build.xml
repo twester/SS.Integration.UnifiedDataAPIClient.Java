@@ -156,16 +156,24 @@
     </javac>
   </target>
   
+  <path id="test.dir">
+        <pathelement location="build/unitTests/"/>
+    </path>    
   
   
   <target name="testModels">
-    <junit printsummary="yes" fork="yes" haltonfailure="yes">
-      <classpath refid="test.lib" />
+    <junit printsummary="yes" fork="no" haltonfailure="yes">
       <formatter type="plain"/>
       <classpath refid="project.lib" />
       <classpath refid="test.lib" />
       <classpath refid="sdk.lib" />
-      <test name="my.test.TestCase"/>
+      <classpath refid="test.dir" />
+      
+      <batchtest fork="yes">
+          <fileset dir="build/unitTests/">                  
+              <include name="**/*Tests.class"/>
+          </fileset>
+      </batchtest>
     </junit>
   </target>
   
