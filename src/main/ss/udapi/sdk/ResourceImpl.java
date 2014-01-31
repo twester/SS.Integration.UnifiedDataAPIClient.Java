@@ -22,7 +22,6 @@ import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.MQListener;
 import ss.udapi.sdk.services.EchoResourceMap;
-//import ss.udapi.sdk.services.ResourceEventsMap;
 import ss.udapi.sdk.services.ResourceSession;
 import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
@@ -50,7 +49,6 @@ public class ResourceImpl implements Resource
   private static Logger logger = Logger.getLogger(ResourceImpl.class.getName());
   private static HttpServices httpSvcs = new HttpServices();
   private static ExecutorService actionExecuter = Executors.newSingleThreadExecutor();
-//  private static ResourceEventsMap eventsMap = ResourceEventsMap.getEventMap();
 
   /*
    * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 

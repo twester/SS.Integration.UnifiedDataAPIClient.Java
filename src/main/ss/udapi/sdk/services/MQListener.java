@@ -15,8 +15,6 @@
 
 package ss.udapi.sdk.services;
 
-import ss.udapi.sdk.model.ServiceRequest;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
