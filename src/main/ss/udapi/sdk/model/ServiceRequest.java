@@ -20,8 +20,8 @@ import java.util.List;
  * Model used for HTTP Communications - Direct use of this class will lead to undefined behaviour. 
  */
 /*
- * Used to pass token and RestItem colletions between HTTP calls during normal communications with the 
- * Sporting Solutions system endpoint. 
+ * Used to pass the HTTP session authentication token and RestItem colletions between HTTP calls during normal 
+ * communications with the Sporting Solutions system endpoint. 
  */
 public class ServiceRequest
 {

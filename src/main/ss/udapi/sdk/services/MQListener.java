@@ -32,9 +32,14 @@ import org.apache.log4j.Logger;
 
 import com.rabbitmq.client.*;
 
+/* Initiates connectivity to RabbitMQ and maintains corresponding queue listeners as new fixtures/resources are
+ * created(added)/destroyed(deleted).
+ */
 public class MQListener implements Runnable
 {
   private static Logger logger = Logger.getLogger(MQListener.class);
+
+  //Maps a resource to a specific cTag (which is in effect a queue listener). 
   private static HashMap<String,String> resourceChannMap = new HashMap<String,String>();
   private static MQListener instance = null;
   private static Channel channel;
@@ -51,6 +56,9 @@ public class MQListener implements Runnable
   
   
   public static MQListener getMQListener(String amqpDest) {
+    /* This lock ensures there cannot be multiple instantiations which can lead to a corrupt object without synchronization,
+     * which in turn cannot be done on a here as the access is static.
+     */
     while(!creationLock.tryLock())
     {}
 
@@ -73,16 +81,18 @@ public class MQListener implements Runnable
     ResourceSession session = null;
     MQListenerRunning  = true;
     
-    /* 
+    /*
      * This section happens only once when the thread is kicked off
      */
     try {
+      //Set the MQ URL.
       session = resourceSessionList.remove();
       URI resourceQURI = new URI(session.getAmqpDest());
       String path = resourceQURI.getRawPath();
       String queue = path.substring(path.indexOf('/',1)+1);
       String userInfo = resourceQURI.getRawUserInfo();
       
+      //Set up the connection.
       ConnectionFactory connectionFactory = new ConnectionFactory();
       connectionFactory.setRequestedHeartbeat(Integer.parseInt(SystemProperties.get("ss.conn_heartbeat")));
       String host = resourceQURI.getHost();
@@ -107,6 +117,7 @@ public class MQListener implements Runnable
         connectionFactory.setPort(port);
       }
       
+      //Start up the connection
       Connection connection;
       try {
         connection = connectionFactory.newConnection();
@@ -114,21 +125,36 @@ public class MQListener implements Runnable
         throw new IOException("Failure creating connection factory");
       }
 
+      /* And create a consumer using the first queue.  This consumer allows subsequent queue listeners to be added and removed
+       * as resources are created / deleted.
+       */
       String ctag;
       try {
         channel = connection.createChannel();
         channel.basicQos(0, 10, false);
-        consumer = new RabbitMqConsumer(channel);  
+        consumer = new RabbitMqConsumer(channel);
+        //Create a queue listener for the first fixure.
         ctag=channel.basicConsume(queue, true, consumer);
       } catch (IOException ex) {
         throw new IOException("Failure creating channel");
       }
+
+      /* A map to used to keep a tally of which queue listeners (cTag) have been created and to disconnect later on 
+       * when all we get is the resource Id.  Disconnection can only happen via a cTag.
+       */
       resourceChannMap.put(session.getResourceId(), ctag);
+
+      /* A map used by RabbitMqConsumer to tie a cTag (which is all it gets from RabbitMq) to identify which resource an echo
+       * response came in for.
+       */
       CtagResourceMap.addCtag(ctag, session.getResourceId());
+
       logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
 
       /*
-       * This section is the loop which uses the connection opened above and adds additional consumers as they are requested
+       * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
+       * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
+       * to the number of active queue listeners.
        */
       while (true) {
         while (resourceSessionList.isEmpty() == false) {
@@ -152,14 +178,7 @@ public class MQListener implements Runnable
         }
         Thread.sleep(1000);
       } 
-
- /* for java 1.7 this syntax is preferable
-  *  } catch(URISyntaxException | UnsupportedEncodingException ex) {
-  *    logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
-  *    ex.printStackTrace();
-  * 
-  */
-      
+       // for java 1.7 this syntax is preferable: catch(URISyntaxException | UnsupportedEncodingException ex)
     } catch(URISyntaxException ex) {
       logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
       ex.printStackTrace();
@@ -177,6 +196,10 @@ public class MQListener implements Runnable
 
   
   
+  /* When we get a disconnect event, either called by the client code or when the maximum of missing echo responses is reached
+   * we close this channel.  This causes a handleCancel event which MQListener receives which in turn calls the associated
+   * ResourceImpl to notify the client code about the disconnect event. 
+   */
   public static void disconnect (String resourceId) {
     try {
       channel.basicCancel(resourceChannMap.get(resourceId));
@@ -188,13 +211,28 @@ public class MQListener implements Runnable
   }
   
   
+  
+  /* After the disconnect event notification is sent to the client MQListener calls this to remove the resource/cTag
+   * mappings.  Bit of housekeeping really.
+   */
   protected static void removeMapping(String cTag)
   {
     resourceChannMap.remove(CtagResourceMap.getResource(cTag));
     CtagResourceMap.removeCtag(cTag);
   }
   
+
+  /* Adds a new request to initiate a queue listener for a newly created fixture/resource.  The loop in run() above
+   * will pick this up and crete the listner there.  
+   */
+  public static void setResources(ResourceSession resourceSession) {
+    resourceSessionList.add(resourceSession);
+    logger.debug("Adding new resource queue listener request for: " + resourceSession.getAmqpDest());
+  }
   
+
+  
+  //Clean up the path.
   private static String uriDecode(String s) {
     try {
       // URLDecode decodes '+' to a space, as for form encoding.  So protect plus signs.
@@ -206,16 +244,9 @@ public class MQListener implements Runnable
   }     
 
   
-  
+  //ResourceImpl will start this thread up if it's not running.
   public static boolean isRunning() {
     return MQListenerRunning;
   }
 
-  
-  
-  public static void setResources(ResourceSession resourceSession) {
-    resourceSessionList.add(resourceSession);
-    logger.debug("Adding new resource queue listener request for: " + resourceSession.getAmqpDest());
-  }
-  
 }

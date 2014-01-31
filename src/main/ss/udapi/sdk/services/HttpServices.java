@@ -38,7 +38,7 @@ import org.apache.http.impl.client.*;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 
-
+//Meets HTTP connectivity requirements to Sporting Solutions systems.
 public class HttpServices
 {
   private static Logger logger = Logger.getLogger(HttpServices.class);
@@ -48,7 +48,7 @@ public class HttpServices
   private static boolean compressionEnabled;
   
   
-  
+  //Get a list of available endpoints that Sporting Solutions provides.
   public ServiceRequest getSession(String url, boolean compressionEnabled) {
     HttpServices.compressionEnabled = compressionEnabled;
     List<RestItem> loginRestItems = null;
@@ -64,6 +64,8 @@ public class HttpServices
       }
       httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
       ResponseHandler<String> responseHandler = getResponseHandler(401);
+
+      //Call the endpoint usign connectivity details we've prepared above and get the list of endpoints we have access to. 
       String responseBody = httpClient.execute(httpGet, responseHandler);
       
       loginRestItems = JsonHelper.toRestItems(responseBody);
@@ -82,7 +84,7 @@ public class HttpServices
       try {
         httpClient.close();
       } catch (IOException ex) {
-        //Can safely be ignored, either the server closed the connection or we didn't open it so there's nothing to do
+        //Can safely be ignored, either the server closed the connection or we didn't open it so there's nothing to do.
       }
     }
     loginResp.setServiceRestItems(loginRestItems);
@@ -91,6 +93,9 @@ public class HttpServices
   
   
   
+  /* Login into the URL using the credentials provided by Sporting Solutions to retrieve an authentication token to be used
+   * for all subsequent HTTP calls.  It also provides a list of services we are allowed to use.
+   */
   public ServiceRequest processLogin(ServiceRequest loginReq, String relation, String name) {
     logger.info("Retrieving services for: " + name);
     CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(loginTimeout).build();
@@ -117,6 +122,7 @@ public class HttpServices
       httpAction.setHeader("X-Auth-Key", SystemProperties.get("ss.password"));
       httpAction.setHeader("Content-Type", "application/json");
 
+      //Send the request of to retrieve the Authentication Token and the list of available services.
       response = httpClient.execute(httpAction);
       if (response.getStatusLine().getStatusCode() != 200) {
         throw new ClientProtocolException("Unexpected response status: " + response.getStatusLine().getStatusCode() +
@@ -145,33 +151,14 @@ public class HttpServices
   
   
   
-  public ServiceRequest processRequest(ServiceRequest request, String relation, String name) {
-    return processRequest(request, relation, name, "n/a");
-  }
-
-  
-  
-  public ServiceRequest processRequest(ServiceRequest request, String relation, String name, String entity) {
-    ServiceRequest response = new ServiceRequest();
-    String body = retrieveBody(request, relation, name, entity);
-    List<RestItem> serviceRestItems = JsonHelper.toRestItems(body);
-
-    response.setServiceRestItems(serviceRestItems);
-    response.setAuthToken(request.getAuthToken());
-    return response;
-  }
-  
-  
-  
-  public String getSnapshot(ServiceRequest snapShot, String relation, String fixture) {
-    return retrieveBody(snapShot, relation, fixture, "n/a");
-  }
-
-
-
+  /*
+   * 1) Sends a request to the Sporting Solutions endpoint and retrieves information items which are used for further
+   * processing.
+   */
   private String retrieveBody(ServiceRequest request, String relation, String name, String entity) {
     CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
     
+    //Double check we do have an actual usable service
     RestItem serviceDetails = null;
     if (name != null) {
       serviceDetails = getRestItems(request, name);
@@ -180,6 +167,7 @@ public class HttpServices
       }
     }
     
+    //The retrieve that service's endpoint
     RestLink link = getLink(serviceDetails, relation);
     if (link == null) {
       logger.error("No links found for: " + relation + " on " + name);
@@ -187,6 +175,7 @@ public class HttpServices
     
     String responseBody = null;    
     try {
+      //Prepare the HTTP request depending on whether it's an echo (POST), then send the request.
       if (relation.equals("http://api.sportingsolutions.com/rels/stream/batchecho"))
       {
         HttpPost httpPost = new HttpPost(link.getHref());
@@ -208,6 +197,7 @@ public class HttpServices
         if (responseEntity != null) {
           responseBody = new String(EntityUtils.toByteArray(responseEntity));
         }
+      //Or anything else (GET), then send the request.
       } else {
         HttpGet httpGet = new HttpGet(link.getHref());
         httpGet.setHeader("X-Auth-Token", request.getAuthToken());
@@ -230,8 +220,50 @@ public class HttpServices
         //Can safely be ignored, either the server closed the connection or we didn't open it so there's nothing to do
       }
     }
+    //Then return the response we got from Sporting Solutions.
     return responseBody;
   }
+  
+  
+  
+  /*
+   * 2) Called by most HTTP interactions with the exception of echo and snapshot requests as they have different behaviour.
+   * These interactions need a parsed set of RestItem(s)
+   */
+  public ServiceRequest processRequest(ServiceRequest request, String relation, String name) {
+    return processRequest(request, relation, name, "n/a");
+  }
+
+  
+  
+  /* 3) Called directly by BatchEcho which provides the echo message body (entity).  Then return a fully formed ServiceRequest
+   * which contains the Httpsession Authentication token and the RestItems parsed from the response retrieved from
+   * retrieveBody()  (1 above)
+   * 
+   * Also called by ServiceRequest (2 above) which needs a ServiceRequest item but does not provide/send a body to the
+   * endpoints as all transactions are GETs.
+   */
+  public ServiceRequest processRequest(ServiceRequest request, String relation, String name, String entity) {
+    ServiceRequest response = new ServiceRequest();
+    String body = retrieveBody(request, relation, name, entity);
+    List<RestItem> serviceRestItems = JsonHelper.toRestItems(body);
+
+    response.setServiceRestItems(serviceRestItems);
+    response.setAuthToken(request.getAuthToken());
+    return response;
+  }
+  
+  
+
+  /* 4) Needs the raw data processRequest (1 above) returns, we don't do anything with this item.  It's enormous we eventually just pass it
+   * to the client code for processing as they deem appropriate. 
+   */
+  public String getSnapshot(ServiceRequest snapShot, String relation, String fixture) {
+    return retrieveBody(snapShot, relation, fixture, "n/a");
+  }
+
+
+  
 
   
   

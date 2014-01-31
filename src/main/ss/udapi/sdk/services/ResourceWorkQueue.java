@@ -18,7 +18,13 @@ package ss.udapi.sdk.services;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
-
+/* Each Fixture is assigned a ResourceImpl.  Each ResourceImpl has an associated ResourceWorkQueue onto which
+ * a running instance of FixtureActionProcessor can drop a UOW for that resource.
+ * ResourceImpl then reads from it's queue and executes the appropriate actions.
+ * 
+ * A separate map is used instead of directly inserting the task into ResourceImpl to minimise the amount of
+ * methods exposed to the public API.
+ */
 public class ResourceWorkQueue
 {
   private static ResourceWorkQueue workQueue = null;
@@ -29,19 +35,7 @@ public class ResourceWorkQueue
   {
   }
   
-  
-  public static LinkedBlockingQueue<String> addQueue(String resourceId) {
-    System.out.println("---------------->added queue [" + resourceId + "]");
-    map.put(resourceId, new LinkedBlockingQueue<String>());
-    return map.get(resourceId);
-  }
-  
 
-  public static void removeQueue(String resourceId) {
-    map.remove(resourceId);
-  }
-  
-  
   public static ResourceWorkQueue getWorkQueue() {
     if (workQueue == null) {
       workQueue = new ResourceWorkQueue();
@@ -50,6 +44,21 @@ public class ResourceWorkQueue
   }
   
   
+  //A new fixture has been registered which created a new instance of ResourceImpl which in turn creates a new queue here 
+  public static LinkedBlockingQueue<String> addQueue(String resourceId) {
+    System.out.println("---------------->added queue [" + resourceId + "]");
+    map.put(resourceId, new LinkedBlockingQueue<String>());
+    return map.get(resourceId);
+  }
+  
+
+  //The fixture is no longer active, has been deleted and we're cleaning as the associated ResourceImpl gets removed.
+  public static void removeQueue(String resourceId) {
+    map.remove(resourceId);
+  }
+  
+
+  //Add a new UOW for the associated resource/fixture.  Currently FixtureActionProcessor does this. 
   public static void addUOW(String resourceId, String task) {
     System.out.println("--------------->echo testing: added echo alert" + task.substring(0,60) + " for [" + resourceId + "]");
     LinkedBlockingQueue<String> queue = map.get(resourceId);
@@ -57,12 +66,7 @@ public class ResourceWorkQueue
   }
   
   
-  public static LinkedBlockingQueue<String> getQueue(String resourceId) {
-    return map.get(resourceId);
-  }
-
-
-  
+  //ResourceImpl pulls the UOW to work on it.
   public static String removeUOW(String resourceId) {
     LinkedBlockingQueue<String> queue = map.get(resourceId);
     return queue.poll();
@@ -70,9 +74,13 @@ public class ResourceWorkQueue
 
   
   
+  public static LinkedBlockingQueue<String> getQueue(String resourceId) {
+    return map.get(resourceId);
+  }
+
+
+ 
   public static boolean exists(String resourceId) {
     return map.containsKey(resourceId);
   }
-  
-  
 }

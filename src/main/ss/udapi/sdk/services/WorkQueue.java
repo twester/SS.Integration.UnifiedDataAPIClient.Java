@@ -19,6 +19,15 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
 
+/* All activity received from the MQ system is simply pulled of the MQ queues and put into this work queue.  By RabbitMQ
+ * consumer to minimize the amount of processing that thread does.
+ * 
+ * The WorkQueueMonitor picks up a UOW from WorkQueue, passes it to an instance of FixtureActionProcessor which retrieves 
+ * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
+ * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
+ * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
+ * by the JVM.
+ */
 public class WorkQueue
 {
   private static WorkQueue workQueue = null;
@@ -29,8 +38,7 @@ public class WorkQueue
   private WorkQueue()
   {
   }
-  
-  
+
   
   public static WorkQueue getWorkQueue() {
     if (workQueue == null)
@@ -41,6 +49,8 @@ public class WorkQueue
   }
   
   
+  
+  //RabbitMQ consumer drops messages retrieved from MQ into this WorkQueue
   public void addTask(String task) {
     try {
       linkedQueue.put(task);
@@ -50,10 +60,12 @@ public class WorkQueue
   }
   
   
-  
+  //WorkQueueMonitorpulls messages retrieved this WorkQueue and initiates processing.
   public String getTask() {
     String task=null;
     try {
+      //this is a blocking method so if there's nothing to pickup from the queue the calling thread sits in a blocked state not
+      //usign any resources.
       task = linkedQueue.take();
     } catch (Exception ex) {
       logger.error("WorkQueue management interrupted", ex);

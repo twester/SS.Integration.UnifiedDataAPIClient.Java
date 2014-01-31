@@ -17,6 +17,19 @@ package ss.udapi.sdk.services;
 
 import org.apache.log4j.Logger;
 
+/* Monitors for any new UOWs on WorkQueue and dispatches it to ResourceImpl instances for processing.
+ * 
+ * The WorkQueueMonitor picks up a UOW from WorkQueue, passes it to an instance of FixtureActionProcessor which retrieves 
+ * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
+ * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
+ * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
+ * by the JVM.
+ *
+ * An alternative design would be to have a theadpool of WorkQueue Listener objects (FixtureActionProcessor) called directly
+ * by RabitMqConsumer, but I chose this design as a centralised control point and to minimise the amount of concerns leaked
+ * between modules.
+ * 
+ */
 public class WorkQueueMonitor implements Runnable
 {
   private static Logger logger = Logger.getLogger(WorkQueueMonitor.class);
@@ -41,7 +54,10 @@ public class WorkQueueMonitor implements Runnable
   @Override
   public void run() {
     logger.info("Work queue Monitor initialized and waiting");
+    
+    //Monitor the queue
     while(true) {
+      //When a UOW comes along call FixtureActionProcessor to grab the associated ResourceImpl and process it.
       String task = workQueue.getTask();
       logger.debug("Queue Read: " + task.substring(0,40));
       try {

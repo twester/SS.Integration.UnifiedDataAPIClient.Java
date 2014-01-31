@@ -17,10 +17,7 @@ package ss.udapi.sdk.services;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Properties;
-
 
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -59,8 +56,8 @@ public final class SystemProperties
   private static void getSystemProperties() {
     
     systemProperties = new Properties();
-    
     logger.debug("Loading properties file");
+
     // These are default properties in case the file is inaccessible or property is missing from file
     ourMap.put("ss.http_login_timeout", "20");
     ourMap.put("ss.http_request_timeout", "60");
@@ -71,9 +68,6 @@ public final class SystemProperties
     
     try {
       systemProperties.load(new FileInputStream("sdk.properties"));
-
-      //      this is in case we need to load the credential and endpoint details.
-      //      systemProperties.load(new FileInputStream("endpoint.properties"));
       Set<String> propNames = ourMap.keySet(); 
       String readPropVal = null;
 
@@ -93,9 +87,9 @@ public final class SystemProperties
   }
 
 
+  //Sets values, such as credentials which can be set by the client code via the SDK public API. 
   public static void setProperty(String key, String value) {
     ourMap.put(key, value);
   }
-  
-  
+
 }
