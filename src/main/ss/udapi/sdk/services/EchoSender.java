@@ -64,7 +64,7 @@ public class EchoSender implements Runnable
 
   @Override
   public void run() {
-    logger.info("Starting echoes.");
+    logger.info("Starting echos.");
     EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
 
     // Get the connection details for the MQ box.
@@ -91,7 +91,7 @@ public class EchoSender implements Runnable
           logger.info("Batch echo sent: " + stringStreamEcho);
           
           //Ater the message is sent increase the numebr of echos sent for all resources.
-          //The number of missed echoes is configured in: conf/sdk.properties using "ss.echo_max_missed_echos" 
+          //The number of missed echos is configured in: conf/sdk.properties using "ss.echo_max_missed_echos" 
           Set<String> defaulters = echoMap.incrAll(Integer.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
           Iterator<String> keyIter = defaulters.iterator();
 
@@ -111,9 +111,10 @@ public class EchoSender implements Runnable
           }
 
           echoRunning=true;
-          //The interval between echoes is configured in: conf/sdk.properties using "ss.echo_sender_interval"
+          //The interval between echos is configured in: conf/sdk.properties using "ss.echo_sender_interval"
           Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
         } catch (InterruptedException ex) {
+          echoRunning=false;
           logger.error("Echo Thread disrupted" + ex);
         }
       }

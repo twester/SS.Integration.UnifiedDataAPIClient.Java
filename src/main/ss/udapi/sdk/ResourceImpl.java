@@ -27,6 +27,7 @@ import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
+import ss.udapi.sdk.services.WorkQueueMonitor;
 import ss.udapi.sdk.streaming.ConnectedAction;
 import ss.udapi.sdk.streaming.DisconnectedAction;
 import ss.udapi.sdk.streaming.Event;
@@ -71,6 +72,15 @@ public class ResourceImpl implements Resource
     this.availableResources = availableResources;
     myTasks = ResourceWorkQueue.addQueue(getId());
     logger.debug("Instantiated Resource: " + restItem.getName());
+    
+    
+    /*
+     * This is not strictly part of the initialization but is needed for Resources to get any work.  As we cannot ask the client code
+     * to monitor our threads we have to do it.  Not the cleanest way of doing things but it does work.
+     */
+    WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
+    ServiceThreadExecutor.executeTask(queueWorker);
+    
     
     if(ResourceWorkerMap.exists(getId()) == true) {
       isStreaming = true;
@@ -142,21 +152,14 @@ public class ResourceImpl implements Resource
       amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
       logger.info("Starting new streaming services, name: " + getName() +" queue: " + amqpDest + " fixture ID: " + getId()) ;
 
-      /* 
-       * Because we have many client threads starting at the same time they can all get here before MQ Listener is fully
-       * initialized so MQListener.isRunning can be false for quite a while.  MQListener.getSender is locked so only one thread
-       * will ever be able to initialize it.  As it and echoSender are singletons they can only run once so the rest if the if
-       * can be dropped through safely.  Eventually MQListener.isRunning will be true so this only happens for the first few
-       * threads anyway.
-       */
-      if (MQListener.isRunning() == false)
-      {
-        MQListener.setResources(new ResourceSession(amqpDest, getId()));
-        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
-        
-        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
-        ServiceThreadExecutor.executeTask(echoSender);
-      }   
+    /* We need these two services to be running for the SDK to behave as expected.  And as they need the MQ details (which
+     * are only available at this point) we are starting them here.  We could retrieve and set this up earlier, but it that would mean
+     * querying teh client resources twice on start up.
+     */
+      MQListener.setResources(new ResourceSession(amqpDest, getId()));
+      ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
+      EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
+      ServiceThreadExecutor.executeTask(echoSender);
       
       //MQListener.setResources does not allow duplicates so fall throughs from the above false will be ignored
       MQListener.setResources(new ResourceSession(amqpDest, getId()));

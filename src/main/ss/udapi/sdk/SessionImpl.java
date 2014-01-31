@@ -53,12 +53,9 @@ public class SessionImpl implements Session
     this.serverURL = serverURL;
     
     /*
-     * This is not strictly part of the session initialization but is needed for the the information retrieved via the session
-     * to be of use.  It's really part of the system's overall initilization
+     * This is not strictly part of the session initialization but is needed for any services to work :-(
      */
     ServiceThreadExecutor.createExecutor();
-    WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
-    ServiceThreadExecutor.executeTask(queueWorker);
 
     GetRoot(serverURL,credentials, true);
   }

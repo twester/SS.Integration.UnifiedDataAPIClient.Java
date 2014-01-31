@@ -58,9 +58,6 @@ public class RabbitMqConsumer extends DefaultConsumer
     } else {
       if (CtagResourceMap.getResource(cTag).equals("4x0lAft_P7JnfqLK0J4o1y_Rgtg")){
         System.out.println("--------------->Disregarding echo response for 4x0lAft_P7JnfqLK0J4o1y_Rgtg, Fernando v Jim");
-
-        echoMap.resetEchoCount(CtagResourceMap.getResource(cTag));
-
       } else {
         //TODO: move this outside the if once we finish testing the echo failure
         echoMap.resetEchoCount(CtagResourceMap.getResource(cTag));
