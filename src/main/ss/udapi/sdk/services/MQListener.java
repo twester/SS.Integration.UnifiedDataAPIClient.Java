@@ -50,7 +50,7 @@ public class MQListener implements Runnable
   
   
   
-  public static MQListener getMQListener(String amqpDest, ServiceRequest resources) {
+  public static MQListener getMQListener(String amqpDest) {
     while(!creationLock.tryLock())
     {}
 

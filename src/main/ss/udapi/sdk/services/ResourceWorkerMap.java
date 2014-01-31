@@ -20,6 +20,14 @@ import ss.udapi.sdk.interfaces.Resource;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+/* Map holding individual instances of ResourceImpl.  There is one instance for each resource/fixture.
+ * 
+ * The WorkQueueMonitor picks up a UOW from MQ, passes it to an instance of FixtureActionProcessor which retrieves 
+ * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
+ * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
+ * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
+ * by the JVM.
+ */
 public class ResourceWorkerMap
 {
   private static ResourceWorkerMap workerMap= null;

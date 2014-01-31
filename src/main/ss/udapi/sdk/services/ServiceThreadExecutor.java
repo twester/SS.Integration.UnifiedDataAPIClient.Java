@@ -18,6 +18,7 @@ package ss.udapi.sdk.services;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+/* Threadpool for the main services used by the SDK */
 public class ServiceThreadExecutor
 {
   private static Executor exec;

@@ -153,15 +153,15 @@ public class ResourceImpl implements Resource
        */
       if (MQListener.isRunning() == false)
       {
-        MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
-        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest, availableResources));
+        MQListener.setResources(new ResourceSession(amqpDest, getId()));
+        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
         
         EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
         ServiceThreadExecutor.executeTask(echoSender);
       }   
       
       //MQListener.setResources does not allow duplicates so fall throughs from the above false will be ignored
-      MQListener.setResources(new ResourceSession(amqpDest, availableResources, getId()));
+      MQListener.setResources(new ResourceSession(amqpDest, getId()));
       actionExecuter.execute(new ConnectedAction(streamingEvents));
       connected = true;
     }

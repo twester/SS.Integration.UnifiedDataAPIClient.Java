@@ -19,10 +19,12 @@ import org.apache.log4j.Logger;
 
 import ss.udapi.sdk.ResourceImpl;
 
+
 /* Wraps up a UOW received from the Sporting Solutions systems via the MQ System (RabbitMQ) as runnable.
  * 
- * The WorkQueueMonitor picks up a UOW from MQ, assigns to the ResourceImpl associated with that MQ Queue (which corresponds
- * to a fixture and executes it using one of the threads from this executor service's thread pool.  The UOW from MQ is 
+ * The WorkQueueMonitor picks up a UOW from MQ, passes it to an instance of FixtureActionProcessor which retrieves 
+ * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
+ * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
  * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
  * by the JVM.
  */

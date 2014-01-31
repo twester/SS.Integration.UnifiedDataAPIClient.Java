@@ -23,14 +23,12 @@ import ss.udapi.sdk.model.ServiceRequest;
 public class ResourceSession
 {
   private String amqpDest = null;
-  private ServiceRequest availableResources = null;
   private String resourceId = null;
 
   
-  public ResourceSession(String amqpDest, ServiceRequest availableResources, String resourceId) {
+  public ResourceSession(String amqpDest, String resourceId) {
     synchronized(this) {
       this.amqpDest = amqpDest;
-      this.availableResources = availableResources;
       this.resourceId = resourceId;
     }
   }
@@ -39,13 +37,6 @@ public class ResourceSession
   public String getAmqpDest() {
     synchronized(this) {
       return amqpDest;
-    }
-  }
-
-
-  public ServiceRequest getAvailableResources() {
-    synchronized(this) {
-      return availableResources;
     }
   }
 
