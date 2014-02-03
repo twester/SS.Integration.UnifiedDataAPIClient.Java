@@ -53,7 +53,7 @@ public final class SystemProperties
   }
 
 
-  private static void getSystemProperties() {
+  private synchronized static void getSystemProperties() {
     
     systemProperties = new Properties();
     logger.debug("Loading properties file");

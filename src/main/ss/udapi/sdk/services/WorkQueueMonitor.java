@@ -42,7 +42,7 @@ public class WorkQueueMonitor implements Runnable
   }
 
   
-  public static WorkQueueMonitor getMonitor() {
+  public synchronized static WorkQueueMonitor getMonitor() {
     if (monitor == null) {
       monitor = new WorkQueueMonitor();
       ActionThreadExecutor.createActionThreadExecutor();

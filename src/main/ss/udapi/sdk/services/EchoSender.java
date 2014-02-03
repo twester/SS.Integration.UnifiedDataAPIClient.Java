@@ -55,7 +55,7 @@ public class EchoSender implements Runnable
   }
   
   
-  public static EchoSender getEchoSender(String amqpDest, ServiceRequest resources) {
+  public synchronized static EchoSender getEchoSender(String amqpDest, ServiceRequest resources) {
     if (instance == null) {
       instance = new EchoSender(amqpDest, resources);
     }

@@ -35,7 +35,7 @@ public class CtagResourceMap
   }
 
   
-  protected static CtagResourceMap getCtagMap() {
+  protected synchronized static CtagResourceMap getCtagMap() {
     if (cTagMap == null) {
       cTagMap = new CtagResourceMap();
     }

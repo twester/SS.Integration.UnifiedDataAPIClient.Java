@@ -40,7 +40,7 @@ public class WorkQueue
   }
 
   
-  public static WorkQueue getWorkQueue() {
+  public synchronized static WorkQueue getWorkQueue() {
     if (workQueue == null)
     {
       workQueue = new WorkQueue();

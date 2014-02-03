@@ -36,7 +36,7 @@ public class ResourceWorkQueue
   }
   
 
-  public static ResourceWorkQueue getWorkQueue() {
+  public synchronized static ResourceWorkQueue getWorkQueue() {
     if (workQueue == null) {
       workQueue = new ResourceWorkQueue();
     }

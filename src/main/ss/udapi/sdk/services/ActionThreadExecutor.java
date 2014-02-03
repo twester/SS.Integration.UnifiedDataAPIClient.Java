@@ -31,10 +31,13 @@ public class ActionThreadExecutor
   private static  Executor exec;
   private static ActionThreadExecutor instance = null;
   
-  private ActionThreadExecutor()
+  ActionThreadExecutor()
   {
-    int workerThreads = Integer.parseInt(SystemProperties.get("ss.workerThreads"));
-    exec = Executors.newFixedThreadPool(workerThreads);
+    synchronized(this)
+    {
+      int workerThreads = Integer.parseInt(SystemProperties.get("ss.workerThreads"));
+      exec = Executors.newFixedThreadPool(workerThreads);
+    }
   }
 
   /*

@@ -43,7 +43,7 @@ public class EchoResourceMap
   }
 
   
-  public static EchoResourceMap getEchoMap(){
+  public synchronized static EchoResourceMap getEchoMap(){
     if (echoMap == null) {
       echoMap = new EchoResourceMap();
     }

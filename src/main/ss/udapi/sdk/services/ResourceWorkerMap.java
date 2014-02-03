@@ -39,7 +39,7 @@ public class ResourceWorkerMap
   }
   
   
-  public static ResourceWorkerMap getWorkerMap() {
+  public synchronized static ResourceWorkerMap getWorkerMap() {
     if (workerMap == null) {
       workerMap = new ResourceWorkerMap();
     }

@@ -58,22 +58,22 @@ public class MQListener implements Runnable
   
   
   
-  public static MQListener getMQListener(String amqpDest) {
+  public synchronized static MQListener getMQListener(String amqpDest) {
     /* This lock ensures there cannot be multiple instantiations which can lead to a corrupt object without synchronization,
      * which in turn cannot be done on a here as the access is static.
      */
-    while(!creationLock.tryLock())
-    {}
+//    while(!creationLock.tryLock())
+//    {}
 
     try {
-      creationLock.lock();
+//      creationLock.lock();
       logger.debug("Retrieving MQListener or create it if it doesn't exist");
       if (instance == null) {
         instance = new MQListener(); 
       } 
       return instance;
     } finally {
-      creationLock.unlock();
+//      creationLock.unlock();
     }
   }
   

@@ -45,12 +45,12 @@ public class HttpServices
   private static ConnectionKeepAliveStrategy requestTimeout = buildTimeout(Integer.parseInt(SystemProperties.get("ss.http_request_timeout")));
   private static ConnectionKeepAliveStrategy loginTimeout = buildTimeout(Integer.parseInt(SystemProperties.get("ss.http_login_timeout")));
   private static String serviceAuthToken = null;
-  private static boolean compressionEnabled;
+  private boolean compressionEnabled;
   
   
   //Get a list of available endpoints that Sporting Solutions provides.
   public ServiceRequest getSession(String url, boolean compressionEnabled) {
-    HttpServices.compressionEnabled = compressionEnabled;
+    compressionEnabled = compressionEnabled;
     List<RestItem> loginRestItems = null;
     ServiceRequest loginResp = new ServiceRequest();
 
