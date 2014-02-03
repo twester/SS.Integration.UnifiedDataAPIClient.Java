@@ -461,3 +461,7 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
 2014-02-03 17:24:42,499 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
 2014-02-03 17:24:42,501 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-03 17:26:49,437 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-03 17:26:49,438 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-03 17:26:49,440 [main] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-03 17:26:50,475 [main] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"13111e0a-d60a-4d03-8052-4e7e345b5891;2014-02-03T17:26:49.553Z"}

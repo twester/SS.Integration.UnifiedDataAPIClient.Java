@@ -107,8 +107,8 @@ public class EchoSender implements Runnable
             while(keyIter.hasNext()) {
               String resourceId = keyIter.next();
               System.out.println("------>Echo error for resource[" + resourceId + "]");
-              ResourceImpl x = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
-              System.out.println("---------------------> resource in echo error" + x.toString());
+              ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
+              System.out.println("---------------------> resource in echo error" + resource.toString());
               MQListener.disconnect(resourceId);
             }
   

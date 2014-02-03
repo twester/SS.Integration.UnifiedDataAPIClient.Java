@@ -39,10 +39,11 @@ public class ResourceWorkerMap
   }
   
   
-  public synchronized static ResourceWorkerMap getWorkerMap() {
+  public static ResourceWorkerMap getWorkerMap() {
     if (workerMap == null) {
       workerMap = new ResourceWorkerMap();
     }
+    System.out.println("-------------------workerMap>" + workerMap.toString());
     return workerMap;
   }
   
@@ -56,7 +57,6 @@ public class ResourceWorkerMap
   
   public static Resource getResourceImpl(String resourceId) {
     System.out.println("----------->retrieving resourceImpl[" + resourceId + "]" + map.get(resourceId).toString());
-
     
     return map.get(resourceId);
   }
