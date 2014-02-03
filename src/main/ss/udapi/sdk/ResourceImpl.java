@@ -77,7 +77,7 @@ public class ResourceImpl implements Resource
     
     if(ResourceWorkerMap.exists(getId()) == true) {
       isStreaming = true;
-//      streamingEvents = eventsMap.getEvents(getId());
+      streamingEvents = eventsMap.getEvents(getId());
     } else {
       ResourceWorkerMap.addResource(getId(), this);
       EchoResourceMap.getEchoMap().addResource(getId());
@@ -116,7 +116,7 @@ public class ResourceImpl implements Resource
    */
   private void startStreaming(List<Event> events, int echoSenderInterval, int maxMissedEchos) {
     if (events != null) {
-//      eventsMap.addEvents(getId(), events);
+      eventsMap.addEvents(getId(), events);
     }
     if (echoSenderInterval > 0) {
       SystemProperties.setProperty("ss.echo_max_missed_echos", Integer.toString(maxMissedEchos));

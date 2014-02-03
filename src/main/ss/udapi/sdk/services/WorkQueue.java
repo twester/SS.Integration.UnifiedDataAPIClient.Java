@@ -16,6 +16,8 @@
 package ss.udapi.sdk.services;
 
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
@@ -40,7 +42,7 @@ public class WorkQueue
   }
 
   
-  public synchronized static WorkQueue getWorkQueue() {
+  public static WorkQueue getWorkQueue() {
     if (workQueue == null)
     {
       workQueue = new WorkQueue();

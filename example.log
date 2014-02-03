@@ -138,3 +138,326 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-03 14:02:00,478 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file: sdk.properties: sdk.properties
 2014-02-03 14:03:02,984 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
 2014-02-03 14:03:02,986 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file: sdk.properties: sdk.properties
+2014-02-03 15:25:24,187 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:25:24,214 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:36:23,648 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:36:23,652 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:37:17,930 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:38:33,622 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:39:15,907 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:40:30,188 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:40:30,191 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:41:47,473 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:41:47,476 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:45:21,095 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:45:21,099 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:45:21,099 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:45:21,099 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:45:21,099 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:45:21,100 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:45:21,100 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:45:21,100 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:45:21,100 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:45:21,100 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:45:21,101 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:45:21,101 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:45:21,101 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:45:21,101 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:46:26,843 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:46:26,843 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:46:26,844 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:46:26,844 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:46:26,844 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:46:26,844 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:46:26,845 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:46:26,845 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:46:26,845 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:46:26,845 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:46:26,846 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:46:26,846 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:46:26,846 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:48:05,801 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:48:05,803 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:48:05,803 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:48:05,803 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:48:05,804 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:48:05,804 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:48:05,804 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:48:05,804 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:48:05,804 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:48:05,805 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:48:05,805 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:48:05,805 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:48:05,805 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:49:08,298 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:49:08,299 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:49:08,299 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:49:08,299 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:49:08,299 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:49:08,300 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:49:08,300 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:49:08,300 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:49:08,300 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:49:08,301 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:49:08,301 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:49:08,301 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:49:08,302 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:49:41,351 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:49:41,352 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:49:41,352 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:49:41,353 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:49:41,353 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:49:41,353 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:49:41,353 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:49:41,353 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:49:41,354 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:49:41,354 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:49:41,354 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:49:41,380 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:49:41,380 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:00,309 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:00,310 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:00,310 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:00,311 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:00,311 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:51:00,311 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:00,311 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:00,312 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:00,312 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:00,312 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:00,312 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:00,313 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:00,313 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:10,071 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:10,072 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:10,072 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:10,072 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:10,072 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:51:10,073 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:10,073 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:10,073 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:10,073 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:10,074 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:10,074 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:10,074 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:10,074 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:42,743 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:42,743 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:42,743 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:42,744 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:42,744 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:51:42,744 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:42,744 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:42,745 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:42,745 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:42,745 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:42,746 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:42,746 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:42,746 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:51,719 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:51,720 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:51,720 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:51,720 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:51,720 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:51:51,721 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:51,721 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:51,721 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:51,721 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:51:51,722 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:51:51,722 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:51:51,722 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:51:51,722 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:02,847 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:02,848 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:02,848 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:02,848 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:02,849 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:52:02,849 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:02,849 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:02,850 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:02,850 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:02,850 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:02,850 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:02,851 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:02,851 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:21,480 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:21,481 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:21,481 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:21,481 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:21,481 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:52:21,482 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:21,482 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:21,482 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:21,482 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:21,483 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:21,483 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:21,483 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:21,483 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:33,276 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:33,277 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:33,277 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:33,277 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:33,278 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:52:33,278 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:33,278 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:33,279 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:33,279 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:33,279 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:33,280 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:33,280 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:33,280 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:47,110 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:47,111 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:47,111 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:47,111 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:47,111 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:52:47,111 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:47,112 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:47,112 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:47,112 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:52:47,113 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:52:47,113 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:52:47,113 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:52:47,113 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:53:16,169 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:53:16,170 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:53:16,170 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:53:16,170 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:53:16,170 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:53:16,171 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:53:16,171 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:53:16,171 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:53:16,171 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:53:16,172 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:53:16,172 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:53:16,172 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:53:16,172 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:53:27,336 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:53:27,336 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:53:27,337 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:53:27,337 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:53:27,337 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:53:27,337 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:53:27,337 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:53:27,338 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:53:27,338 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:53:27,338 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:53:27,339 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:53:27,339 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:53:27,339 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:55:22,394 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:55:22,397 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:55:22,398 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:55:22,398 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:55:22,398 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:55:22,398 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-03 15:55:22,399 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:55:22,399 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:55:22,399 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:55:22,399 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 15:55:22,400 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-03 15:55:22,400 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-03 15:55:22,400 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-03 15:55:22,400 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-03 16:20:52,052 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-03 16:20:52,054 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.
+java.io.FileNotFoundException: sdk.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.services.SystemProperties.getSystemProperties(SystemProperties.java:70)
+	at ss.udapi.sdk.services.SystemProperties.get(SystemProperties.java:49)
+	at ss.udapi.sdk.services.HttpServices.<clinit>(HttpServices.java:45)
+	at ss.udapi.sdk.services.EchoSender.<clinit>(EchoSender.java:42)
+	at ss.udapi.sdk.services.EchoSenderTest.setUp(EchoSenderTest.java:32)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+2014-02-03 16:32:52,405 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-03 16:32:52,407 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.
+java.io.FileNotFoundException: sdk.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.services.SystemProperties.getSystemProperties(SystemProperties.java:70)
+	at ss.udapi.sdk.services.SystemProperties.get(SystemProperties.java:49)
+	at ss.udapi.sdk.services.EchoSenderTest.setUp(EchoSenderTest.java:33)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+2014-02-03 17:23:52,757 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-03 17:23:52,759 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.
+java.io.FileNotFoundException: sdk.properties (The system cannot find the file specified)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at ss.udapi.sdk.services.SystemProperties.getSystemProperties(SystemProperties.java:71)
+	at ss.udapi.sdk.services.SystemProperties.get(SystemProperties.java:49)
+	at ss.udapi.sdk.services.HttpServices.<clinit>(HttpServices.java:45)
+	at ss.udapi.sdk.services.EchoSender.<clinit>(EchoSender.java:42)
+	at ss.udapi.sdk.services.EchoSenderTest.setUp(EchoSenderTest.java:44)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:24)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:271)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:70)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:50)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+2014-02-03 17:24:42,499 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-03 17:24:42,501 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties

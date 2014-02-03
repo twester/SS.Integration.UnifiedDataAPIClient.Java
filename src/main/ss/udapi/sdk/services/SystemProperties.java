@@ -29,7 +29,7 @@ import org.apache.log4j.Logger;
  * Loads properties from multiple property files if they exist.  Otherwise provides reasonable defaults and logs the fact that
  * a property was not found in the properties file.
  */
-public final class SystemProperties
+public class SystemProperties
 {
   private static boolean propertiesLoaded = false;
   private static Properties systemProperties;
@@ -49,6 +49,7 @@ public final class SystemProperties
       getSystemProperties();
       propertiesLoaded = true;
     }
+    System.out.println("--------------------->requesting " + key + "---" + ourMap.get(key));
     return ourMap.get(key);
   }
 
@@ -82,7 +83,7 @@ public final class SystemProperties
         }
       }
     } catch (IOException ex) {
-      logger.error("Can't load the properties file.",ex);
+      logger.error("Can't load the properties file.  sdk.properties");
     }
   }
 
@@ -90,6 +91,13 @@ public final class SystemProperties
   //Sets values, such as credentials which can be set by the client code via the SDK public API. 
   public static void setProperty(String key, String value) {
     ourMap.put(key, value);
+  }
+  
+  
+  //this is needed for unit testing to avoid loading the properties file
+  protected static void setLoaded()
+  {
+    propertiesLoaded = true;
   }
 
 }

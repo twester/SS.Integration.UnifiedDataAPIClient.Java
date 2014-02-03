@@ -1,16 +1,17 @@
 package ss.udapi.sdk.services;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
 public class CtagResourceMapTest
 {
-  CtagResourceMap.getCtagMap();
 
   @Before
   public void setUp() throws Exception
   {
+    CtagResourceMap.initCtagMap();
   }
 
 
@@ -39,4 +40,5 @@ public class CtagResourceMapTest
     assertTrue(CtagResourceMap.getResource("tagId2") == null);
   }
 
+  
 }

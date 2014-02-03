@@ -20,6 +20,7 @@ import ss.udapi.sdk.interfaces.Session;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
+import ss.udapi.sdk.services.CtagResourceMap;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
@@ -56,7 +57,8 @@ public class SessionImpl implements Session
      * This is not strictly part of the session initialization but is needed for any services to work :-(
      */
     ServiceThreadExecutor.createExecutor();
-
+    CtagResourceMap.initCtagMap();
+    
     GetRoot(serverURL,credentials, true);
   }
 

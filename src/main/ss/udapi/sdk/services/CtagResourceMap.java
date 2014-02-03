@@ -35,11 +35,11 @@ public class CtagResourceMap
   }
 
   
-  protected synchronized static CtagResourceMap getCtagMap() {
+  public synchronized static void initCtagMap() {
     if (cTagMap == null) {
       cTagMap = new CtagResourceMap();
     }
-    return cTagMap;
+//    return cTagMap;
   }
   
   

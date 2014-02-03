@@ -84,7 +84,7 @@ public class EchoResourceMap
   protected void resetEchoCount(String resourceId)
   {
     map.replace(resourceId, 0);
-    logger.info("Echo received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
+    logger.info("Echo or message received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
   }
 
 
@@ -107,15 +107,21 @@ public class EchoResourceMap
       String resourceId = keyIter.next();
       int count = (map.get(resourceId));
       if (count == (retries)){
+        System.out.println("--------------->" + resourceId + ". added to defaulters" + (map.get(resourceId)));
         defaulters.add(resourceId);
       }
       map.replace(resourceId, count+1);
 
       System.out.println("--------------->echo count increased for: " + resourceId + ". Current count " + (map.get(resourceId)));
     }
-
     return defaulters;
   }
   
+  
+  //Only used for unit tests
+  protected Integer getEchoCount(String resourceId)
+  {
+    return map.get(resourceId);
+  }
   
 }
