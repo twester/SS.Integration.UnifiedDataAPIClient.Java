@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ public class StreamEchoTest
   private StreamEcho streamEcho;
   
   @Before
-  public void prepStreamEcho()
+  public void setUp()
   {
     streamEcho = new StreamEcho();
   }

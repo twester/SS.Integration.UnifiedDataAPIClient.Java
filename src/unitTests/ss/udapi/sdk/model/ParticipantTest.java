@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,7 @@ public class ParticipantTest
   
   
   @Before
-  public void prepParticipants()  {
+  public void setUp()  {
     participant = new Participant();
   }
 

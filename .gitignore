@@ -5,3 +5,4 @@ dist/
 example.log.*
 html/
 conf/
+TEST*txt

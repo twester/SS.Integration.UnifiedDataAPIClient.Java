@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +10,11 @@ import static org.junit.Assert.*;
 
 public class ServiceRequestTest
 {
-  ServiceRequest request;
+  private ServiceRequest request;
   private ModelTestHelper testHelper;
   
   @Before
-  public void prepServiceRequest()
+  public void setUp()
   {
     testHelper = new ModelTestHelper();
     testHelper.buildRestItems();

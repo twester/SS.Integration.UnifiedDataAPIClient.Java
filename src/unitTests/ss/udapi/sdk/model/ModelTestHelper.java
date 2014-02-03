@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import java.util.ArrayList;
 import java.util.List;

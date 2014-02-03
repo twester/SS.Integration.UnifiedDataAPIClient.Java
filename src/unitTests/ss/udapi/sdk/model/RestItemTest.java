@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class RestItemTest
   private ModelTestHelper testHelper;
   
   @Before
-  public void prepRestItem()
+  public void setUp()
   {
     testHelper = new ModelTestHelper();
     testHelper.buildRestItems();

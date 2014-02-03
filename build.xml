@@ -147,6 +147,18 @@
   
   
   
+  
+  
+  <!--  =================================
+        Test tasks
+        =================================
+  -->    
+  
+  <path id="test.dir">
+        <pathelement location="build/unitTests/"/>
+  </path>    
+
+  
   <target name="buildTests" depends="jar">
     <mkdir dir="build/unitTests"/>
     <javac srcdir="src/unitTests" destdir="build/unitTests" includeAntRuntime="false">
@@ -155,29 +167,28 @@
       <classpath refid="sdk.lib" />
     </javac>
   </target>
+
   
-  <path id="test.dir">
-        <pathelement location="build/unitTests/"/>
-    </path>    
-  
-  
-  <target name="testModels">
+  <target name="testSDK">
     <junit printsummary="yes" fork="no" haltonfailure="yes">
       <formatter type="plain"/>
       <classpath refid="project.lib" />
       <classpath refid="test.lib" />
       <classpath refid="sdk.lib" />
       <classpath refid="test.dir" />
-      
       <batchtest fork="yes">
-          <fileset dir="build/unitTests/">                  
-              <include name="**/*Tests.class"/>
-          </fileset>
+        <fileset dir="build/unitTests/">                  
+          <include name="**/*Test.class"/>
+        </fileset>
       </batchtest>
     </junit>
   </target>
   
-  
+
+  <target name="runAllTests">
+    <antcall target="buildSDK" />
+    <antcall target="testModels" />
+  </target>
   
 
   

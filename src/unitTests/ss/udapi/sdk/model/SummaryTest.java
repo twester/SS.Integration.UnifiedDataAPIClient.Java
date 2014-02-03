@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +14,7 @@ public class SummaryTest
 
   
   @Before
-  public void prepSummary()
+  public void setUp()
   {
     summary = new Summary();
     modelHelper = new ModelTestHelper();

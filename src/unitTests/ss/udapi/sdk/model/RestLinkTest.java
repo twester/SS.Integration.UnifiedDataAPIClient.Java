@@ -1,4 +1,4 @@
-package ss.udapi.sdk.examples.model;
+package ss.udapi.sdk.model;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +15,7 @@ public class RestLinkTest
   
   
   @Before
-  public void preRestLink()
+  public void setUp()
   {
     testHelper = new ModelTestHelper();
     testHelper.buildLinks();
