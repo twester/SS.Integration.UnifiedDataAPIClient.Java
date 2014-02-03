@@ -153,37 +153,37 @@ public class MQListener implements Runnable
         CtagResourceMap.addCtag(ctag, session.getResourceId());
     
         logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
-
+      
+        /*
+         * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
+         * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
+         * to the number of active queue listeners.
+         */
+        while (true) {
+          while (resourceSessionList.isEmpty() == false) {
+            session = resourceSessionList.remove();
+            try {
+              resourceQURI = new URI(session.getAmqpDest());
+              path = resourceQURI.getRawPath();
+              queue = path.substring(path.indexOf('/',1)+1);
+              
+              if (resourceChannMap.containsKey(session.getResourceId()) == false) {
+                ctag=channel.basicConsume(queue, true, consumer);
+                resourceChannMap.put(session.getResourceId(), ctag);
+                CtagResourceMap.addCtag(ctag, session.getResourceId());
+                logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+              }
+            } catch (IOException ex) {
+              logger.debug(ex);
+            } catch (URISyntaxException ex) {
+              logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + session.getAmqpDest());
+            }
+          }
+          Thread.sleep(1000);
+        } 
       }
       
-      /*
-       * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
-       * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
-       * to the number of active queue listeners.
-       */
-      while (true) {
-        while (resourceSessionList.isEmpty() == false) {
-          session = resourceSessionList.remove();
-          try {
-            resourceQURI = new URI(session.getAmqpDest());
-            path = resourceQURI.getRawPath();
-            queue = path.substring(path.indexOf('/',1)+1);
-            
-            if (resourceChannMap.containsKey(session.getResourceId()) == false) {
-              ctag=channel.basicConsume(queue, true, consumer);
-              resourceChannMap.put(session.getResourceId(), ctag);
-              CtagResourceMap.addCtag(ctag, session.getResourceId());
-              logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
-            }
-          } catch (IOException ex) {
-            logger.debug(ex);
-          } catch (URISyntaxException ex) {
-            logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + session.getAmqpDest());
-          }
-        }
-        Thread.sleep(1000);
-      } 
-       // for java 1.7 this syntax is preferable: catch(URISyntaxException | UnsupportedEncodingException ex)
+      // for java 1.7 this syntax is preferable: catch(URISyntaxException | UnsupportedEncodingException ex)
     } catch(URISyntaxException ex) {
       logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
       ex.printStackTrace();

@@ -32,9 +32,10 @@ public class ServiceThreadExecutor
    * more than three in total.  So if the thread pool throws java.util.concurrent.RejectedExecutionException
    * then something bad *has* happened and needs to be investigated not covered up as would be the case if we had more threads. 
    */
+  private static final int MAX_SERVICE_THREADS = 3;
 
   public static void createExecutor() {
-    exec = Executors.newFixedThreadPool(3);
+    exec = Executors.newFixedThreadPool(MAX_SERVICE_THREADS);
   }
   
   public static void executeTask(Runnable task) {

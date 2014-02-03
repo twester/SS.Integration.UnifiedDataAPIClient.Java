@@ -35,6 +35,7 @@ public class WorkQueueMonitor implements Runnable
   private static Logger logger = Logger.getLogger(WorkQueueMonitor.class);
   private static WorkQueueMonitor monitor = null;
   private WorkQueue workQueue = WorkQueue.getWorkQueue();
+  private static final String THREAD_NAME = "Work_Queue_Thread";
   
   private WorkQueueMonitor()
   {
@@ -53,18 +54,21 @@ public class WorkQueueMonitor implements Runnable
   
   @Override
   public void run() {
-    logger.info("Work queue Monitor initialized and waiting");
+    if(Thread.currentThread().getName().equals(THREAD_NAME) == false) {
+      logger.info("Work queue Monitor initialized and waiting");
     
-    //Monitor the queue
-    while(true) {
-      //When a UOW comes along call FixtureActionProcessor to grab the associated ResourceImpl and process it.
-      String task = workQueue.getTask();
-      logger.debug("Queue Read: " + task.substring(0,40));
-      try {
-        FixtureActionProcessor processor = new FixtureActionProcessor(task);
-        ActionThreadExecutor.executeTask(processor);
-      } catch (Exception ex) {
-        logger.error("Work queue monitor has been interrupted");
+      //Monitor the queue
+      while(true) {
+        //When a UOW comes along call FixtureActionProcessor to grab the associated ResourceImpl and process it.
+        String task = workQueue.getTask();
+        logger.debug("Queue Read: " + task.substring(0,40));
+        try {
+          FixtureActionProcessor processor = new FixtureActionProcessor(task);
+          ActionThreadExecutor.executeTask(processor);
+        } catch (Exception ex) {
+          logger.error("Work queue monitor has been interrupted");
+        }
+        Thread.currentThread().setName(THREAD_NAME);
       }
     }
   }

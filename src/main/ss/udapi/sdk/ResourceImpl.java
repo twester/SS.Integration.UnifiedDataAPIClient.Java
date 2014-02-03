@@ -73,15 +73,6 @@ public class ResourceImpl implements Resource
     myTasks = ResourceWorkQueue.addQueue(getId());
     logger.debug("Instantiated Resource: " + restItem.getName());
     
-    
-    /*
-     * This is not strictly part of the initialization but is needed for Resources to get any work.  As we cannot ask the client code
-     * to monitor our threads we have to do it.  Not the cleanest way of doing things but it does work.
-     */
-    WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
-    ServiceThreadExecutor.executeTask(queueWorker);
-    
-    
     if(ResourceWorkerMap.exists(getId()) == true) {
       isStreaming = true;
 //      streamingEvents = eventsMap.getEvents(getId());
@@ -156,10 +147,14 @@ public class ResourceImpl implements Resource
      * are only available at this point) we are starting them here.  We could retrieve and set this up earlier, but it that would mean
      * querying teh client resources twice on start up.
      */
-      MQListener.setResources(new ResourceSession(amqpDest, getId()));
-      ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
-      EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
-      ServiceThreadExecutor.executeTask(echoSender);
+      synchronized(this) {
+        WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
+        ServiceThreadExecutor.executeTask(queueWorker);
+        MQListener.setResources(new ResourceSession(amqpDest, getId()));
+        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
+        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
+        ServiceThreadExecutor.executeTask(echoSender);
+      }
       
       //MQListener.setResources does not allow duplicates so fall throughs from the above false will be ignored
       MQListener.setResources(new ResourceSession(amqpDest, getId()));
