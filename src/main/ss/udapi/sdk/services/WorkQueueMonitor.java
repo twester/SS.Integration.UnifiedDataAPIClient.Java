@@ -15,9 +15,6 @@
 
 package ss.udapi.sdk.services;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import org.apache.log4j.Logger;
 
 /* Monitors for any new UOWs on WorkQueue and dispatches it to ResourceImpl instances for processing.

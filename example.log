@@ -705,3 +705,222 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-04 11:01:06,567 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"83238476-8878-4be1-9d7a-f89e2610b3df;2014-02-04T11:01:06.185Z"}
 2014-02-04 11:01:07,585 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"83238476-8878-4be1-9d7a-f89e2610b3df;2014-02-04T11:01:06.185Z"}
 2014-02-04 11:01:08,602 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"83238476-8878-4be1-9d7a-f89e2610b3df;2014-02-04T11:01:06.185Z"}
+2014-02-04 11:06:23,655 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 11:06:23,656 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 11:06:23,869 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:06:24,241 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:06:24,869 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:06:25,262 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:06:25,869 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:06:26,283 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:06:26,869 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:06:27,306 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:06:27,869 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:06:27,878 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:06:28,323 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:06:29,343 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:06:30,392 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9c6a933a-806f-4b0d-8813-602f2fec37d2;2014-02-04T11:06:23.900Z"}
+2014-02-04 11:07:05,301 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 11:07:05,303 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 11:07:05,479 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:07:05,871 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:07:06,477 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:07:06,892 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:07:07,477 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:07:07,912 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:07:08,477 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:07:08,933 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:07:09,477 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:07:09,481 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:07:09,978 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:07:10,996 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:07:12,156 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"7f01d89d-38ce-450c-9d56-eda6f6053b86;2014-02-04T11:07:05.515Z"}
+2014-02-04 11:09:14,530 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 11:09:14,532 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 11:09:14,697 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:09:15,090 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:09:15,696 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:09:16,108 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:09:16,696 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:09:17,127 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:09:17,696 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:09:18,147 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:09:18,696 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:09:18,701 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:09:19,167 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:09:20,187 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:09:21,206 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1aa3f3c0-3d53-4062-9323-1ea0378ad5a3;2014-02-04T11:09:14.732Z"}
+2014-02-04 11:59:07,341 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 11:59:07,343 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 11:59:07,519 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:59:07,913 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"365db02c-d083-421b-b980-d064c959feab;2014-02-04T11:59:07.553Z"}
+2014-02-04 11:59:08,932 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"365db02c-d083-421b-b980-d064c959feab;2014-02-04T11:59:07.553Z"}
+2014-02-04 11:59:09,950 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"365db02c-d083-421b-b980-d064c959feab;2014-02-04T11:59:07.553Z"}
+2014-02-04 11:59:11,522 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:59:12,522 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:59:13,522 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:59:14,522 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 11:59:15,522 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 12:11:46,888 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 12:11:46,890 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 12:11:47,063 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 12:11:47,473 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"8eb3bf62-b0f1-4424-87c6-57bb32898937;2014-02-04T12:11:47.095Z"}
+2014-02-04 12:11:48,493 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"8eb3bf62-b0f1-4424-87c6-57bb32898937;2014-02-04T12:11:47.095Z"}
+2014-02-04 12:11:49,512 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"8eb3bf62-b0f1-4424-87c6-57bb32898937;2014-02-04T12:11:47.095Z"}
+2014-02-04 12:11:51,066 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 12:11:52,066 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 12:11:53,066 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 12:11:54,066 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 12:11:55,066 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 12:59:36,779 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 12:59:36,782 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 12:59:36,839 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:00:19,678 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:00:19,680 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:00:19,729 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:02:53,043 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:02:53,044 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:02:53,094 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:03:22,863 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:03:22,864 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:03:22,912 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:04:45,262 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:04:45,264 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:04:45,317 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:12:37,532 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:12:37,534 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:12:37,585 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:13:27,730 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:13:27,731 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:13:27,802 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:22:12,686 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:22:12,687 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:25:49,607 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:25:49,609 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:27:08,826 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:27:08,828 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:30:28,946 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:30:28,948 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:33:58,768 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:33:58,770 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:36:47,495 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:36:47,497 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:37:20,542 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:37:20,544 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:37:20,603 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:37:57,101 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:37:57,103 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:38:52,268 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:38:52,269 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:38:52,328 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:39:19,338 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:39:19,339 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:39:19,399 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 13:42:23,689 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:42:23,690 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:43:45,406 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:43:45,407 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:54:21,708 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:54:21,709 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:54:21,714 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-04 13:58:20,984 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:58:20,985 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:58:20,989 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-04 13:58:41,164 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:58:41,166 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:58:41,171 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-04 13:59:51,277 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 13:59:51,278 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 13:59:51,283 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-04 13:59:51,285 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-04 14:22:58,160 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 14:22:58,162 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 14:32:15,559 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 14:32:15,560 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 14:38:24,755 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 14:38:24,756 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 14:45:17,709 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 14:45:17,711 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 14:47:34,450 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 14:47:34,452 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 14:53:03,079 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 14:53:03,081 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:10:22,984 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:10:22,986 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:13:17,310 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:13:17,311 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:13:18,036 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:13:18,077 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 403
+2014-02-04 15:14:13,412 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:14:13,413 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:14:27,795 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:14:27,797 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:14:28,566 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:14:28,582 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 403
+2014-02-04 15:14:59,632 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:14:59,634 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:15:00,580 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:15:01,345 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 403
+2014-02-04 15:16:04,361 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:16:04,362 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:16:05,073 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:16:05,177 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 403
+2014-02-04 15:17:45,963 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:17:45,965 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:17:46,675 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:17:46,695 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 403
+2014-02-04 15:18:22,946 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:18:22,948 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:18:23,559 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:18:23,651 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 403
+2014-02-04 15:20:26,892 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:20:26,893 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:20:27,898 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 15:20:27,912 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://xxx.testurl.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-04 15:20:28,058 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 404
+2014-02-04 15:43:52,433 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:43:52,435 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:43:52,601 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 15:43:52,981 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0143d1e5-ab9a-431d-8ef8-fe6bd34e1ab9;2014-02-04T15:43:52.631Z"}
+2014-02-04 15:43:54,003 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0143d1e5-ab9a-431d-8ef8-fe6bd34e1ab9;2014-02-04T15:43:52.631Z"}
+2014-02-04 15:43:55,023 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0143d1e5-ab9a-431d-8ef8-fe6bd34e1ab9;2014-02-04T15:43:52.631Z"}
+2014-02-04 15:43:56,605 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 15:43:57,605 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:43:58,605 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:43:59,605 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:44:00,605 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:44:55,734 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 15:44:55,735 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 15:44:55,881 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 15:44:56,383 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 15:44:56,384 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"72f5d6cb-ba34-4e12-8fb4-fbbcba8a6cc6;2014-02-04T15:44:55.911Z"}
+2014-02-04 15:44:57,536 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 15:44:57,536 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"72f5d6cb-ba34-4e12-8fb4-fbbcba8a6cc6;2014-02-04T15:44:55.911Z"}
+2014-02-04 15:44:58,688 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 15:44:58,688 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"72f5d6cb-ba34-4e12-8fb4-fbbcba8a6cc6;2014-02-04T15:44:55.911Z"}
+2014-02-04 15:44:59,884 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 15:45:00,884 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:45:01,884 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:45:02,884 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 15:45:03,884 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 16:04:06,336 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:06,376 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:06,378 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:06,379 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:06,380 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-04 16:04:20,626 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:20,688 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:20,689 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:20,691 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:04:20,692 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-04 16:08:42,246 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:08:42,285 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:08:42,288 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:08:42,291 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:08:42,293 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-04 16:09:09,558 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:09:09,597 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:09:09,599 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:09:09,601 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 16:09:09,603 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-04 16:09:09,603 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g

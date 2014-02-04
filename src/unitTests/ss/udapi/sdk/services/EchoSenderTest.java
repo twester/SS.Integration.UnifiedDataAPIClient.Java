@@ -1,71 +1,87 @@
 package ss.udapi.sdk.services;
 
-import ss.udapi.sdk.ResourceImpl;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static org.junit.Assert.*;
-
 import org.junit.runner.RunWith;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.runners.MockitoJUnitRunner;
-
 import static org.mockito.Mockito.*;
-import static org.mockito.Matchers.*;
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class EchoSenderTest
 {
   private EchoSender echoSender = null;
   private HttpServices httpSvcs = mock(HttpServices.class);
-  private ResourceImpl resource = mock(ResourceImpl.class);
-  private ServiceRequest resources;
+  private ServiceRequest resRequest;
   private EchoResourceMap echoMap = null;
-  private ResourceWorkerMap workMap = null; 
-
   
   
   @Before
   public void setUp() throws Exception
   {
-    String resourceBody = "[{\"Name\":\"Fernando v Jim\",\"Content\":{\"Id\":\"testresource2\",\"StartTime\":\"2014-01-14T11:14:16Z\",\"Sequence\":160,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fernando\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"Jim\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"test\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/snapshot/Football/testresource2/eW-m1htDbDHblJ3hBGH8G-PJYvsy\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource2/I_jl9FutdrjWPmMFe5NXHZbxbvlE\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/sequence/Football/testresource2/2BrWDeuhdeBEvoxHkJRFsF5mVEs4\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/batchecho/IWrPmnacWoSOoz_kOqQNjI7SBSY0\",\"Verbs\":[\"Post\"]}]},{\"Name\":\"Fern v NotFern\",\"Content\":{\"Id\":\"testresource1\",\"StartTime\":\"2014-01-21T14:54:54Z\",\"Sequence\":104,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fern\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"NotFern\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"AGame\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/snapshot/Football/testresource1/bYQ4NJ0ckn-oAMwylfJwzMbAREQ2\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/sequence/Football/testresource1/DlUzE_85HvmneGPFDLws4eKb9_Iz\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/echo/wjIyvcuD67AChr32xwpJoFDQ0pw0\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/batchecho/1eJp1LYuuRROXMjlPMxkhuvDJrBD\",\"Verbs\":[\"Post\"]}]}]";
+    String resourceBody = "[{\"Name\":\"Fernando v Jim\",\"Content\":{\"Id\":\"testresource2\",\"StartTime\":\"2014-01-14T11:14:16Z\",\"Sequence\":160,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fernando\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"Jim\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"test\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/snapshot/Football/testresource2/eW-m1htDbDHblJ3hBGH8G-PJYvsy\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/stream/Football/testresource2/I_jl9FutdrjWPmMFe5NXHZbxbvlE\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/sequence/Football/testresource2/2BrWDeuhdeBEvoxHkJRFsF5mVEs4\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/stream/batchecho/IWrPmnacWoSOoz_kOqQNjI7SBSY0\",\"Verbs\":[\"Post\"]}]},{\"Name\":\"Fern v NotFern\",\"Content\":{\"Id\":\"testresource1\",\"StartTime\":\"2014-01-21T14:54:54Z\",\"Sequence\":104,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fern\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"NotFern\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"AGame\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/snapshot/Football/testresource1/bYQ4NJ0ckn-oAMwylfJwzMbAREQ2\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/sequence/Football/testresource1/DlUzE_85HvmneGPFDLws4eKb9_Iz\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/stream/echo/wjIyvcuD67AChr32xwpJoFDQ0pw0\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://xxx.testurl.com/UnifiedDataAPI/stream/batchecho/1eJp1LYuuRROXMjlPMxkhuvDJrBD\",\"Verbs\":[\"Post\"]}]}]";
     List<RestItem> restItems = JsonHelper.toRestItems(resourceBody);
-    resources = new ServiceRequest();
-    resources.setAuthToken("AUTH_TOKEN_01");
-    resources.setServiceRestItems(restItems);
+    resRequest = new ServiceRequest();
+    resRequest.setAuthToken("AUTH_TOKEN_01");
+    resRequest.setServiceRestItems(restItems);
     
-    echoSender = EchoSender.getEchoSender("http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox", resources);
+    echoSender = EchoSender.getEchoSender("http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox", resRequest);
 
     echoMap = EchoResourceMap.getEchoMap();
     echoMap.addResource("testresource2");
-
-    workMap = ResourceWorkerMap.getWorkerMap();
-    workMap.addResource("testresource2", resource);
-
-  
   }
 
   
   @Test 
-  public void testEchoRetryCountExceeded()
+  public void testEchoRetryReturnedDefaulter()
   {
     SystemProperties.setProperty("ss.echo_sender_interval", "1");
     SystemProperties.setProperty("ss.echo_max_missed_echos", "2");
-    when(httpSvcs.processRequest(eq(resources), eq("http://api.sportingsolutions.com/rels/stream/batchecho"), eq(resources.getServiceRestItems().get(0).getName()), anyString())).thenReturn(resources);
+    when(httpSvcs.processRequest(eq(resRequest), eq("http://api.sportingsolutions.com/rels/stream/batchecho"), eq(resRequest.getServiceRestItems().get(0).getName()), anyString())).thenReturn(resRequest);
     
     Thread testThread = new Thread(echoSender);
     
     testThread.start();
     
-    //yI know! sleep methods in unit test, but we are a testing a method which itself goes to sleep, so we have to do it.
+    //I know! sleep methods in unit test, but we are a testing a method which itself goes to sleep, so we have to do it.
     try {
       Thread.sleep(4000);
+    } catch (InterruptedException ex) {
+      fail("The echo thread was interrupted before test completed.");
+    } 
+    
+    /* We are checking whether the retry is exceeded and echosender knows which resource it is for */
+    assertNotNull(EchoResourceMap.getEchoMap().getEchoCount("testresource2"));
+  }
+
+
+  
+  @Test 
+  public void testEchoRetryNotExceeded()
+  {
+    SystemProperties.setProperty("ss.echo_sender_interval", "1");
+    SystemProperties.setProperty("ss.echo_max_missed_echos", "2");
+    when(httpSvcs.processRequest(eq(resRequest), eq("http://api.sportingsolutions.com/rels/stream/batchecho"), eq(resRequest.getServiceRestItems().get(0).getName()), anyString())).thenReturn(resRequest);
+    
+    Thread testThread = new Thread(echoSender);
+    
+    testThread.start();
+    
+    //I know! sleep methods in unit test, but we are a testing a method which itself goes to sleep, so we have to do it.
+    try {
+      Thread.sleep(1000);
+      echoMap.resetEchoCount("testresource2");
+      Thread.sleep(1000);
+      echoMap.resetEchoCount("testresource2");
+      Thread.sleep(1000);
+      echoMap.resetEchoCount("testresource2");
+      Thread.sleep(1000);
+      echoMap.resetEchoCount("testresource2");
     } catch (InterruptedException ex) {
       fail("The echo thread was interrupted before test completed.");
     } 
@@ -73,33 +89,7 @@ public class EchoSenderTest
     /*We are checking to see if the echo count achieved the maximum number the count appears to be a plus one but that's because
      *of where we carry out the check in echo sender (ie when we next call it).
      */
-    assertTrue(EchoResourceMap.getEchoMap().getEchoCount("testresource2").equals(3));
+     assertTrue(EchoResourceMap.getEchoMap().getEchoCount("testresource2").equals(0));
   }
-
-/*
-  @Test 
-  public void testEchoRetryExceededMQDisconnected()
-  {
-    SystemProperties.setProperty("ss.echo_sender_interval", "1");
-    SystemProperties.setProperty("ss.echo_max_missed_echos", "2");
-    when(httpSvcs.processRequest(eq(resources), eq("http://api.sportingsolutions.com/rels/stream/batchecho"), eq(resources.getServiceRestItems().get(0).getName()), anyString())).thenReturn(resources);
-    
-    Thread testThread = new Thread(echoSender);
-    
-    testThread.start();
-    
-    //yI know! sleep methods in unit test, but we are a testing a method which itself goes to sleep, so we have to do it.
-    try {
-      Thread.sleep(4000);
-    } catch (InterruptedException ex) {
-      fail("The echo thread was interrupted before test completed.");
-    } 
-    
-    /*We are checking to see if the echo count achieved the maximum number the count appears to be a plus one but that's because
-     *of where we carry out the check in echo sender (ie when we next call it).
-    assertTrue(EchoResourceMap.getEchoMap().getEchoCount("testresource2").equals(3));
-  }
-*/
-  
   
 }

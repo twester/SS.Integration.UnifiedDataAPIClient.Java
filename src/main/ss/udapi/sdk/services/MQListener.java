@@ -22,7 +22,6 @@ import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.locks.*;
 
 import javax.management.BadAttributeValueExpException;
 
@@ -42,7 +41,6 @@ public class MQListener implements Runnable
   private static MQListener instance = null;
   private static Channel channel;
   private static RabbitMqConsumer consumer;
-  private static Lock creationLock = new ReentrantLock();
   private static ConcurrentLinkedQueue<ResourceSession> resourceSessionList = new ConcurrentLinkedQueue<ResourceSession>();
 
   private ResourceSession session = null;
@@ -62,26 +60,17 @@ public class MQListener implements Runnable
     /* This lock ensures there cannot be multiple instantiations which can lead to a corrupt object without synchronization,
      * which in turn cannot be done on a here as the access is static.
      */
-//    while(!creationLock.tryLock())
-//    {}
-
-    try {
-//      creationLock.lock();
-      logger.debug("Retrieving MQListener or create it if it doesn't exist");
-      if (instance == null) {
-        instance = new MQListener(); 
-      } 
-      return instance;
-    } finally {
-//      creationLock.unlock();
-    }
+    logger.debug("Retrieving MQListener or create it if it doesn't exist");
+    if (instance == null) {
+      instance = new MQListener(); 
+    } 
+    return instance;
   }
   
   
   
   @Override
   public void run() {
-    
     /*
      * This section happens only once when the thread is kicked off if the channel (read connection) doesn't exist
      * or if the channel has died.
@@ -220,12 +209,12 @@ public class MQListener implements Runnable
   /* After the disconnect event notification is sent to the client MQListener calls this to remove the resource/cTag
    * mappings.  Bit of housekeeping really.
    */
-  protected static void removeMapping(String cTag)
-  {
+  protected static void removeMapping(String cTag) {
     resourceChannMap.remove(CtagResourceMap.getResource(cTag));
     CtagResourceMap.removeCtag(cTag);
   }
-  
+
+
 
   /* Adds a new request to initiate a queue listener for a newly created fixture/resource.  The loop in run() above
    * will pick this up and crete the listner there.  
@@ -235,7 +224,13 @@ public class MQListener implements Runnable
     logger.debug("Adding new resource queue listener request for: " + resourceSession.getAmqpDest());
   }
   
-
+  
+  
+  //Hook for unit testing
+  protected int countPendingResources() {
+    return resourceSessionList.size();
+  }
+  
   
   //Clean up the path.
   private static String uriDecode(String s) {
@@ -248,4 +243,7 @@ public class MQListener implements Runnable
     }
   }     
 
+  
+
+  
 }

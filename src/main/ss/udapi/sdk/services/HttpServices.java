@@ -174,7 +174,7 @@ public class HttpServices
       logger.error("No links found for: " + relation + " on " + name);
     }
     
-    String responseBody = null;    
+    String responseBody = "";    
     try {
       //Prepare the HTTP request depending on whether it's an echo (POST), then send the request.
       if (relation.equals("http://api.sportingsolutions.com/rels/stream/batchecho"))

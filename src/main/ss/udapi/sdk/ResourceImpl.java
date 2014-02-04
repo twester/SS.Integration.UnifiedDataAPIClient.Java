@@ -69,7 +69,7 @@ public class ResourceImpl implements Resource
   /*
    * Constructor initializes and resets internal state in case it is re-initialized by the client code.  
    */
-  protected ResourceImpl(RestItem restItem, ServiceRequest availableResources) {
+  public ResourceImpl(RestItem restItem, ServiceRequest availableResources) {
     this.restItem = restItem;
     this.availableResources = availableResources;
     myTasks = ResourceWorkQueue.addQueue(getId());
