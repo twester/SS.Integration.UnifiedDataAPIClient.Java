@@ -60,7 +60,7 @@ public class ResourceWorkQueue
 
   //Add a new UOW for the associated resource/fixture.  Currently FixtureActionProcessor does this. 
   public static void addUOW(String resourceId, String task) {
-    System.out.println("--------------->echo testing: added echo alert" + task.substring(0,60) + " for [" + resourceId + "]");
+    System.out.println("--------------->echo testing: added echo alert" + task.substring(0,10) + " for [" + resourceId + "]");
     LinkedBlockingQueue<String> queue = map.get(resourceId);
     queue.add(task);
   }

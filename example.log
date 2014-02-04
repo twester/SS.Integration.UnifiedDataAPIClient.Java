@@ -924,3 +924,51 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-04 16:09:09,601 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
 2014-02-04 16:09:09,603 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
 2014-02-04 16:09:09,603 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-04 16:50:03,965 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 16:50:03,966 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 16:50:14,261 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 16:50:14,263 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 16:54:01,770 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 16:54:01,772 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 16:54:29,966 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 16:54:29,967 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 16:55:16,181 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 16:55:16,183 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 17:04:22,804 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 17:04:22,806 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 17:04:34,712 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 17:04:34,714 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 17:37:27,623 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 17:37:27,624 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 17:37:27,787 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 17:37:28,490 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 17:37:28,491 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"fb8dd337-6a22-46ab-8e07-6bf6856521cf;2014-02-04T17:37:27.819Z"}
+2014-02-04 17:37:29,644 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 17:37:29,644 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"fb8dd337-6a22-46ab-8e07-6bf6856521cf;2014-02-04T17:37:27.819Z"}
+2014-02-04 17:37:30,801 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-04 17:37:30,801 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"fb8dd337-6a22-46ab-8e07-6bf6856521cf;2014-02-04T17:37:27.819Z"}
+2014-02-04 17:37:31,790 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 17:37:32,790 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 17:37:33,790 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 17:37:34,790 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 17:37:35,790 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-04 17:37:35,913 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-04 17:37:35,915 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-04 17:37:35,915 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-04 17:37:35,916 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-04 17:37:35,916 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-04 17:37:35,916 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-04 17:37:35,917 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-04 17:37:35,917 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-04 17:37:35,917 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-04 17:37:35,917 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-04 17:37:35,917 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-04 17:37:35,918 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-04 17:37:35,918 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-04 17:37:35,918 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-04 17:37:35,948 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 17:37:35,949 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 17:37:35,950 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 17:37:35,951 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 17:37:35,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-04 17:37:35,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
