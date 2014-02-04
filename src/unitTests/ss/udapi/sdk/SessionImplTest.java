@@ -1,5 +1,5 @@
 package ss.udapi.sdk;
-
+/*
 import java.net.URL;
 import java.util.List;
 
@@ -68,3 +68,4 @@ public class SessionImplTest
   }
 
 }
+*/

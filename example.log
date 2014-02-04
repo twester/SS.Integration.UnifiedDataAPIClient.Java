@@ -476,3 +476,232 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-03 18:08:22,893 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
 2014-02-03 18:08:23,018 [main] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
 2014-02-03 18:08:23,427 [main] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"bf3bfcd6-bdf0-4c0f-b719-454b1198e3f6;2014-02-03T18:08:23.079Z"}
+2014-02-04 09:25:50,898 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:25:50,900 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:25:51,108 [main] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:25:51,543 [main] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:26:11,561 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:26:31,580 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:26:51,598 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:27:11,634 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:27:31,651 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:27:51,669 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:28:11,708 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:28:31,729 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2330d93c-5497-4b71-9a45-1d549c91e81c;2014-02-04T09:25:51.182Z"}
+2014-02-04 09:42:12,167 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:42:12,169 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:42:12,319 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:44:44,102 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:44:44,104 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:44:47,250 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:45:09,747 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:45:09,748 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:45:09,886 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:45:10,282 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"15d04660-c59a-4b37-bf01-9aba6b982527;2014-02-04T09:45:09.920Z"}
+2014-02-04 09:45:11,300 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"15d04660-c59a-4b37-bf01-9aba6b982527;2014-02-04T09:45:09.920Z"}
+2014-02-04 09:45:12,322 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"15d04660-c59a-4b37-bf01-9aba6b982527;2014-02-04T09:45:09.920Z"}
+2014-02-04 09:45:58,510 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:45:58,512 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:45:58,645 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:45:59,006 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ee529c23-6d48-41ab-83bc-d59065b7a08e;2014-02-04T09:45:58.675Z"}
+2014-02-04 09:46:00,025 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ee529c23-6d48-41ab-83bc-d59065b7a08e;2014-02-04T09:45:58.675Z"}
+2014-02-04 09:46:01,043 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ee529c23-6d48-41ab-83bc-d59065b7a08e;2014-02-04T09:45:58.675Z"}
+2014-02-04 09:52:00,744 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:52:00,745 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:58:44,941 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:58:44,943 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:58:45,085 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:58:45,478 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d72d845a-6f11-4a4b-b800-71e2dd3f8ea6;2014-02-04T09:58:45.117Z"}
+2014-02-04 09:58:46,501 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d72d845a-6f11-4a4b-b800-71e2dd3f8ea6;2014-02-04T09:58:45.117Z"}
+2014-02-04 09:58:47,524 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d72d845a-6f11-4a4b-b800-71e2dd3f8ea6;2014-02-04T09:58:45.117Z"}
+2014-02-04 09:59:27,217 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 09:59:27,219 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 09:59:27,409 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 09:59:27,810 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6997d6c2-980c-4a64-9522-969e01244b68;2014-02-04T09:59:27.453Z"}
+2014-02-04 09:59:28,832 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6997d6c2-980c-4a64-9522-969e01244b68;2014-02-04T09:59:27.453Z"}
+2014-02-04 09:59:29,853 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6997d6c2-980c-4a64-9522-969e01244b68;2014-02-04T09:59:27.453Z"}
+2014-02-04 09:59:30,874 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6997d6c2-980c-4a64-9522-969e01244b68;2014-02-04T09:59:27.453Z"}
+2014-02-04 09:59:31,915 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6997d6c2-980c-4a64-9522-969e01244b68;2014-02-04T09:59:27.453Z"}
+2014-02-04 10:00:12,294 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:00:12,295 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:00:12,428 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:00:12,804 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"dadbd5a8-1d35-4fd5-9d00-09551d39e0a8;2014-02-04T10:00:12.460Z"}
+2014-02-04 10:00:13,822 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"dadbd5a8-1d35-4fd5-9d00-09551d39e0a8;2014-02-04T10:00:12.460Z"}
+2014-02-04 10:00:14,840 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"dadbd5a8-1d35-4fd5-9d00-09551d39e0a8;2014-02-04T10:00:12.460Z"}
+2014-02-04 10:00:15,870 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"dadbd5a8-1d35-4fd5-9d00-09551d39e0a8;2014-02-04T10:00:12.460Z"}
+2014-02-04 10:00:16,895 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"dadbd5a8-1d35-4fd5-9d00-09551d39e0a8;2014-02-04T10:00:12.460Z"}
+2014-02-04 10:02:00,145 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:02:00,146 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:02:00,318 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:02:00,698 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"37f3bb80-fc1b-487b-93cc-61e6604c6b6f;2014-02-04T10:02:00.350Z"}
+2014-02-04 10:02:01,719 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"37f3bb80-fc1b-487b-93cc-61e6604c6b6f;2014-02-04T10:02:00.350Z"}
+2014-02-04 10:02:02,739 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"37f3bb80-fc1b-487b-93cc-61e6604c6b6f;2014-02-04T10:02:00.350Z"}
+2014-02-04 10:02:03,758 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"37f3bb80-fc1b-487b-93cc-61e6604c6b6f;2014-02-04T10:02:00.350Z"}
+2014-02-04 10:05:02,298 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:05:02,300 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:05:02,483 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:05:02,841 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"db7e8070-2850-4313-9c8a-c9380adfb0f2;2014-02-04T10:05:02.512Z"}
+2014-02-04 10:05:03,862 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"db7e8070-2850-4313-9c8a-c9380adfb0f2;2014-02-04T10:05:02.512Z"}
+2014-02-04 10:05:04,879 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"db7e8070-2850-4313-9c8a-c9380adfb0f2;2014-02-04T10:05:02.512Z"}
+2014-02-04 10:05:05,898 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"db7e8070-2850-4313-9c8a-c9380adfb0f2;2014-02-04T10:05:02.512Z"}
+2014-02-04 10:06:35,043 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:06:35,045 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:06:35,217 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:06:35,585 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"18fe4610-b4ab-4265-90dd-3c82d565ab30;2014-02-04T10:06:35.245Z"}
+2014-02-04 10:06:36,621 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"18fe4610-b4ab-4265-90dd-3c82d565ab30;2014-02-04T10:06:35.245Z"}
+2014-02-04 10:06:37,638 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"18fe4610-b4ab-4265-90dd-3c82d565ab30;2014-02-04T10:06:35.245Z"}
+2014-02-04 10:06:38,655 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"18fe4610-b4ab-4265-90dd-3c82d565ab30;2014-02-04T10:06:35.245Z"}
+2014-02-04 10:07:34,755 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:07:34,757 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:07:34,902 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:07:35,301 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3a027e6b-1858-422b-9f8e-6bfe87aa1b75;2014-02-04T10:07:34.931Z"}
+2014-02-04 10:07:36,324 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3a027e6b-1858-422b-9f8e-6bfe87aa1b75;2014-02-04T10:07:34.931Z"}
+2014-02-04 10:07:37,355 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3a027e6b-1858-422b-9f8e-6bfe87aa1b75;2014-02-04T10:07:34.931Z"}
+2014-02-04 10:09:48,063 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:09:48,064 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:09:48,220 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:09:48,612 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"22ca4248-1928-43b3-bfa9-5ccc80bf10e9;2014-02-04T10:09:48.251Z"}
+2014-02-04 10:09:49,632 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"22ca4248-1928-43b3-bfa9-5ccc80bf10e9;2014-02-04T10:09:48.251Z"}
+2014-02-04 10:09:50,651 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"22ca4248-1928-43b3-bfa9-5ccc80bf10e9;2014-02-04T10:09:48.251Z"}
+2014-02-04 10:18:26,243 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:18:26,245 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:18:26,414 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 10:18:26,426 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:18:26,683 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/stream/batchecho on Fernando v Jim
+2014-02-04 10:22:45,508 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:22:45,510 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:22:45,681 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-04 10:22:45,698 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:22:45,991 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/stream/batchecho on Fernando v Jim
+2014-02-04 10:23:04,111 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:23:04,113 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:23:04,318 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:23:04,623 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/stream/batchecho on Fernando v Jim
+2014-02-04 10:23:28,575 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:23:28,576 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:23:28,756 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:23:29,144 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"82ceb350-fa20-4dde-931d-dead07233a7a;2014-02-04T10:23:28.788Z"}
+2014-02-04 10:23:30,164 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"82ceb350-fa20-4dde-931d-dead07233a7a;2014-02-04T10:23:28.788Z"}
+2014-02-04 10:23:31,183 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"82ceb350-fa20-4dde-931d-dead07233a7a;2014-02-04T10:23:28.788Z"}
+2014-02-04 10:24:17,711 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:24:17,713 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:24:17,889 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:24:18,176 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/stream/batchecho on Fernando v Jim
+2014-02-04 10:24:45,100 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:24:45,102 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:24:45,305 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:24:45,703 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ec39584a-609b-4292-9af3-85d7271810a1;2014-02-04T10:24:45.344Z"}
+2014-02-04 10:24:46,724 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ec39584a-609b-4292-9af3-85d7271810a1;2014-02-04T10:24:45.344Z"}
+2014-02-04 10:24:47,747 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ec39584a-609b-4292-9af3-85d7271810a1;2014-02-04T10:24:45.344Z"}
+2014-02-04 10:25:15,748 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:25:15,750 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:25:15,937 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:25:16,231 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/stream/batchecho on Fernando v Jim
+2014-02-04 10:26:15,605 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:26:15,607 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:26:15,784 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:26:16,182 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"712f0563-78aa-488e-82fb-22deb2e2fdfe;2014-02-04T10:26:15.818Z"}
+2014-02-04 10:26:17,205 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"712f0563-78aa-488e-82fb-22deb2e2fdfe;2014-02-04T10:26:15.818Z"}
+2014-02-04 10:26:18,225 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"712f0563-78aa-488e-82fb-22deb2e2fdfe;2014-02-04T10:26:15.818Z"}
+2014-02-04 10:29:18,663 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:29:18,665 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:29:18,825 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:29:19,208 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9a6d96dd-b560-44e9-af5c-58a8b9ee1c6e;2014-02-04T10:29:18.858Z"}
+2014-02-04 10:29:20,229 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9a6d96dd-b560-44e9-af5c-58a8b9ee1c6e;2014-02-04T10:29:18.858Z"}
+2014-02-04 10:29:21,252 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"9a6d96dd-b560-44e9-af5c-58a8b9ee1c6e;2014-02-04T10:29:18.858Z"}
+2014-02-04 10:31:39,380 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:31:39,382 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:31:39,544 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:31:39,932 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"77dddbb1-c99d-4b8a-8782-b43194ca9128;2014-02-04T10:31:39.574Z"}
+2014-02-04 10:31:40,954 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"77dddbb1-c99d-4b8a-8782-b43194ca9128;2014-02-04T10:31:39.574Z"}
+2014-02-04 10:31:41,975 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"77dddbb1-c99d-4b8a-8782-b43194ca9128;2014-02-04T10:31:39.574Z"}
+2014-02-04 10:32:33,683 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:32:33,684 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:32:33,866 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:32:34,251 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b527e74-f36a-465c-aa64-95bea2a1aeb4;2014-02-04T10:32:33.902Z"}
+2014-02-04 10:32:35,273 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b527e74-f36a-465c-aa64-95bea2a1aeb4;2014-02-04T10:32:33.902Z"}
+2014-02-04 10:32:36,292 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b527e74-f36a-465c-aa64-95bea2a1aeb4;2014-02-04T10:32:33.902Z"}
+2014-02-04 10:34:34,096 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:34:34,098 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:34:34,266 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:34:37,032 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"44066219-69e6-4dd7-8b14-47d30a602468;2014-02-04T10:34:34.299Z"}
+2014-02-04 10:34:55,655 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:34:55,657 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:34:55,892 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:35:23,092 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:35:23,093 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:35:23,268 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:35:24,176 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"16664611-8b94-4364-b459-373d33c38259;2014-02-04T10:35:23.302Z"}
+2014-02-04 10:35:25,194 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"16664611-8b94-4364-b459-373d33c38259;2014-02-04T10:35:23.302Z"}
+2014-02-04 10:36:06,374 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:36:06,376 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:36:06,573 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:36:06,932 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"f32334dc-aa81-44f5-965a-e343db2215ab;2014-02-04T10:36:06.605Z"}
+2014-02-04 10:36:07,959 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"f32334dc-aa81-44f5-965a-e343db2215ab;2014-02-04T10:36:06.605Z"}
+2014-02-04 10:36:08,977 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"f32334dc-aa81-44f5-965a-e343db2215ab;2014-02-04T10:36:06.605Z"}
+2014-02-04 10:42:32,443 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:42:32,444 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:42:32,608 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:42:32,999 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"54676711-58e8-402b-b17f-2751f15dae86;2014-02-04T10:42:32.639Z"}
+2014-02-04 10:42:34,021 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"54676711-58e8-402b-b17f-2751f15dae86;2014-02-04T10:42:32.639Z"}
+2014-02-04 10:42:35,041 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"54676711-58e8-402b-b17f-2751f15dae86;2014-02-04T10:42:32.639Z"}
+2014-02-04 10:42:46,436 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:42:46,437 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:42:46,615 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:42:46,997 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"01ab0bdf-6afe-4432-88d4-ae29705d5132;2014-02-04T10:42:46.645Z"}
+2014-02-04 10:42:48,016 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"01ab0bdf-6afe-4432-88d4-ae29705d5132;2014-02-04T10:42:46.645Z"}
+2014-02-04 10:42:49,035 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"01ab0bdf-6afe-4432-88d4-ae29705d5132;2014-02-04T10:42:46.645Z"}
+2014-02-04 10:43:33,472 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:43:33,473 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:43:33,647 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:43:34,013 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ffd918c3-5a66-437b-a0b3-10d467e8e73a;2014-02-04T10:43:33.677Z"}
+2014-02-04 10:43:35,039 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ffd918c3-5a66-437b-a0b3-10d467e8e73a;2014-02-04T10:43:33.677Z"}
+2014-02-04 10:43:36,058 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"ffd918c3-5a66-437b-a0b3-10d467e8e73a;2014-02-04T10:43:33.677Z"}
+2014-02-04 10:45:04,381 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:45:04,383 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:45:04,571 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:45:04,932 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4e9de77d-8d67-43a7-ac13-085812477f77;2014-02-04T10:45:04.603Z"}
+2014-02-04 10:45:06,586 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4e9de77d-8d67-43a7-ac13-085812477f77;2014-02-04T10:45:04.603Z"}
+2014-02-04 10:45:17,416 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:45:17,418 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:45:17,606 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:45:17,977 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"680668aa-7cbf-421e-baff-8e091a7c966f;2014-02-04T10:45:17.638Z"}
+2014-02-04 10:45:19,006 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"680668aa-7cbf-421e-baff-8e091a7c966f;2014-02-04T10:45:17.638Z"}
+2014-02-04 10:45:20,043 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"680668aa-7cbf-421e-baff-8e091a7c966f;2014-02-04T10:45:17.638Z"}
+2014-02-04 10:45:30,467 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:45:30,468 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:45:30,638 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:45:31,002 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"c41de553-7ab5-4333-ba4e-3e97db78a1af;2014-02-04T10:45:30.670Z"}
+2014-02-04 10:45:33,332 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"c41de553-7ab5-4333-ba4e-3e97db78a1af;2014-02-04T10:45:30.670Z"}
+2014-02-04 10:45:34,396 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"c41de553-7ab5-4333-ba4e-3e97db78a1af;2014-02-04T10:45:30.670Z"}
+2014-02-04 10:46:43,730 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:46:43,732 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:46:43,918 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:46:44,326 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"f8c4e55b-0cff-4938-8bbc-c280ae197b93;2014-02-04T10:46:43.948Z"}
+2014-02-04 10:46:45,346 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"f8c4e55b-0cff-4938-8bbc-c280ae197b93;2014-02-04T10:46:43.948Z"}
+2014-02-04 10:47:40,019 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:47:40,020 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:47:40,211 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:47:40,561 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"75c4bf8c-58d7-4c04-afee-c307104ed4a1;2014-02-04T10:47:40.243Z"}
+2014-02-04 10:47:41,583 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"75c4bf8c-58d7-4c04-afee-c307104ed4a1;2014-02-04T10:47:40.243Z"}
+2014-02-04 10:47:42,601 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"75c4bf8c-58d7-4c04-afee-c307104ed4a1;2014-02-04T10:47:40.243Z"}
+2014-02-04 10:47:57,078 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:47:57,079 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:47:57,267 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:47:57,639 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4be6ae90-3e92-4f9d-83ad-db6ffe18138b;2014-02-04T10:47:57.300Z"}
+2014-02-04 10:47:58,656 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4be6ae90-3e92-4f9d-83ad-db6ffe18138b;2014-02-04T10:47:57.300Z"}
+2014-02-04 10:47:59,675 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4be6ae90-3e92-4f9d-83ad-db6ffe18138b;2014-02-04T10:47:57.300Z"}
+2014-02-04 10:49:21,705 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:49:21,707 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 10:49:21,940 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 10:49:22,300 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2368b1f1-b00d-42fb-9a53-ba586a73b033;2014-02-04T10:49:21.968Z"}
+2014-02-04 10:49:23,326 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2368b1f1-b00d-42fb-9a53-ba586a73b033;2014-02-04T10:49:21.968Z"}
+2014-02-04 10:49:24,344 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"2368b1f1-b00d-42fb-9a53-ba586a73b033;2014-02-04T10:49:21.968Z"}
+2014-02-04 10:59:15,640 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 10:59:15,642 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 11:01:05,976 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-04 11:01:05,977 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-04 11:01:06,155 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-04 11:01:06,567 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"83238476-8878-4be1-9d7a-f89e2610b3df;2014-02-04T11:01:06.185Z"}
+2014-02-04 11:01:07,585 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"83238476-8878-4be1-9d7a-f89e2610b3df;2014-02-04T11:01:06.185Z"}
+2014-02-04 11:01:08,602 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"83238476-8878-4be1-9d7a-f89e2610b3df;2014-02-04T11:01:06.185Z"}

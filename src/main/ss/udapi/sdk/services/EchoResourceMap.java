@@ -104,6 +104,7 @@ public class EchoResourceMap
     Iterator<String> keyIter = keys.iterator();
 
     while(keyIter.hasNext()) {
+      System.out.println("--------------->called in unit test");
       String resourceId = keyIter.next();
       int count = (map.get(resourceId));
       if (count == (retries)){

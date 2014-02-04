@@ -154,8 +154,9 @@ public class HttpServices
   /*
    * 1) Sends a request to the Sporting Solutions endpoint and retrieves information items which are used for further
    * processing.
+   * Protected to allow unit testing.
    */
-  private String retrieveBody(ServiceRequest request, String relation, String name, String entity) {
+  protected String retrieveBody(ServiceRequest request, String relation, String name, String entity) {
     CloseableHttpClient httpClient = HttpClients.custom().setKeepAliveStrategy(requestTimeout).build();
     
     //Double check we do have an actual usable service

@@ -49,7 +49,6 @@ public class SystemProperties
       getSystemProperties();
       propertiesLoaded = true;
     }
-    System.out.println("--------------------->requesting " + key + "---" + ourMap.get(key));
     return ourMap.get(key);
   }
 
@@ -91,13 +90,6 @@ public class SystemProperties
   //Sets values, such as credentials which can be set by the client code via the SDK public API. 
   public static void setProperty(String key, String value) {
     ourMap.put(key, value);
-  }
-  
-  
-  //this is needed for unit testing to avoid loading the properties file
-  protected static void setLoaded()
-  {
-    propertiesLoaded = true;
   }
 
 }

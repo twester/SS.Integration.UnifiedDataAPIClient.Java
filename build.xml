@@ -186,8 +186,9 @@
   
 
   <target name="runAllTests">
-    <antcall target="buildSDK" />
-    <antcall target="testModels" />
+    <antcall target="compileSDK" />
+    <antcall target="buildTests" />
+    <antcall target="testSDK" />
   </target>
   
 
