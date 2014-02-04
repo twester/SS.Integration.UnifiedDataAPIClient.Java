@@ -50,7 +50,7 @@ public class HttpServices
   
   //Get a list of available endpoints that Sporting Solutions provides.
   public ServiceRequest getSession(String url, boolean compressionEnabled) {
-    compressionEnabled = compressionEnabled;
+    this.compressionEnabled = compressionEnabled;
     List<RestItem> loginRestItems = null;
     ServiceRequest loginResp = new ServiceRequest();
 

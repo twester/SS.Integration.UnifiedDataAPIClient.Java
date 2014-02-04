@@ -3,6 +3,7 @@ package ss.udapi.sdk.services;
 import static org.junit.Assert.*;
 
 import org.junit.runner.RunWith;
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.runners.MockitoJUnitRunner;
 
@@ -12,7 +13,6 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class ResourceWorkerMapTest
 {
-  private ResourceWorkerMap workMap = ResourceWorkerMap.getWorkerMap();
   private ResourceImpl resource1 = mock(ResourceImpl.class);
   private static final String resId1 = "resource1";
   private ResourceImpl resource2 = mock(ResourceImpl.class);
@@ -21,20 +21,26 @@ public class ResourceWorkerMapTest
   private static final String resId3 = "resource1";
   
   
+  @Before
+  public void setUp()
+  {
+    ResourceWorkerMap.initWorkerMap();
+  }
+  
   @Test
   public void testAddResource()
   {
-    workMap.addResource(resId1, resource1);
-    assertTrue(workMap.exists(resId1));
+    ResourceWorkerMap.addResource(resId1, resource1);
+    assertTrue(ResourceWorkerMap.exists(resId1));
   }
 
   
   @Test
   public void testGetResourceImpl()
   {
-    workMap.addResource(resId2, resource2);
-    assertTrue(workMap.exists(resId2));
-    ResourceImpl tempRes = (ResourceImpl) workMap.getResourceImpl(resId2);
+    ResourceWorkerMap.addResource(resId2, resource2);
+    assertTrue(ResourceWorkerMap.exists(resId2));
+    ResourceImpl tempRes = (ResourceImpl) ResourceWorkerMap.getResourceImpl(resId2);
     assertNotNull(tempRes);
   }
 
@@ -42,7 +48,7 @@ public class ResourceWorkerMapTest
   @Test
   public void testGetMissingImpl()
   {
-    ResourceImpl tempRes = (ResourceImpl) workMap.getResourceImpl("noResource");
+    ResourceImpl tempRes = (ResourceImpl) ResourceWorkerMap.getResourceImpl("noResource");
     assertNull(tempRes);
   }
 
@@ -51,9 +57,9 @@ public class ResourceWorkerMapTest
   @Test
   public void testRemoveResource()
   {
-    workMap.addResource(resId3, resource3);
-    assertTrue(workMap.exists(resId3));
-    workMap.removeResource(resId3);
-    assertFalse(workMap.exists(resId3));
+    ResourceWorkerMap.addResource(resId3, resource3);
+    assertTrue(ResourceWorkerMap.exists(resId3));
+    ResourceWorkerMap.removeResource(resId3);
+    assertFalse(ResourceWorkerMap.exists(resId3));
   }
 }

@@ -36,11 +36,10 @@ public class ResourceWorkQueue
   }
   
 
-  public synchronized static ResourceWorkQueue getResourceWorkQueue() {
+  public synchronized static void initResourceWorkQueue() {
     if (workQueue == null) {
       workQueue = new ResourceWorkQueue();
     }
-    return workQueue;
   }
   
   

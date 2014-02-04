@@ -39,11 +39,10 @@ public class ResourceWorkerMap
   }
   
   
-  public static ResourceWorkerMap getWorkerMap() {
+  public static void initWorkerMap() {
     if (workerMap == null) {
       workerMap = new ResourceWorkerMap();
     }
-    return workerMap;
   }
   
   

@@ -26,7 +26,6 @@ import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;
-import ss.udapi.sdk.services.WorkQueueMonitor;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -60,8 +59,8 @@ public class SessionImpl implements Session
      */
     ServiceThreadExecutor.createExecutor();
     CtagResourceMap.initCtagMap();
-    ResourceWorkerMap.getWorkerMap();
-    ResourceWorkQueue.getResourceWorkQueue();
+    ResourceWorkerMap.initWorkerMap();
+    ResourceWorkQueue.initResourceWorkQueue();
     
     GetRoot(serverURL,credentials, true);
   }
