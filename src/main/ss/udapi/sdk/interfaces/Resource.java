@@ -40,5 +40,5 @@ public interface Resource
 	public void pauseStreaming();	
 	
 	public void unpauseStreaming();
-
+	
 }

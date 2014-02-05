@@ -22,7 +22,6 @@ import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.ServiceImpl;
 import ss.udapi.sdk.services.CtagResourceMap;
 import ss.udapi.sdk.services.HttpServices;
-import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
 import ss.udapi.sdk.services.ServiceThreadExecutor;
 import ss.udapi.sdk.services.SystemProperties;

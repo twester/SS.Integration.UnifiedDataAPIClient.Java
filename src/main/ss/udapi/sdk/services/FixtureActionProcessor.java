@@ -53,7 +53,7 @@ public class FixtureActionProcessor implements Runnable
   
     System.out.println("----------------->For Echo testing: " + msgHead);
 
-    //Now that we know what fixture the work is for  put the UOW in that fixtrues work queue.
+    //Now that we know what fixture the work is for  put the UOW in that fixtures work queue.
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
     
     resWorkQueueRef.addUOW(fixtureId, task);

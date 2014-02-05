@@ -7,12 +7,11 @@ import org.junit.Test;
 
 public class ResourceWorkQueueTest
 {
-  
+  private ResourceWorkQueue myQueueRef = ResourceWorkQueue.getResourceWorkQueue();
   
   @Before
   public void setUp()
   {
-    ResourceWorkQueue.initResourceWorkQueue();
   }
   
   
@@ -39,18 +38,18 @@ public class ResourceWorkQueueTest
   public void testManipulateResourceQueue()
   {
     ResourceWorkQueue.addQueue("testResourceId3");
-    ResourceWorkQueue.addUOW("testResourceId3", "This is the task to add for processing");
-    ResourceWorkQueue.addUOW("testResourceId3", "And a second one");
+    myQueueRef.addUOW("testResourceId3", "This is the task to add for processing");
+    myQueueRef.addUOW("testResourceId3", "And a second one");
     
     ResourceWorkQueue.addQueue("testResourceId4");
-    ResourceWorkQueue.addUOW("testResourceId4", "This one only gets one task");
+    myQueueRef.addUOW("testResourceId4", "This one only gets one task");
 
-    assertEquals("This is the task to add for processing", ResourceWorkQueue.removeUOW("testResourceId3"));
+    assertEquals("This is the task to add for processing", myQueueRef.removeUOW("testResourceId3"));
 
     //we'll do them out of sequence to test they are in fact two separate queues
-    assertEquals("This one only gets one task", ResourceWorkQueue.removeUOW("testResourceId4"));
+    assertEquals("This one only gets one task", myQueueRef.removeUOW("testResourceId4"));
     
-    assertEquals("And a second one", ResourceWorkQueue.removeUOW("testResourceId3"));
+    assertEquals("And a second one", myQueueRef.removeUOW("testResourceId3"));
   }
 
   

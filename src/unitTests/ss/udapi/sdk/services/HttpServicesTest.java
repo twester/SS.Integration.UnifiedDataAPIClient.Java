@@ -1,4 +1,4 @@
-/*package ss.udapi.sdk.services;
+package ss.udapi.sdk.services;
 
 import static org.junit.Assert.*;
 
@@ -158,4 +158,3 @@ public class HttpServicesTest
 
 
 
-*/

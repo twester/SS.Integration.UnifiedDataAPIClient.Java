@@ -972,3 +972,69 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-04 17:37:35,951 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
 2014-02-04 17:37:35,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
 2014-02-04 17:37:35,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://val1%40uname:pw@1.1.1.1:5672/vhost/amq.gen-pz15SpXWf5mEKHgACG8D9g
+2014-02-05 10:16:41,430 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:16:41,433 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 10:16:41,433 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 10:16:41,433 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 10:16:41,433 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:16:41,433 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-05 10:16:41,433 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 10:16:41,434 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 10:16:41,434 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 10:16:41,434 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:16:41,434 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 10:16:41,434 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 10:16:41,434 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 10:16:41,435 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:17:09,834 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:17:09,837 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 10:17:09,837 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 10:17:09,837 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 10:17:09,838 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:17:09,838 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-05 10:17:09,838 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 10:17:09,838 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 10:17:09,839 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 10:17:09,839 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:17:09,839 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 10:17:09,839 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 10:17:09,839 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 10:17:09,839 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 10:17:30,015 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 10:17:30,017 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 10:17:30,112 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 10:17:31,048 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-05 10:17:31,049 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"47e46f4e-5497-48de-b0c5-adb331bc90e4;2014-02-05T10:17:30.144Z"}
+2014-02-05 10:17:32,244 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-05 10:17:32,244 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"47e46f4e-5497-48de-b0c5-adb331bc90e4;2014-02-05T10:17:30.144Z"}
+2014-02-05 10:17:33,438 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-05 10:17:33,438 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"47e46f4e-5497-48de-b0c5-adb331bc90e4;2014-02-05T10:17:30.144Z"}
+2014-02-05 10:17:34,115 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 10:17:35,116 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 10:17:36,116 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 10:17:37,116 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 10:17:38,117 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 10:56:50,756 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-05 11:00:15,834 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-05 11:01:58,774 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-05 11:02:41,617 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource1","Sequence":4
+2014-02-05 11:04:59,540 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 11:07:04,087 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 11:18:45,447 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 11:18:45,447 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 11:21:22,413 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 11:21:41,312 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 11:22:07,768 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 11:25:11,569 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:09:14,912 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:09:14,913 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:09:15,015 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:11:36,416 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:11:36,416 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:11:36,512 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:13:28,446 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:13:28,447 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:13:28,542 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:27:01,745 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:27:01,746 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:27:01,848 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
