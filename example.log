@@ -1377,3 +1377,140 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-05 15:54:57,352 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
 2014-02-05 15:54:57,353 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
 2014-02-05 15:54:57,354 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 16:40:48,319 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 16:40:48,320 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 16:40:48,363 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-05 16:40:48,364 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 16:40:48,577 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-05 16:40:48,577 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 16:40:48,583 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-05 16:40:48,583 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 16:43:18,405 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 16:43:18,405 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 16:43:18,451 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-05 16:43:18,457 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-05 16:43:18,459 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-05 16:43:18,459 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 17:12:52,065 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:12:52,066 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:12:52,068 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:12:52,397 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:12:52,444 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:12:52,445 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:12:52,532 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status: 401 while retrieving services for: Login while retrieving services for: Login
+2014-02-05 17:21:19,374 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:21:19,375 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:21:19,376 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:21:19,751 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:21:19,793 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:21:19,794 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:21:20,198 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/UnXJMoANxNeEOj02bX5F16TgJqAz]
+2014-02-05 17:21:20,337 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:21:20,385 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/WJRF8lscmye_RYAyX9VO8ZcJ-LUy]
+2014-02-05 17:21:20,756 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:21:20,763 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fernando v Jim] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/4x0lAft_P7JnfqLK0J4o1y_Rgtg/M5Zba6FN5Hja4Ts83b3k0IIGkJNC]
+2014-02-05 17:21:20,955 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:23:43,910 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:23:43,911 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:23:43,913 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:23:44,251 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:23:44,293 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:23:44,293 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:23:44,614 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/VqjDlq96GqIGyTLSdHsN0HsvwgJD]
+2014-02-05 17:23:44,736 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:23:44,767 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/YFUBu4lobCJeX1v-yFZMyab5REU3]
+2014-02-05 17:23:45,116 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:23:45,143 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fernando v Jim] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/4x0lAft_P7JnfqLK0J4o1y_Rgtg/M5Zba6FN5Hja4Ts83b3k0IIGkJNC]
+2014-02-05 17:23:45,226 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:24:11,137 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:24:11,138 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:24:11,141 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:24:11,479 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:24:11,521 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:24:11,521 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:24:11,865 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/fWzKg9FYSRX4vd52VCL3xnz6s1k3]
+2014-02-05 17:24:11,938 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:24:11,968 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/bGZTti517NCavWSPpchF7jwp2D5F]
+2014-02-05 17:24:12,285 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:24:12,311 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fernando v Jim] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/4x0lAft_P7JnfqLK0J4o1y_Rgtg/I_jl9FutdrjWPmMFe5NXHZbxbvlE]
+2014-02-05 17:24:12,399 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:25:33,380 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:25:33,381 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:25:33,384 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:25:33,715 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:25:33,756 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:25:33,756 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:25:34,052 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/fWzKg9FYSRX4vd52VCL3xnz6s1k3]
+2014-02-05 17:25:34,132 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:25:34,163 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/bGZTti517NCavWSPpchF7jwp2D5D]
+2014-02-05 17:25:34,523 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:25:34,531 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fernando v Jim] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/4x0lAft_P7JnfqLK0J4o1y_Rgtg/M5Zba6FN5Hja4Ts83b3k0IIGkJNC]
+2014-02-05 17:25:34,629 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:27:52,627 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:27:52,628 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:27:52,629 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:27:53,064 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:27:53,111 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:27:53,112 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:27:53,508 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/VqjDlq96GqIGyTLSdHsN0HsvwgJE]
+2014-02-05 17:27:56,712 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:27:56,746 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/h2_8IEIKvPWXdLVsPah6nxdvFew4]
+2014-02-05 17:27:57,058 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:27:57,087 [main] ERROR ss.udapi.sdk.services.HttpServices - No details found for: http://api.sportingsolutions.com/rels/stream/amqp on Fern v Johhny Alien
+2014-02-05 17:28:14,516 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:28:14,517 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:28:14,519 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:28:14,877 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:28:14,925 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:28:14,925 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:28:15,244 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/UiHASrll1c1ABeuF1AoaHooPm8xC]
+2014-02-05 17:28:15,350 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:28:15,379 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/h2_8IEIKvPWXdLVsPah6nxdvFew4]
+2014-02-05 17:28:15,723 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:28:15,760 [main] ERROR ss.udapi.sdk.services.HttpServices - No details found for: http://api.sportingsolutions.com/rels/stream/amqp on fern v johhny alien
+2014-02-05 17:28:51,230 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:28:51,231 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:28:51,232 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:28:51,523 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:28:51,578 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:28:51,578 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:28:52,039 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/UiHASrll1c1ABeuF1AoaHooPm8xB]
+2014-02-05 17:28:52,120 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:28:52,150 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/WJRF8lscmye_RYAyX9VO8ZcJ-LUz]
+2014-02-05 17:28:52,481 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:28:52,491 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[fern v johnny alien] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/5IyktEE--jyYCP4IMNgFjoXegiw/T29o1GI23kOIZJGJHVegOfV0_HMy]
+2014-02-05 17:28:52,570 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:29:49,898 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:29:49,899 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:29:49,901 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:29:50,219 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:29:50,269 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:29:50,269 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:29:50,571 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/VqjDlq96GqIGyTLSdHsN0HsvwgJG]
+2014-02-05 17:29:50,653 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:29:50,684 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/YFUBu4lobCJeX1v-yFZMyab5REU2]
+2014-02-05 17:29:54,051 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:30:16,265 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:30:16,266 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:30:16,267 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:30:16,589 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:30:16,641 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:30:16,642 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:30:16,991 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/UiHASrll1c1ABeuF1AoaHooPm8xC]
+2014-02-05 17:30:17,224 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:30:17,254 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/h2_8IEIKvPWXdLVsPah6nxdvFexC]
+2014-02-05 17:30:17,631 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:30:17,638 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[fern v johnny alien] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/5IyktEE--jyYCP4IMNgFjoXegiw/T29o1GI23kOIZJGJHVegOfV0_HMz]
+2014-02-05 17:30:23,771 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:30:29,405 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 17:30:29,406 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 17:30:29,408 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving connection actions from url: http://apicui.sportingsolutions.com
+2014-02-05 17:30:29,709 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 401
+2014-02-05 17:30:29,765 [main] DEBUG ss.udapi.sdk.services.HttpServices - Retrieved connection details: [Login, Reset]
+2014-02-05 17:30:29,766 [main] INFO  ss.udapi.sdk.services.HttpServices - Retrieving services for: Login
+2014-02-05 17:30:30,118 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/features/list] name:[UnifiedDataAPI] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/VqjDlq96GqIGyTLSdHsN0HsvwgJE]
+2014-02-05 17:30:30,208 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:30:30,245 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/Football/h2_8IEIKvPWXdLVsPah6nxdvFexB]
+2014-02-05 17:30:30,567 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-05 17:30:30,573 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[fern v johnny alien] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/5IyktEE--jyYCP4IMNgFjoXegiw/A7myGTApRxvDOyFww1yISzAwEKQ4]
+2014-02-05 17:30:30,653 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
