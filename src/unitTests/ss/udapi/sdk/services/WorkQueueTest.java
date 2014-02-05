@@ -2,7 +2,6 @@ package ss.udapi.sdk.services;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class WorkQueueTest
@@ -21,7 +20,7 @@ public class WorkQueueTest
     assertEquals(task2, queue.getTask());
   }
 
-
+  @Test
   public void testProveItsFIFO()
   {
     String task3 = "More strings to test";

@@ -19,15 +19,17 @@ public class RabbitMqConsumerTest
 {
   private Channel channel = mock(Channel.class);
   private ResourceImpl resource = mock(ResourceImpl.class);
-  private MQListener mqListener = MQListener.getMQListener("http://xxx.test123url.com/UnifiedDataAPI/stream/Football/testresource2/I_jl9FutdrjWPmMFe5NXHZbxbvlE");
   private WorkQueue myQueue = WorkQueue.getWorkQueue();
-  private boolean resourceImplCalled = false;
+  private boolean resourceImplCalled;
   private byte[] messageByteArray;
   private byte[] echoByteArray;
   private EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
-  
   private RabbitMqConsumer mqConsumer;
   private String cTag = "amq.ctag-ApAlmaYcURB0nqy-B8UsjQ";
+
+  //It is used in this session, just not in this class but in RabbitMQConsumer
+  @SuppressWarnings("unused")
+  private MQListener mqListener = MQListener.getMQListener("http://xxx.test123url.com/UnifiedDataAPI/stream/Football/testresource2/I_jl9FutdrjWPmMFe5NXHZbxbvlE");
   
   
   @Before
@@ -35,6 +37,7 @@ public class RabbitMqConsumerTest
   {
     mqConsumer = new RabbitMqConsumer(channel);
     ResourceWorkerMap.initWorkerMap();
+    resourceImplCalled = false;
     ResourceWorkerMap.addResource("5IyktEE--jyYCP4IMNgFjoXegiw", resource);
     MQListener.getMQListener(cTag);
     CtagResourceMap.initCtagMap();

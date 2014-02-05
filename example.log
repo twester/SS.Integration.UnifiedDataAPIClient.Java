@@ -1311,3 +1311,69 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-05 14:56:31,099 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
 2014-02-05 14:56:31,100 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
 2014-02-05 14:56:31,100 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:58:06,887 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:58:06,889 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:59:26,465 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:59:26,466 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:00:16,321 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:00:16,322 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:27:34,396 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:27:34,397 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:27:34,417 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:27:34,417 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: [{"Name":"Fernando v Jim","Content":{"Id
+2014-02-05 15:27:34,418 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource2","StartTime":
+2014-02-05 15:32:33,981 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:32:33,982 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:32:34,006 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:32:34,007 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:32:34,010 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:33:29,917 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:33:29,918 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:33:29,944 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:33:29,944 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:33:29,946 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:41:28,962 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:41:28,964 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:41:29,010 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:41:29,011 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:41:29,012 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:42:22,340 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:42:22,341 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:42:22,375 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:42:22,375 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:42:22,376 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:43:07,791 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:43:07,792 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:43:07,834 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:43:07,834 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:43:07,835 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:43:30,715 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:43:30,716 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:43:30,746 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:43:30,746 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:43:30,748 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:44:01,914 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:44:01,916 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:44:01,944 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:44:01,944 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:44:01,946 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:44:10,976 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:44:10,977 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:44:10,996 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:44:10,996 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:44:10,998 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:44:29,368 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:44:29,369 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:44:29,393 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:44:29,393 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:44:29,395 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:53:34,635 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:53:34,636 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:53:34,809 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:53:34,809 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:53:34,810 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 15:54:57,225 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 15:54:57,226 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 15:54:57,352 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-05 15:54:57,353 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-05 15:54:57,354 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
