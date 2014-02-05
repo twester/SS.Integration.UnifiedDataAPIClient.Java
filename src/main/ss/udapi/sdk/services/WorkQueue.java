@@ -64,13 +64,19 @@ public class WorkQueue
   public String getTask() {
     String task=null;
     try {
-      //this is a blocking method so if there's nothing to pickup from the queue the calling thread sits in a blocked state not
-      //usign any resources.
+      //this is a blocking method so if there's nothing to pickup from the queue the listener thread sits in a blocked state not
+      //using any resources up to the point where we have something to offer.
       task = linkedQueue.take();
     } catch (Exception ex) {
       logger.error("WorkQueue management interrupted", ex);
     }
     return task;
+  }
+  
+  
+  //added to allow unit testing
+  protected int size() {
+    return linkedQueue.size();
   }
   
 }

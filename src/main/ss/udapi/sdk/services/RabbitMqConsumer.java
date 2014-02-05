@@ -68,7 +68,7 @@ public class RabbitMqConsumer extends DefaultConsumer
 
     }
 
-    //We sucessfully got an echo response or wome work from a queue, so the queue must be OK.
+    //We successfully got an echo response or some work from a queue, so the queue must be OK.
   }
 
   

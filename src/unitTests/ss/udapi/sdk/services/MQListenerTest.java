@@ -22,7 +22,7 @@ public class MQListenerTest
   private Connection conn = mock(Connection.class);
   private ConnectionFactory connFact= mock(ConnectionFactory.class);
   
-  private MQListener mqListener = MQListener.getMQListener("http://testurl");
+  private MQListener mqListener = MQListener.getMQListener("http://test123");
   
   @Before
   public void setUp() throws Exception

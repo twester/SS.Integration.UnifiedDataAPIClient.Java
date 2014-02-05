@@ -1038,3 +1038,276 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-05 12:27:01,745 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
 2014-02-05 12:27:01,746 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
 2014-02-05 12:27:01,848 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:33:08,254 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:33:08,255 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:33:09,175 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected response status for echo request: 404
+2014-02-05 12:33:09,182 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://xxx.testurl.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-05 12:33:09,367 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 404
+2014-02-05 12:33:49,359 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:33:49,361 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:33:49,763 [main] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingssssolutions.com/rels/stream/batchecho on Fern v NotFern
+2014-02-05 12:33:49,777 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://xxx.testurl.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-05 12:33:50,030 [main] ERROR ss.udapi.sdk.services.HttpServices - Invalid Client Protocol: Unexpected http connection response status: 404
+2014-02-05 12:35:53,119 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:35:53,120 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:35:53,631 [main] ERROR ss.udapi.sdk.services.HttpServices - Communication error: yyy.test123url.com
+2014-02-05 12:35:53,638 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[Fern v NotFern] to href:[http://yyy.test123url.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1]
+2014-02-05 12:35:53,639 [main] ERROR ss.udapi.sdk.services.HttpServices - Communication error: yyy.test123url.com
+2014-02-05 12:39:28,302 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:39:28,304 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 12:39:28,304 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 12:39:28,304 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 12:39:28,304 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:39:28,304 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 12:39:28,305 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:39:36,630 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:39:36,631 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:39:36,729 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:39:40,732 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:39:40,942 [Thread-1] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:40,942 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:40,943 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4b91e7cd-7dd7-43c7-8ac9-24bc25a9e7ff;2014-02-05T12:39:40.732Z"}
+2014-02-05 12:39:40,943 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e71e80fc-0d12-4063-a9c0-5fae877bad1b;2014-02-05T12:39:36.752Z"}
+2014-02-05 12:39:41,733 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:39:41,949 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:41,949 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:41,949 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4b91e7cd-7dd7-43c7-8ac9-24bc25a9e7ff;2014-02-05T12:39:40.732Z"}
+2014-02-05 12:39:41,949 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e71e80fc-0d12-4063-a9c0-5fae877bad1b;2014-02-05T12:39:36.752Z"}
+2014-02-05 12:39:42,733 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:39:42,954 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:42,954 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:42,954 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e71e80fc-0d12-4063-a9c0-5fae877bad1b;2014-02-05T12:39:36.752Z"}
+2014-02-05 12:39:42,954 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4b91e7cd-7dd7-43c7-8ac9-24bc25a9e7ff;2014-02-05T12:39:40.732Z"}
+2014-02-05 12:39:43,734 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:39:43,961 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:43,961 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123.com
+2014-02-05 12:39:43,962 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e71e80fc-0d12-4063-a9c0-5fae877bad1b;2014-02-05T12:39:36.752Z"}
+2014-02-05 12:39:43,962 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"4b91e7cd-7dd7-43c7-8ac9-24bc25a9e7ff;2014-02-05T12:39:40.732Z"}
+2014-02-05 12:39:44,735 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:40:01,008 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:40:01,009 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:40:01,106 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:53:39,755 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:53:39,757 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 12:53:39,757 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 12:53:39,757 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 12:53:39,757 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:53:39,757 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-05 12:53:39,758 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 12:53:39,758 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 12:53:39,758 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 12:53:39,758 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:53:39,759 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-05 12:53:39,759 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-05 12:53:39,759 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-05 12:53:39,759 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-05 12:53:45,856 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:53:45,857 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:53:45,949 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:53:46,244 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:53:46,244 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"a78c8609-83cc-4728-98ea-8a6093ef46ed;2014-02-05T12:53:45.970Z"}
+2014-02-05 12:53:47,250 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:53:47,250 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"a78c8609-83cc-4728-98ea-8a6093ef46ed;2014-02-05T12:53:45.970Z"}
+2014-02-05 12:53:48,254 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:53:48,254 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"a78c8609-83cc-4728-98ea-8a6093ef46ed;2014-02-05T12:53:45.970Z"}
+2014-02-05 12:53:49,951 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:53:50,952 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:53:51,952 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:53:52,953 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:53:53,953 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:54:00,839 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:54:00,840 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:54:00,933 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 12:54:34,604 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:54:34,605 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:54:34,683 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:54:34,910 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:54:34,910 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6ef8e242-4311-4c04-a269-001dccbcbd1c;2014-02-05T12:54:34.704Z"}
+2014-02-05 12:54:35,916 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:54:35,916 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6ef8e242-4311-4c04-a269-001dccbcbd1c;2014-02-05T12:54:34.704Z"}
+2014-02-05 12:54:36,920 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:54:36,920 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"6ef8e242-4311-4c04-a269-001dccbcbd1c;2014-02-05T12:54:34.704Z"}
+2014-02-05 12:54:38,696 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:54:39,697 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:54:40,698 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:54:41,698 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:54:42,698 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:55:54,474 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:55:54,475 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:55:54,477 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:55:54,743 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:55:54,744 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"5e208109-56fc-42a1-8e09-2b227d36a081;2014-02-05T12:55:54.501Z"}
+2014-02-05 12:55:55,748 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:55:55,748 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"5e208109-56fc-42a1-8e09-2b227d36a081;2014-02-05T12:55:54.501Z"}
+2014-02-05 12:55:56,753 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-05 12:55:56,753 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"5e208109-56fc-42a1-8e09-2b227d36a081;2014-02-05T12:55:54.501Z"}
+2014-02-05 12:55:58,480 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-05 12:55:59,481 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:56:00,481 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:56:01,482 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:56:02,482 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-05 12:56:17,188 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 12:56:17,189 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 12:56:17,291 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 13:43:44,693 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:43:44,694 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:44:52,824 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:44:52,825 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:45:29,420 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:45:29,421 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:46:24,811 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:46:24,812 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:46:24,853 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 13:49:01,078 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:49:01,079 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:49:01,112 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 13:50:06,533 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:50:06,535 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:54:37,578 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:54:37,580 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 13:54:37,600 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 13:54:37,608 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 13:54:37,608 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 13:58:03,668 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 13:58:03,670 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:02:43,769 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:02:43,781 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:02:43,781 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:02:43,802 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:02:43,809 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:02:43,810 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:02:43,810 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:02:43,811 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:02:43,827 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:03:26,012 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:03:26,026 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:03:26,026 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:03:26,048 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:03:26,065 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:04:20,750 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:04:20,760 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:04:20,760 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:04:20,776 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:04:20,782 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:04:20,782 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:04:20,783 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:04:20,783 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:04:20,795 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:08:31,969 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:08:31,970 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:08:31,975 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:08:31,994 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:08:32,001 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:08:32,002 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:08:32,003 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:08:32,003 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:08:32,018 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:09:57,772 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:09:57,773 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:09:57,776 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:09:57,795 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:09:57,814 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:09:57,819 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:09:57,820 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:09:57,825 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:09:57,825 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:09:57,826 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:12:55,440 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:12:55,441 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:12:55,444 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,463 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,469 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,470 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,484 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:12:55,488 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,488 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,489 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:12:55,490 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:12:55,491 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:13:27,520 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:13:27,521 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:13:27,617 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-05 14:14:17,023 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:14:17,025 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:14:17,029 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,050 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,058 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,059 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,072 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:14:17,075 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,076 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,077 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:14:17,077 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:14:17,078 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,684 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:21:42,685 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:21:42,689 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,707 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,713 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,714 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,728 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:21:42,731 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,732 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,733 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:21:42,733 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:21:42,733 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,429 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:31:46,430 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:31:46,433 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,452 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,459 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,460 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,461 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,461 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,478 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:31:46,480 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,481 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:31:46,482 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:32:17,882 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:32:17,883 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:32:17,888 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,908 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,910 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-05 14:32:17,912 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,912 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,918 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,919 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,937 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:32:17,941 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,942 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:32:17,944 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:34:49,226 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:34:49,227 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:34:49,232 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,252 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,254 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-05 14:34:49,255 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,256 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,260 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,261 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,273 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:34:49,276 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,276 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:34:49,277 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:56:31,052 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-05 14:56:31,053 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-05 14:56:31,056 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,073 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,075 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-05 14:56:31,075 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,076 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,077 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-05 14:56:31,077 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-05 14:56:31,078 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,078 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,096 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-05 14:56:31,099 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,100 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-05 14:56:31,100 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
