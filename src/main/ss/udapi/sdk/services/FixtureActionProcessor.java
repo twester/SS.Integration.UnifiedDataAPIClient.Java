@@ -32,6 +32,7 @@ public class FixtureActionProcessor implements Runnable
 {
   private static Logger logger = Logger.getLogger(FixtureActionProcessor.class);
   private String task;
+  private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue(); 
   
   public FixtureActionProcessor(String task) {
     this.task = task;
@@ -55,7 +56,7 @@ public class FixtureActionProcessor implements Runnable
     //Now that we know what fixture the work is for  put the UOW in that fixtrues work queue.
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
     
-    ResourceWorkQueue.addUOW(fixtureId, task);
+    resWorkQueueRef.addUOW(fixtureId, task);
 
     //And run it.
     resource.streamData();

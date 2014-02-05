@@ -55,12 +55,12 @@ public class ResourceImpl implements Resource
    * This is the work queue for this resource instance.  All activity for this resource's MQ queue received 
    * from Sporting Solutions end up here as well as internal echo control commands.  RabbitMQConsumer and EchoSender place objects here. 
    */
-  private static LinkedBlockingQueue<String> myTasks;
   private boolean isStreaming;
   private boolean connected;
   private String amqpDest;
   private ServiceRequest availableResources;
   private RestItem restItem = new RestItem();
+  private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue(); 
   private List<Event> streamingEvents;
   
   
@@ -70,7 +70,7 @@ public class ResourceImpl implements Resource
   public ResourceImpl(RestItem restItem, ServiceRequest availableResources) {
     this.restItem = restItem;
     this.availableResources = availableResources;
-    myTasks = ResourceWorkQueue.addQueue(getId());
+    ResourceWorkQueue.addQueue(getId());
     logger.debug("Instantiated Resource: " + restItem.getName());
     
     if(ResourceWorkerMap.exists(getId()) == true) {
@@ -165,13 +165,15 @@ public class ResourceImpl implements Resource
    * Starts callback services to the client code whenever an event is received for this resource/fixture.
    */
   public void streamData() {
-    logger.debug("In resource " + getId() + " number of items received: " + myTasks.size() + " streaming status: " + isStreaming);
+    logger.debug("In resource " + getId() + " number of items received: " + ResourceWorkQueue.size(getId()) + " streaming status: " + isStreaming);
     StreamAction streamAction = new StreamAction(streamingEvents);
-    while ((! myTasks.isEmpty()) && (isStreaming == true)) {
-      String task = myTasks.poll();
-      logger.debug("Streaming data: " + task.substring(0, 60));
+    while ((! ResourceWorkQueue.isEmpty(getId())) && (isStreaming == true)) {
       try {
+        String task = resWorkQueueRef.removeUOW(getId());
+        logger.debug("Streaming data: " + task.substring(0, 60));
         streamAction.execute(task);
+      } catch (InterruptedException ex) {
+        logger.warn("Error while retrieving unit of work:" + getId());
       } catch (Exception ex) {
         logger.warn("Error while communicating with client code for Id:" + getId());
       } 

@@ -60,7 +60,6 @@ public class SessionImpl implements Session
     ServiceThreadExecutor.createExecutor();
     CtagResourceMap.initCtagMap();
     ResourceWorkerMap.initWorkerMap();
-    ResourceWorkQueue.initResourceWorkQueue();
     
     GetRoot(serverURL,credentials, true);
   }

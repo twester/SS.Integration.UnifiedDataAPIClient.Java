@@ -36,10 +36,11 @@ public class ResourceWorkQueue
   }
   
 
-  public synchronized static void initResourceWorkQueue() {
+  public synchronized static ResourceWorkQueue getResourceWorkQueue() {
     if (workQueue == null) {
       workQueue = new ResourceWorkQueue();
     }
+    return workQueue;
   }
   
   
@@ -58,17 +59,21 @@ public class ResourceWorkQueue
   
 
   //Add a new UOW for the associated resource/fixture.  Currently FixtureActionProcessor does this. 
-  public static void addUOW(String resourceId, String task) {
-    System.out.println("--------------->echo testing: added echo alert" + task.substring(0,10) + " for [" + resourceId + "]");
-    LinkedBlockingQueue<String> queue = map.get(resourceId);
-    queue.add(task);
+  public void addUOW(String resourceId, String task) {
+    synchronized(this) {
+      System.out.println("--------------->echo testing: added echo alert" + task.substring(0,10) + " for [" + resourceId + "]");
+      LinkedBlockingQueue<String> queue = map.get(resourceId);
+      queue.add(task);
+    }
   }
   
   
   //ResourceImpl pulls the UOW to work on it.
-  public static String removeUOW(String resourceId) {
-    LinkedBlockingQueue<String> queue = map.get(resourceId);
-    return queue.poll();
+  public String removeUOW(String resourceId) {
+    synchronized(this) {
+      LinkedBlockingQueue<String> queue = map.get(resourceId);
+      return queue.poll();
+    }
   }
 
   
@@ -77,8 +82,14 @@ public class ResourceWorkQueue
     return map.get(resourceId);
   }
 
+  public static int size(String resourceId) {
+    return map.get(resourceId).size();
+  }
 
- 
+  public static boolean isEmpty(String resourceId) {
+    return map.get(resourceId).isEmpty();
+  }
+  
   public static boolean exists(String resourceId) {
     return map.containsKey(resourceId);
   }
