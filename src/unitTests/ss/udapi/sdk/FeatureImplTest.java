@@ -121,7 +121,9 @@ public class FeatureImplTest
     assertEquals("Football", feature.getName());
   }
 
+
   
+  //find the request we need
   private RestItem getRestItems(ServiceRequest request, String name) {
     RestItem matchingRest = null;
     Iterator<RestItem> itemRestIterator = request.getServiceRestItems().iterator();

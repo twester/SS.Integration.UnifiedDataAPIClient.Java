@@ -97,4 +97,10 @@ public class FeatureImpl implements Feature
     this.httpSvcs = httpSvcs;
   }
   
+  //Getter for unit testing
+  protected String getFeatureHref()
+  {
+    return restItem.getLinks().get(0).getHref();
+  }
+  
 }

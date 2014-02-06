@@ -87,4 +87,17 @@ public class ServiceImpl implements Service
   public String getName() {
     return restItem.getName();
   }
+  
+  
+  
+  //Setter for unit testing
+  protected void setHttpSvcs(HttpServices httpSvcs)
+  {
+    this.httpSvcs = httpSvcs;
+  }
+
+
+
+
+  
 }

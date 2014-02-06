@@ -1764,3 +1764,93 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-06 09:24:35,708 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
 2014-02-06 09:24:35,712 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
 2014-02-06 09:24:35,712 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 10:00:30,195 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 10:00:30,196 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 10:00:30,310 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:00:30,337 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-06 10:00:30,352 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:14:41,460 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 10:14:41,462 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 10:14:41,588 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:14:41,617 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-06 10:14:41,639 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:17:34,625 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 10:17:34,627 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 10:17:34,750 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:17:34,779 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-06 10:17:34,826 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:17:34,829 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:17:34,836 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:17:34,840 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
+2014-02-06 10:18:05,758 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 10:18:05,760 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 10:18:05,870 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:18:05,897 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-06 10:18:05,912 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:18:05,915 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:18:05,921 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:18:05,925 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
+2014-02-06 10:20:57,516 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 10:20:57,517 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 10:20:57,619 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:20:57,645 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving all features
+2014-02-06 10:20:57,676 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AustralianRules
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Badminton
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Baseball
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Basketball
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: BeachVolleyball
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Boxing
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Cricket
+2014-02-06 10:20:57,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Darts
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicFootball
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicHurling
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Handball
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: HorseRacing
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: IceHockey
+2014-02-06 10:20:57,678 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyLeague
+2014-02-06 10:20:57,679 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyUnion
+2014-02-06 10:20:57,679 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Snooker
+2014-02-06 10:20:57,679 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Squash
+2014-02-06 10:20:57,679 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Tennis
+2014-02-06 10:20:57,679 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: TestCricket
+2014-02-06 10:20:57,679 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Volleyball
+2014-02-06 10:20:57,688 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:20:57,702 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-06 10:20:57,703 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:20:57,708 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:20:57,714 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:20:57,718 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
+2014-02-06 10:21:05,970 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 10:21:05,972 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 10:21:06,086 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:21:06,114 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving all features
+2014-02-06 10:21:06,155 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AustralianRules
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Badminton
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Baseball
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Basketball
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: BeachVolleyball
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Boxing
+2014-02-06 10:21:06,156 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Cricket
+2014-02-06 10:21:06,157 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Darts
+2014-02-06 10:21:06,157 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 10:21:06,157 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicFootball
+2014-02-06 10:21:06,157 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicHurling
+2014-02-06 10:21:06,157 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Handball
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: HorseRacing
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: IceHockey
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyLeague
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyUnion
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Snooker
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Squash
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Tennis
+2014-02-06 10:21:06,158 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: TestCricket
+2014-02-06 10:21:06,159 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Volleyball
+2014-02-06 10:21:06,162 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:21:06,166 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-06 10:21:06,166 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-06 10:21:06,169 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:21:06,174 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-06 10:21:06,178 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
