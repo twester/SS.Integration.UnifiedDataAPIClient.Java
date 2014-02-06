@@ -48,6 +48,8 @@ public class MQListener implements Runnable
   private String path = null;
   private String queue = null;
   private String ctag = null;
+  
+  private static final int connectRetries = 5;
 
   
   private MQListener ()
@@ -111,7 +113,7 @@ public class MQListener implements Runnable
         
         //Start up the connection
         Connection connection;
-        try {
+        try {                                                   
           connection = connectionFactory.newConnection();
         } catch (IOException ex) {
           throw new IOException("Failure creating connection factory");
@@ -120,17 +122,26 @@ public class MQListener implements Runnable
         /* And create a consumer using the first queue.  This consumer allows subsequent queue listeners to be added and removed
          * as resources are created / deleted.
          */
-        
-        try {
-          channel = connection.createChannel();
-          channel.basicQos(0, 10, false);
-          consumer = new RabbitMqConsumer(channel);
-          //Create a queue listener for the first fixure.
-          ctag=channel.basicConsume(queue, true, consumer);
-        } catch (IOException ex) {
+        boolean connectSuccess = false;
+        for (int retries=1; retries<=connectRetries; retries++) {
+          logger.info("Attempting new connection to MQ...");
+          try {
+            channel = connection.createChannel();
+            channel.basicQos(0, 10, false);
+            
+            consumer = new RabbitMqConsumer(channel);
+            //Create a queue listener for the first fixure.
+            ctag=channel.basicConsume(queue, true, consumer);
+            connectSuccess = true;
+          } catch (IOException ex) {
+          }
+        }
+
+        if (connectSuccess == false) {
           throw new IOException("Failure creating channel");
         }
-    
+        logger.info("Connection made to MQ");
+        
         /* A map to used to keep a tally of which queue listeners (cTag) have been created and to disconnect later on 
          * when all we get is the resource Id.  Disconnection can only happen via a cTag.
          */
@@ -165,7 +176,7 @@ public class MQListener implements Runnable
             } catch (IOException ex) {
               logger.debug(ex);
             } catch (URISyntaxException ex) {
-              logger.error("Queue name corrupted. It would have been checked by now so something bad happened: " + session.getAmqpDest());
+              logger.error("Queue name corrupted: " + session.getAmqpDest());
             }
           }
           Thread.sleep(1000);
@@ -195,13 +206,18 @@ public class MQListener implements Runnable
    * ResourceImpl to notify the client code about the disconnect event. 
    */
   public static void disconnect (String resourceId) {
-    try {
-      channel.basicCancel(resourceChannMap.get(resourceId));
-      logger.info("Disconnecting basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
-    } catch (IOException ex) {
-      logger.error("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+    EchoResourceMap.getEchoMap().removeResource(resourceId);
+    if (resourceChannMap.get(resourceId) == null) {
+      logger.info("Basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId + 
+                "has already disconnected.");
+    } else {
+      try {
+        channel.basicCancel(resourceChannMap.get(resourceId));
+        logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+      } catch (IOException ex) {
+        logger.warn("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+      }
     }
-    
   }
   
   

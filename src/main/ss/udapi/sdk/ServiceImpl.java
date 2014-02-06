@@ -93,10 +93,15 @@ public class ServiceImpl implements Service
   //Setter for unit testing
   protected void setHttpSvcs(HttpServices httpSvcs)
   {
-    this.httpSvcs = httpSvcs;
+    ServiceImpl.httpSvcs = httpSvcs;
   }
 
 
+  //Getter for unit testing
+  protected String getServiceHref()
+  {
+    return availableServices.getServiceRestItems().get(0).getLinks().get(0).getHref();
+  }
 
 
   

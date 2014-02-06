@@ -109,6 +109,7 @@ public class EchoSender implements Runnable
               System.out.println("------>Echo error for resource[" + resourceId + "]");
               ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
               System.out.println("---------------------> resource in echo error" + resource.toString());
+              logger.warn("Attempting to disconnect resource: " + resourceId + " maximum number of echo retries reached");
               MQListener.disconnect(resourceId);
             }
   

@@ -39,7 +39,6 @@ public class CtagResourceMap
     if (cTagMap == null) {
       cTagMap = new CtagResourceMap();
     }
-//    return cTagMap;
   }
   
   

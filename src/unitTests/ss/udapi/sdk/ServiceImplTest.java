@@ -1,25 +1,23 @@
 package ss.udapi.sdk;
 
-import static org.junit.Assert.*;
-
-import java.util.Iterator;
-import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
-
-import ss.udapi.sdk.ResourceImpl;
 import ss.udapi.sdk.interfaces.Feature;
-import ss.udapi.sdk.interfaces.Resource;
 import ss.udapi.sdk.model.RestItem;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
+
+import java.util.Iterator;
+import java.util.List;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import static org.mockito.Mockito.*;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceImplTest

@@ -133,4 +133,28 @@ public class SessionImpl implements Session
     return serviceSet;
   }
 
+
+  
+  //Setter for unit testing
+  protected void setHttpSvcs(HttpServices httpSvcs, URL serverURL, Credentials credentials)
+  {
+    SessionImpl.httpSvcs = httpSvcs;
+    
+    this.serverURL = serverURL;
+    
+    ServiceThreadExecutor.createExecutor();
+    CtagResourceMap.initCtagMap();
+    ResourceWorkerMap.initWorkerMap();
+    
+    GetRoot(serverURL,credentials, true);
+    
+  }
+
+  
+  //Getter for unit testing
+  protected String getServiceHref()
+  {
+    return availableServices.getServiceRestItems().get(0).getLinks().get(0).getHref();
+  }
+
 }

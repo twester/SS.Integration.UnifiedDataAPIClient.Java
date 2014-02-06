@@ -4,7 +4,6 @@ build/
 dist/
 example.log.*
 html/
-conf/
 TEST*txt
 src/unitTests/ss/udapi/sdk/services/ServicesIntegrationTest.java
 

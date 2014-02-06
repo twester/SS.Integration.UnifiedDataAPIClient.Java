@@ -18,10 +18,13 @@ package ss.udapi.sdk.services;
 import ss.udapi.sdk.ResourceImpl;
 
 import org.apache.log4j.Logger;
+
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import com.rabbitmq.client.ShutdownSignalException;
 
 
 /* 
@@ -32,7 +35,9 @@ import com.rabbitmq.client.Envelope;
 public class RabbitMqConsumer extends DefaultConsumer
 {
   private static Logger logger = Logger.getLogger(RabbitMqConsumer.class);
+  private static boolean connectShutDownLogged = false;
   private EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
+  
 
   
   public RabbitMqConsumer(Channel channel){
@@ -44,7 +49,9 @@ public class RabbitMqConsumer extends DefaultConsumer
   //Message received from MQ
   @Override
   public void handleDelivery(String cTag, Envelope envelope, AMQP.BasicProperties properties, byte[] bodyByteArray) {
-
+    // we're running and receiving so the connection hasn't been broken or has been restored
+    connectShutDownLogged = false;
+    
     //Get the message header
     String body = new String(bodyByteArray);
     String msgHead = body.substring(0, 64);
@@ -71,6 +78,7 @@ public class RabbitMqConsumer extends DefaultConsumer
     //We successfully got an echo response or some work from a queue, so the queue must be OK.
   }
 
+
   
   /*
    * The queue has been disconnected.   This was requested by us when the number of echo retries was exceeded as managed by
@@ -87,6 +95,7 @@ public class RabbitMqConsumer extends DefaultConsumer
     MQListener.removeMapping(cTag);
   }
 
+
   
   /*
    * The queue has been disconnected.   But this time it was a result of a failure on MQ (unlikely but we should allow for it).
@@ -100,6 +109,39 @@ public class RabbitMqConsumer extends DefaultConsumer
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();
     MQListener.removeMapping(cTag);
+  }
+  
+
+  
+  /*
+   * The channel or connection has been shutdown.  Log the event.
+   */
+  @Override
+  public void handleShutdownSignal(String cTag, ShutdownSignalException signal) {
+    if (connectShutDownLogged == false) {
+      connectShutDownLogged = true;       //so we don't end up logging it for each cTag
+  
+      String hardError = "";
+      String applInit = "";
+      String reason = "";
+  
+      if (signal.isHardError()) {
+        hardError = "connection";
+      } else {
+        hardError = "channel";
+      }
+      
+      if (signal.isInitiatedByApplication()) {
+        applInit = "application";
+      } else {
+        applInit = "broker";
+      }
+
+      reason = signal.getReason().toString();
+      
+      logger.error("Connectivity to MQ has failed.  It was caused by " + applInit + " at the " + hardError
+                    + " level.  Reason received " + reason);
+    }
   }
   
 }
