@@ -40,6 +40,7 @@ public class FeatureImpl implements Feature
   protected FeatureImpl(RestItem restItem, ServiceRequest availableFeatures) {
     this.restItem = restItem;
     this.availableFeatures = availableFeatures;
+    System.out.println("------------->" + this.restItem);
     logger.info("Instantiated Feature: " + restItem.getName());
   }
 
@@ -50,12 +51,13 @@ public class FeatureImpl implements Feature
    * @param resourceName    Name of resource which will be retrieved from all resources available for this account.
    */
   public Resource getResource(String resourceName) {
-    logger.info("Retrieving resource" + resourceName);
+    logger.info("Retrieving resource: " + resourceName);
     
     ServiceRequest availableResources = httpSvcs.processRequest(availableFeatures, "http://api.sportingsolutions.com/rels/resources/list", restItem.getName());
     List<RestItem> restItems = availableResources.getServiceRestItems();
     for(RestItem searchRestItem:restItems) {
       if (searchRestItem.getName().equals(resourceName)) {
+        System.out.println("------------->" + searchRestItem.getName());
         return new ResourceImpl(searchRestItem, availableResources);
       }
     }
@@ -86,4 +88,13 @@ public class FeatureImpl implements Feature
   public String getName() {
     return restItem.getName();
   }
+  
+  
+  
+  //Setter for unit testing
+  protected void setHttpSvcs(HttpServices httpSvcs)
+  {
+    this.httpSvcs = httpSvcs;
+  }
+  
 }

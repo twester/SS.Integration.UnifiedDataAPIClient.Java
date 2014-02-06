@@ -222,7 +222,6 @@ public class HttpServices
       }
     }
     //Then return the response we got from Sporting Solutions.
-    System.out.println("---------------------->" + responseBody);
     return responseBody;
   }
   

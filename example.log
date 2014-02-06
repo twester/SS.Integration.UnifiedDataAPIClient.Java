@@ -1514,3 +1514,253 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-05 17:30:30,567 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
 2014-02-05 17:30:30,573 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/stream/amqp] name:[fern v johnny alien] to href:[http://apicui.sportingsolutions.com/UnifiedDataAPI/stream/Football/5IyktEE--jyYCP4IMNgFjoXegiw/A7myGTApRxvDOyFww1yISzAwEKQ4]
 2014-02-05 17:30:30,653 [main] DEBUG ss.udapi.sdk.services.HttpServices - Http connetion status 200
+2014-02-06 07:53:20,290 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-06 07:53:20,292 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-06 07:53:20,293 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-06 07:53:20,293 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-06 07:53:20,293 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-06 07:53:20,293 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 0
+2014-02-06 07:53:20,293 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-06 07:53:20,294 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-06 07:53:20,294 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-06 07:53:20,294 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-06 07:53:20,294 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 0
+2014-02-06 07:53:20,295 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 0
+2014-02-06 07:53:20,295 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 0
+2014-02-06 07:53:20,295 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 0
+2014-02-06 07:53:45,800 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:53:45,802 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:53:45,804 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-06 07:53:49,807 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-06 07:53:50,807 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-06 07:53:51,807 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-06 07:53:52,808 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-06 07:53:53,307 [Thread-0] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-06 07:53:53,307 [Thread-1] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.com
+2014-02-06 07:53:53,308 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"48d63b16-6d9d-49ec-be22-343c356dca1f;2014-02-06T07:53:45.851Z"}
+2014-02-06 07:53:53,308 [Thread-1] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3cd510df-dd15-4204-bb1d-58d95dd06576;2014-02-06T07:53:49.808Z"}
+2014-02-06 07:53:53,808 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-06 07:54:06,574 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:54:06,576 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:54:06,763 [Thread-0] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-06 07:54:24,081 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:54:24,083 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:54:24,088 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,112 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,114 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-06 07:54:24,116 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,116 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,118 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-06 07:54:24,118 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-06 07:54:24,118 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,119 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,137 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-06 07:54:24,154 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,154 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-06 07:54:24,156 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-06 07:54:37,577 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:54:37,578 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:54:50,183 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:54:50,184 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:54:56,218 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:54:56,219 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:54:56,439 [Thread-0] INFO  ss.udapi.sdk.services.WorkQueueMonitor - Work queue Monitor initialized and waiting
+2014-02-06 07:54:56,439 [Thread-0] DEBUG ss.udapi.sdk.services.WorkQueueMonitor - Queue Read: {"Relation":"http://c2e.sportingingsolut
+2014-02-06 07:54:56,441 [pool-1-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-06 07:59:29,988 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 07:59:29,989 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 07:59:30,048 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-06 07:59:30,055 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-06 07:59:30,057 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: null
+2014-02-06 07:59:30,057 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-06 08:16:10,209 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:16:10,210 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:18:06,877 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:18:06,880 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:19:32,556 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:19:32,558 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:20:30,448 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:20:30,449 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:21:16,906 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:21:16,907 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:23:12,218 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:23:12,219 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:23:24,440 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:23:24,441 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:24:20,264 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:24:20,266 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:24:20,385 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:24:20,396 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:24:20,401 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:24:20,401 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 08:24:20,711 [main] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/resources/list on Fern v NotFern
+2014-02-06 08:27:50,646 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:27:50,648 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:27:50,765 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:27:50,777 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:27:50,782 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:27:50,782 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 08:27:51,067 [main] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/resources/list on Fern v NotFern
+2014-02-06 08:28:12,553 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:28:12,556 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:28:47,404 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:28:47,406 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:28:47,514 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:28:47,523 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:28:47,527 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:28:47,527 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 08:28:47,840 [main] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/resources/list on Fern v NotFern
+2014-02-06 08:32:05,097 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:32:05,098 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:32:05,209 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:32:05,218 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:32:05,222 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Fern v NotFern
+2014-02-06 08:32:05,222 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 08:32:05,516 [main] ERROR ss.udapi.sdk.services.HttpServices - No links found for: http://api.sportingsolutions.com/rels/resources/list on Fern v NotFern
+2014-02-06 08:40:35,768 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:40:35,769 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:40:35,881 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:40:35,891 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:40:35,895 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:40:35,895 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 08:40:36,212 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://xxx.tes123turl.com/UnifiedDataAPI/Football/YFUBu4lobCJeX1v-yFZMyab5REU3]
+2014-02-06 08:40:40,052 [main] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.tes123turl.com
+2014-02-06 08:49:26,531 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:49:26,532 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:49:26,644 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:49:26,657 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:49:26,665 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:50:33,069 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:50:33,071 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:50:33,187 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:50:33,200 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:50:33,209 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:52:31,543 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:52:31,544 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:52:31,654 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:52:31,667 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:52:31,677 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:52:52,614 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:52:52,615 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:52:52,721 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:52:52,734 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:52:52,742 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:53:12,110 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:53:12,112 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:53:12,239 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:53:12,253 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:53:12,262 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:53:40,888 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:53:40,890 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:53:41,014 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:53:41,028 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:53:41,036 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:01,476 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:54:01,477 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:54:01,586 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:01,599 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:01,608 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:18,922 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:54:18,924 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:54:19,047 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:19,060 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:19,069 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:36,253 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:54:36,255 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:54:36,363 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:36,376 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:54:36,385 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:55:23,347 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 08:55:23,349 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 08:55:23,456 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:55:23,470 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:55:23,479 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 08:55:23,525 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 08:55:23,793 [main] DEBUG ss.udapi.sdk.services.HttpServices - Sending request for relation:[http://api.sportingsolutions.com/rels/resources/list] name:[Football] to href:[http://xxx.tes123turl.com/UnifiedDataAPI/Football/YFUBu4lobCJeX1v-yFZMyab5REU3]
+2014-02-06 08:55:23,855 [main] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.tes123turl.com
+2014-02-06 09:04:06,303 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:04:06,304 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:04:06,423 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:04:06,436 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:04:06,445 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:04:06,500 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resourcetestresource1
+2014-02-06 09:09:10,722 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:09:10,724 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:09:10,830 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:09:10,854 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:09:10,862 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:09:43,387 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:09:43,388 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:09:43,497 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:09:43,511 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:09:43,520 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:09:43,567 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: testresource1
+2014-02-06 09:13:16,455 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:13:16,457 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:13:16,566 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:13:16,578 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:13:16,587 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:13:16,619 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:13:16,625 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:18:17,948 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:18:17,949 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:18:18,058 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:18:18,071 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:18:18,079 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:18:18,126 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:18:18,133 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:18:36,097 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:18:36,099 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:18:36,211 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:18:36,225 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:18:36,234 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:18:36,266 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:18:36,274 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:21:03,846 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:21:03,848 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:21:03,970 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:04,015 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:21:04,024 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:21:04,030 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:04,043 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:04,048 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: name does not exist
+2014-02-06 09:21:04,053 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:04,056 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:21:04,057 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:21:24,299 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:21:24,301 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:21:24,430 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:24,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:21:24,475 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:21:24,481 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:24,495 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:24,499 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: name does not exist
+2014-02-06 09:21:24,503 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:21:24,507 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:21:24,507 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:23:33,902 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:23:33,904 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:23:34,016 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:23:34,050 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving all resources
+2014-02-06 09:23:34,059 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fernando v Jim
+2014-02-06 09:23:34,061 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-06 09:23:34,061 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:23:34,065 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:23:34,080 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:23:34,084 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: name does not exist
+2014-02-06 09:23:34,088 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:23:34,092 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:23:34,092 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:24:35,519 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 09:24:35,521 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 09:24:35,631 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:24:35,665 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving all resources
+2014-02-06 09:24:35,675 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fernando v Jim
+2014-02-06 09:24:35,677 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-06 09:24:35,677 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 09:24:35,682 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:24:35,700 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:24:35,704 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: name does not exist
+2014-02-06 09:24:35,708 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 09:24:35,712 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 09:24:35,712 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
