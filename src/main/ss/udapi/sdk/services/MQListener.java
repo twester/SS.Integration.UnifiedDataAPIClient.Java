@@ -124,21 +124,24 @@ public class MQListener implements Runnable
          */
         boolean connectSuccess = false;
         for (int retries=1; retries<=connectRetries; retries++) {
-          logger.info("Attempting new connection to MQ...");
-          try {
-            channel = connection.createChannel();
-            channel.basicQos(0, 10, false);
+          if (connectSuccess == false) {
+            logger.info("Attempting new connection to MQ...");
 
-            consumer = new RabbitMqConsumer(channel);
-            //Create a queue listener for the first fixure.
-            ctag=channel.basicConsume(queue, true, consumer);
-            connectSuccess = true;
-          } catch (IOException ex) {
-            connectSuccess = false;
-            //we're catching this and ignoring it during the retries
+            try {
+              channel = connection.createChannel();
+              channel.basicQos(0, 10, false);
+  
+              consumer = new RabbitMqConsumer(channel);
+              //Create a queue listener for the first fixure.
+              ctag=channel.basicConsume(queue, true, consumer);
+              connectSuccess = true;
+            } catch (IOException ex) {
+              connectSuccess = false;
+              //we're catching this and ignoring it during the retries
+            }
+
           }
         }
-
         if (connectSuccess == false) {
           throw new IOException("Failure creating channel");
         }
