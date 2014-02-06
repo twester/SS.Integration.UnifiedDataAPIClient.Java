@@ -128,12 +128,14 @@ public class MQListener implements Runnable
           try {
             channel = connection.createChannel();
             channel.basicQos(0, 10, false);
-            
+
             consumer = new RabbitMqConsumer(channel);
             //Create a queue listener for the first fixure.
             ctag=channel.basicConsume(queue, true, consumer);
             connectSuccess = true;
           } catch (IOException ex) {
+            connectSuccess = false;
+            //we're catching this and ignoring it during the retries
           }
         }
 
@@ -174,7 +176,7 @@ public class MQListener implements Runnable
                 logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
               }
             } catch (IOException ex) {
-              logger.debug(ex);
+              logger.error("Failure creating additional basic consumer for : " + session.getResourceId());
             } catch (URISyntaxException ex) {
               logger.error("Queue name corrupted: " + session.getAmqpDest());
             }
