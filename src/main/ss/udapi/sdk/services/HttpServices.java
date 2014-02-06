@@ -211,9 +211,9 @@ public class HttpServices
         responseBody = httpClient.execute(httpGet, responseHandler);
       }
     } catch (ClientProtocolException protEx) {
-      logger.error("Invalid Client Protocol: " + protEx.getMessage());
+      logger.error("Invalid Client Protocol: " + protEx.getMessage() + "while processing : " + name );
     } catch (IOException ioEx) {
-      logger.error("Communication error: " + ioEx.getMessage());
+      logger.error("Communication error: " + ioEx.getMessage() + "while processing : " + name );
     } finally {
       try {
         httpClient.close();

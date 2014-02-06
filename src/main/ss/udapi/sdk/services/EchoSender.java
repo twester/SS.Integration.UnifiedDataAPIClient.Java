@@ -65,6 +65,8 @@ public class EchoSender implements Runnable
 
   @Override
   public void run() {
+//    logger.debug("----->" + Thread.currentThread().getName().equals(THREAD_NAME));
+    
     if(Thread.currentThread().getName().equals(THREAD_NAME) == false) {
       logger.info("Starting echos.");
       EchoResourceMap echoMap = EchoResourceMap.getEchoMap();

@@ -1928,3 +1928,16 @@ java.io.FileNotFoundException: sdk.properties (The system cannot find the file s
 2014-02-06 11:13:37,725 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
 2014-02-06 11:13:37,730 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
 2014-02-06 11:13:37,735 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
+2014-02-06 14:53:04,800 [main] DEBUG ss.udapi.sdk.services.SystemProperties - Loading properties file
+2014-02-06 14:53:04,802 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-06 14:53:04,940 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 14:53:04,981 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving all resources
+2014-02-06 14:53:04,991 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fernando v Jim
+2014-02-06 14:53:04,993 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: Fern v NotFern
+2014-02-06 14:53:04,993 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien
+2014-02-06 14:53:04,997 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 14:53:05,005 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 14:53:05,010 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: name does not exist
+2014-02-06 14:53:05,014 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-06 14:53:05,019 [main] INFO  ss.udapi.sdk.FeatureImpl - Retrieving resource: fern v johnny alien
+2014-02-06 14:53:05,019 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiated Resource: fern v johnny alien

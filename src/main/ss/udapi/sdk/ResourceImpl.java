@@ -145,6 +145,7 @@ public class ResourceImpl implements Resource
       synchronized(this) {
         WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
         ServiceThreadExecutor.executeTask(queueWorker);
+        
         MQListener.setResources(new ResourceSession(amqpDest, getId()));
         ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
         EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);

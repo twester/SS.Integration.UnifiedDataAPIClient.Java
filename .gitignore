@@ -6,4 +6,3 @@ example.log.*
 html/
 TEST*txt
 src/unitTests/ss/udapi/sdk/services/ServicesIntegrationTest.java
-conf/
