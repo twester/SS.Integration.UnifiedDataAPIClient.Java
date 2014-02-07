@@ -90,6 +90,11 @@ public class MQListener implements Runnable
      * or if the channel has died.
      */
     try {
+      if (channel == null)
+        logger.debug("MQ Channel not open");
+      else
+        logger.debug("MQ Channel status: " + channel.isOpen());
+      
       if ((channel == null)  || (channel != null && (channel.isOpen() == false))) {
         //Set the MQ URL.
         session = resourceSessionList.remove();
@@ -227,8 +232,7 @@ public class MQListener implements Runnable
   public static void disconnect (String resourceId) {
     EchoResourceMap.getEchoMap().removeResource(resourceId);
     if (resourceChannMap.get(resourceId) == null) {
-      logger.info("Basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId + 
-                "has already disconnected.");
+      logger.debug("Basic consumer for resource " + resourceId + " has already disconnected.");
     } else {
       try {
         channel.basicCancel(resourceChannMap.get(resourceId));
@@ -245,6 +249,7 @@ public class MQListener implements Runnable
    * mappings.  Bit of housekeeping really.
    */
   protected static void removeMapping(String cTag) {
+    logger.debug("cTag" + cTag + "no longer valid.");
     resourceChannMap.remove(CtagResourceMap.getResource(cTag));
     CtagResourceMap.removeCtag(cTag);
   }

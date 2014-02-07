@@ -71,6 +71,9 @@ public class GTPService {
 		activeFixtures = new ConcurrentHashMap<String,Boolean>();
 	}
 	
+	
+	
+	
 	public void start(){
 		try{
 			logger.debug("Starting GTPService");
@@ -86,7 +89,7 @@ public class GTPService {
 			theTimer = new Timer(true);
 			theTimer.scheduleAtFixedRate(new TimerTask(){public void run(){
 				timerEvent(theService);
-			}}, 0, 30000);
+			}}, 0, 120000);
 		}catch(Exception ex){
 			logger.error(ex);
 		}

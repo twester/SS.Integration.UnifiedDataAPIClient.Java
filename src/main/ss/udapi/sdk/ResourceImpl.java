@@ -69,7 +69,7 @@ public class ResourceImpl implements Resource
     this.restItem = restItem;
     this.availableResources = availableResources;
     ResourceWorkQueue.addQueue(getId());
-    logger.debug("Instantiated Resource: " + restItem.getName());
+    logger.debug("Instantiating Resource: " + restItem.getName() + " -- id: " + getId());
     
     if(ResourceWorkerMap.exists(getId()) == true) {
       isStreaming = true;
@@ -126,6 +126,9 @@ public class ResourceImpl implements Resource
   }
 
   
+  
+  
+  
   /*
    * Attaches the application to the MQ service if there is no connection, otherwise it binds a new consume process
    * to an additional queue. 
@@ -141,8 +144,6 @@ public class ResourceImpl implements Resource
      * are only available at this point) we are starting them here.  We could retrieve and set this up earlier, but it that would mean
      * querying teh client resources twice on start up.
      */
-
-      logger.debug("Monitoring Services");
       WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
       ServiceThreadExecutor.executeTask(queueWorker);
       MQListener.setResources(new ResourceSession(amqpDest, getId()));
@@ -191,6 +192,7 @@ public class ResourceImpl implements Resource
   {
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
+    connected = false;
     EchoResourceMap.getEchoMap().removeResource(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
     ResourceWorkQueue.removeQueue(getId());
@@ -203,7 +205,11 @@ public class ResourceImpl implements Resource
   @Override
   public void stopStreaming()
   {
-    MQListener.disconnect(getId());
+    if (connected == true) {
+      logger.debug("Calling MQListener disconnect for resource" + getId());
+      MQListener.disconnect(getId());
+    }
+    connected = false;
     isStreaming = false;
   }
 

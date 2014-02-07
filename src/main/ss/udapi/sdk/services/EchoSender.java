@@ -28,6 +28,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
+import com.rabbitmq.client.AlreadyClosedException;
+
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.model.StreamEcho;
@@ -124,7 +126,10 @@ public class EchoSender implements Runnable
         Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
       } catch (InterruptedException ex) {
         logger.error("Echo Thread disrupted" + ex);
+      } catch (AlreadyClosedException ex) {
+        logger.warn("Tried to close an MQ connection that was already closed" + ex);
       }
+      
     }
   }
   
