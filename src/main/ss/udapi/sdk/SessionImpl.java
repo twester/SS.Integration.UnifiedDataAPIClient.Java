@@ -142,7 +142,6 @@ public class SessionImpl implements Session
     
     this.serverURL = serverURL;
     
-    ServiceThreadExecutor.createExecutor();
     CtagResourceMap.initCtagMap();
     ResourceWorkerMap.initWorkerMap();
     

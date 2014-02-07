@@ -15,13 +15,22 @@
 
 package ss.udapi.sdk.services;
 
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.locks.ReentrantLock;
+
+import org.apache.log4j.Logger;
+
 
 /* Threadpool for the main services used by the SDK */
 public class ServiceThreadExecutor
 {
   private static Executor exec;
+  private static Logger logger = Logger.getLogger(ServiceThreadExecutor.class);
+  private static ConcurrentHashMap<String,FutureTask<Runnable>> map = new ConcurrentHashMap<String, FutureTask<Runnable>>();
+  private static ReentrantLock svcLock = new ReentrantLock();
 
   /* Yes 3 is a magic number (as the song says).  But there cannot be more than three threads running, we do not start any more:
    *    1) MQListener
@@ -35,12 +44,30 @@ public class ServiceThreadExecutor
   private static final int MAX_SERVICE_THREADS = 3;
 
   public static void createExecutor() {
+    logger.debug("Instantiated Service Thread Executor");
     exec = Executors.newFixedThreadPool(MAX_SERVICE_THREADS);
   }
+
   
   public static void executeTask(Runnable task) {
-    exec.execute(task);
+    String taskName = task.toString().substring(0, task.toString().indexOf('@'));
+ 
+
+    
+      synchronized(ServiceThreadExecutor.class) {
+      if (map.containsKey(taskName) == false ) {
+        map.put(taskName, new FutureTask(task, taskName));
+        exec.execute(task);
+        logger.debug("Instantiating Service Thread Executor for: " + taskName + "."); 
+      }      
+      else if (map.get(taskName).isDone() == true) {
+        FutureTask future = new FutureTask(task, taskName);
+        map.put(taskName, future);
+        exec.execute(task);
+        logger.debug("Instantiating Service Thread Executor for: " + taskName + "."); 
+      }
+      
+
+    }
   }
-  
-  
 }

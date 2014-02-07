@@ -107,12 +107,11 @@ public class EchoResourceMap
       String resourceId = keyIter.next();
       int count = (map.get(resourceId));
       if (count == (retries)){
-        System.out.println("--------------->" + resourceId + ". added to defaulters" + (map.get(resourceId)));
+        logger.debug(resourceId + ". added to defaulters" + (map.get(resourceId)));
         defaulters.add(resourceId);
       }
       map.replace(resourceId, count+1);
-
-      System.out.println("--------------->echo count increased for: " + resourceId + ". Current count " + (map.get(resourceId)));
+      logger.debug("Echo count increased for: " + resourceId + ". Current count " + (map.get(resourceId)));
     }
     return defaulters;
   }

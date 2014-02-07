@@ -21,7 +21,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.MissingResourceException;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.management.BadAttributeValueExpException;
 
@@ -42,6 +44,7 @@ public class MQListener implements Runnable
   private static Channel channel;
   private static RabbitMqConsumer consumer;
   private static ConcurrentLinkedQueue<ResourceSession> resourceSessionList = new ConcurrentLinkedQueue<ResourceSession>();
+  private static ReentrantLock mqListenerLock = new ReentrantLock();
 
   private ResourceSession session = null;
   private URI resourceQURI = null;
@@ -62,10 +65,18 @@ public class MQListener implements Runnable
     /* This lock ensures there cannot be multiple instantiations which can lead to a corrupt object without synchronization,
      * which in turn cannot be done on a here as the access is static.
      */
-    logger.debug("Retrieving MQListener or create it if it doesn't exist");
-    if (instance == null) {
-      instance = new MQListener(); 
-    } 
+    try {
+      mqListenerLock.lock();
+      logger.debug("Retrieving MQListener or create it if it doesn't exist");
+      if (instance == null) {
+        instance = new MQListener(); 
+      } 
+    } catch (Exception ex) {
+      logger.error("Could not initialiaze MQ Listener.");
+      throw new MissingResourceException("Service threadpool has become corrupted", "ss.udapi.sdk.services.ActionThreadExecutor", "MQListener");
+    } finally {
+      mqListenerLock.unlock();
+    }
     return instance;
   }
   
@@ -160,6 +171,7 @@ public class MQListener implements Runnable
       
           logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
         }
+      }
         /*
          * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
          * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
@@ -187,7 +199,7 @@ public class MQListener implements Runnable
           }
           Thread.sleep(1000);
         } 
-      }
+
       
       // for java 1.7 this syntax is preferable: catch(URISyntaxException | UnsupportedEncodingException ex)
     } catch(URISyntaxException ex) {
@@ -266,6 +278,5 @@ public class MQListener implements Runnable
   }     
 
   
-
   
 }

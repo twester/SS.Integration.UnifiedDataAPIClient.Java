@@ -50,8 +50,6 @@ public class FixtureActionProcessor implements Runnable
     int idStart = msgHead.indexOf("Id\":")+5;
     String fixtureId = msgHead.substring(idStart,idStart+27);
     logger.debug("Processing started for fixture/resource: " + fixtureId);
-  
-    System.out.println("----------------->For Echo testing: " + msgHead);
 
     //Now that we know what fixture the work is for  put the UOW in that fixtures work queue.
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);

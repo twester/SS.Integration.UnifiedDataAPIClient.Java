@@ -62,7 +62,6 @@ public class ResourceImpl implements Resource
   private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue(); 
   private List<Event> streamingEvents;
   
-  
   /*
    * Constructor initializes and resets internal state in case it is re-initialized by the client code.  
    */
@@ -138,19 +137,18 @@ public class ResourceImpl implements Resource
       amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
       logger.info("Starting new streaming services, name: " + getName() +" queue: " + amqpDest + " fixture ID: " + getId()) ;
 
-    /* We need these two services to be running for the SDK to behave as expected.  And as they need the MQ details (which
+    /* We need these three services to be running for the SDK to behave as expected.  And as they need the MQ details (which
      * are only available at this point) we are starting them here.  We could retrieve and set this up earlier, but it that would mean
      * querying teh client resources twice on start up.
      */
-      synchronized(this) {
-        WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
-        ServiceThreadExecutor.executeTask(queueWorker);
-        
-        MQListener.setResources(new ResourceSession(amqpDest, getId()));
-        ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
-        EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
-        ServiceThreadExecutor.executeTask(echoSender);
-      }
+
+      logger.debug("Monitoring Services");
+      WorkQueueMonitor queueWorker = WorkQueueMonitor.getMonitor();
+      ServiceThreadExecutor.executeTask(queueWorker);
+      MQListener.setResources(new ResourceSession(amqpDest, getId()));
+      ServiceThreadExecutor.executeTask(MQListener.getMQListener(amqpDest));
+      EchoSender echoSender = EchoSender.getEchoSender(amqpDest, availableResources);
+      ServiceThreadExecutor.executeTask(echoSender);
       
       //MQListener.setResources does not allow duplicates so fall throughs from the above false will be ignored
       MQListener.setResources(new ResourceSession(amqpDest, getId()));

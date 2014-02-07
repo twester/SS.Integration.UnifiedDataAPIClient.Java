@@ -62,18 +62,11 @@ public class RabbitMqConsumer extends DefaultConsumer
     if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",") != true) {
       WorkQueue myQueue = WorkQueue.getWorkQueue();
       myQueue.addTask(body);
-    } else {
-      if (CtagResourceMap.getResource(cTag).equals("4x0lAft_P7JnfqLK0J4o1y_Rgtg")){
-        System.out.println("--------------->Disregarding echo response for 4x0lAft_P7JnfqLK0J4o1y_Rgtg, Fernando v Jim");
-      } else {
-        //TODO: move this outside the if once we finish testing the echo failure
-        echoMap.resetEchoCount(CtagResourceMap.getResource(cTag));
+    } 
 
-      }
-
-    }
-    echoMap.resetEchoCount(CtagResourceMap.getResource(cTag));
     //We successfully got an echo response or some work from a queue, so the queue must be OK.
+    echoMap.resetEchoCount(CtagResourceMap.getResource(cTag));
+
   }
 
 

@@ -15,6 +15,9 @@
 
 package ss.udapi.sdk.services;
 
+import java.util.MissingResourceException;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.apache.log4j.Logger;
 
 /* Monitors for any new UOWs on WorkQueue and dispatches it to ResourceImpl instances for processing.
@@ -35,6 +38,7 @@ public class WorkQueueMonitor implements Runnable
   private static Logger logger = Logger.getLogger(WorkQueueMonitor.class);
   private static WorkQueueMonitor monitor = null;
   private WorkQueue workQueue = WorkQueue.getWorkQueue();
+  private static ReentrantLock workQueueLock = new ReentrantLock();
   private static final String THREAD_NAME = "Work_Queue_Thread";
   
   private WorkQueueMonitor()
@@ -44,10 +48,17 @@ public class WorkQueueMonitor implements Runnable
   
   
   public static WorkQueueMonitor getMonitor() {
-    if (monitor == null) {
-
-      monitor = new WorkQueueMonitor();
-      ActionThreadExecutor.createActionThreadExecutor();
+    try {
+      workQueueLock.lock();
+      if (monitor == null) {
+        monitor = new WorkQueueMonitor();
+        ActionThreadExecutor.createActionThreadExecutor();
+      }
+    } catch (Exception ex) {
+      logger.error("Could not initialiaze Work Queue Monitor.");
+      throw new MissingResourceException("Service threadpool has become corrupted", "ss.udapi.sdk.services.ActionThreadExecutor", "WorkQueueMonitor");
+    } finally {
+      workQueueLock.unlock();
     }
     return monitor;
   }

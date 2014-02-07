@@ -40,7 +40,6 @@ public class FeatureImpl implements Feature
   protected FeatureImpl(RestItem restItem, ServiceRequest availableFeatures) {
     this.restItem = restItem;
     this.availableFeatures = availableFeatures;
-    System.out.println("------------->" + this.restItem);
     logger.info("Instantiated Feature: " + restItem.getName());
   }
 
@@ -57,7 +56,6 @@ public class FeatureImpl implements Feature
     List<RestItem> restItems = availableResources.getServiceRestItems();
     for(RestItem searchRestItem:restItems) {
       if (searchRestItem.getName().equals(resourceName)) {
-        System.out.println("------------->" + searchRestItem.getName());
         return new ResourceImpl(searchRestItem, availableResources);
       }
     }

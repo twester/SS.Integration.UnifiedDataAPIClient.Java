@@ -18,6 +18,8 @@ package ss.udapi.sdk.services;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import org.apache.log4j.Logger;
+
 /* Each Fixture is assigned a ResourceImpl.  Each ResourceImpl has an associated ResourceWorkQueue onto which
  * a running instance of FixtureActionProcessor can drop a UOW for that resource.
  * ResourceImpl then reads from it's queue and executes the appropriate actions.
@@ -29,7 +31,7 @@ public class ResourceWorkQueue
 {
   private static ResourceWorkQueue workQueue = null;
   private static ConcurrentHashMap<String,LinkedBlockingQueue<String>> map = new ConcurrentHashMap<String,LinkedBlockingQueue<String>>();
-  
+  private static Logger logger = Logger.getLogger(ResourceWorkQueue.class);
   
   private ResourceWorkQueue()
   {
@@ -46,7 +48,6 @@ public class ResourceWorkQueue
   
   //A new fixture has been registered which created a new instance of ResourceImpl which in turn creates a new queue here 
   public static LinkedBlockingQueue<String> addQueue(String resourceId) {
-    System.out.println("---------------->added queue [" + resourceId + "]");
     map.put(resourceId, new LinkedBlockingQueue<String>());
     return map.get(resourceId);
   }
@@ -60,7 +61,7 @@ public class ResourceWorkQueue
 
   //Add a new UOW for the associated resource/fixture.  Currently FixtureActionProcessor does this. 
   public void addUOW(String resourceId, String task) {
-      System.out.println("--------------->echo testing: added echo alert" + task.substring(0,10) + " for [" + resourceId + "]");
+      logger.debug("Added echo alert" + task.substring(0,10) + " for [" + resourceId + "]");
       LinkedBlockingQueue<String> queue = map.get(resourceId);
       queue.add(task);
   }

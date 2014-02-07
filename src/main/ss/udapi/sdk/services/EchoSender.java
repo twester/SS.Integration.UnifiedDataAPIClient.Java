@@ -20,9 +20,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.MissingResourceException;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.UUID;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
@@ -43,6 +45,7 @@ public class EchoSender implements Runnable
   private URI amqpURI;
   private ServiceRequest resources = new ServiceRequest();
   private static final String THREAD_NAME = "Echo_Thread";
+  private static ReentrantLock echoSenderLock = new ReentrantLock();
 
   
   private EchoSender(String amqpDest, ServiceRequest resources) {
@@ -52,12 +55,21 @@ public class EchoSender implements Runnable
     } catch (Exception ex) {
       logger.debug(ex);
     }
-  }
+    }
   
   
-  public synchronized static EchoSender getEchoSender(String amqpDest, ServiceRequest resources) {
-    if (instance == null) {
-      instance = new EchoSender(amqpDest, resources);
+  public static EchoSender getEchoSender(String amqpDest, ServiceRequest resources) {
+    try {
+      echoSenderLock.lock();
+      logger.debug("Retrieving EchoSender or create it if it doesn't exist");
+      if (instance == null) {
+          instance = new EchoSender(amqpDest, resources);
+        }
+    } catch (Exception ex) {
+      logger.error("Could not initialiaze EchoSender Listener.");
+      throw new MissingResourceException("Service threadpool has become corrupted", "ss.udapi.sdk.services.ActionThreadExecutor", "EchoSender");
+    } finally {
+      echoSenderLock.unlock();
     }
     return instance;
   }
@@ -65,9 +77,7 @@ public class EchoSender implements Runnable
 
   @Override
   public void run() {
-//    logger.debug("----->" + Thread.currentThread().getName().equals(THREAD_NAME));
-    
-    if(Thread.currentThread().getName().equals(THREAD_NAME) == false) {
+//    if(Thread.currentThread().getName().equals(THREAD_NAME) == false) {
       logger.info("Starting echos.");
       EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
   
@@ -108,9 +118,7 @@ public class EchoSender implements Runnable
              */
             while(keyIter.hasNext()) {
               String resourceId = keyIter.next();
-              System.out.println("------>Echo error for resource[" + resourceId + "]");
               ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
-              System.out.println("---------------------> resource in echo error" + resource.toString());
               logger.warn("Attempting to disconnect resource: " + resourceId + " maximum number of echo retries reached");
               MQListener.disconnect(resourceId);
             }
@@ -125,7 +133,7 @@ public class EchoSender implements Runnable
           }
         }
       }
-    }
+   // }
   }
   
   
