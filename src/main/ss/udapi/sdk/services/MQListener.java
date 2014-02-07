@@ -52,6 +52,7 @@ public class MQListener implements Runnable
   private String queue = null;
   private String ctag = null;
   
+  private static final String THREAD_NAME = "MQListener";
   private static final int connectRetries = 5;
 
   
@@ -90,93 +91,93 @@ public class MQListener implements Runnable
      */
     try {
       if ((channel == null)  || (channel != null && (channel.isOpen() == false))) {
-        synchronized (this) {
-          //Set the MQ URL.
-          session = resourceSessionList.remove();
-          resourceQURI = new URI(session.getAmqpDest());
-          path = resourceQURI.getRawPath();
-          queue = path.substring(path.indexOf('/',1)+1);
-          String userInfo = resourceQURI.getRawUserInfo();
-          
-          //Set up the connection.
-          ConnectionFactory connectionFactory = new ConnectionFactory();
-          connectionFactory.setRequestedHeartbeat(Integer.parseInt(SystemProperties.get("ss.conn_heartbeat")));
-          String host = resourceQURI.getHost();
-          connectionFactory.setHost(host);
-          String virtualHost = uriDecode(path.substring(1,path.indexOf('/',1)));
-          connectionFactory.setVirtualHost("/" + virtualHost);
-      
-          userInfo = URLDecoder.decode(userInfo,"UTF-8");
-          if (userInfo != null) {
-              String userPass[] = userInfo.split(":");
-              if (userPass.length > 2) {
-                  throw new BadAttributeValueExpException("Invalid user details format in AMQP URI: " + userInfo);
-              }
-              connectionFactory.setUsername(uriDecode(userPass[0]));
-              if (userPass.length == 2) {
-                connectionFactory.setPassword(uriDecode(userPass[1]));
-              }
-          }
-          
-          int port = resourceQURI.getPort();
-          if (port != -1) {
-            connectionFactory.setPort(port);
-          }
-          
-          //Start up the connection
-          Connection connection;
-          try {                                                   
-            connection = connectionFactory.newConnection();
-          } catch (IOException ex) {
-            throw new IOException("Failure creating connection factory");
-          }
-      
-          /* And create a consumer using the first queue.  This consumer allows subsequent queue listeners to be added and removed
-           * as resources are created / deleted.
-           */
-          boolean connectSuccess = false;
-          for (int retries=1; retries<=connectRetries; retries++) {
-            if (connectSuccess == false) {
-              logger.info("Attempting new connection to MQ...");
-  
-              try {
-                channel = connection.createChannel();
-                channel.basicQos(0, 10, false);
+        //Set the MQ URL.
+        session = resourceSessionList.remove();
+        resourceQURI = new URI(session.getAmqpDest());
+        path = resourceQURI.getRawPath();
+        queue = path.substring(path.indexOf('/',1)+1);
+        String userInfo = resourceQURI.getRawUserInfo();
+        
+        //Set up the connection.
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        connectionFactory.setRequestedHeartbeat(Integer.parseInt(SystemProperties.get("ss.conn_heartbeat")));
+        String host = resourceQURI.getHost();
+        connectionFactory.setHost(host);
+        String virtualHost = uriDecode(path.substring(1,path.indexOf('/',1)));
+        connectionFactory.setVirtualHost("/" + virtualHost);
     
-                consumer = new RabbitMqConsumer(channel);
-                //Create a queue listener for the first fixure.
-                ctag=channel.basicConsume(queue, true, consumer);
-                connectSuccess = true;
-              } catch (IOException ex) {
-                connectSuccess = false;
-                //we're catching this and ignoring it during the retries
-              }
-  
+        userInfo = URLDecoder.decode(userInfo,"UTF-8");
+        if (userInfo != null) {
+            String userPass[] = userInfo.split(":");
+            if (userPass.length > 2) {
+                throw new BadAttributeValueExpException("Invalid user details format in AMQP URI: " + userInfo);
             }
-          }
-          if (connectSuccess == false) {
-            throw new IOException("Failure creating channel");
-          }
-          logger.info("Connection made to MQ");
-          
-          /* A map to used to keep a tally of which queue listeners (cTag) have been created and to disconnect later on 
-           * when all we get is the resource Id.  Disconnection can only happen via a cTag.
-           */
-          resourceChannMap.put(session.getResourceId(), ctag);
-      
-          /* A map used by RabbitMqConsumer to tie a cTag (which is all it gets from RabbitMq) to identify which resource an echo
-           * response came in for.
-           */
-          CtagResourceMap.addCtag(ctag, session.getResourceId());
-      
-          logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+            connectionFactory.setUsername(uriDecode(userPass[0]));
+            if (userPass.length == 2) {
+              connectionFactory.setPassword(uriDecode(userPass[1]));
+            }
         }
-      }
-        /*
-         * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
-         * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
-         * to the number of active queue listeners.
+        
+        int port = resourceQURI.getPort();
+        if (port != -1) {
+          connectionFactory.setPort(port);
+        }
+        
+        //Start up the connection
+        Connection connection;
+        try {                                                   
+          connection = connectionFactory.newConnection();
+        } catch (IOException ex) {
+          throw new IOException("Failure creating connection factory");
+        }
+    
+        /* And create a consumer using the first queue.  This consumer allows subsequent queue listeners to be added and removed
+         * as resources are created / deleted.
          */
+        boolean connectSuccess = false;
+        for (int retries=1; retries<=connectRetries; retries++) {
+          if (connectSuccess == false) {
+            logger.info("Attempting new connection to MQ...");
+
+            try {
+              channel = connection.createChannel();
+              channel.basicQos(0, 10, false);
+  
+              consumer = new RabbitMqConsumer(channel);
+              //Create a queue listener for the first fixure.
+              ctag=channel.basicConsume(queue, true, consumer);
+              connectSuccess = true;
+            } catch (IOException ex) {
+              connectSuccess = false;
+              //we're catching this and ignoring it during the retries
+            }
+
+          }
+        }
+        if (connectSuccess == false) {
+          throw new IOException("Failure creating channel");
+        }
+        logger.info("Connection made to MQ");
+        
+        /* A map to used to keep a tally of which queue listeners (cTag) have been created and to disconnect later on 
+         * when all we get is the resource Id.  Disconnection can only happen via a cTag.
+         */
+        resourceChannMap.put(session.getResourceId(), ctag);
+    
+        /* A map used by RabbitMqConsumer to tie a cTag (which is all it gets from RabbitMq) to identify which resource an echo
+         * response came in for.
+         */
+        CtagResourceMap.addCtag(ctag, session.getResourceId());
+    
+        logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+      }
+
+      /*
+       * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
+       * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
+       * to the number of active queue listeners.
+       */
+      Thread.currentThread().setName(THREAD_NAME);
         while (true) {
           while (resourceSessionList.isEmpty() == false) {
             session = resourceSessionList.remove();

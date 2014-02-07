@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
@@ -29,8 +28,7 @@ public class ServiceThreadExecutor
 {
   private static Executor exec;
   private static Logger logger = Logger.getLogger(ServiceThreadExecutor.class);
-  private static ConcurrentHashMap<String,FutureTask<Runnable>> map = new ConcurrentHashMap<String, FutureTask<Runnable>>();
-  private static ReentrantLock svcLock = new ReentrantLock();
+  private static ConcurrentHashMap<String,FutureTask<String>> map = new ConcurrentHashMap<String, FutureTask<String>>();
 
   /* Yes 3 is a magic number (as the song says).  But there cannot be more than three threads running, we do not start any more:
    *    1) MQListener
@@ -51,18 +49,14 @@ public class ServiceThreadExecutor
   
   public static void executeTask(Runnable task) {
     String taskName = task.toString().substring(0, task.toString().indexOf('@'));
- 
-
-    
-      synchronized(ServiceThreadExecutor.class) {
+    synchronized(ServiceThreadExecutor.class) {
       if (map.containsKey(taskName) == false ) {
-        map.put(taskName, new FutureTask(task, taskName));
+        map.put(taskName, new FutureTask<String>(task, taskName));
         exec.execute(task);
         logger.debug("Instantiating Service Thread Executor for: " + taskName + "."); 
       }      
       else if (map.get(taskName).isDone() == true) {
-        FutureTask future = new FutureTask(task, taskName);
-        map.put(taskName, future);
+        map.put(taskName, new FutureTask<String>(task, taskName));
         exec.execute(task);
         logger.debug("Instantiating Service Thread Executor for: " + taskName + "."); 
       }
