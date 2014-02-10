@@ -160,6 +160,7 @@ public class MQListener implements Runnable
           }
         }
         if (connectSuccess == false) {
+          disconnect(session.getResourceId());
           throw new IOException("Failure creating channel");
         }
         logger.info("Connection made to MQ");
@@ -242,7 +243,7 @@ public class MQListener implements Runnable
         channel.basicCancel(resourceChannMap.get(resourceId));
         logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
       } catch (IOException ex) {
-        logger.warn("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+        logger.debug("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
       }
     }
   }
