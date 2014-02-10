@@ -89,7 +89,7 @@ public class GTPService {
 			theTimer = new Timer(true);
 			theTimer.scheduleAtFixedRate(new TimerTask(){public void run(){
 				timerEvent(theService);
-			}}, 0, 120000);
+			}}, 0, 30000);
 		}catch(Exception ex){
 			logger.error(ex);
 		}

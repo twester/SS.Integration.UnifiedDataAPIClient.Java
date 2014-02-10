@@ -163,18 +163,19 @@ public class MQListener implements Runnable
           throw new IOException("Failure creating channel");
         }
         logger.info("Connection made to MQ");
+        String resourceId = session.getResourceId();
         
         /* A map to used to keep a tally of which queue listeners (cTag) have been created and to disconnect later on 
          * when all we get is the resource Id.  Disconnection can only happen via a cTag.
          */
-        resourceChannMap.put(session.getResourceId(), ctag);
+        resourceChannMap.put(resourceId, ctag);
     
         /* A map used by RabbitMqConsumer to tie a cTag (which is all it gets from RabbitMq) to identify which resource an echo
          * response came in for.
          */
-        CtagResourceMap.addCtag(ctag, session.getResourceId());
-    
-        logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+        CtagResourceMap.addCtag(ctag, resourceId);
+        EchoResourceMap.getEchoMap().addResource(resourceId);
+        logger.info("Initial basic consumer " + ctag + " added for queue " + queue + "for resource " + resourceId);
       }
 
       /*
@@ -191,11 +192,14 @@ public class MQListener implements Runnable
               path = resourceQURI.getRawPath();
               queue = path.substring(path.indexOf('/',1)+1);
               
-              if (resourceChannMap.containsKey(session.getResourceId()) == false) {
+              String resourceId = session.getResourceId();
+              
+              if (resourceChannMap.containsKey(resourceId) == false) {
                 ctag=channel.basicConsume(queue, true, consumer);
-                resourceChannMap.put(session.getResourceId(), ctag);
-                CtagResourceMap.addCtag(ctag, session.getResourceId());
-                logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + session.getResourceId());
+                resourceChannMap.put(resourceId, ctag);
+                CtagResourceMap.addCtag(ctag, resourceId);
+                EchoResourceMap.getEchoMap().addResource(resourceId);
+                logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + resourceId);
               }
             } catch (IOException ex) {
               logger.error("Failure creating additional basic consumer for : " + session.getResourceId());

@@ -75,7 +75,6 @@ public class ResourceImpl implements Resource
       isStreaming = true;
     } else {
       ResourceWorkerMap.addResource(getId(), this);
-      EchoResourceMap.getEchoMap().addResource(getId());
     }
   }
   
@@ -196,6 +195,7 @@ public class ResourceImpl implements Resource
     EchoResourceMap.getEchoMap().removeResource(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
     ResourceWorkQueue.removeQueue(getId());
+    ResourceWorkerMap.removeResource(getId());
   }
   
 

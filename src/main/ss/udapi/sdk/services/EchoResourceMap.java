@@ -55,6 +55,7 @@ public class EchoResourceMap
    * We are going to start keeping a count for this resource.
    */
   public void addResource(String resourceId) {
+    logger.debug("Monitoring echos for: " + resourceId);
     map.put(resourceId, 0);
   }
   
@@ -64,6 +65,7 @@ public class EchoResourceMap
    */
   public void removeResource(String resourceId)
   {
+    logger.debug("No longer monitoring echos for: " + resourceId);
     map.remove(resourceId);
   }
   
