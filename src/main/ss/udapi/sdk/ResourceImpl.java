@@ -187,8 +187,7 @@ public class ResourceImpl implements Resource
    * Used internally for MQ polling events.  RabbitMqConsumer passes queue consumer closure events to this method,
    * this in turn notifies the client code that such an event has taken place. 
    */
-  public void mqDisconnectEvent()
-  {
+  public void mqDisconnectEvent() {
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     connected = false;
@@ -199,12 +198,12 @@ public class ResourceImpl implements Resource
   }
   
 
+  
   /**
    * Stops the monitoring for this resource's MQ queue.  
    */
   @Override
-  public void stopStreaming()
-  {
+  public void stopStreaming() {
     if (connected == true) {
       logger.debug("Calling MQListener disconnect for resource" + getId());
       MQListener.disconnect(getId());
@@ -213,25 +212,31 @@ public class ResourceImpl implements Resource
     isStreaming = false;
   }
 
+  
+  
   /**
    * Pauses the monitoring for this resource's MQ queue. Resume queue monitoring with unpauseStreaming.  
    */
   @Override
-  public void pauseStreaming()
-  {
+  public void pauseStreaming() {
     isStreaming = false;
   }
 
+  
+  
   /**
    * Resumes the monitoring for this resource's MQ queue if it has been paused.  
    */
   @Override
-  public void unpauseStreaming()
-  {
+  public void unpauseStreaming() {
     isStreaming = true;
   }
 
+
   
+  /**
+   * Return the resource's ID  
+   */
   @Override
   public String getId()
   {
@@ -239,6 +244,10 @@ public class ResourceImpl implements Resource
   }
 
   
+
+  /**
+   * Return the resource's name  
+   */
   @Override
   public String getName()
   {
@@ -246,11 +255,24 @@ public class ResourceImpl implements Resource
   }
 
   
+  
+  /**
+   * Return the resource's content  
+   */
   @Override
   public Summary getContent()
   {
     return restItem.getContent();
   }
+
+
+
+  //Hook for testing
+  protected void setHttpSvcs(HttpServices httpSvcs) {
+    ResourceImpl.httpSvcs = httpSvcs;
+  }
+  
+
 }
 
 

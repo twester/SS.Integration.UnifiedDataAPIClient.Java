@@ -61,10 +61,11 @@ public class SystemProperties
     // These are default properties in case the file is inaccessible or property is missing from file
     ourMap.put("ss.http_login_timeout", "20");
     ourMap.put("ss.http_request_timeout", "60");
-    ourMap.put("ss.conn_heartbeat", "5");
+    ourMap.put("ss.conn_heartbeat", "60");
     ourMap.put("ss.echo_sender_interval", "20");
+    ourMap.put("ss.echo_max_missed_echos", "3");
     ourMap.put("ss.workerThreads", "20");
-    ourMap.put("ss.echo_max_missed_echos", "3");  
+
     
     try {
       systemProperties.load(new FileInputStream("sdk.properties"));

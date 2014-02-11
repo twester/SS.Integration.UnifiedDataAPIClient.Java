@@ -30,14 +30,15 @@ public class ServiceThreadExecutor
   private static Logger logger = Logger.getLogger(ServiceThreadExecutor.class);
   private static ConcurrentHashMap<String,FutureTask<String>> map = new ConcurrentHashMap<String, FutureTask<String>>();
 
-  /* Yes 3 is a magic number (as the song says).  But there cannot be more than three threads running, we do not start any more:
+  /*
+   * Yes 3 is a magic number (as the song says).  But there cannot be more than three threads running, we do not start any more:
    *    1) MQListener
    *    2) EchoSender
    *    3) WorkQueueMonitor
    * 
-   * Any additional threads are not ours and shouldn't be using our pool.  As this objects are all singletons there cannot be
+   * Any additional threads are not ours and shouldn't be using our pool.  As these objects are all singletons there cannot be
    * more than three in total.  So if the thread pool throws java.util.concurrent.RejectedExecutionException
-   * then something bad *has* happened and needs to be investigated not covered up as would be the case if we had more threads. 
+   * something bad *has* happened and needs to be investigated not covered up as would be the case if we had more threads. 
    */
   private static final int MAX_SERVICE_THREADS = 3;
 
@@ -53,12 +54,11 @@ public class ServiceThreadExecutor
       if (map.containsKey(taskName) == false ) {
         map.put(taskName, new FutureTask<String>(task, taskName));
         exec.execute(task);
-        logger.debug("Instantiating Service Thread Executor for: " + taskName + "."); 
-      }      
-      else if (map.get(taskName).isDone() == true) {
+        logger.debug("Instantiating initial ServiceThreadExecutor thread for: " + taskName + "."); 
+      } else if (map.get(taskName).isDone() == true) {
         map.put(taskName, new FutureTask<String>(task, taskName));
         exec.execute(task);
-        logger.debug("Instantiating Service Thread Executor for: " + taskName + "."); 
+        logger.debug("Instantiating new ServiceThreadExecutor thread for: " + taskName + "."); 
       }
       
 

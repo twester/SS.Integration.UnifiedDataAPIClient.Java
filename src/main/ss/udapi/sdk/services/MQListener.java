@@ -53,7 +53,7 @@ public class MQListener implements Runnable
   private String ctag = null;
   
   private static final String THREAD_NAME = "MQListener";
-  private static final int connectRetries = 5;
+  private static final int CONNECT_RETRIES = 5;
 
   
   private MQListener ()
@@ -90,10 +90,11 @@ public class MQListener implements Runnable
      * or if the channel has died.
      */
     try {
-      if (channel == null)
+      if (channel == null) {
         logger.debug("MQ Channel not open");
-      else
+      } else {
         logger.debug("MQ Channel status: " + channel.isOpen());
+      }
       
       if ((channel == null)  || (channel != null && (channel.isOpen() == false))) {
         //Set the MQ URL.
@@ -140,7 +141,7 @@ public class MQListener implements Runnable
          * as resources are created / deleted.
          */
         boolean connectSuccess = false;
-        for (int retries=1; retries<=connectRetries; retries++) {
+        for (int retries=1; retries<=CONNECT_RETRIES; retries++) {
           if (connectSuccess == false) {
             logger.info("Attempting new connection to MQ...");
 
