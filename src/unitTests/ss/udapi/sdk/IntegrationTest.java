@@ -8,12 +8,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
 
 import ss.udapi.sdk.model.RestItem;
@@ -52,18 +49,18 @@ public class IntegrationTest
   private ServiceRequest responseSR = new ServiceRequest();
   
   private HttpServices httpSvcs = mock(HttpServices.class);
+  
   private boolean connectedEventCalled = false;
   private boolean disconnectedEventCalled = false;
   private boolean streamEventCalled = false;
   
-  private String basicTestQueue = "testQueue";
-  private String intTestQueue = "integrationTestQueue";
   private Channel channel = null;
   private Connection connection = null;
   private ConnectionFactory connFactory;
-  
-  private String responseSnapshot = "------------Clearly not a real snapshot.  We don't do anything with it anyway";    
-  private String features = "[{\"Name\":\"Quoits\",\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/resources/list\",\"Href\":\"http://127.0.0.1/UnifiedDataAPI/Quoits/sDMyoipbwgtH1ineuvU8isd2mXtG\",\"Verbs\":[\"Get\"]}]}, {\"Name\":\"Skittles\",\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/resources/list\",\"Href\":\"http://127.0.0.1//UnifiedDataAPI/Skittles/YFUBu4lobCJeX1v-yFZMyab5REU0\",\"Verbs\":[\"Get\"]}]}]";
+  private String basicTestQueue = "testQueue";
+  private String intTestQueue = "integrationTestQueue";
+
+  private String resourceId = "46NtalSfupT7w2MxuudoYUd9CKw";
   private String resources = "[{\"Name\":\"Fern v NotFern\",\"Content\":{\"Id\":\"46NtalSfupT7w2MxuudoYUd9CKw\",\"StartTime\":\"2014-01-21T14:54:54Z\",\"Sequence\":449,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fern\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"NotFern\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"An important match\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/snapshot/Skittles/46NtalSfupT7w2MxuudoYUd9CKw/bYQ4NJ0ckn-oAMwylfJwzMbAREQ3\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/stream/Skittles/46NtalSfupT7w2MxuudoYUd9CKw/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/sequence/Skittles/46NtalSfupT7w2MxuudoYUd9CKw/Ly7yvGLELxxThyA-88QT4riXoFU1\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/stream/echo/I546imiMYzaxVfuUQVUSWK4Nf1pF\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/stream/batchecho/n21SkC75lqm5y716xvV6LSSUtVs5\",\"Verbs\":[\"Post\"]}]},{\"Name\":\"fern v johnny alien\",\"Content\":{\"Id\":\"5IyktEE--jyYCP4IMNgFjoXegiw\",\"StartTime\":\"2014-02-05T08:57:15Z\",\"Sequence\":57,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"fern\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"johnny alien\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"another match\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/snapshot/Skittles/5IyktEE--jyYCP4IMNgFjoXegiw/txi1aKDfyRlQWZc3-w4vwsVGP_Qx\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/stream/Skittles/5IyktEE--jyYCP4IMNgFjoXegiw/T29o1GI23kOIZJGJHVegOfV0_HMx\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://127.0.0.1:8080/rels/sequence\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/sequence/Skittles/5IyktEE--jyYCP4IMNgFjoXegiw/J9S14jW_GlKoz9RQygrX5Q7xX_hE\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/stream/echo/wjIyvcuD67AChr32xwpJoFDQ0pw0\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://127.0.0.1:8080/UnifiedDataAPI/stream/batchecho/nyounZMjUxEGPcQ_o44qlXQazhQx\",\"Verbs\":[\"Post\"]}]}]";
   private String mqMessage = "{\"Relation\":\"http://c2e.sportingingsolutions.com/rels/v006/FootballOdds\",\"Content\":{\"FixtureName\":\"Fern v NotFern\",\"Id\":\"46NtalSfupT7w2MxuudoYUd9CKw\",\"Sequence\":88,\"MatchStatus\":40,\"Markets\":[],\"GameState\":{\"matchsummary\":\"0-0 00:00 1st\",\"concisematchsummary\":\"0-0 00:00 1st\",\"homepenalties\":0,\"awaypenalties\":0,\"homecorners\":0,\"awaycorners\":0,\"homeredcards\":0,\"awayredcards\":0,\"homeyellowcards\":0,\"awayyellowcards\":0,\"homewoodwork\":0,\"awaywoodwork\":0,\"homesubstitutions\":0,\"awaysubstitutions\":0,\"goals\":null},\"Epoch\":3,\"LastEpochChangeReason\":[40],\"Timestamp\":\"2014-02-11T16:39:57Z\"}}";
   private String recvdFromMq = "";
@@ -74,7 +71,6 @@ public class IntegrationTest
   public void setUp() throws Exception {
     ResourceWorkerMap.initWorkerMap();
     ServiceThreadExecutor.createExecutor();
-
     
     SystemProperties.setProperty("ss.echo_sender_interval", "20");
     SystemProperties.setProperty("ss.echo_max_missed_echos", "3");
@@ -106,6 +102,9 @@ public class IntegrationTest
       } 
     }).when(httpSvcs).processRequest(requestSR, "http://api.sportingsolutions.com/rels/stream/amqp", "Fern v NotFern");
 
+    connectedEventCalled = false;
+    disconnectedEventCalled = false;
+    streamEventCalled = false;
   }
 
   
@@ -145,11 +144,7 @@ public class IntegrationTest
   public void testConnectedDisconnectedEvents() {
     // Instantiate the resource 
     ResourceImpl resourceImpl = new ResourceImpl(restItem, requestSR);
-
     resourceImpl.setHttpSvcs(httpSvcs);
-    connectedEventCalled = false;
-    disconnectedEventCalled = false;
-    streamEventCalled = false;
     
     try {
       channel.queueDeclare(intTestQueue, false, false, false, null);
@@ -195,16 +190,13 @@ public class IntegrationTest
     assertTrue(disconnectedEventCalled);
   }
 
-  
 
+  
   @Test
   public void testStreamingEvent() {
     // Instantiate the resource 
     ResourceImpl resourceImpl = new ResourceImpl(restItem, requestSR);
     resourceImpl.setHttpSvcs(httpSvcs);
-    connectedEventCalled = false;
-    disconnectedEventCalled = false;
-    streamEventCalled = false;
     
     try {
       channel.queueDeclare(intTestQueue, false, false, false, null);
@@ -253,49 +245,58 @@ public class IntegrationTest
       // Bit of housekeeping
     }
   }
+  
+  
+  
+  @Test
+  public void testDisconnectViaExceeded() {
+    // Make the test run a little faster
+    SystemProperties.setProperty("ss.echo_sender_interval", "2");
+    SystemProperties.setProperty("ss.echo_max_missed_echos", "3");
+
+    //Instatiate the resource
+    ResourceImpl resourceImpl = new ResourceImpl(restItem, requestSR);
+    resourceImpl.setHttpSvcs(httpSvcs);
+    
+    try {
+      channel.queueDeclare(intTestQueue, false, false, false, null);
+    } catch (Exception ex ) {
+      fail("Connectivity error to MQ while running Test" + ex);
+      try {
+        channel.close();
+        connection.close();
+      } catch (Exception otherEx ) {
+        // We couldn't close a connection that's already closed or hasn't been open...
+      }
+    }
+        
+    // Here we build the queue ResourceImpl is going to connect to and we will later publish to
+    resourceImpl.startStreaming(createListeners());
+    
+    // Have a rest to let the echo count expire
+    try {
+      Thread.sleep(20000);
+    } catch (Exception ex ) {
+      fail("Interrupted sleep cycle" + ex);
+    }
+
+    // 1st test:  did the echo count get increased by the batch echo sends?
+    assertTrue(disconnectedEventCalled);
+
+    
+    try {
+      channel.queuePurge(resourceId);
+      channel.close();
+      connection.close();
+    } catch (Exception otherEx ) {
+      // We couldn't close a connection that's already closed or hasn't been open...
+    }
+  }
 
 
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  //Set up the listeners we need
-  private List<Event> createListeners( ){
+  //Set up the listeners
+  private List<Event> createListeners( ) {
     List<Event> streamingEvents = new ArrayList<Event>();
 
     streamingEvents.add(new ConnectedEvent() {
