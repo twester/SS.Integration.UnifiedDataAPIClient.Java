@@ -191,7 +191,6 @@ public class ResourceImpl implements Resource
     logger.info("Disconnect event for ID:" + getId());
     isStreaming = false;
     connected = false;
-    EchoResourceMap.getEchoMap().removeResource(getId());
     actionExecuter.execute(new DisconnectedAction(streamingEvents));
     ResourceWorkQueue.removeQueue(getId());
     ResourceWorkerMap.removeResource(getId());

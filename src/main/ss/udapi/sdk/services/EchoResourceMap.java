@@ -34,8 +34,8 @@ import org.apache.log4j.Logger;
 public class EchoResourceMap
 {
   private static Logger logger = Logger.getLogger(EchoResourceMap.class);
-  private static EchoResourceMap echoMap= null;
-  private static ConcurrentHashMap<String,Integer> map = new ConcurrentHashMap<String,Integer>();
+  private static EchoResourceMap echoMap;
+  private static ConcurrentHashMap<String,Integer> map;
   
 
   private EchoResourceMap()
@@ -46,6 +46,7 @@ public class EchoResourceMap
   public synchronized static EchoResourceMap getEchoMap(){
     if (echoMap == null) {
       echoMap = new EchoResourceMap();
+      map = new ConcurrentHashMap<String,Integer>();
     }
     return echoMap;
   }
@@ -55,8 +56,10 @@ public class EchoResourceMap
    * We are going to start keeping a count for this resource.
    */
   public void addResource(String resourceId) {
-    logger.debug("Monitoring echos for: " + resourceId);
-    map.put(resourceId, 0);
+    if (resourceId != null) {
+      logger.debug("Monitoring echos for: " + resourceId);
+      map.put(resourceId, 0);
+    }
   }
   
   
@@ -65,8 +68,10 @@ public class EchoResourceMap
    */
   public void removeResource(String resourceId)
   {
-    logger.debug("No longer monitoring echos for: " + resourceId);
-    map.remove(resourceId);
+    if (resourceId != null) {
+      logger.debug("No longer monitoring echos for: " + resourceId);
+      map.remove(resourceId);
+    }
   }
   
   
@@ -76,7 +81,9 @@ public class EchoResourceMap
    */
   protected void incrEchoCount(String resourceId)
   {
-    map.replace(resourceId, map.get(resourceId)+1);
+    if (resourceId != null) {
+      map.replace(resourceId, map.get(resourceId)+1);
+    }
   }
 
   
@@ -85,8 +92,10 @@ public class EchoResourceMap
    */
   protected void resetEchoCount(String resourceId)
   {
-    map.replace(resourceId, 0);
-    logger.info("Echo or message received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
+    if (resourceId != null) {
+      map.replace(resourceId, 0);
+      logger.info("Echo or message received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
+    }
   }
 
 
@@ -123,6 +132,12 @@ public class EchoResourceMap
   protected Integer getEchoCount(String resourceId)
   {
     return map.get(resourceId);
+  }
+  
+  
+  // For unit tests only
+  protected static void reset() {
+    echoMap = null;
   }
   
 }

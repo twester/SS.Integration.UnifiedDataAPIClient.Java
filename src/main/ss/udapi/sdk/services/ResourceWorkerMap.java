@@ -31,7 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResourceWorkerMap
 {
   private static ResourceWorkerMap workerMap= null;
-  private static ConcurrentHashMap<String,Resource> map = new ConcurrentHashMap<String,Resource>();
+  private static ConcurrentHashMap<String,Resource> map;
   
   
   private ResourceWorkerMap()
@@ -42,6 +42,7 @@ public class ResourceWorkerMap
   public static void initWorkerMap() {
     if (workerMap == null) {
       workerMap = new ResourceWorkerMap();
+      map = new ConcurrentHashMap<String,Resource>();
     }
   }
   
@@ -67,5 +68,10 @@ public class ResourceWorkerMap
     return map.containsKey(resourceId);
   }
   
+
+  // For unit tests only
+  protected static void reset() {
+    workerMap = null;
+  }
   
 }

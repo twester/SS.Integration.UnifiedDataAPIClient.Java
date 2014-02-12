@@ -243,7 +243,7 @@ public class MQListener implements Runnable
       try {
         channel.basicCancel(resourceChannMap.get(resourceId));
         logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
-      } catch (IOException ex) {
+      } catch (Exception ex) {
         logger.debug("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
       }
     }

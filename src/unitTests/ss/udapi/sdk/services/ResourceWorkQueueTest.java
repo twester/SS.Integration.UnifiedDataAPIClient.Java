@@ -7,25 +7,24 @@ import org.junit.Test;
 
 public class ResourceWorkQueueTest
 {
-  private ResourceWorkQueue myQueueRef = ResourceWorkQueue.getResourceWorkQueue();
+  private ResourceWorkQueue myQueueRef = null;
   
   @Before
-  public void setUp()
-  {
+  public void setUp() {
+    ResourceWorkQueue.reset();
+    myQueueRef = ResourceWorkQueue.getResourceWorkQueue();
   }
   
   
   @Test
-  public void testAddQueue()
-  {
+  public void testAddQueue() {
     ResourceWorkQueue.addQueue("testResourceId1");
     assertTrue(ResourceWorkQueue.exists("testResourceId1"));
   }
   
   
   @Test
-  public void testRemoveQueue()
-  {
+  public void testRemoveQueue() {
     ResourceWorkQueue.addQueue("testResourceId2");
     assertTrue(ResourceWorkQueue.exists("testResourceId2"));
     ResourceWorkQueue.removeQueue("testResourceId2");
@@ -35,8 +34,7 @@ public class ResourceWorkQueueTest
 
   
   @Test
-  public void testManipulateResourceQueue()
-  {
+  public void testManipulateResourceQueue() {
     ResourceWorkQueue.addQueue("testResourceId3");
     myQueueRef.addUOW("testResourceId3", "This is the task to add for processing");
     myQueueRef.addUOW("testResourceId3", "And a second one");
@@ -54,8 +52,7 @@ public class ResourceWorkQueueTest
 
   
   @Test
-  public void testExists()
-  {
+  public void testExists()  {
     ResourceWorkQueue.addQueue("testResourceId10");
     assertTrue(ResourceWorkQueue.exists("testResourceId10"));
     assertFalse(ResourceWorkQueue.exists("testResourceId11"));

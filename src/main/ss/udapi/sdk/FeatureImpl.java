@@ -92,7 +92,7 @@ public class FeatureImpl implements Feature
   //Setter for unit testing
   protected void setHttpSvcs(HttpServices httpSvcs)
   {
-    this.httpSvcs = httpSvcs;
+    FeatureImpl.httpSvcs = httpSvcs;
   }
   
   //Getter for unit testing

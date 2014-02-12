@@ -9,30 +9,27 @@ public class CtagResourceMapTest
 {
 
   @Before
-  public void setUp() throws Exception
-  {
+  public void setUp() throws Exception { 
+    CtagResourceMap.reset();
     CtagResourceMap.initCtagMap();
   }
 
 
   @Test
-  public void testAddGetCtagResource()
-  {
+  public void testAddGetCtagResource() {
     CtagResourceMap.addCtag("tagId1", "resourceId1_1");
     assertTrue("resourceId1_1".equalsIgnoreCase(CtagResourceMap.getResource("tagId1")));
   }
 
 
   @Test
-  public void testMissingCtagResourceMap()
-  {
+  public void testMissingCtagResourceMap() {
     assertTrue(CtagResourceMap.getResource("missingTag") == null);
   }
 
   
   @Test
-  public void testRemoveCtag()
-  {
+  public void testRemoveCtag() {
     CtagResourceMap.addCtag("tagId2", "resourceId2_1");
     assertTrue("resourceId2_1".equalsIgnoreCase(CtagResourceMap.getResource("tagId2")));
     

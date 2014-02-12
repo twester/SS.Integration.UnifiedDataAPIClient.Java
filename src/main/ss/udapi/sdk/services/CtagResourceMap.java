@@ -26,8 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class CtagResourceMap
 {
-  private static CtagResourceMap cTagMap= null;
-  private static ConcurrentHashMap<String,String> map = new ConcurrentHashMap<String,String>();
+  private static CtagResourceMap cTagMap = null;
+  private static ConcurrentHashMap<String,String> map;
 
   
   private CtagResourceMap()
@@ -38,6 +38,7 @@ public class CtagResourceMap
   public synchronized static void initCtagMap() {
     if (cTagMap == null) {
       cTagMap = new CtagResourceMap();
+      map = new ConcurrentHashMap<String,String>();
     }
   }
   
@@ -57,4 +58,8 @@ public class CtagResourceMap
   }
   
   
+  // For unit tests only
+  protected static void reset() {
+    cTagMap = null;
+  }
 }

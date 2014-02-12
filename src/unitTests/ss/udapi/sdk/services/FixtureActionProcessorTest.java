@@ -18,10 +18,9 @@ import static org.mockito.Mockito.*;
 
 
 @RunWith(MockitoJUnitRunner.class)
-public class FixtureActionProcessorTest
-{
+public class FixtureActionProcessorTest {
   private String task;
-  private ResourceWorkQueue workQueue;
+  private ResourceWorkQueue workQueue = null;
   private ResourceImpl resource = mock(ResourceImpl.class);
   private boolean resourceImplCalled = false;
   
@@ -37,8 +36,10 @@ public class FixtureActionProcessorTest
     availableResources.setAuthToken("TEST_AUTH");
     availableResources.setServiceRestItems(restItems);
 
+    ResourceWorkerMap.reset();
     ResourceWorkerMap.initWorkerMap();
     ResourceWorkerMap.addResource("5IyktEE--jyYCP4IMNgFjoXegiw", resource);
+    WorkQueue.reset();
     workQueue = ResourceWorkQueue.getResourceWorkQueue();
     ResourceWorkQueue.addQueue("5IyktEE--jyYCP4IMNgFjoXegiw");
     
@@ -48,8 +49,7 @@ public class FixtureActionProcessorTest
   
 
   @Test
-  public void testResourceImplCalled()
-  {
+  public void testResourceImplCalled() {
     /* This mocks the side effect ResourceImpl has on the it's work queue (i.e. it removes it's work).
      * You can prove to yourself the work queue is populated by looking at the logs for "FixtureActionProcessor - Processing started for fixture/resource:"   
      */
@@ -79,14 +79,10 @@ public class FixtureActionProcessorTest
      */
     assertTrue(ResourceWorkQueue.size("5IyktEE--jyYCP4IMNgFjoXegiw") == 0);
     assertTrue(resourceImplCalled);
+    
+    FixtureActionProcessor.terminate();
   }
 
 
-
-  
-  
-  
-  
-  
 }
 

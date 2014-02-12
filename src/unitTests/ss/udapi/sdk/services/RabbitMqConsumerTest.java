@@ -15,11 +15,10 @@ import ss.udapi.sdk.ResourceImpl;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RabbitMqConsumerTest
-{
+public class RabbitMqConsumerTest {
   private Channel channel = mock(Channel.class);
   private ResourceImpl resource = mock(ResourceImpl.class);
-  private WorkQueue myQueue = WorkQueue.getWorkQueue();
+  private WorkQueue myQueue = null;
   private boolean resourceImplCalled;
   private byte[] messageByteArray;
   private byte[] echoByteArray;
@@ -33,13 +32,16 @@ public class RabbitMqConsumerTest
   
   
   @Before
-  public void setUp() throws Exception
-  {
+  public void setUp() throws Exception {
+    WorkQueue.reset();
+    myQueue = WorkQueue.getWorkQueue();
     mqConsumer = new RabbitMqConsumer(channel);
+    ResourceWorkerMap.reset();
     ResourceWorkerMap.initWorkerMap();
     resourceImplCalled = false;
     ResourceWorkerMap.addResource("5IyktEE--jyYCP4IMNgFjoXegiw", resource);
     MQListener.getMQListener(cTag);
+    CtagResourceMap.reset();
     CtagResourceMap.initCtagMap();
     CtagResourceMap.addCtag("amq.ctag-ApAlmaYcURB0nqy-B8UsjQ", "5IyktEE--jyYCP4IMNgFjoXegiw");
     messageByteArray = "[{\"Name\":\"Fernando v Jim\",\"Content\":{\"Id\":\"testresource2\",\"StartTime\":\"2014-01-14T11:14:16Z\",\"Sequence\":160,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fernando\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"Jim\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"test\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/snapshot/Football/testresource2/eW-m1htDbDHblJ3hBGH8G-PJYvsy\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/stream/Football/testresource2/I_jl9FutdrjWPmMFe5NXHZbxbvlE\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/sequence/Football/testresource2/2BrWDeuhdeBEvoxHkJRFsF5mVEs4\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/stream/batchecho/IWrPmnacWoSOoz_kOqQNjI7SBSY0\",\"Verbs\":[\"Post\"]}]},{\"Name\":\"Fern v NotFern\",\"Content\":{\"Id\":\"testresource1\",\"StartTime\":\"2014-01-21T14:54:54Z\",\"Sequence\":104,\"Tags\":[{\"Id\":1,\"Key\":\"Participant\",\"Value\":\"Fern\"},{\"Id\":2,\"Key\":\"Participant\",\"Value\":\"NotFern\"},{\"Id\":3,\"Key\":\"Competition\",\"Value\":\"AGame\"}],\"MatchStatus\":40},\"Links\":[{\"Relation\":\"http://api.sportingsolutions.com/rels/snapshot\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/snapshot/Football/testresource1/bYQ4NJ0ckn-oAMwylfJwzMbAREQ2\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/amqp\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/stream/Football/testresource1/sdSfNkO9XsaI9CpGMxOLnTYhh1Y1\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/sequence\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/sequence/Football/testresource1/DlUzE_85HvmneGPFDLws4eKb9_Iz\",\"Verbs\":[\"Get\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/stream/echo/wjIyvcuD67AChr32xwpJoFDQ0pw0\",\"Verbs\":[\"Post\"]},{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/batchecho\",\"Href\":\"http://xxx.test123url.com/UnifiedDataAPI/stream/batchecho/1eJp1LYuuRROXMjlPMxkhuvDJrBD\",\"Verbs\":[\"Post\"]}]}]".getBytes();
@@ -50,8 +52,7 @@ public class RabbitMqConsumerTest
 
 
   @Test
-  public void testEchoHandleDeliveryData()
-  {
+  public void testEchoHandleDeliveryData() {
     int queueSize = myQueue.size();
     mqConsumer.handleDelivery(cTag, null, null, messageByteArray);
     //test that RabbitMQListener successfully found work queue and dumped the payload in there for workQueueMonitor to do as it pleases.
@@ -63,8 +64,7 @@ public class RabbitMqConsumerTest
   
   
   @Test
-  public void testHandleDeliveryEchoResp()
-  {
+  public void testHandleDeliveryEchoResp() {
     //here we increase the number of missed echos to two.
     echoMap.incrAll(3);
     echoMap.incrAll(3);
@@ -81,8 +81,7 @@ public class RabbitMqConsumerTest
 
     
   @Test
-  public void testHandleCancelOkString()
-  {    
+  public void testHandleCancelOkString() {    
     assertTrue(CtagResourceMap.getResource(cTag) != null);
     
     /* All we need to do in this test is check that the resource and MQListeners are alerted to this event.  Checking the complete call stack is
@@ -109,8 +108,7 @@ public class RabbitMqConsumerTest
   
   
   @Test
-  public void testHandleCancelString()
-  {
+  public void testHandleCancelString() {
     assertTrue(CtagResourceMap.getResource(cTag) != null);
     
     /* All we need to do in this test is check that the resource and MQListeners are alerted to this event.  Checking the complete call stack is

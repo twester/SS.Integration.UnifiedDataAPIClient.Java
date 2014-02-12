@@ -31,7 +31,7 @@ import org.apache.log4j.Logger;
 public class WorkQueue
 {
   private static WorkQueue workQueue = null;
-  private static LinkedBlockingQueue<String> linkedQueue = new LinkedBlockingQueue<String>();
+  private static LinkedBlockingQueue<String> internalQueue;
   
   private static Logger logger = Logger.getLogger(WorkQueue.class);
   
@@ -44,6 +44,7 @@ public class WorkQueue
     if (workQueue == null)
     {
       workQueue = new WorkQueue();
+      internalQueue = new LinkedBlockingQueue<String>();
     }
     return workQueue;
   }
@@ -53,7 +54,7 @@ public class WorkQueue
   //RabbitMQ consumer drops messages retrieved from MQ into this WorkQueue
   public void addTask(String task) {
     try {
-      linkedQueue.put(task);
+      internalQueue.put(task);
     } catch (Exception ex) {
       logger.error("WorkQueue management interrupted", ex);
     }
@@ -66,7 +67,7 @@ public class WorkQueue
     try {
       //this is a blocking method so if there's nothing to pickup from the queue the listener thread sits in a blocked state not
       //using any resources up to the point where we have something to offer.
-      task = linkedQueue.take();
+      task = internalQueue.take();
     } catch (Exception ex) {
       logger.error("WorkQueue management interrupted", ex);
     }
@@ -76,7 +77,12 @@ public class WorkQueue
   
   //added to allow unit testing
   protected int size() {
-    return linkedQueue.size();
+    return internalQueue.size();
+  }
+  
+  // For unit tests only
+  protected static void reset() {
+    workQueue = null;
   }
   
 }

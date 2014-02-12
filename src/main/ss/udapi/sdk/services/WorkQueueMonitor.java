@@ -40,6 +40,7 @@ public class WorkQueueMonitor implements Runnable
   private WorkQueue workQueue = WorkQueue.getWorkQueue();
   private static ReentrantLock workQueueLock = new ReentrantLock();
   private static final String THREAD_NAME = "Work_Queue_Thread";
+  private static boolean terminate = false;
   
   private WorkQueueMonitor()
   {
@@ -80,8 +81,17 @@ public class WorkQueueMonitor implements Runnable
       } catch (Exception ex) {
         logger.error("Work queue monitor has been interrupted");
       }
+
+      if (terminate == true) {
+        return;
+      }
     }
   }
 
+  
+  //for unit testing
+  protected static void terminate() {
+    terminate = true;
+  }
   
 }

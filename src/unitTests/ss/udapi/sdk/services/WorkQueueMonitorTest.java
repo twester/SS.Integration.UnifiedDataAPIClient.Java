@@ -16,17 +16,21 @@ import static org.mockito.Mockito.*;
 public class WorkQueueMonitorTest
 {
   private WorkQueueMonitor monitor = WorkQueueMonitor.getMonitor();
-  private WorkQueue workQueue = WorkQueue.getWorkQueue();
-  private ResourceWorkQueue resourceWorkQueue = ResourceWorkQueue.getResourceWorkQueue(); 
+  private WorkQueue workQueue = null;
+  private ResourceWorkQueue resourceWorkQueue = null;
   private ResourceImpl resource = mock(ResourceImpl.class);
   private boolean resourceImplCalled;
   private String body = "{\"Relation\":\"http://c2e.sportingingsolutions.com/rels/v006/FootballOdds\",\"Content\":{\"FixtureName\":\"fern v johnny alien\",\"Id\":\"5IyktEE--jyYCP4IMNgFjoXegiw\",\"Sequence\":57,\"MatchStatus\":40,\"Markets\":[],\"GameState\":{\"matchsummary\":\"0-0 00:00 1st\",\"concisematchsummary\":\"0-0 00:00 1st\",\"homepenalties\":0,\"awaypenalties\":0,\"homecorners\":0,\"awaycorners\":0,\"homeredcards\":0,\"awayredcards\":0,\"homeyellowcards\":0,\"awayyellowcards\":0,\"homewoodwork\":0,\"awaywoodwork\":0,\"homesubstitutions\":0,\"awaysubstitutions\":0,\"goals\":null},\"Epoch\":3,\"LastEpochChangeReason\":[40],\"Timestamp\":\"2014-02-05T15:30:51Z\"}}";
   
   @Before
-  public void setUp() throws Exception
-  {
+  public void setUp() throws Exception {
     resourceImplCalled = false;
-    
+
+    WorkQueue.reset();
+    workQueue = WorkQueue.getWorkQueue();
+    ResourceWorkQueue.reset();
+    resourceWorkQueue = ResourceWorkQueue.getResourceWorkQueue(); 
+    ResourceWorkerMap.reset();
     ResourceWorkerMap.initWorkerMap();
     ResourceWorkerMap.addResource("5IyktEE--jyYCP4IMNgFjoXegiw", resource);
     ResourceWorkQueue.addQueue("5IyktEE--jyYCP4IMNgFjoXegiw");
@@ -34,11 +38,11 @@ public class WorkQueueMonitorTest
 
   
   @Test
-  public void MonitorDequeuesAssignsWorkToProcessor()
-  {
+  public void MonitorDequeuesAssignsWorkToProcessor() {
+    int currentSize = WorkQueue.getWorkQueue().size();
     workQueue.addTask(body);
     //So here we have the newly added task 
-    assertTrue(workQueue.size() == 1);
+    assertTrue(workQueue.size() == currentSize+1);
     
     doAnswer(new Answer<Void>() { 
       public Void answer(InvocationOnMock invocation) throws Throwable {
@@ -68,6 +72,7 @@ public class WorkQueueMonitorTest
      * exposing it's innards and adding hooks for testing we simply look at the ResourceImpl it calls. et voila!
      */
     assertTrue(resourceImplCalled);
+    WorkQueueMonitor.terminate();
   }
 
 }

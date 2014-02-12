@@ -13,8 +13,8 @@ public class EchoresourceMapTest
 
   
   @Before
-  public void setUp() throws Exception
-  {
+  public void setUp() throws Exception {
+    EchoResourceMap.reset();
     resourceMap = EchoResourceMap.getEchoMap();
     resourceMap.addResource("resource_1");
     resourceMap.addResource("resource_2");
@@ -28,23 +28,20 @@ public class EchoresourceMapTest
 
   
   @Test
-  public void testAddResource()
-  {
+  public void testAddResource() {
     assertTrue(resourceMap.getEchoCount("resource_1").compareTo(0) == 0);
   }
 
 
   @Test
-  public void testRemoveResource()
-  {
+  public void testRemoveResource() {
     resourceMap.removeResource("resource_2");
     assertNull(resourceMap.getEchoCount("resource_2"));
   }
 
   
   @Test
-  public void testIncrEchoCount()
-  {
+  public void testIncrEchoCount() {
     assertTrue(resourceMap.getEchoCount("resource_3").compareTo(0) == 0);
     resourceMap.incrEchoCount("resource_3");
     assertTrue(resourceMap.getEchoCount("resource_3").compareTo(1) == 0);
@@ -52,8 +49,7 @@ public class EchoresourceMapTest
 
   
   @Test
-  public void testResetEchoCount()
-  {
+  public void testResetEchoCount() {
     assertTrue(resourceMap.getEchoCount("resource_4").compareTo(0) == 0);
     resourceMap.incrEchoCount("resource_4");
     resourceMap.incrEchoCount("resource_4");
@@ -64,8 +60,7 @@ public class EchoresourceMapTest
 
   
   @Test
-  public void testIncrAll()
-  {
+  public void testIncrAll() {
     Set<String> defaulters = resourceMap.incrAll(2);
     resourceMap.resetEchoCount("resource_1");
     resourceMap.resetEchoCount("resource_2");
@@ -94,7 +89,6 @@ public class EchoresourceMapTest
     assertTrue(defaulters.contains("resource_11"));
     assertTrue(defaulters.contains("resource_12"));
     assertTrue(defaulters.size() == 2);
-    
   }
 
 }

@@ -46,6 +46,7 @@ public class EchoSender implements Runnable
   private ServiceRequest resources = new ServiceRequest();
   private static final String THREAD_NAME = "Echo_Thread";
   private static ReentrantLock echoSenderLock = new ReentrantLock();
+  private static boolean terminate = false;
 
   
   private EchoSender(String amqpDest, ServiceRequest resources) {
@@ -121,9 +122,14 @@ public class EchoSender implements Runnable
           logger.warn("Attempting to disconnect resource: " + resourceId + " maximum number of echo retries reached");
           MQListener.disconnect(resourceId);
         }
-
+        
         //The interval between echos is configured in: conf/sdk.properties using "ss.echo_sender_interval"
         Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval"))*1000);
+
+        if (terminate == true) {
+          return;
+        }
+
       } catch (InterruptedException ex) {
         logger.error("Echo Thread disrupted" + ex);
       } catch (AlreadyClosedException ex) {
@@ -146,5 +152,10 @@ public class EchoSender implements Runnable
         throw new RuntimeException(e);
     }
   }     
+  
+  //for unit testing
+  protected static void terminate() {
+    terminate = true;
+  }
   
 }

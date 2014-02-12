@@ -22,22 +22,20 @@ public class ResourceWorkerMapTest
   
   
   @Before
-  public void setUp()
-  {
+  public void setUp() {
+    ResourceWorkerMap.reset();
     ResourceWorkerMap.initWorkerMap();
   }
   
   @Test
-  public void testAddResource()
-  {
+  public void testAddResource() {
     ResourceWorkerMap.addResource(resId1, resource1);
     assertTrue(ResourceWorkerMap.exists(resId1));
   }
 
   
   @Test
-  public void testGetResourceImpl()
-  {
+  public void testGetResourceImpl() {
     ResourceWorkerMap.addResource(resId2, resource2);
     assertTrue(ResourceWorkerMap.exists(resId2));
     ResourceImpl tempRes = (ResourceImpl) ResourceWorkerMap.getResourceImpl(resId2);
@@ -46,8 +44,7 @@ public class ResourceWorkerMapTest
 
   
   @Test
-  public void testGetMissingImpl()
-  {
+  public void testGetMissingImpl() {
     ResourceImpl tempRes = (ResourceImpl) ResourceWorkerMap.getResourceImpl("noResource");
     assertNull(tempRes);
   }
@@ -55,8 +52,7 @@ public class ResourceWorkerMapTest
   
   
   @Test
-  public void testRemoveResource()
-  {
+  public void testRemoveResource() {
     ResourceWorkerMap.addResource(resId3, resource3);
     assertTrue(ResourceWorkerMap.exists(resId3));
     ResourceWorkerMap.removeResource(resId3);

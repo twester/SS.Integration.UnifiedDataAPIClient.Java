@@ -14,8 +14,7 @@ public class ResourceSessionTest
   }
 
   @Test
-  public void testResourceSessionAndGetters()
-  {
+  public void testResourceSessionAndGetters() {
     ResourceSession session = new ResourceSession("amqp1", "resource2");
     
     assertEquals("amqp1", session.getAmqpDest());

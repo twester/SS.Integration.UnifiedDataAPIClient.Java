@@ -30,7 +30,7 @@ import org.apache.log4j.Logger;
 public class ResourceWorkQueue
 {
   private static ResourceWorkQueue workQueue = null;
-  private static ConcurrentHashMap<String,LinkedBlockingQueue<String>> map = new ConcurrentHashMap<String,LinkedBlockingQueue<String>>();
+  private static ConcurrentHashMap<String,LinkedBlockingQueue<String>> map;
   private static Logger logger = Logger.getLogger(ResourceWorkQueue.class);
   
   private ResourceWorkQueue()
@@ -41,6 +41,7 @@ public class ResourceWorkQueue
   public synchronized static ResourceWorkQueue getResourceWorkQueue() {
     if (workQueue == null) {
       workQueue = new ResourceWorkQueue();
+      map = new ConcurrentHashMap<String,LinkedBlockingQueue<String>>();
     }
     return workQueue;
   }
@@ -79,15 +80,25 @@ public class ResourceWorkQueue
     return map.get(resourceId);
   }
 
+  
   public static int size(String resourceId) {
     return map.get(resourceId).size();
   }
 
+  
   public static boolean isEmpty(String resourceId) {
     return map.get(resourceId).isEmpty();
   }
   
+  
   public static boolean exists(String resourceId) {
     return map.containsKey(resourceId);
   }
+
+
+  // For unit tests only
+  protected static void reset() {
+    workQueue = null;
+  }
+
 }

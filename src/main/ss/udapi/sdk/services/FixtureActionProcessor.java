@@ -32,7 +32,8 @@ public class FixtureActionProcessor implements Runnable
 {
   private static Logger logger = Logger.getLogger(FixtureActionProcessor.class);
   private String task;
-  private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue(); 
+  private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue();
+  private static boolean terminate = false;
   
   public FixtureActionProcessor(String task) {
     this.task = task;
@@ -58,7 +59,17 @@ public class FixtureActionProcessor implements Runnable
 
     //And run it.
     resource.streamData();
-    
+
+    if (terminate == true) {
+      return;
+    }
+
   }
 
+  
+  //for unit testing
+  protected static void terminate() {
+    terminate = true;
+  }
+  
 }
