@@ -54,13 +54,13 @@ public class RabbitMqConsumer extends DefaultConsumer
     //Get the message header
     String body = new String(bodyByteArray);
     String msgHead = body.substring(0, 64);
-    logger.debug("Consumer: " + cTag + " received message: " + msgHead);
     
     /* If it's not an echo assign the work to a the queue's resource implementation (fixture handler).
      * The resource is retrieved from CtagResourceMap which is maintained by MQListener (as it creates/destroys queue listeners). */
     if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",") != true) {
       WorkQueue myQueue = WorkQueue.getWorkQueue();
       myQueue.addTask(body);
+      logger.debug("Consumer: " + cTag + " received non echo message: " + msgHead);
     } 
 
     //We successfully got an echo response or some work from a queue, so the queue must be OK.

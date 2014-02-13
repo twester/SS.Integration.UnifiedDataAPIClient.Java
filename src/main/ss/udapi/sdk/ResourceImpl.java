@@ -136,7 +136,7 @@ public class ResourceImpl implements Resource
       ServiceRequest amqpRequest = new ServiceRequest();
       amqpRequest = httpSvcs.processRequest(availableResources,"http://api.sportingsolutions.com/rels/stream/amqp", restItem.getName());
       amqpDest = amqpRequest.getServiceRestItems().get(0).getLinks().get(0).getHref();
-      logger.info("Starting new streaming services, name: " + getName() +" queue: " + amqpDest + " fixture ID: " + getId()) ;
+      logger.info("Starting new streaming service, name: " + getName() +" queue: " + amqpDest + " fixture ID: " + getId()) ;
 
     /* We need these three services to be running for the SDK to behave as expected.  And as they need the MQ details (which
      * are only available at this point) we are starting them here.  We could retrieve and set this up earlier, but it that would mean

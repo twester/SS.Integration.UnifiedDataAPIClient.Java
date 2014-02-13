@@ -117,7 +117,7 @@ public class EchoResourceMap
       String resourceId = keyIter.next();
       int count = (map.get(resourceId));
       if (count == (retries)){
-        logger.debug(resourceId + ". added to defaulters" + (map.get(resourceId)));
+        logger.info(resourceId + " added to defaulters with");
         defaulters.add(resourceId);
       }
       map.replace(resourceId, count+1);

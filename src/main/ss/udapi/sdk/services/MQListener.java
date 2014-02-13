@@ -52,7 +52,7 @@ public class MQListener implements Runnable
   private String queue = null;
   private String ctag = null;
   
-  private static final String THREAD_NAME = "MQListener";
+  private static final String THREAD_NAME = "MQ_Listener_Thread";
   private static final int CONNECT_RETRIES = 5;
   
   private static boolean terminate = false;
