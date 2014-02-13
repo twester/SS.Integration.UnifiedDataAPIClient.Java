@@ -36,11 +36,11 @@ public class FixtureActionProcessorTest {
     availableResources.setAuthToken("TEST_AUTH");
     availableResources.setServiceRestItems(restItems);
 
-    ResourceWorkerMap.reset();
     ResourceWorkerMap.initWorkerMap();
+    ResourceWorkerMap.reset();
     ResourceWorkerMap.addResource("5IyktEE--jyYCP4IMNgFjoXegiw", resource);
-    WorkQueue.reset();
     workQueue = ResourceWorkQueue.getResourceWorkQueue();
+    WorkQueue.reset();
     ResourceWorkQueue.addQueue("5IyktEE--jyYCP4IMNgFjoXegiw");
     
     resourceImplCalled = false;

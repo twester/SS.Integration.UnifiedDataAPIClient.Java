@@ -31,7 +31,9 @@ these are only needed following a fresh installation:
             
 Copy the file:
     "initRabbitMq.sh"
-from this package into the vagrant's home directory and while logged onto vagrant copy the file
+from this package into the vagrant's home directory, and issue the command:
+    chmod 744 initRabbitMq.sh
+while logged onto vagrant copy the file:
     "Dockerfile"
 in this package and issue the command:
 
@@ -58,7 +60,9 @@ presumably within the build system
             vagrant up
     4) then bring up the docker container which hosts activeMQ with this command
             docker run -d -p 15672:15672 -p 5672:5672 sporting/rabbitmq
-    5) now issue the command  .\initRabbitMq.sh  to create the users and vhost for the integration tests.
+    5) now issue the command
+            .\initRabbitMq.sh
+       to create the users and vhost for the integration tests.
   
 
   

@@ -4509,3 +4509,884 @@
 2014-02-12 17:35:49,340 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
 2014-02-12 17:35:49,341 [main] DEBUG ss.udapi.sdk.services.EchoResourceMap - Monitoring echos for: 5IyktEE--jyYCP4IMNgFjoXegiw
 2014-02-12 17:35:49,343 [main] DEBUG ss.udapi.sdk.services.EchoResourceMap - Monitoring echos for: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 09:34:15,610 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:34:16,012 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 09:34:16,016 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:34:16,056 [pool-4-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 09:34:16,063 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 09:34:16,069 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 09:34:17,578 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:17,579 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:20,586 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:20,586 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:23,593 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:23,593 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:26,600 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:26,600 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:29,608 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:29,608 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:32,615 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:32,616 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:35,623 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:35,623 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:36,089 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 09:34:36,090 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:34:38,630 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:34:38,630 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"3684be88-7157-46bd-9e89-fba137dffbb2;2014-02-13T09:34:16.127Z"}
+2014-02-13 09:34:41,086 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:34:43,105 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 09:34:43,105 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:34:48,106 [pool-9-thread-3] ERROR ss.udapi.sdk.services.RabbitMqConsumer - Connectivity to MQ has failed.  It was caused by broker at the connection level.  Reason received #method<connection.close>(reply-code=541, reply-text=Internal error in Consumer ss.udapi.sdk.services.RabbitMqConsumer@25e25cc (amq.ctag-PYm4O_nlLpTlQNIEptpHHQ) method handleDelivery for channel AMQChannel(amqp://sportingsolutions@fern@127.0.0.1:5672/fern,1), class-id=0, method-id=0)
+2014-02-13 09:34:49,100 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:35:36,686 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:35:36,960 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 09:35:36,964 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:35:36,971 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 09:35:36,978 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 09:35:36,989 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 09:35:38,320 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:38,320 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:35:41,336 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:41,336 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:35:44,343 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:44,344 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:35:47,351 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:47,352 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:35:50,359 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:50,359 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:35:53,366 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:53,366 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:35:56,373 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:35:56,373 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05054a78-f2b3-4b46-9e60-744d4f34e5d4;2014-02-13T09:35:37.005Z"}
+2014-02-13 09:47:26,217 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:47:26,515 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 09:47:26,519 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:47:26,525 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 09:47:26,534 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 09:47:26,545 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 09:47:27,875 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:47:27,876 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"e49bba44-2aa7-4d9d-9f7b-1f4e802f4631;2014-02-13T09:47:26.560Z"}
+2014-02-13 09:47:31,528 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:48:32,571 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:48:43,639 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:48:43,909 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 09:48:43,913 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:48:43,921 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 09:48:43,930 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 09:48:43,941 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 09:48:45,274 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 09:48:45,275 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"0dc2d174-402a-45a4-aa34-a3a9177fa1f2;2014-02-13T09:48:43.958Z"}
+2014-02-13 09:48:48,937 [pool-6-thread-3] ERROR ss.udapi.sdk.services.RabbitMqConsumer - Connectivity to MQ has failed.  It was caused by broker at the connection level.  Reason received #method<connection.close>(reply-code=541, reply-text=Internal error in Consumer ss.udapi.sdk.services.RabbitMqConsumer@3a5f5a46 (amq.ctag-jyeoK0nYfGbDgMOb1oh3hA) method handleDelivery for channel AMQChannel(amqp://sportingsolutions@fern@127.0.0.1:5672/fern,1), class-id=0, method-id=0)
+2014-02-13 09:48:49,926 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 09:51:15,499 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:51:15,509 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 09:51:39,954 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:51:39,964 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 09:52:08,751 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:52:08,763 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 09:52:22,328 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 09:52:22,338 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:00:04,151 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:00:04,164 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:00:04,448 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:00:04,471 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:04,483 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 10:00:04,490 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:04,494 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:00:04,497 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:00:04,497 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:00:04,498 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:00:04,498 [pool-4-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:00:04,500 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:00:04,500 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:00:04,501 [pool-4-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:00:04,503 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:00:04,510 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:00:04,520 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:00:05,877 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:05,878 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:08,888 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:08,888 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:11,898 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:11,899 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:14,915 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:14,916 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:17,926 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:17,926 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:20,936 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:20,936 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:23,947 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:23,947 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:24,510 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:00:24,522 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:24,524 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:00:24,524 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:24,524 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:00:24,524 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:00:24,524 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:00:24,524 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:00:26,957 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:00:26,958 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"126969c0-a6f9-47c1-92e2-387d7519aa3b;2014-02-13T10:00:04.541Z"}
+2014-02-13 10:00:29,525 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:31,529 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:00:31,542 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:31,544 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:00:31,544 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:31,544 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:00:31,544 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:00:31,544 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:00:31,544 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:00:36,547 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-abNLQMBVpBWxhux5-uOP3A received message: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/Footb
+2014-02-13 10:00:36,549 [pool-8-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:00:36,549 [pool-8-thread-1] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 1 streaming status: true
+2014-02-13 10:00:36,549 [pool-8-thread-1] DEBUG ss.udapi.sdk.ResourceImpl - Streaming data: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/F
+2014-02-13 10:00:36,550 [pool-9-thread-3] ERROR ss.udapi.sdk.services.RabbitMqConsumer - Connectivity to MQ has failed.  It was caused by broker at the connection level.  Reason received #method<connection.close>(reply-code=541, reply-text=Internal error in Consumer ss.udapi.sdk.services.RabbitMqConsumer@57f0cde7 (amq.ctag-abNLQMBVpBWxhux5-uOP3A) method handleDelivery for channel AMQChannel(amqp://sportingsolutions@fern@127.0.0.1:5672/fern,1), class-id=0, method-id=0)
+2014-02-13 10:00:37,545 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:01:10,407 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:01:10,417 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:01:10,666 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:01:10,674 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:01:10,678 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:01:10,681 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:01:10,684 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:01:10,684 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:01:10,685 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:01:10,685 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:01:10,687 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:01:10,687 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:01:10,687 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:01:10,689 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:01:10,697 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:01:10,709 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:01:12,054 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:01:12,054 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"7fce86b2-6f79-465d-aeb0-16b5a95b6c53;2014-02-13T10:01:10.724Z"}
+2014-02-13 10:01:15,691 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:02:19,096 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:02:19,106 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:02:19,402 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:02:19,410 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:02:19,414 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:02:19,417 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:02:19,420 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:02:19,420 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:02:19,420 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:02:19,421 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:02:19,422 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:02:19,423 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:02:19,424 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:02:19,425 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:02:19,431 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:02:19,441 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:02:20,770 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:02:20,771 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"4269fbd8-9123-4371-b09b-aff75304e0c0;2014-02-13T10:02:19.458Z"}
+2014-02-13 10:02:24,427 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:05:42,945 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:05:42,955 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:05:43,218 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:05:43,227 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:05:43,231 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:05:43,234 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:05:43,237 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:05:43,237 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:05:43,238 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:05:43,238 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:05:43,240 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:05:43,240 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:05:43,240 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:05:43,243 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:05:43,250 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:05:43,263 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:05:44,609 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:05:44,610 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"30c145e8-aee0-4a51-8a66-736ccff0f2fc;2014-02-13T10:05:43.283Z"}
+2014-02-13 10:05:48,245 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:08:06,907 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:08:06,918 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:08:07,193 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:08:07,203 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:08:07,210 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:08:07,214 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:08:07,216 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:08:07,217 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:08:07,217 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:08:07,217 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:08:07,219 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:08:07,219 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:08:07,220 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:08:07,222 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:08:07,227 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:08:07,240 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:08:08,596 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:08:08,597 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"a3774454-6a7d-4289-b43b-0626a5eaf559;2014-02-13T10:08:07.257Z"}
+2014-02-13 10:08:12,224 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:08:40,118 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:08:40,128 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:08:40,411 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:08:40,420 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:08:40,425 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:08:40,429 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:08:40,432 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:08:40,433 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:08:40,433 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:08:40,433 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:08:40,435 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:08:40,435 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:08:40,435 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:08:40,437 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:08:40,442 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:08:40,451 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:08:41,796 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:08:41,797 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"fb722dac-4e95-482b-9e4b-50b708f6ffb7;2014-02-13T10:08:40.469Z"}
+2014-02-13 10:11:39,944 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:11:39,957 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:11:40,202 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:11:40,210 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:11:40,214 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:11:40,216 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:11:40,218 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:11:40,218 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:11:40,219 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:11:40,219 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:11:40,221 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:11:40,221 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:11:40,222 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:11:40,224 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:11:40,230 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:11:40,238 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:11:41,587 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:11:41,588 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"05b43d6e-d4fa-458a-aa90-fd6eeda2a53e;2014-02-13T10:11:40.257Z"}
+2014-02-13 10:11:45,226 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:28,471 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:13:28,487 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:13:28,760 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:28,769 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:13:28,775 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:28,779 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:13:28,782 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:13:28,783 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:13:28,783 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:13:28,784 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:13:28,787 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:13:28,787 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:13:28,787 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:13:28,792 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:13:28,799 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:13:28,810 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:13:30,157 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:13:30,158 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"46331ce4-795d-4869-877a-f2f2b5eb63bf;2014-02-13T10:13:28.826Z"}
+2014-02-13 10:13:33,795 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:53,042 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:13:53,055 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:13:53,316 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:53,323 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:13:53,327 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:53,329 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:13:53,332 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:13:53,332 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:13:53,333 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:13:53,333 [pool-1-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:13:53,334 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:13:53,334 [pool-1-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:13:53,334 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:13:53,339 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:13:53,343 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:13:53,354 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:13:53,354 [pool-1-thread-2] INFO  ss.udapi.sdk.services.MQListener - Initial basic consumer amq.ctag-tgbCY25p37qNJgYr64seBQ added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:13:54,692 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:13:54,693 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"0bf043ad-0db0-4ae4-a8cb-b37c40c56f14;2014-02-13T10:13:53.369Z"}
+2014-02-13 10:13:58,340 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:17:07,368 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:17:07,370 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:17:08,370 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-13 10:17:09,370 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-13 10:17:10,371 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-13 10:17:11,371 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 0
+2014-02-13 10:17:11,579 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,590 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,591 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:17:11,592 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:17:11,592 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,593 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,593 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:17:11,593 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:17:11,594 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,594 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,612 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:17:11,616 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:17:11,616 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,617 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:17:11,618 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:17:11,618 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:17:11,623 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:17:12,132 [Thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:17:12,633 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:17:12,634 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:17:12,634 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:17:12,634 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:17:12,634 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:17:12,635 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:17:12,636 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:17:12,636 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:23:07,528 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:23:07,531 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:23:07,913 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:23:07,914 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"38872e25-7926-414a-9636-9fb72e271326;2014-02-13T10:23:07.562Z"}
+2014-02-13 10:23:08,531 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:23:08,923 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:23:08,924 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"38872e25-7926-414a-9636-9fb72e271326;2014-02-13T10:23:07.562Z"}
+2014-02-13 10:23:09,531 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:23:09,933 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:23:09,933 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"38872e25-7926-414a-9636-9fb72e271326;2014-02-13T10:23:07.562Z"}
+2014-02-13 10:23:10,531 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:23:10,943 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:23:10,943 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"38872e25-7926-414a-9636-9fb72e271326;2014-02-13T10:23:07.562Z"}
+2014-02-13 10:23:11,531 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:23:11,713 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:23:11,876 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:23:11,889 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:11,894 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 10:23:11,896 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:11,898 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:23:11,899 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:23:11,899 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:11,899 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:23:11,899 [pool-5-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:23:11,900 [pool-5-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:23:11,900 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:23:11,900 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:23:11,905 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:23:11,912 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:23:11,912 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:23:11,912 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"54e90885-225a-422b-9cf0-3a70b7a615a3;2014-02-13T10:23:11.900Z"}
+2014-02-13 10:23:11,918 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:23:11,918 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Initial basic consumer amq.ctag-Y_77QUjxca2WJMiKLvaxmg added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:31,913 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:23:31,928 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:31,931 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:23:31,931 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:31,931 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:23:31,931 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:31,931 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:23:31,931 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:23:36,932 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:38,936 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:23:38,950 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:38,952 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:23:38,952 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:38,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:23:38,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:38,952 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:23:38,952 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:23:43,955 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-Y_77QUjxca2WJMiKLvaxmg received message: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/Footb
+2014-02-13 10:23:43,955 [pool-9-thread-2] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 46NtalSfupT7w2MxuudoYUd9CKw. Current missed echos: 0
+2014-02-13 10:23:43,956 [pool-8-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:43,956 [pool-8-thread-1] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 1 streaming status: true
+2014-02-13 10:23:43,957 [pool-8-thread-1] DEBUG ss.udapi.sdk.ResourceImpl - Streaming data: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/F
+2014-02-13 10:23:44,953 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:23:46,964 [Thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:23:47,466 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:23:47,467 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:23:47,467 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:23:47,467 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:23:47,467 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:23:47,467 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 1
+2014-02-13 10:23:47,467 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:23:47,468 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:23:47,472 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:23:47,475 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving all features
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AustralianRules
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Badminton
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Baseball
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Basketball
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: BeachVolleyball
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Boxing
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Cricket
+2014-02-13 10:23:47,476 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Darts
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicFootball
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicHurling
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Handball
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: HorseRacing
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: IceHockey
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyLeague
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyUnion
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Snooker
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Squash
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Tennis
+2014-02-13 10:23:47,477 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: TestCricket
+2014-02-13 10:23:47,478 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Volleyball
+2014-02-13 10:23:47,479 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:23:47,482 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-13 10:23:47,482 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-13 10:23:47,484 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:23:47,488 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:23:47,491 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
+2014-02-13 10:23:47,520 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,520 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,521 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:23:47,521 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:23:47,522 [pool-8-thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource2","StartTime":
+2014-02-13 10:23:47,522 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,523 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,524 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:23:47,524 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:23:47,525 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,525 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,526 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:23:47,527 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:23:47,527 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,528 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:23:47,529 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:23:47,529 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:23:47,532 [pool-8-thread-4] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:24:36,535 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:24:36,537 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:24:36,921 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:24:36,922 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"579dbb7d-1f74-402b-b3e1-e004ff67a197;2014-02-13T10:24:36.570Z"}
+2014-02-13 10:24:37,538 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:24:37,932 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:24:37,932 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"579dbb7d-1f74-402b-b3e1-e004ff67a197;2014-02-13T10:24:36.570Z"}
+2014-02-13 10:24:38,538 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:24:38,941 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:24:38,941 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"579dbb7d-1f74-402b-b3e1-e004ff67a197;2014-02-13T10:24:36.570Z"}
+2014-02-13 10:24:39,538 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:24:39,951 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:24:39,951 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"579dbb7d-1f74-402b-b3e1-e004ff67a197;2014-02-13T10:24:36.570Z"}
+2014-02-13 10:24:40,538 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:24:40,719 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:24:40,867 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:24:40,881 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:24:40,887 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 10:24:40,889 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:24:40,891 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:24:40,892 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:24:40,892 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:24:40,892 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:24:40,892 [pool-5-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:24:40,893 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:24:40,893 [pool-5-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:24:40,893 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:24:40,896 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:24:40,902 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:24:40,906 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:24:40,906 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"1bf08847-7f57-4df3-ac5f-54307da0b0ef;2014-02-13T10:24:40.893Z"}
+2014-02-13 10:24:40,909 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:24:40,909 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Initial basic consumer amq.ctag-WNy5hQnAlBAeT0opPNJuDQ added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:00,904 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:25:00,918 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:00,920 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:25:00,921 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:00,921 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:25:00,921 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:00,921 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:25:00,921 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:25:05,922 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:07,926 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:25:07,938 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:07,940 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:25:07,941 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:07,941 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:25:07,941 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:07,941 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:25:07,941 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:25:12,944 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-WNy5hQnAlBAeT0opPNJuDQ received message: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/Footb
+2014-02-13 10:25:12,944 [pool-9-thread-2] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 46NtalSfupT7w2MxuudoYUd9CKw. Current missed echos: 0
+2014-02-13 10:25:13,953 [Thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:25:14,454 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:25:14,456 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:25:14,457 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:25:14,457 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:25:14,457 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:25:14,457 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:25:14,461 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:25:14,464 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving all features
+2014-02-13 10:25:14,464 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-13 10:25:14,464 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AustralianRules
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Badminton
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Baseball
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Basketball
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: BeachVolleyball
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Boxing
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Cricket
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Darts
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Football
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicFootball
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: GaelicHurling
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Handball
+2014-02-13 10:25:14,465 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: HorseRacing
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: IceHockey
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyLeague
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: RugbyUnion
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Snooker
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Squash
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Tennis
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: TestCricket
+2014-02-13 10:25:14,466 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: Volleyball
+2014-02-13 10:25:14,468 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:25:14,471 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: AmericanFootball
+2014-02-13 10:25:14,471 [main] INFO  ss.udapi.sdk.FeatureImpl - Instantiated Feature: AmericanFootball
+2014-02-13 10:25:14,473 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:25:14,476 [main] INFO  ss.udapi.sdk.ServiceImpl - Instantiated Service: UnifiedDataAPI
+2014-02-13 10:25:14,479 [main] INFO  ss.udapi.sdk.ServiceImpl - Retrieving feature: Skittles
+2014-02-13 10:25:14,509 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,510 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,510 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:25:14,510 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:25:14,511 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,511 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,512 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:25:14,512 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:25:14,513 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,513 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,514 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:25:14,514 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:25:14,515 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,515 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:14,516 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:25:14,517 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:25:14,521 [pool-8-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:25:34,116 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:25:34,119 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:25:34,500 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:25:34,500 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e003cb04-0038-40f4-a21c-5e1a72c8d83c;2014-02-13T10:25:34.151Z"}
+2014-02-13 10:25:35,119 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:25:35,510 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:25:35,511 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e003cb04-0038-40f4-a21c-5e1a72c8d83c;2014-02-13T10:25:34.151Z"}
+2014-02-13 10:25:36,119 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:25:36,520 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:25:36,520 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e003cb04-0038-40f4-a21c-5e1a72c8d83c;2014-02-13T10:25:34.151Z"}
+2014-02-13 10:25:37,119 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:25:37,530 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:25:37,530 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"e003cb04-0038-40f4-a21c-5e1a72c8d83c;2014-02-13T10:25:34.151Z"}
+2014-02-13 10:25:38,119 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:25:38,298 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:25:38,451 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:25:38,465 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:38,470 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 10:25:38,473 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:25:38,474 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:25:38,475 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:25:38,475 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:25:38,475 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:25:38,475 [pool-5-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:25:38,476 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:25:38,476 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:25:38,476 [pool-5-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:25:38,479 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:25:38,488 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:25:38,488 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:25:38,489 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"771013d1-9fc9-4f9e-95ad-05173897e2ce;2014-02-13T10:25:38.477Z"}
+2014-02-13 10:25:38,495 [pool-5-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:27:55,235 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:27:55,238 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:27:55,635 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:27:55,635 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d07b09c8-445c-45cc-a380-8bb334945ea7;2014-02-13T10:27:55.270Z"}
+2014-02-13 10:27:56,238 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:27:56,645 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:27:56,645 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d07b09c8-445c-45cc-a380-8bb334945ea7;2014-02-13T10:27:55.270Z"}
+2014-02-13 10:27:57,238 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:27:57,655 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:27:57,655 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d07b09c8-445c-45cc-a380-8bb334945ea7;2014-02-13T10:27:55.270Z"}
+2014-02-13 10:27:58,238 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:27:58,664 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:27:58,665 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d07b09c8-445c-45cc-a380-8bb334945ea7;2014-02-13T10:27:55.270Z"}
+2014-02-13 10:27:59,238 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:27:59,474 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,476 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,477 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:27:59,477 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:27:59,478 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,478 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,479 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:27:59,479 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:27:59,479 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,490 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,505 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:27:59,507 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:27:59,508 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,508 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:27:59,509 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:27:59,510 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:27:59,514 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:28:00,023 [Thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:28:00,524 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:28:00,526 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:28:00,527 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:28:00,527 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:28:00,527 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:28:00,527 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:30:16,916 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:30:16,918 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:30:17,324 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:30:17,325 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b21ca84-43d2-4058-aa2b-7469bb543d08;2014-02-13T10:30:16.956Z"}
+2014-02-13 10:30:17,919 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:30:18,336 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:30:18,337 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b21ca84-43d2-4058-aa2b-7469bb543d08;2014-02-13T10:30:16.956Z"}
+2014-02-13 10:30:18,919 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:30:19,347 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:30:19,348 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b21ca84-43d2-4058-aa2b-7469bb543d08;2014-02-13T10:30:16.956Z"}
+2014-02-13 10:30:19,919 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:30:20,366 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:30:20,367 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"3b21ca84-43d2-4058-aa2b-7469bb543d08;2014-02-13T10:30:16.956Z"}
+2014-02-13 10:30:20,920 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:30:21,279 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,280 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,282 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:30:21,282 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:30:21,283 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,283 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,284 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:30:21,284 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:30:21,285 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,285 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,316 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:30:21,318 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:30:21,318 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,319 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:30:21,320 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:30:21,320 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:30:21,325 [pool-2-thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:30:21,325 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource2","StartTime":
+2014-02-13 10:30:21,833 [Thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:30:22,334 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:30:22,336 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:30:22,336 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:30:22,336 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:30:22,336 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:32:14,849 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:32:14,852 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:32:15,211 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:32:15,212 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d1e423b8-dec8-476b-8d9d-e6b83a8b6769;2014-02-13T10:32:14.883Z"}
+2014-02-13 10:32:15,852 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:32:16,222 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:32:16,222 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d1e423b8-dec8-476b-8d9d-e6b83a8b6769;2014-02-13T10:32:14.883Z"}
+2014-02-13 10:32:16,852 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:32:17,232 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:32:17,232 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d1e423b8-dec8-476b-8d9d-e6b83a8b6769;2014-02-13T10:32:14.883Z"}
+2014-02-13 10:32:17,852 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:32:18,241 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:32:18,242 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"d1e423b8-dec8-476b-8d9d-e6b83a8b6769;2014-02-13T10:32:14.883Z"}
+2014-02-13 10:32:18,852 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:32:19,055 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,057 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,058 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:32:19,058 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:32:19,059 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,059 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,060 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:32:19,060 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:32:19,060 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,069 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,084 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:32:19,087 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:32:19,087 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,088 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:32:19,089 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:32:19,089 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:32:19,095 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: testresource2","StartTime":
+2014-02-13 10:32:19,095 [pool-2-thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:32:19,603 [Thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:32:20,104 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:32:20,105 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:32:20,105 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:32:20,105 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:32:20,105 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:32:20,105 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:32:20,106 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:37:55,824 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:37:55,827 [Thread-0] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:37:56,196 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:37:56,196 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0b202dca-b9cd-4006-b449-b2d2d84a8b03;2014-02-13T10:37:55.866Z"}
+2014-02-13 10:37:56,827 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:37:57,206 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:37:57,206 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0b202dca-b9cd-4006-b449-b2d2d84a8b03;2014-02-13T10:37:55.866Z"}
+2014-02-13 10:37:57,827 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:37:58,216 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:37:58,216 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0b202dca-b9cd-4006-b449-b2d2d84a8b03;2014-02-13T10:37:55.866Z"}
+2014-02-13 10:37:58,827 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:37:59,225 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: xxx.test123url.comwhile processing : Fernando v Jim
+2014-02-13 10:37:59,225 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"UnifiedDataAPI","queue":"stream/echo/UJp-nkCrpBHv195n1Oi2rWm9TCox","message":"0b202dca-b9cd-4006-b449-b2d2d84a8b03;2014-02-13T10:37:55.866Z"}
+2014-02-13 10:37:59,828 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: testresource2. Current missed echos: 1
+2014-02-13 10:38:00,043 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,045 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,046 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: [{"Name":"Fernando v Jim","Content":{"Id":"testresource2","Start
+2014-02-13 10:38:00,058 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 0
+2014-02-13 10:38:00,059 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,060 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,060 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQ received message: {"Relation":"http://api.sportingsolutions.com/rels/stream/echo",
+2014-02-13 10:38:00,060 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: 5IyktEE--jyYCP4IMNgFjoXegiw. Current missed echos: 2
+2014-02-13 10:38:00,061 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,061 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,072 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:38:00,075 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:38:00,076 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,076 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:38:00,077 [main] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-ApAlmaYcURB0nqy-B8UsjQdisconnected
+2014-02-13 10:38:00,078 [main] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-ApAlmaYcURB0nqy-B8UsjQno longer valid.
+2014-02-13 10:38:00,082 [pool-2-thread-1] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:38:00,591 [Thread-2] DEBUG ss.udapi.sdk.services.FixtureActionProcessor - Processing started for fixture/resource: 5IyktEE--jyYCP4IMNgFjoXegiw
+2014-02-13 10:38:01,092 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 2
+2014-02-13 10:38:01,093 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:38:01,093 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:38:01,093 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:38:01,093 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_10. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_1. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_2. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_3. Current missed echos: 1
+2014-02-13 10:38:01,094 [main] INFO  ss.udapi.sdk.services.EchoResourceMap - Echo or message received for fixture Id: resource_4. Current missed echos: 1
+2014-02-13 10:39:10,866 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:39:10,876 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:39:11,139 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:39:11,158 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:11,164 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 10:39:11,168 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:11,170 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:39:11,173 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:39:11,173 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:39:11,173 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:39:11,173 [pool-4-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:39:11,175 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:39:11,175 [pool-4-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:39:11,175 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:39:11,178 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:39:11,184 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:39:11,191 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:39:11,192 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Initial basic consumer amq.ctag-yFPTO_e5DQPp7q5DSrCxHg added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:12,518 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:12,519 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:15,528 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:15,529 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:18,539 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:18,539 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:21,543 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:21,543 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:21,543 [Echo_Thread] WARN  ss.udapi.sdk.services.EchoSender - Attempting to disconnect resource: 46NtalSfupT7w2MxuudoYUd9CKw maximum number of echo retries reached
+2014-02-13 10:39:21,546 [Echo_Thread] INFO  ss.udapi.sdk.services.MQListener - Disconnected basic consumer amq.ctag-yFPTO_e5DQPp7q5DSrCxHg for resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:21,546 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-yFPTO_e5DQPp7q5DSrCxHgdisconnected
+2014-02-13 10:39:21,547 [pool-9-thread-2] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:21,548 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-yFPTO_e5DQPp7q5DSrCxHgno longer valid.
+2014-02-13 10:39:24,556 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:24,556 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:27,567 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:27,567 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:30,571 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:30,571 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:31,186 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:39:31,198 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:31,200 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:39:31,200 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:31,200 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:39:31,200 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:39:31,200 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:39:31,201 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:39:32,198 [MQListener] INFO  ss.udapi.sdk.services.MQListener - Additional basic consumer amq.ctag-5hwmJGqJiJmS9aKaHTGutQ added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:33,586 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:39:33,587 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"5bb9d7f4-3fa8-4af3-ad8a-2c28b0010bf7;2014-02-13T10:39:11.209Z"}
+2014-02-13 10:39:36,201 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:38,204 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:39:38,216 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:38,218 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:39:38,218 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:39:38,218 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:39:38,218 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:39:38,218 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:39:38,218 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:39:43,221 [pool-9-thread-4] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-5hwmJGqJiJmS9aKaHTGutQ received message: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/Footb
+2014-02-13 10:46:39,075 [main] ERROR ss.udapi.sdk.services.SystemProperties - Can't load the properties file.  sdk.properties
+2014-02-13 10:46:39,087 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:46:39,379 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:46:39,393 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:39,399 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 2 and Max Missed Echos of: 3
+2014-02-13 10:46:39,403 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:39,405 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.WorkQueueMonitor.
+2014-02-13 10:46:39,407 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:46:39,407 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:46:39,408 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.MQListener.
+2014-02-13 10:46:39,408 [pool-4-thread-2] DEBUG ss.udapi.sdk.services.MQListener - MQ Channel not open
+2014-02-13 10:46:39,409 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiating initial ServiceThreadExecutor thread for: ss.udapi.sdk.services.EchoSender.
+2014-02-13 10:46:39,409 [pool-4-thread-3] INFO  ss.udapi.sdk.services.EchoSender - Starting echos.
+2014-02-13 10:46:39,410 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:46:39,412 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:46:39,417 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Attempting new connection to MQ...
+2014-02-13 10:46:39,422 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Connection made to MQ
+2014-02-13 10:46:39,423 [pool-4-thread-2] INFO  ss.udapi.sdk.services.MQListener - Initial basic consumer amq.ctag-u9LLITLjzc82BvsCDOadOg added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:40,763 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:40,763 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:43,773 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:43,773 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:46,783 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:46,783 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:49,793 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:49,793 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:49,793 [Echo_Thread] WARN  ss.udapi.sdk.services.EchoSender - Attempting to disconnect resource: 46NtalSfupT7w2MxuudoYUd9CKw maximum number of echo retries reached
+2014-02-13 10:46:49,796 [Echo_Thread] INFO  ss.udapi.sdk.services.MQListener - Disconnected basic consumer amq.ctag-u9LLITLjzc82BvsCDOadOg for resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:49,796 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-u9LLITLjzc82BvsCDOadOgdisconnected
+2014-02-13 10:46:49,797 [pool-9-thread-2] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:49,798 [pool-9-thread-2] DEBUG ss.udapi.sdk.services.MQListener - cTagamq.ctag-u9LLITLjzc82BvsCDOadOgno longer valid.
+2014-02-13 10:46:52,806 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:52,807 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:55,816 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:55,816 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:58,826 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:46:58,826 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:46:59,420 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:46:59,432 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:59,434 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:46:59,434 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:46:59,434 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:46:59,434 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:46:59,434 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:46:59,434 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:47:00,430 [MQListener] INFO  ss.udapi.sdk.services.MQListener - Additional basic consumer amq.ctag-lXJsZI_HqwMcDbTxXvHRNQ added for queue integrationTestQueuefor resource 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:47:01,836 [Echo_Thread] ERROR ss.udapi.sdk.services.HttpServices - Communication error: Connect to 127.0.0.1:8080 [/127.0.0.1] failed: Connection refused: connectwhile processing : Fern v NotFern
+2014-02-13 10:47:01,836 [Echo_Thread] INFO  ss.udapi.sdk.services.EchoSender - Batch echo sent: {"host":"fern","queue":"integrationTestQueue","message":"8ec77569-acd4-4f1a-a4d9-9b7e7f9d753a;2014-02-13T10:46:39.442Z"}
+2014-02-13 10:47:04,435 [main] INFO  ss.udapi.sdk.ResourceImpl - Disconnect event for ID:46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:47:06,437 [main] DEBUG ss.udapi.sdk.services.ServiceThreadExecutor - Instantiated Service Thread Executor
+2014-02-13 10:47:06,448 [main] DEBUG ss.udapi.sdk.ResourceImpl - Instantiating Resource: Fern v NotFern -- id: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:47:06,451 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting stream for Fern v NotFern with Echo Interval of: 20 and Max Missed Echos of: 3
+2014-02-13 10:47:06,451 [main] INFO  ss.udapi.sdk.ResourceImpl - Starting new streaming services, name: Fern v NotFern queue: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue fixture ID: 46NtalSfupT7w2MxuudoYUd9CKw
+2014-02-13 10:47:06,451 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:47:06,452 [main] DEBUG ss.udapi.sdk.services.MQListener - Retrieving MQListener or create it if it doesn't exist
+2014-02-13 10:47:06,452 [main] DEBUG ss.udapi.sdk.services.MQListener - Adding new resource queue listener request for: amqp://sportingsolutions%40fern:sporting@127.0.0.1:5672/fern/integrationTestQueue
+2014-02-13 10:47:06,452 [main] DEBUG ss.udapi.sdk.ResourceImpl - In resource 46NtalSfupT7w2MxuudoYUd9CKw number of items received: 0 streaming status: true
+2014-02-13 10:47:11,455 [pool-9-thread-4] DEBUG ss.udapi.sdk.services.RabbitMqConsumer - Consumer: amq.ctag-lXJsZI_HqwMcDbTxXvHRNQ received message: {"Relation":"http://c2e.sportingingsolutions.com/rels/v006/Footb

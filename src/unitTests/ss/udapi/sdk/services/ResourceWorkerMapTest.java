@@ -23,8 +23,8 @@ public class ResourceWorkerMapTest
   
   @Before
   public void setUp() {
-    ResourceWorkerMap.reset();
     ResourceWorkerMap.initWorkerMap();
+    ResourceWorkerMap.reset();
   }
   
   @Test

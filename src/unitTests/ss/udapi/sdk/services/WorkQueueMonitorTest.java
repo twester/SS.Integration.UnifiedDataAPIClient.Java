@@ -26,12 +26,12 @@ public class WorkQueueMonitorTest
   public void setUp() throws Exception {
     resourceImplCalled = false;
 
-    WorkQueue.reset();
     workQueue = WorkQueue.getWorkQueue();
-    ResourceWorkQueue.reset();
+    WorkQueue.reset();
     resourceWorkQueue = ResourceWorkQueue.getResourceWorkQueue(); 
-    ResourceWorkerMap.reset();
+    ResourceWorkQueue.reset();
     ResourceWorkerMap.initWorkerMap();
+    ResourceWorkerMap.reset();
     ResourceWorkerMap.addResource("5IyktEE--jyYCP4IMNgFjoXegiw", resource);
     ResourceWorkQueue.addQueue("5IyktEE--jyYCP4IMNgFjoXegiw");
   }

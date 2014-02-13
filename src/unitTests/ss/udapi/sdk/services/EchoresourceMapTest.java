@@ -14,8 +14,8 @@ public class EchoresourceMapTest
   
   @Before
   public void setUp() throws Exception {
-    EchoResourceMap.reset();
     resourceMap = EchoResourceMap.getEchoMap();
+    EchoResourceMap.reset();
     resourceMap.addResource("resource_1");
     resourceMap.addResource("resource_2");
     resourceMap.addResource("resource_3");

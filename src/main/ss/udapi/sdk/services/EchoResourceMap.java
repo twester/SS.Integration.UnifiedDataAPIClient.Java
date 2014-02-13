@@ -35,7 +35,7 @@ public class EchoResourceMap
 {
   private static Logger logger = Logger.getLogger(EchoResourceMap.class);
   private static EchoResourceMap echoMap;
-  private static ConcurrentHashMap<String,Integer> map;
+  private static ConcurrentHashMap<String,Integer> map = new ConcurrentHashMap<String,Integer>();
   
 
   private EchoResourceMap()
@@ -46,7 +46,6 @@ public class EchoResourceMap
   public synchronized static EchoResourceMap getEchoMap(){
     if (echoMap == null) {
       echoMap = new EchoResourceMap();
-      map = new ConcurrentHashMap<String,Integer>();
     }
     return echoMap;
   }
@@ -93,8 +92,8 @@ public class EchoResourceMap
   protected void resetEchoCount(String resourceId)
   {
     if (resourceId != null) {
-      map.replace(resourceId, 0);
       logger.info("Echo or message received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
+      map.replace(resourceId, 0);
     }
   }
 
@@ -136,8 +135,8 @@ public class EchoResourceMap
   
   
   // For unit tests only
-  protected static void reset() {
-    echoMap = null;
+  public static void reset() {
+    map = new ConcurrentHashMap<String,Integer>();
   }
   
 }

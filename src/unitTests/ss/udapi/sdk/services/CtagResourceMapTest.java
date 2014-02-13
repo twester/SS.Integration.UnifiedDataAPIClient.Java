@@ -10,8 +10,8 @@ public class CtagResourceMapTest
 
   @Before
   public void setUp() throws Exception { 
-    CtagResourceMap.reset();
     CtagResourceMap.initCtagMap();
+    CtagResourceMap.reset();
   }
 
 

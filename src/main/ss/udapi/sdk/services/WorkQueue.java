@@ -31,7 +31,7 @@ import org.apache.log4j.Logger;
 public class WorkQueue
 {
   private static WorkQueue workQueue = null;
-  private static LinkedBlockingQueue<String> internalQueue;
+  private static LinkedBlockingQueue<String> internalQueue = new LinkedBlockingQueue<String>();
   
   private static Logger logger = Logger.getLogger(WorkQueue.class);
   
@@ -44,7 +44,6 @@ public class WorkQueue
     if (workQueue == null)
     {
       workQueue = new WorkQueue();
-      internalQueue = new LinkedBlockingQueue<String>();
     }
     return workQueue;
   }
@@ -81,8 +80,8 @@ public class WorkQueue
   }
   
   // For unit tests only
-  protected static void reset() {
-    workQueue = null;
+  public static void reset() {
+    internalQueue = new LinkedBlockingQueue<String>();
   }
   
 }

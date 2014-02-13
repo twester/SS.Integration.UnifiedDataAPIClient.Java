@@ -12,8 +12,8 @@ public class WorkQueueTest
   
   @Before
   public void setUp() {
-    WorkQueue.reset();
     queue = WorkQueue.getWorkQueue();
+    WorkQueue.reset();
   }
   
   

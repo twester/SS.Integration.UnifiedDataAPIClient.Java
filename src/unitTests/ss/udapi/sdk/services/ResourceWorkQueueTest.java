@@ -11,8 +11,8 @@ public class ResourceWorkQueueTest
   
   @Before
   public void setUp() {
-    ResourceWorkQueue.reset();
     myQueueRef = ResourceWorkQueue.getResourceWorkQueue();
+    ResourceWorkQueue.reset();
   }
   
   
