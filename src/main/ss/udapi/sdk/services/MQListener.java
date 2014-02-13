@@ -54,6 +54,8 @@ public class MQListener implements Runnable
   
   private static final String THREAD_NAME = "MQListener";
   private static final int CONNECT_RETRIES = 5;
+  
+  private static boolean terminate = false;
 
   
   private MQListener ()
@@ -85,6 +87,7 @@ public class MQListener implements Runnable
   
   @Override
   public void run() {
+    terminate = false;
     /*
      * This section happens only once when the thread is kicked off if the channel (read connection) doesn't exist
      * or if the channel has died.
@@ -203,6 +206,10 @@ public class MQListener implements Runnable
                 EchoResourceMap.getEchoMap().addResource(resourceId);
                 logger.info("Additional basic consumer " + ctag + " added for queue " + queue + "for resource " + resourceId);
               }
+
+              if (terminate == true) {
+                return;
+              }
             } catch (IOException ex) {
               logger.error("Failure creating additional basic consumer for : " + session.getResourceId());
             } catch (URISyntaxException ex) {
@@ -289,6 +296,9 @@ public class MQListener implements Runnable
     }
   }     
 
-  
+  //for unit testing
+  public static void terminate() {
+    terminate = true;
+  }
   
 }

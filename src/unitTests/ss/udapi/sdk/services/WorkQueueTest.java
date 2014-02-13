@@ -28,7 +28,6 @@ public class WorkQueueTest
     assertEquals(task2, queue.getTask());
   }
 
-  /*
   @Test
   public void testProveItsFIFO() {
     String task3 = "More strings to test";
@@ -40,5 +39,4 @@ public class WorkQueueTest
     assertNotEquals(task3, queue.getTask());
   }
   
-  */
 }

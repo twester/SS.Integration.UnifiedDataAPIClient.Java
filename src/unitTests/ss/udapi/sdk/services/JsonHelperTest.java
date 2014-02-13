@@ -45,7 +45,7 @@ public class JsonHelperTest
     streamEcho.setMessage(guid + ";" + df.format(new Date(6256132)));
     String stringStreamEcho = JsonHelper.ToJson(streamEcho);
     
-    assertEquals("{\"host\":\"TEST_HOST\",\"queue\":\"QUEUE\",\"message\":\"a78c6f2c-92f4-44bb-b7c9-69cd7b59ee1a;1970-01-01T01:44:16.132Z\"}",stringStreamEcho);
+    assertEquals("{\"host\":\"TEST_HOST\",\"queue\":\"QUEUE\",\"message\":\"a78c6f2c-92f4-44bb-b7c9-69cd7b59ee1a;" + df.format(new Date(6256132)) + "\"}",stringStreamEcho);
   }
 
   

@@ -21,7 +21,6 @@ import ss.udapi.sdk.model.Summary;
 import ss.udapi.sdk.services.EchoSender;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.MQListener;
-import ss.udapi.sdk.services.EchoResourceMap;
 import ss.udapi.sdk.services.ResourceSession;
 import ss.udapi.sdk.services.ResourceWorkQueue;
 import ss.udapi.sdk.services.ResourceWorkerMap;
@@ -168,8 +167,8 @@ public class ResourceImpl implements Resource
     while ((! ResourceWorkQueue.isEmpty(getId())) && (isStreaming == true)) {
       try {
         String task = resWorkQueueRef.removeUOW(getId());
-        logger.debug("Streaming data: " + task.substring(0, 60));
         streamAction.execute(task);
+        logger.debug("Streaming data: " + task.substring(0, 60));
       } catch (InterruptedException ex) {
         logger.warn("Error while retrieving unit of work:" + getId());
       } catch (Exception ex) {

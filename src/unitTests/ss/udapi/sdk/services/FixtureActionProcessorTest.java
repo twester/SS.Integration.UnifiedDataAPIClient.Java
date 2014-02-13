@@ -79,8 +79,6 @@ public class FixtureActionProcessorTest {
      */
     assertTrue(ResourceWorkQueue.size("5IyktEE--jyYCP4IMNgFjoXegiw") == 0);
     assertTrue(resourceImplCalled);
-    
-    FixtureActionProcessor.terminate();
   }
 
 

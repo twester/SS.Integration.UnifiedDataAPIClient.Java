@@ -4,4 +4,5 @@ build/
 dist/
 example.log.*
 html/
+conf/
 TEST*txt

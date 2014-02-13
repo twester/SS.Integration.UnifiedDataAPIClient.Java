@@ -68,6 +68,7 @@ public class WorkQueueMonitor implements Runnable
   
   @Override
   public void run() {
+    terminate = false;
     logger.info("Work queue Monitor initialized and waiting");
     Thread.currentThread().setName(THREAD_NAME);
     //Monitor the queue
@@ -90,7 +91,7 @@ public class WorkQueueMonitor implements Runnable
 
   
   //for unit testing
-  protected static void terminate() {
+  public static void terminate() {
     terminate = true;
   }
   

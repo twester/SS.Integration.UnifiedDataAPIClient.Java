@@ -78,6 +78,7 @@ public class EchoSender implements Runnable
 
   @Override
   public void run() {
+    terminate = false;
     logger.info("Starting echos.");
     EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
 
@@ -95,7 +96,6 @@ public class EchoSender implements Runnable
     df.setTimeZone(TimeZone.getTimeZone("UTC"));
     streamEcho.setMessage(guid + ";" + df.format(new Date()));
     String stringStreamEcho = JsonHelper.ToJson(streamEcho);
-
     Thread.currentThread().setName(THREAD_NAME);
     
     while (true) {
@@ -154,7 +154,7 @@ public class EchoSender implements Runnable
   }     
   
   //for unit testing
-  protected static void terminate() {
+  public static void terminate() {
     terminate = true;
   }
   
