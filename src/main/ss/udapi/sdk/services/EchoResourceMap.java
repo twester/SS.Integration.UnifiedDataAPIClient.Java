@@ -76,7 +76,7 @@ public class EchoResourceMap
   
   
   /*
-   * Not currently used, but seemed sensible to include such a method
+   * Not currently used, but seemed sensible to include such a method as an example for future use.
    */
   protected void incrEchoCount(String resourceId)
   {

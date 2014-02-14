@@ -65,7 +65,9 @@ public class WorkQueueMonitor implements Runnable
   }
   
   
-  
+  /* This could call directly resourceImpl to process the stream, but we want this thread to be blocked as little as possible.
+   * Getting FixtureActionProcessor to do the work in it's own thread means we don't block during the processing.
+   */
   @Override
   public void run() {
     terminate = false;

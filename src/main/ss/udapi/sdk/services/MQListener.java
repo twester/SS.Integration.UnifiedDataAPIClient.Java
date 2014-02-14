@@ -186,7 +186,8 @@ public class MQListener implements Runnable
       /*
        * This section is the loop which uses the connection opened above and adds additional consumers as they are requested.
        * The two maps are also updated here.  This loop constantly monitors resourceSessionList for any new pending additions
-       * to the number of active queue listeners.
+       * to the number of active queue listeners.  Could have used an observer to add more listeners, but that happens very
+       * infrequently compared to the lifetime of the running program, this is simpler for the return you get.
        */
       Thread.currentThread().setName(THREAD_NAME);
         while (true) {
@@ -243,10 +244,10 @@ public class MQListener implements Runnable
    * ResourceImpl to notify the client code about the disconnect event. 
    */
   public static void disconnect (String resourceId) {
-    EchoResourceMap.getEchoMap().removeResource(resourceId);
     if (resourceChannMap.get(resourceId) == null) {
       logger.debug("Basic consumer for resource " + resourceId + " has already disconnected.");
     } else {
+
       try {
         channel.basicCancel(resourceChannMap.get(resourceId));
         logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
@@ -262,6 +263,7 @@ public class MQListener implements Runnable
    * mappings.  Bit of housekeeping really.
    */
   protected static void removeMapping(String cTag) {
+    EchoResourceMap.getEchoMap().removeResource(CtagResourceMap.getResource(cTag));
     logger.debug("cTag" + cTag + "no longer valid.");
     resourceChannMap.remove(CtagResourceMap.getResource(cTag));
     CtagResourceMap.removeCtag(cTag);

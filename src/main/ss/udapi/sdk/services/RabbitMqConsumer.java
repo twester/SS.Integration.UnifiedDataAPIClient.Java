@@ -133,6 +133,7 @@ public class RabbitMqConsumer extends DefaultConsumer
       String resourceId = CtagResourceMap.getResource(cTag);
       ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
       resource.mqDisconnectEvent();
+      MQListener.removeMapping(cTag);
     }
   }
   

@@ -40,7 +40,7 @@ public class FeatureImpl implements Feature
   protected FeatureImpl(RestItem restItem, ServiceRequest availableFeatures) {
     this.restItem = restItem;
     this.availableFeatures = availableFeatures;
-    logger.info("Instantiated Feature: " + restItem.getName());
+    logger.info("Instantiated feature: " + restItem.getName());
   }
 
   

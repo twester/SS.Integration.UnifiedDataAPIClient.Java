@@ -27,6 +27,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
  * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
  * by the JVM.
+ * 
+ * Having a separate work queue for the resource instead of calling streamdata() directly means we can react to multiple
+ * (almost) simultaneous updates without waiting for streamdata() to complete, thereby reducing any thread blocks.
  */
 public class ResourceWorkerMap
 {
