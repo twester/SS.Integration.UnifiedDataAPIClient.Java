@@ -130,11 +130,10 @@ public class RabbitMqConsumer extends DefaultConsumer
       reason = signal.getReason().toString();
       logger.error("Connectivity to MQ has failed.  It was caused by " + applInit + " at the " + hardError
                     + " level.  Reason received " + reason);
+    }
       String resourceId = CtagResourceMap.getResource(cTag);
       ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
       resource.mqDisconnectEvent();
       MQListener.removeMapping(cTag);
-    }
   }
-  
 }
