@@ -81,12 +81,14 @@ public class ResourceWorkQueue
 
   
   public static int size(String resourceId) {
-    return map.get(resourceId).size();
+      Collection<String> strings = map.get(resourceId);
+      return strings == null ? 0 : strings.size();
   }
 
   
   public static boolean isEmpty(String resourceId) {
-    return map.get(resourceId).isEmpty();
+      Collection<String> strings = map.get(resourceId);
+      return strings == null || strings.isEmpty();
   }
   
   
