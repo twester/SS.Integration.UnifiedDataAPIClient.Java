@@ -78,7 +78,7 @@ public class RabbitMqConsumer extends DefaultConsumer
    */
   @Override
   public void handleCancelOk(String cTag) {
-    logger.debug("Consumer: " + cTag + "disconnected" );
+    logger.debug("Consumer: " + cTag + " disconnected" );
     String resourceId = CtagResourceMap.getResource(cTag);
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();
@@ -94,7 +94,7 @@ public class RabbitMqConsumer extends DefaultConsumer
    */
   @Override
   public void handleCancel(String cTag) {
-    logger.debug("Consumer: " + cTag + "disconnected" );
+    logger.debug("Consumer: " + cTag + " disconnected" );
     String resourceId = CtagResourceMap.getResource(cTag);
     ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(resourceId);
     resource.mqDisconnectEvent();

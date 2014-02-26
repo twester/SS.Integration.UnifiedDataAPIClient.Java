@@ -67,6 +67,7 @@ public class GTPService {
 	//	sportsList.add("Baseball");
 //		sportsList.add("IceHockey");
 //		sportsList.add("TestCricket");
+//		sportsList.add("HorseRacing");
 		listeners = new ConcurrentHashMap<String,StreamListener>();
 		activeFixtures = new ConcurrentHashMap<String,Boolean>();
 	}

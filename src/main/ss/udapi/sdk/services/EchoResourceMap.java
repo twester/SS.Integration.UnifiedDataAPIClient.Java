@@ -92,8 +92,8 @@ public class EchoResourceMap
   protected void resetEchoCount(String resourceId)
   {
     if (resourceId != null) {
-      logger.info("Echo or message received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
       map.replace(resourceId, 0);
+      logger.info("Echo or message received for fixture Id: " + resourceId + ". Current missed echos: " + map.get(resourceId));
     }
   }
 

@@ -190,7 +190,7 @@ public class MQListener implements Runnable
        * infrequently compared to the lifetime of the running program, this is simpler for the return you get.
        */
       Thread.currentThread().setName(THREAD_NAME);
-        while (true) {
+        while (channel.isOpen()) {
           while (resourceSessionList.isEmpty() == false) {
             session = resourceSessionList.remove();
             try {
@@ -219,9 +219,9 @@ public class MQListener implements Runnable
           }
           Thread.sleep(1000);
         } 
-
-      
       // for java 1.7 this syntax is preferable: catch(URISyntaxException | UnsupportedEncodingException ex)
+    } catch(AlreadyClosedException ex){
+      logger.error("The amqp channel is closed: " + ex.getMessage());	
     } catch(URISyntaxException ex) {
       logger.error ("URI: " + session.getAmqpDest() + " for session: " + session + " is not valid.");
       ex.printStackTrace();
@@ -231,7 +231,7 @@ public class MQListener implements Runnable
     } catch(BadAttributeValueExpException ex) {
       logger.error (ex.getMessage());
     } catch(IOException ex) {
-      logger.error ("Connection creation failure:" + ex.getMessage());
+      logger.error ("Connection creation failure: " + ex.getMessage());
     } catch(InterruptedException ex) {
       logger.warn("MQListener was awoken from it's sleep.  No further action required, but what caused it?");
     }
@@ -244,15 +244,15 @@ public class MQListener implements Runnable
    * ResourceImpl to notify the client code about the disconnect event. 
    */
   public static void disconnect (String resourceId) {
-    if (resourceChannMap.get(resourceId) == null) {
+	String consumerTag = resourceChannMap.get(resourceId);  
+    if (consumerTag == null) {
       logger.debug("Basic consumer for resource " + resourceId + " has already disconnected.");
     } else {
-
       try {
-        channel.basicCancel(resourceChannMap.get(resourceId));
-        logger.info("Disconnected basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+        channel.basicCancel(consumerTag);
+        logger.info("Disconnected basic consumer " + consumerTag + " for resource " + resourceId);
       } catch (Exception ex) {
-        logger.debug("Could not disconnect basic consumer " + resourceChannMap.get(resourceId) + " for resource " + resourceId);
+        logger.debug("Could not disconnect basic consumer " + consumerTag + " for resource " + resourceId);
       }
     }
   }
