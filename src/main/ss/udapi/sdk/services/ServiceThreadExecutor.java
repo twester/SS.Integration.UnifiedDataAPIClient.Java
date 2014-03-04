@@ -52,16 +52,16 @@ public class ServiceThreadExecutor
     String taskName = task.toString().substring(0, task.toString().indexOf('@'));
     synchronized(ServiceThreadExecutor.class) {
       if (map.containsKey(taskName) == false ) {
-        map.put(taskName, new FutureTask<String>(task, taskName));
-        exec.execute(task);
+    	FutureTask<String> futureTask = new FutureTask<String>(task, taskName);   
+        map.put(taskName, futureTask);
+        exec.execute(futureTask);
         logger.debug("Instantiating initial ServiceThreadExecutor thread for: " + taskName + "."); 
       } else if (map.get(taskName).isDone() == true) {
-        map.put(taskName, new FutureTask<String>(task, taskName));
-        exec.execute(task);
+    	FutureTask<String> futureTask = new FutureTask<String>(task, taskName);
+        map.put(taskName, futureTask);
+        exec.execute(futureTask);
         logger.debug("Instantiating new ServiceThreadExecutor thread for: " + taskName + "."); 
       }
-      
-
     }
   }
 }
