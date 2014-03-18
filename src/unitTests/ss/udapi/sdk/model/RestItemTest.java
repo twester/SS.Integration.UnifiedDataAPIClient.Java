@@ -12,43 +12,35 @@ import static org.junit.Assert.*;
 
 //These are to make sure beans still work once they become immutable
 
-public class RestItemTest
-{
-  private RestItem restItem;
-  private ModelTestHelper testHelper;
-  
-  @Before
-  public void setUp()
-  {
-    testHelper = new ModelTestHelper();
-    testHelper.buildRestItems();
-    restItem = testHelper.getRestItem();
-  }
-  
-  
-  @Test
-  public void testSetGetName()
-  {
-    assertEquals("Tennis", restItem.getName());
-  }
+public class RestItemTest {
+	private RestItem restItem;
+	private ModelTestHelper testHelper;
 
-  
-  @Test
-  public void testSetGetContent()
-  {
-    Summary summary = testHelper.getSummary();
+	@Before
+	public void setUp() {
+		testHelper = new ModelTestHelper();
+		testHelper.buildRestItems();
+		restItem = testHelper.getRestItem();
+	}
 
-    assertEquals(summary.getDate(), restItem.getContent().getDate());
-  }
+	@Test
+	public void testSetGetName() {
+		assertEquals("Tennis", restItem.getName());
+	}
 
-  
-  @Test
-  public void testSetGetLinks()
-  {
-    List<RestLink> links = testHelper.getLinks();
-    RestLink link = links.get(0); 
-    
-    assertEquals(link.getHref(), restItem.getLinks().get(0).getHref());
-  }
+	@Test
+	public void testSetGetContent() {
+		Summary summary = testHelper.getSummary();
+
+		assertEquals(summary.getDate(), restItem.getContent().getDate());
+	}
+
+	@Test
+	public void testSetGetLinks() {
+		List<RestLink> links = testHelper.getLinks();
+		RestLink link = links.get(0);
+
+		assertEquals(link.getHref(), restItem.getLinks().get(0).getHref());
+	}
 
 }

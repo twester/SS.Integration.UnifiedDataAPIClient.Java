@@ -12,7 +12,6 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 package ss.udapi.sdk.services;
 
 import ss.udapi.sdk.model.RestItem;
@@ -23,7 +22,6 @@ import java.util.List;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 
-
 /*
  * Converts a JSON object into either:
  * 
@@ -31,22 +29,21 @@ import com.google.gson.reflect.TypeToken;
  * 2) A RestItem which is used by HTTPServices to find individual endpoints amongst all the available ones in a resource.
  *  
  */
-public class JsonHelper
-{
+public class JsonHelper {
 
-  public static List<RestItem> toRestItems(String json) {
+	public static List<RestItem> toRestItems(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		
-		Type myListType = new TypeToken<List<RestItem>>(){}.getType();
+
+		Type myListType = new TypeToken<List<RestItem>>() {
+		}.getType();
 		List<RestItem> links = gson.fromJson(json, myListType);
 		return links;
 	}
-	
-  
+
 	public static String ToJson(Object objectToJson) {
 		String serializedObject = null;
-		if(objectToJson != null){
+		if (objectToJson != null) {
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
 			serializedObject = gson.toJson(objectToJson);

@@ -17,32 +17,33 @@ package ss.udapi.sdk.streaming;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+
 /**
- *  Please see superclass.
+ * Please see superclass.
  */
-public class SynchronizationAction extends Action{
-	
-	private static Logger logger = Logger.getLogger(SynchronizationAction.class.getName());
-	 
-  
-  /**
-  * We're listening for MQ Disconnect events.
-  * @param events     List of events the client code wants to be informed about. 
-  */
+public class SynchronizationAction extends Action {
+
+	private static Logger logger = Logger.getLogger(SynchronizationAction.class
+			.getName());
+
+	/**
+	 * We're listening for MQ Disconnect events.
+	 * 
+	 * @param events
+	 *            List of events the client code wants to be informed about.
+	 */
 	public SynchronizationAction(List<Event> events) {
 		super(events, SynchronizationEvent.class);
 	}
-	
-	
-	 /**
-   * Notifications are executed in their own thread.
-   */
+
+	/**
+	 * Notifications are executed in their own thread.
+	 */
 	@Override
 	public void run() {
-		try	{
+		try {
 			execute("Synchronization Action");
-		}
-		catch(Exception ex)	{
+		} catch (Exception ex) {
 			logger.warn("Error", ex);
 		}
 	}

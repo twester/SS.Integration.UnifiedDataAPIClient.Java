@@ -17,76 +17,63 @@ package ss.udapi.sdk.model;
 import java.util.List;
 
 /**
- * Model used for JSON mapping - Direct use of this class will lead to undefined behaviour. 
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
  */
-public class Summary 
-{
-  private String Id;
-  private String Date;
-  private String StartTime;
-  private int Sequence;
-  private List<Tag> Tags;
-  private int MatchStatus;
+public class Summary {
+	private String Id;
+	private String Date;
+	private String StartTime;
+	private int Sequence;
+	private List<Tag> Tags;
+	private int MatchStatus;
 
-  
-  public String getId() {
+	public String getId() {
 		return Id;
 	}
 
-	
-  public void setId(String id) {
+	public void setId(String id) {
 		Id = id;
 	}
 
-	
-  public String getDate() {
+	public String getDate() {
 		return Date;
 	}
 
-	
-  public void setDate(String date) {
+	public void setDate(String date) {
 		Date = date;
 	}
-	
-	
-  public String getStartTime() {
+
+	public String getStartTime() {
 		return StartTime;
 	}
 
-	
-  public void setStartTime(String startTime) {
+	public void setStartTime(String startTime) {
 		StartTime = startTime;
 	}
-	
-	
-  public int getSequence() {
+
+	public int getSequence() {
 		return Sequence;
 	}
-	
-	
-  public void setSequence(int sequence) {
+
+	public void setSequence(int sequence) {
 		Sequence = sequence;
 	}
-	
-	
-  public List<Tag> getTags() {
+
+	public List<Tag> getTags() {
 		return Tags;
 	}
-	
-	
-  public void setTags(List<Tag> tags) {
+
+	public void setTags(List<Tag> tags) {
 		Tags = tags;
 	}
 
-  
 	public int getMatchStatus() {
 		return MatchStatus;
 	}
-	
-	
+
 	public void setMatchStatus(int matchStatus) {
 		MatchStatus = matchStatus;
 	}
 
-	
 }

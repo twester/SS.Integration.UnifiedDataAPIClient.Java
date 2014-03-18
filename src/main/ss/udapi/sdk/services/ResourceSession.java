@@ -12,37 +12,32 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 package ss.udapi.sdk.services;
 
 /* Object used by ResourceImpl to pass details about details to MQListener requesting that a resouce by bound to a queue on MQ
  * Consists of the resouceID, all resources available 
  */
-public class ResourceSession
-{
-  private String amqpDest = null;
-  private String resourceId = null;
+public class ResourceSession {
+	private String amqpDest = null;
+	private String resourceId = null;
 
-  
-  public ResourceSession(String amqpDest, String resourceId) {
-    synchronized(this) {
-      this.amqpDest = amqpDest;
-      this.resourceId = resourceId;
-    }
-  }
+	public ResourceSession(String amqpDest, String resourceId) {
+		synchronized (this) {
+			this.amqpDest = amqpDest;
+			this.resourceId = resourceId;
+		}
+	}
 
+	public String getAmqpDest() {
+		synchronized (this) {
+			return amqpDest;
+		}
+	}
 
-  public String getAmqpDest() {
-    synchronized(this) {
-      return amqpDest;
-    }
-  }
+	public String getResourceId() {
+		synchronized (this) {
+			return resourceId;
+		}
+	}
 
-
-  public String getResourceId() {
-    synchronized(this) {
-      return resourceId;
-    }
-  }
-  
 }

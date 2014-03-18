@@ -12,7 +12,6 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 package ss.udapi.sdk.services;
 
 import java.util.MissingResourceException;
@@ -33,68 +32,70 @@ import org.apache.log4j.Logger;
  * between modules.
  * 
  */
-public class WorkQueueMonitor implements Runnable
-{
-  private static Logger logger = Logger.getLogger(WorkQueueMonitor.class);
-  private static WorkQueueMonitor monitor = null;
-  private WorkQueue workQueue = WorkQueue.getWorkQueue();
-  private static ReentrantLock workQueueLock = new ReentrantLock();
-  private static final String THREAD_NAME = "Work_Queue_Thread";
-  private static boolean terminate = false;
-  
-  private WorkQueueMonitor()
-  {
-  }
+public class WorkQueueMonitor implements Runnable {
+	private static Logger logger = Logger.getLogger(WorkQueueMonitor.class);
+	private static WorkQueueMonitor monitor = null;
+	private WorkQueue workQueue = WorkQueue.getWorkQueue();
+	private static ReentrantLock workQueueLock = new ReentrantLock();
+	private static final String THREAD_NAME = "Work_Queue_Thread";
+	private static boolean terminate = false;
 
-  
-  
-  public static WorkQueueMonitor getMonitor() {
-    try {
-      workQueueLock.lock();
-      if (monitor == null) {
-        monitor = new WorkQueueMonitor();
-        ActionThreadExecutor.createActionThreadExecutor();
-      }
-    } catch (Exception ex) {
-      logger.error("Could not initialiaze Work Queue Monitor.");
-      throw new MissingResourceException("Service threadpool has become corrupted", "ss.udapi.sdk.services.ActionThreadExecutor", "WorkQueueMonitor");
-    } finally {
-      workQueueLock.unlock();
-    }
-    return monitor;
-  }
-  
-  
-  /* This could call directly resourceImpl to process the stream, but we want this thread to be blocked as little as possible.
-   * Getting FixtureActionProcessor to do the work in it's own thread means we don't block during the processing.
-   */
-  @Override
-  public void run() {
-    terminate = false;
-    logger.info("Work queue Monitor initialized and waiting");
-    Thread.currentThread().setName(THREAD_NAME);
-    //Monitor the queue
-    while(true) {
-      //When a UOW comes along call FixtureActionProcessor to grab the associated ResourceImpl and process it.
-      String task = workQueue.getTask();
-      logger.debug("Queue Read: " + task.substring(0,40));
-      try {
-        FixtureActionProcessor processor = new FixtureActionProcessor(task);
-        ActionThreadExecutor.executeTask(processor);
-      } catch (Exception ex) {
-        logger.error("Work queue monitor has been interrupted");
-      }
+	private WorkQueueMonitor() {
+	}
 
-      if (terminate == true) {
-        return;
-      }
-    }
-  }
+	public static WorkQueueMonitor getMonitor() {
+		try {
+			workQueueLock.lock();
+			if (monitor == null) {
+				monitor = new WorkQueueMonitor();
+				ActionThreadExecutor.createActionThreadExecutor();
+			}
+		} catch (Exception ex) {
+			logger.error("Could not initialiaze Work Queue Monitor.");
+			throw new MissingResourceException(
+					"Service threadpool has become corrupted",
+					"ss.udapi.sdk.services.ActionThreadExecutor",
+					"WorkQueueMonitor");
+		} finally {
+			workQueueLock.unlock();
+		}
+		return monitor;
+	}
 
-  
-  //for unit testing
-  public static void terminate() {
-    terminate = true;
-  }
-  
+	/*
+	 * This could call directly resourceImpl to process the stream, but we want
+	 * this thread to be blocked as little as possible. Getting
+	 * FixtureActionProcessor to do the work in it's own thread means we don't
+	 * block during the processing.
+	 */
+	@Override
+	public void run() {
+		terminate = false;
+		logger.info("Work queue Monitor initialized and waiting");
+		Thread.currentThread().setName(THREAD_NAME);
+		// Monitor the queue
+		while (true) {
+			// When a UOW comes along call FixtureActionProcessor to grab the
+			// associated ResourceImpl and process it.
+			String task = workQueue.getTask();
+			logger.debug("Queue Read: " + task.substring(0, 40));
+			try {
+				FixtureActionProcessor processor = new FixtureActionProcessor(
+						task);
+				ActionThreadExecutor.executeTask(processor);
+			} catch (Exception ex) {
+				logger.error("Work queue monitor has been interrupted");
+			}
+
+			if (terminate == true) {
+				return;
+			}
+		}
+	}
+
+	// for unit testing
+	public static void terminate() {
+		terminate = true;
+	}
+
 }

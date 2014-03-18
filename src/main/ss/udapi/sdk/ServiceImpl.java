@@ -27,82 +27,77 @@ import org.apache.log4j.Logger;
 
 /**
  * Services provide access to available features for that service.
- *
+ * 
  */
-public class ServiceImpl implements Service
-{
-  private Logger logger = Logger.getLogger(ServiceImpl.class.getName());
-  private ServiceRequest availableServices;
-  private RestItem restItem = new RestItem();
-  private static HttpServices httpSvcs = new HttpServices();
+public class ServiceImpl implements Service {
+	private Logger logger = Logger.getLogger(ServiceImpl.class.getName());
+	private ServiceRequest availableServices;
+	private RestItem restItem = new RestItem();
+	private static HttpServices httpSvcs = new HttpServices();
 
-  
-  protected ServiceImpl(RestItem restItem, ServiceRequest availableServices){
-    this.restItem = restItem;
-    this.availableServices = availableServices;
-    logger.info("Instantiated Service: " + restItem.getName());
-  }
+	protected ServiceImpl(RestItem restItem, ServiceRequest availableServices) {
+		this.restItem = restItem;
+		this.availableServices = availableServices;
+		logger.info("Instantiated Service: " + restItem.getName());
+	}
 
+	/**
+	 * Retrieves a specific feature from those available for this service.
+	 * 
+	 * @param featureName
+	 *            Name of feature which will be retrieved from all features
+	 *            available for this service.
+	 */
+	public Feature getFeature(String featureName) {
+		logger.info("Retrieving feature: " + featureName);
 
-  /**
-   * Retrieves a specific feature from those available for this service.
-   * 
-   * @param featureName       Name of feature which will be retrieved from all features available for this service.
-   */  
-  public Feature getFeature(String featureName) {
-    logger.info("Retrieving feature: " + featureName);
-    
-    ServiceRequest availableFeatures = httpSvcs.processRequest(availableServices, "http://api.sportingsolutions.com/rels/features/list", restItem.getName());
-    List<RestItem> restItems = availableFeatures.getServiceRestItems();
-    for(RestItem searchRestItem:restItems){
-      if (searchRestItem.getName().equals(featureName)) {
-        return new FeatureImpl(searchRestItem, availableFeatures);
-      }
-    }
-    return null;
-  }
+		ServiceRequest availableFeatures = httpSvcs.processRequest(
+				availableServices,
+				"http://api.sportingsolutions.com/rels/features/list",
+				restItem.getName());
+		List<RestItem> restItems = availableFeatures.getServiceRestItems();
+		for (RestItem searchRestItem : restItems) {
+			if (searchRestItem.getName().equals(featureName)) {
+				return new FeatureImpl(searchRestItem, availableFeatures);
+			}
+		}
+		return null;
+	}
 
-  
+	/**
+	 * Retrieves all available features available for this service.
+	 */
+	public List<Feature> getFeatures() {
+		logger.info("Retrieving all features");
 
-  /**
-   * Retrieves all available features available for this service.
-   */
-  public List<Feature> getFeatures() {
-    logger.info("Retrieving all features");
-    
-    ServiceRequest availableFeatures = httpSvcs.processRequest(availableServices, "http://api.sportingsolutions.com/rels/features/list", restItem.getName());
-    List<RestItem> restItems = availableFeatures.getServiceRestItems();
-    List<Feature> featureSet = new ArrayList<Feature>();
-    for(RestItem searchRestItem:restItems){
-      featureSet.add(new FeatureImpl(searchRestItem, availableFeatures));
-    }
-    return featureSet;
-  }
+		ServiceRequest availableFeatures = httpSvcs.processRequest(
+				availableServices,
+				"http://api.sportingsolutions.com/rels/features/list",
+				restItem.getName());
+		List<RestItem> restItems = availableFeatures.getServiceRestItems();
+		List<Feature> featureSet = new ArrayList<Feature>();
+		for (RestItem searchRestItem : restItems) {
+			featureSet.add(new FeatureImpl(searchRestItem, availableFeatures));
+		}
+		return featureSet;
+	}
 
+	/**
+	 * Retrieves the service name.
+	 */
+	public String getName() {
+		return restItem.getName();
+	}
 
-  
-  /**
-   * Retrieves the service name.
-   */
-  public String getName() {
-    return restItem.getName();
-  }
-  
-  
-  
-  //Setter for unit testing
-  protected void setHttpSvcs(HttpServices httpSvcs)
-  {
-    ServiceImpl.httpSvcs = httpSvcs;
-  }
+	// Setter for unit testing
+	protected void setHttpSvcs(HttpServices httpSvcs) {
+		ServiceImpl.httpSvcs = httpSvcs;
+	}
 
+	// Getter for unit testing
+	protected String getServiceHref() {
+		return availableServices.getServiceRestItems().get(0).getLinks().get(0)
+				.getHref();
+	}
 
-  //Getter for unit testing
-  protected String getServiceHref()
-  {
-    return availableServices.getServiceRestItems().get(0).getLinks().get(0).getHref();
-  }
-
-
-  
 }

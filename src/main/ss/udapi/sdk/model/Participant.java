@@ -15,31 +15,27 @@
 package ss.udapi.sdk.model;
 
 /**
- * Model used for JSON mapping - Direct use of this class will lead to undefined behaviour. 
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
  */
-public class Participant
-{
-  private String Name;
-  private Integer Id;
-	
-  
+public class Participant {
+	private String Name;
+	private Integer Id;
+
 	public void setName(String name) {
 		this.Name = name;
 	}
 
-	
 	public String getName() {
 		return Name;
 	}
-	
-	
+
 	public void setId(Integer id) {
 		this.Id = id;
 	}
 
-	
 	public Integer getId() {
 		return Id;
 	}
-	
+
 }

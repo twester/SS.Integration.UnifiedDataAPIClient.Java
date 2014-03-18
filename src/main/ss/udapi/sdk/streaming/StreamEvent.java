@@ -15,7 +15,7 @@
 package ss.udapi.sdk.streaming;
 
 /**
- *  Please see Interface.
+ * Please see Interface.
  */
 public interface StreamEvent extends Event {
 

@@ -15,39 +15,34 @@
 package ss.udapi.sdk.model;
 
 /**
- * Model used for JSON mapping - Direct use of this class will lead to undefined behaviour. 
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
  */
-public class StreamEcho
-{
+public class StreamEcho {
 	private String host;
 	private String queue;
 	private String message;
-	
+
 	public String getHost() {
 		return host;
 	}
 
-	
 	public void setHost(String host) {
 		this.host = host;
 	}
-	
-	
+
 	public String getQueue() {
 		return queue;
 	}
-	
-	
+
 	public void setQueue(String queue) {
 		this.queue = queue;
 	}
-	
-	
+
 	public String getMessage() {
 		return message;
 	}
-	
-	
+
 	public void setMessage(String message) {
 		this.message = message;
 	}

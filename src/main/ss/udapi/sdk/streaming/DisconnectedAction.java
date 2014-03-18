@@ -19,31 +19,31 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 /**
- *  Please see superclass.
+ * Please see superclass.
  */
-public class DisconnectedAction extends Action{
-	
-	private static Logger logger = Logger.getLogger(DisconnectedAction.class.getName());
-	
-	
+public class DisconnectedAction extends Action {
+
+	private static Logger logger = Logger.getLogger(DisconnectedAction.class
+			.getName());
+
 	/**
 	 * We're listening for MQ Disconnect events.
-	 * @param events     List of events the client code wants to be informed about. 
+	 * 
+	 * @param events
+	 *            List of events the client code wants to be informed about.
 	 */
 	public DisconnectedAction(List<Event> events) {
 		super(events, DisconnectedEvent.class);
 	}
 
-	
 	/**
 	 * Notifications are executed in their own thread.
 	 */
 	@Override
 	public void run() {
-	  try {
+		try {
 			execute("Disconnected Action");
-		}
-		catch(Exception ex)	{
+		} catch (Exception ex) {
 			logger.warn("Error", ex);
 		}
 	}

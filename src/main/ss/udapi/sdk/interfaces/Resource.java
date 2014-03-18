@@ -20,25 +20,24 @@ import ss.udapi.sdk.streaming.Event;
 import java.util.List;
 
 /**
- *  Please see implementing classes
+ * Please see implementing classes
  */
-public interface Resource 
-{
+public interface Resource {
 
-  public String getId();
+	public String getId();
 
-  public String getName();
-	
-  public Summary getContent();
-	
+	public String getName();
+
+	public Summary getContent();
+
 	public String getSnapshot();
-	
+
 	public void startStreaming(List<Event> streamingEvents);
-	
+
 	public void stopStreaming();
-	
-	public void pauseStreaming();	
-	
+
+	public void pauseStreaming();
+
 	public void unpauseStreaming();
-	
+
 }

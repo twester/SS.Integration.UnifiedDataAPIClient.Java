@@ -12,13 +12,11 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 package ss.udapi.sdk.services;
 
 import ss.udapi.sdk.interfaces.Resource;
 
 import java.util.concurrent.ConcurrentHashMap;
-
 
 /* Map holding individual instances of ResourceImpl.  There is one instance for each resource/fixture.
  * 
@@ -31,49 +29,38 @@ import java.util.concurrent.ConcurrentHashMap;
  * Having a separate work queue for the resource instead of calling streamdata() directly means we can react to multiple
  * (almost) simultaneous updates without waiting for streamdata() to complete, thereby reducing any thread blocks.
  */
-public class ResourceWorkerMap
-{
-  private static ResourceWorkerMap workerMap= null;
-  private static ConcurrentHashMap<String,Resource>  map = new ConcurrentHashMap<String,Resource>();
-  
-  
-  private ResourceWorkerMap()
-  {
-  }
-  
-  
-  public static void initWorkerMap() {
-    if (workerMap == null) {
-      workerMap = new ResourceWorkerMap();
-    }
-  }
-  
-  
-  public static void addResource(String resourceId, Resource resourceImpl) {
-    map.put(resourceId, resourceImpl);
-  }
-  
-  
-  public static Resource getResourceImpl(String resourceId) {
-    return map.get(resourceId);
-  }
+public class ResourceWorkerMap {
+	private static ResourceWorkerMap workerMap = null;
+	private static ConcurrentHashMap<String, Resource> map = new ConcurrentHashMap<String, Resource>();
 
+	private ResourceWorkerMap() {
+	}
 
-  
-  public static Resource removeResource(String resourceId) {
-    return map.remove(resourceId);
-  }
+	public static void initWorkerMap() {
+		if (workerMap == null) {
+			workerMap = new ResourceWorkerMap();
+		}
+	}
 
-  
-  
-  public static boolean exists(String resourceId) {
-    return map.containsKey(resourceId);
-  }
-  
+	public static void addResource(String resourceId, Resource resourceImpl) {
+		map.put(resourceId, resourceImpl);
+	}
 
-  // For unit tests only
-  public static void reset() {
-    map = new ConcurrentHashMap<String,Resource>();
-  }
-  
+	public static Resource getResourceImpl(String resourceId) {
+		return map.get(resourceId);
+	}
+
+	public static Resource removeResource(String resourceId) {
+		return map.remove(resourceId);
+	}
+
+	public static boolean exists(String resourceId) {
+		return map.containsKey(resourceId);
+	}
+
+	// For unit tests only
+	public static void reset() {
+		map = new ConcurrentHashMap<String, Resource>();
+	}
+
 }

@@ -17,35 +17,32 @@ package ss.udapi.sdk.model;
 import java.util.List;
 
 /**
- * Model used for HTTP Communications - Direct use of this class will lead to undefined behaviour. 
+ * Model used for HTTP Communications - Direct use of this class will lead to
+ * undefined behaviour.
  */
 /*
- * Used to pass the HTTP session authentication token and RestItem colletions between HTTP calls during normal 
- * communications with the Sporting Solutions system endpoint. 
+ * Used to pass the HTTP session authentication token and RestItem colletions
+ * between HTTP calls during normal communications with the Sporting Solutions
+ * system endpoint.
  */
-public class ServiceRequest
-{
-  private String authToken = null;
-  private List<RestItem> serviceRestItems = null;
+public class ServiceRequest {
+	private String authToken = null;
+	private List<RestItem> serviceRestItems = null;
 
+	public String getAuthToken() {
+		return authToken;
+	}
 
-  public String getAuthToken() {
-    return authToken;
-  }
-  
-  
-  public void setAuthToken(String authToken) {
-    this.authToken = authToken;
-  }
+	public void setAuthToken(String authToken) {
+		this.authToken = authToken;
+	}
 
-  
-  public List<RestItem> getServiceRestItems() {
-    return serviceRestItems;
-  }
+	public List<RestItem> getServiceRestItems() {
+		return serviceRestItems;
+	}
 
-  
-  public void setServiceRestItems(List<RestItem> serviceRestItems) {
-    this.serviceRestItems = serviceRestItems;
-  }
-  
+	public void setServiceRestItems(List<RestItem> serviceRestItems) {
+		this.serviceRestItems = serviceRestItems;
+	}
+
 }

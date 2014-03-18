@@ -24,41 +24,34 @@ import java.util.concurrent.ConcurrentHashMap;
  * communicate with a fixture in the event of a connection failure and helps it manage the echo processing logic.
  *  
  */
-public class CtagResourceMap
-{
-  private static CtagResourceMap cTagMap = null;
-  private static ConcurrentHashMap<String,String> map = new ConcurrentHashMap<String,String>();;
+public class CtagResourceMap {
+	private static CtagResourceMap cTagMap = null;
+	private static ConcurrentHashMap<String, String> map = new ConcurrentHashMap<String, String>();;
 
-  
-  private CtagResourceMap()
-  {
-  }
+	private CtagResourceMap() {
+	}
 
-  
-  public synchronized static void initCtagMap() {
-    if (cTagMap == null) {
-      cTagMap = new CtagResourceMap();
-    }
-  }
-  
-  
-  protected static void addCtag(String cTag, String resource) {
-    map.put(cTag, resource);
-  }
-  
-  
-  protected static String getResource(String cTag) {
-    return map.get(cTag);
-  }
-  
-  
-  protected static void removeCtag(String cTag) {
-    map.remove(cTag);
-  }
-  
-  
-  // For unit tests only
-  public static void reset() {
-    map = new ConcurrentHashMap<String,String>();;
-  }
+	public synchronized static void initCtagMap() {
+		if (cTagMap == null) {
+			cTagMap = new CtagResourceMap();
+		}
+	}
+
+	protected static void addCtag(String cTag, String resource) {
+		map.put(cTag, resource);
+	}
+
+	protected static String getResource(String cTag) {
+		return map.get(cTag);
+	}
+
+	protected static void removeCtag(String cTag) {
+		map.remove(cTag);
+	}
+
+	// For unit tests only
+	public static void reset() {
+		map = new ConcurrentHashMap<String, String>();
+		;
+	}
 }

@@ -12,7 +12,6 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 package ss.udapi.sdk.services;
 
 import java.util.Collection;
@@ -28,79 +27,70 @@ import org.apache.log4j.Logger;
  * A separate map is used instead of directly inserting the task into ResourceImpl to minimise the amount of
  * methods exposed to the public API.
  */
-public class ResourceWorkQueue
-{
-  private static ResourceWorkQueue workQueue = null;
-  private static ConcurrentHashMap<String,LinkedBlockingQueue<String>> map = new ConcurrentHashMap<String,LinkedBlockingQueue<String>>();
-  private static Logger logger = Logger.getLogger(ResourceWorkQueue.class);
-  
-  private ResourceWorkQueue()
-  {
-  }
-  
+public class ResourceWorkQueue {
+	private static ResourceWorkQueue workQueue = null;
+	private static ConcurrentHashMap<String, LinkedBlockingQueue<String>> map = new ConcurrentHashMap<String, LinkedBlockingQueue<String>>();
+	private static Logger logger = Logger.getLogger(ResourceWorkQueue.class);
 
-  public synchronized static ResourceWorkQueue getResourceWorkQueue() {
-    if (workQueue == null) {
-      workQueue = new ResourceWorkQueue();
-    }
-    return workQueue;
-  }
-  
-  
-  //A new fixture has been registered which created a new instance of ResourceImpl which in turn creates a new queue here 
-  public static LinkedBlockingQueue<String> addQueue(String resourceId) {
-    map.put(resourceId, new LinkedBlockingQueue<String>());
-    return map.get(resourceId);
-  }
-  
+	private ResourceWorkQueue() {
+	}
 
-  //The fixture is no longer active, has been deleted and we're cleaning as the associated ResourceImpl gets removed.
-  public static void removeQueue(String resourceId) {
-    map.remove(resourceId);
-  }
-  
+	public synchronized static ResourceWorkQueue getResourceWorkQueue() {
+		if (workQueue == null) {
+			workQueue = new ResourceWorkQueue();
+		}
+		return workQueue;
+	}
 
-  //Add a new UOW for the associated resource/fixture.  Currently FixtureActionProcessor does this. 
-  public void addUOW(String resourceId, String task) {
-      logger.debug("Added echo alert" + task.substring(0,10) + " for [" + resourceId + "]");
-      LinkedBlockingQueue<String> queue = map.get(resourceId);
-      queue.add(task);
-  }
-  
-  
-  //ResourceImpl pulls the UOW to work on it.
-  public String removeUOW(String resourceId) {
-      LinkedBlockingQueue<String> queue = map.get(resourceId);
-      return queue.poll();
-  }
+	// A new fixture has been registered which created a new instance of
+	// ResourceImpl which in turn creates a new queue here
+	public static LinkedBlockingQueue<String> addQueue(String resourceId) {
+		map.put(resourceId, new LinkedBlockingQueue<String>());
+		return map.get(resourceId);
+	}
 
-  
-  
-  public static LinkedBlockingQueue<String> getQueue(String resourceId) {
-    return map.get(resourceId);
-  }
+	// The fixture is no longer active, has been deleted and we're cleaning as
+	// the associated ResourceImpl gets removed.
+	public static void removeQueue(String resourceId) {
+		map.remove(resourceId);
+	}
 
-  
-  public static int size(String resourceId) {
-      Collection<String> strings = map.get(resourceId);
-      return strings == null ? 0 : strings.size();
-  }
+	// Add a new UOW for the associated resource/fixture. Currently
+	// FixtureActionProcessor does this.
+	public void addUOW(String resourceId, String task) {
+		logger.debug("Added echo alert" + task.substring(0, 10) + " for ["
+				+ resourceId + "]");
+		LinkedBlockingQueue<String> queue = map.get(resourceId);
+		queue.add(task);
+	}
 
-  
-  public static boolean isEmpty(String resourceId) {
-      Collection<String> strings = map.get(resourceId);
-      return strings == null || strings.isEmpty();
-  }
-  
-  
-  public static boolean exists(String resourceId) {
-    return map.containsKey(resourceId);
-  }
+	// ResourceImpl pulls the UOW to work on it.
+	public String removeUOW(String resourceId) {
+		LinkedBlockingQueue<String> queue = map.get(resourceId);
+		return queue.poll();
+	}
 
+	public static LinkedBlockingQueue<String> getQueue(String resourceId) {
+		return map.get(resourceId);
+	}
 
-  // For unit tests only
-  public static void reset() {
-    map = new ConcurrentHashMap<String,LinkedBlockingQueue<String>>();
-  }
+	public static int size(String resourceId) {
+		Collection<String> strings = map.get(resourceId);
+		return strings == null ? 0 : strings.size();
+	}
+
+	public static boolean isEmpty(String resourceId) {
+		Collection<String> strings = map.get(resourceId);
+		return strings == null || strings.isEmpty();
+	}
+
+	public static boolean exists(String resourceId) {
+		return map.containsKey(resourceId);
+	}
+
+	// For unit tests only
+	public static void reset() {
+		map = new ConcurrentHashMap<String, LinkedBlockingQueue<String>>();
+	}
 
 }

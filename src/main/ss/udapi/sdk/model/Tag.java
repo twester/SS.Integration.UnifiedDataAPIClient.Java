@@ -15,41 +15,36 @@
 package ss.udapi.sdk.model;
 
 /**
- * Model used for JSON mapping - Direct use of this class will lead to undefined behaviour. 
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
  */
-public class Tag 
-{
-  private String Value;
-  private String Key;
-  private Integer Id;
-	
+public class Tag {
+	private String Value;
+	private String Key;
+	private Integer Id;
 
-  public void setValue(String value) {
+	public void setValue(String value) {
 		this.Value = value;
 	}
-	
-  
-  public String getValue() {
+
+	public String getValue() {
 		return Value;
 	}
-	
-  
+
 	public void setKey(String key) {
 		this.Key = key;
 	}
-	
-	
+
 	public String getKey() {
 		return Key;
 	}
-	
+
 	public void setId(Integer id) {
 		this.Id = id;
 	}
-	
-	
+
 	public Integer getId() {
 		return Id;
 	}
-	
+
 }

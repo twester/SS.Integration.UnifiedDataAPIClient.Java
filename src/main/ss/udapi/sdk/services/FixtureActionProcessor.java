@@ -12,13 +12,11 @@
 //See the License for the specific language governing permissions and
 //limitations under the License.
 
-
 package ss.udapi.sdk.services;
 
 import org.apache.log4j.Logger;
 
 import ss.udapi.sdk.ResourceImpl;
-
 
 /* Wraps up a UOW received from the Sporting Solutions systems via the MQ System (RabbitMQ) as runnable.
  * 
@@ -28,37 +26,42 @@ import ss.udapi.sdk.ResourceImpl;
  * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
  * by the JVM.
  */
-public class FixtureActionProcessor implements Runnable
-{
-  private static Logger logger = Logger.getLogger(FixtureActionProcessor.class);
-  private String task;
-  private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue();
-  
-  public FixtureActionProcessor(String task) {
-    this.task = task;
-  }
-  
-  
-  @Override
-  public void run()
-  {
-    /* We could parse the message to pick up the ID, but in some cases the messages can be fairly sizeable whcih would
-     * slow things down and if large enough can lead to an internal GSON exception: java.lang.UnsupportedOperationException: JsonObject
-     * All we care about is the Id number which can be found by looking at the message directly.
-     */
-    String msgHead = task.substring(0, 200);
-    int idStart = msgHead.indexOf("Id\":")+5;
-    String fixtureId = msgHead.substring(idStart,idStart+27);
-    logger.debug("Processing started for fixture/resource: " + fixtureId);
+public class FixtureActionProcessor implements Runnable {
+	private static Logger logger = Logger
+			.getLogger(FixtureActionProcessor.class);
+	private String task;
+	private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue
+			.getResourceWorkQueue();
 
-    //Now that we know what fixture the work is for  put the UOW in that fixtures work queue.
-    ResourceImpl resource = (ResourceImpl)ResourceWorkerMap.getResourceImpl(fixtureId);
-    
-    resWorkQueueRef.addUOW(fixtureId, task);
+	public FixtureActionProcessor(String task) {
+		this.task = task;
+	}
 
-    //And run it.
-    resource.streamData();
+	@Override
+	public void run() {
+		/*
+		 * We could parse the message to pick up the ID, but in some cases the
+		 * messages can be fairly sizeable whcih would slow things down and if
+		 * large enough can lead to an internal GSON exception:
+		 * java.lang.UnsupportedOperationException: JsonObject All we care about
+		 * is the Id number which can be found by looking at the message
+		 * directly.
+		 */
+		String msgHead = task.substring(0, 200);
+		int idStart = msgHead.indexOf("Id\":") + 5;
+		String fixtureId = msgHead.substring(idStart, idStart + 27);
+		logger.debug("Processing started for fixture/resource: " + fixtureId);
 
-  }
+		// Now that we know what fixture the work is for put the UOW in that
+		// fixtures work queue.
+		ResourceImpl resource = (ResourceImpl) ResourceWorkerMap
+				.getResourceImpl(fixtureId);
+
+		resWorkQueueRef.addUOW(fixtureId, task);
+
+		// And run it.
+		resource.streamData();
+
+	}
 
 }

@@ -26,38 +26,33 @@ import java.util.concurrent.Executors;
 
  * The number of threads allocated is configured in: conf/sdk.properties using "ss.workerThreads"
  */
-public class ActionThreadExecutor
-{
-  private static  Executor exec;
-  private static ActionThreadExecutor instance = null;
-  
-  ActionThreadExecutor()
-  {
-    synchronized(this)
-    {
-      int workerThreads = Integer.parseInt(SystemProperties.get("ss.workerThreads"));
-      exec = Executors.newFixedThreadPool(workerThreads);
-    }
-  }
+public class ActionThreadExecutor {
+	private static Executor exec;
+	private static ActionThreadExecutor instance = null;
 
-  /*
-   * Create a instance.
-   */
-  protected static ActionThreadExecutor createActionThreadExecutor()
-  {
-    if (instance ==null) {
-      new ActionThreadExecutor();
-    }
-    return instance;
-  }
-  
+	ActionThreadExecutor() {
+		synchronized (this) {
+			int workerThreads = Integer.parseInt(SystemProperties
+					.get("ss.workerThreads"));
+			exec = Executors.newFixedThreadPool(workerThreads);
+		}
+	}
 
-  /*
-   * Assign a task to this threadpool
-   */
-  protected static void executeTask(Runnable task)
-  {
-    exec.execute(task);
-  }
-  
+	/*
+	 * Create a instance.
+	 */
+	protected static ActionThreadExecutor createActionThreadExecutor() {
+		if (instance == null) {
+			new ActionThreadExecutor();
+		}
+		return instance;
+	}
+
+	/*
+	 * Assign a task to this threadpool
+	 */
+	protected static void executeTask(Runnable task) {
+		exec.execute(task);
+	}
+
 }

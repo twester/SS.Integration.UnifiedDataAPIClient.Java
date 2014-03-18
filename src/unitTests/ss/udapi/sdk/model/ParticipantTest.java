@@ -6,30 +6,25 @@ import org.junit.Test;
 import ss.udapi.sdk.model.Participant;
 import static org.junit.Assert.*;
 
+public class ParticipantTest {
+	private Participant participant;
 
-public class ParticipantTest
-{
-  private Participant participant;
-  
-  
-  @Before
-  public void setUp()  {
-    participant = new Participant();
-  }
+	@Before
+	public void setUp() {
+		participant = new Participant();
+	}
 
-  
-  @Test
-  public void testSetGetNameTest()  {
-    participant.setName("Fern");
-    assertEquals("Fern", participant.getName());
-  }
-  
-  
-  @Test
-  public void testSetGetId()  {
-    int id = 1234;
-    participant.setId(id);
-    assertTrue(participant.getId() == id);
-  }
+	@Test
+	public void testSetGetNameTest() {
+		participant.setName("Fern");
+		assertEquals("Fern", participant.getName());
+	}
+
+	@Test
+	public void testSetGetId() {
+		int id = 1234;
+		participant.setId(id);
+		assertTrue(participant.getId() == id);
+	}
 
 }

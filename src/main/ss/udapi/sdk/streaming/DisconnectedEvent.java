@@ -15,8 +15,8 @@
 package ss.udapi.sdk.streaming;
 
 /**
- *  Please see Interface.
+ * Please see Interface.
  */
-public interface DisconnectedEvent extends Event{
+public interface DisconnectedEvent extends Event {
 
 }

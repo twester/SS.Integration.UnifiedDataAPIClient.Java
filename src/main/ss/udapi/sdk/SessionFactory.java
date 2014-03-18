@@ -19,22 +19,22 @@ import java.net.URL;
 import ss.udapi.sdk.interfaces.Credentials;
 import ss.udapi.sdk.interfaces.Session;
 
-
 /**
  * Factory which supplies session instances to the client.
  * 
  */
-public class SessionFactory
-{
+public class SessionFactory {
 
-  
-  /**
-   * @param   rootURL       Server endpoint as supplied by Sporting Solutions.
-   * @param   credentials   Credentials associated with a valid account grating access to the Sporting Solutions Service.
-   * @return                A session which provides access to services.
-   */
-  public static Session createSession(URL rootURL, Credentials credentials)  {
+	/**
+	 * @param rootURL
+	 *            Server endpoint as supplied by Sporting Solutions.
+	 * @param credentials
+	 *            Credentials associated with a valid account grating access to
+	 *            the Sporting Solutions Service.
+	 * @return A session which provides access to services.
+	 */
+	public static Session createSession(URL rootURL, Credentials credentials) {
 		return new SessionImpl(rootURL, credentials);
 	}
-	
+
 }

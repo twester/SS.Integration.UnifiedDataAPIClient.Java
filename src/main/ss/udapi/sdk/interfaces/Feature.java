@@ -17,15 +17,14 @@ package ss.udapi.sdk.interfaces;
 import java.util.List;
 
 /**
- *  Please see implementing classes
+ * Please see implementing classes
  */
-public interface Feature 
-{
+public interface Feature {
 
-  public String getName();
-	
+	public String getName();
+
 	public Resource getResource(String resourceName);
-	
+
 	public List<Resource> getResources();
-	
+
 }

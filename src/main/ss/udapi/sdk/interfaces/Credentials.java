@@ -15,11 +15,10 @@
 package ss.udapi.sdk.interfaces;
 
 /**
- *  Please see implementing classes
+ * Please see implementing classes
  */
-public interface Credentials
-{
-	
+public interface Credentials {
+
 	public String getPassword();
 
 	public String getUserName();
