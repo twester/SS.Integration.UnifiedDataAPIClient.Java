@@ -18,22 +18,22 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /*
- * Activity tasks received from the Sporting Solutions systems via the MQ System (RabbitMQ) are placed on an instance of 
+ * Activity tasks received from the Sporting Solutions system via the MQ System (RabbitMQ) are placed on an instance of 
  * WorkQueue.
- * The WorkQueueMonitor picks up a taskfrom MQ, assigns to the ResourceImpl associated with that MQ Queue (which corresponds
- * to a fixture and executes it using one of the threads from this executor service's thread pool.  The task from MQ is 
- * wrapped up in a FixtureActionProcessor.  When the task completes the thread is returned to the threadpool by the JVM.
-
+ * The WorkQueueMonitor picks up a task from MQ, assigns to the ResourceImpl associated with that MQ Queue (which corresponds
+ * to a fixture) and executes it using one of the threads from this executor service's thread pool.  The task from MQ is 
+ * wrapped up in a FixtureActionProcessor.  When the task completes the thread is returned to the thread-pool by the JVM.
+ * 
  * The number of threads allocated is configured in: conf/sdk.properties using "ss.workerThreads"
  */
 public class ActionThreadExecutor {
+	
 	private static Executor exec;
 	private static ActionThreadExecutor instance = null;
 
 	ActionThreadExecutor() {
 		synchronized (this) {
-			int workerThreads = Integer.parseInt(SystemProperties
-					.get("ss.workerThreads"));
+			int workerThreads = Integer.parseInt(SystemProperties.get("ss.workerThreads"));
 			exec = Executors.newFixedThreadPool(workerThreads);
 		}
 	}
@@ -49,9 +49,9 @@ public class ActionThreadExecutor {
 	}
 
 	/*
-	 * Assign a task to this threadpool
+	 * Assign a task to this thread-pool
 	 */
-	protected static void executeTask(Runnable task) {
+	protected static void executeTask(FixtureActionProcessor task) {
 		exec.execute(task);
 	}
 

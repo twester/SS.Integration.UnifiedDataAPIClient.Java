@@ -23,8 +23,7 @@ import org.apache.log4j.Logger;
  */
 public class ConnectedAction extends Action {
 
-	private static Logger logger = Logger.getLogger(ConnectedAction.class
-			.getName());
+	private static Logger logger = Logger.getLogger(ConnectedAction.class.getName());
 
 	/**
 	 * We're listening for MQ Disconnect events.

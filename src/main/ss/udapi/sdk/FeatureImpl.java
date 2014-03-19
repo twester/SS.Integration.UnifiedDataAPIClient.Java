@@ -30,13 +30,17 @@ import org.apache.log4j.Logger;
  * 
  */
 public class FeatureImpl implements Feature {
-	private static Logger logger = Logger
-			.getLogger(FeatureImpl.class.getName());
+	
+	private static Logger logger = Logger.getLogger(FeatureImpl.class.getName());
 	private static HttpServices httpSvcs = new HttpServices();
 	private ServiceRequest availableFeatures;
-	private RestItem restItem = new RestItem();
+	private RestItem restItem;
 
 	protected FeatureImpl(RestItem restItem, ServiceRequest availableFeatures) {
+		
+		if (restItem == null)
+			throw new IllegalArgumentException("restItem cannot be null");
+		
 		this.restItem = restItem;
 		this.availableFeatures = availableFeatures;
 		logger.info("Instantiated feature: " + restItem.getName());
@@ -49,38 +53,51 @@ public class FeatureImpl implements Feature {
 	 *            Name of resource which will be retrieved from all resources
 	 *            available for this account.
 	 */
-	public Resource getResource(String resourceName) {
+	public Resource getResource(String resourceName) throws Exception {
+		
 		logger.info("Retrieving resource: " + resourceName);
 
 		ServiceRequest availableResources = httpSvcs.processRequest(
 				availableFeatures,
 				"http://api.sportingsolutions.com/rels/resources/list",
 				restItem.getName());
+		
+		if (availableResources == null) 
+			return null;
+		
 		List<RestItem> restItems = availableResources.getServiceRestItems();
 		for (RestItem searchRestItem : restItems) {
 			if (searchRestItem.getName().equals(resourceName)) {
 				return new ResourceImpl(searchRestItem, availableResources);
 			}
 		}
+		
 		return null;
 	}
 
 	/**
 	 * Retrieves all available resources available for this feature.
 	 */
-	public List<Resource> getResources() {
+	public List<Resource> getResources() throws Exception {
+		
 		logger.info("Retrieving all resources");
 
 		ServiceRequest availableResources = httpSvcs.processRequest(
 				availableFeatures,
 				"http://api.sportingsolutions.com/rels/resources/list",
 				restItem.getName());
-		List<RestItem> restItems = availableResources.getServiceRestItems();
+		
 		List<Resource> resourceSet = new ArrayList<Resource>();
+		
+		if(availableResources == null)
+			return resourceSet;
+		
+		List<RestItem> restItems = availableResources.getServiceRestItems();
+		
 		for (RestItem searchRestItem : restItems) {
-			resourceSet
-					.add(new ResourceImpl(searchRestItem, availableResources));
+			resourceSet.add(new ResourceImpl(searchRestItem, availableResources));
 		}
+		
 		return resourceSet;
 	}
 

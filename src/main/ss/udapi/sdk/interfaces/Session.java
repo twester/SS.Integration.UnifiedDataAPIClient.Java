@@ -21,8 +21,8 @@ import java.util.List;
  */
 public interface Session {
 
-	public Service getService(String name);
+	public Service getService(String name) throws Exception;
 
-	public List<Service> getServices();
+	public List<Service> getServices() throws Exception;
 
 }

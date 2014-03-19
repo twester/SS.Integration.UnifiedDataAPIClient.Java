@@ -23,15 +23,14 @@ import ss.udapi.sdk.ResourceImpl;
  * The WorkQueueMonitor picks up a UOW from WorkQueue, passes it to an instance of FixtureActionProcessor which retrieves 
  * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
  * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
- * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
+ * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the thread-pool 
  * by the JVM.
  */
 public class FixtureActionProcessor implements Runnable {
-	private static Logger logger = Logger
-			.getLogger(FixtureActionProcessor.class);
+	
+	private static Logger logger = Logger.getLogger(FixtureActionProcessor.class);
 	private String task;
-	private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue
-			.getResourceWorkQueue();
+	private ResourceWorkQueue resWorkQueueRef = ResourceWorkQueue.getResourceWorkQueue();
 
 	public FixtureActionProcessor(String task) {
 		this.task = task;
@@ -41,7 +40,7 @@ public class FixtureActionProcessor implements Runnable {
 	public void run() {
 		/*
 		 * We could parse the message to pick up the ID, but in some cases the
-		 * messages can be fairly sizeable whcih would slow things down and if
+		 * messages can be fairly sizable which would slow things down and if
 		 * large enough can lead to an internal GSON exception:
 		 * java.lang.UnsupportedOperationException: JsonObject All we care about
 		 * is the Id number which can be found by looking at the message
@@ -54,10 +53,11 @@ public class FixtureActionProcessor implements Runnable {
 
 		// Now that we know what fixture the work is for put the UOW in that
 		// fixtures work queue.
-		ResourceImpl resource = (ResourceImpl) ResourceWorkerMap
-				.getResourceImpl(fixtureId);
-
-		resWorkQueueRef.addUOW(fixtureId, task);
+		ResourceImpl resource = (ResourceImpl) ResourceWorkerMap.getResourceImpl(fixtureId);
+		
+		if(!resWorkQueueRef.addUOW(fixtureId, task))
+			logger.warn("A task for id: " + fixtureId 
+					+ " has not been added to the queue - this may indicate some incorrect execution flow");
 
 		// And run it.
 		resource.streamData();

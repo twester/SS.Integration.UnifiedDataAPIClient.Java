@@ -19,6 +19,7 @@ package ss.udapi.sdk.model;
  * behaviour.
  */
 public class RestLink {
+	
 	/* Using Uppercase so that deserialization from json works */
 	private String Relation;
 	private String Href;

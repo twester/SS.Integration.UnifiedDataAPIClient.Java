@@ -6,15 +6,18 @@ import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.services.HttpServices;
 import ss.udapi.sdk.services.JsonHelper;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.mockito.Mockito.*;
+
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
@@ -53,17 +56,27 @@ public class ServiceImplTest {
 		 * the response and returns the a ResourceImpl with a set of resources
 		 * for this feature.
 		 */
-		doAnswer(new Answer<ServiceRequest>() {
-			public ServiceRequest answer(InvocationOnMock invocation)
-					throws Throwable {
-				return resResponse;
-			}
-		}).when(httpSvcs).processRequest(resRequest,
-				"http://api.sportingsolutions.com/rels/features/list",
-				"UnifiedDataAPI");
+		try {
+			doAnswer(new Answer<ServiceRequest>() {
+				public ServiceRequest answer(InvocationOnMock invocation)
+						throws Throwable {
+					return resResponse;
+				}
+			}).when(httpSvcs).processRequest(resRequest,
+					"http://api.sportingsolutions.com/rels/features/list",
+					"UnifiedDataAPI");
+		} catch (Exception ex) {
+			fail("Error while retrieving feature list " + ex);
+		}
 
 		service.setHttpSvcs(httpSvcs);
-		responseFeature = (FeatureImpl) service.getFeature("AmericanFootball");
+
+		try {
+			responseFeature = (FeatureImpl) service
+					.getFeature("AmericanFootball");
+		} catch (Exception ex) {
+			fail("Error while trying to retrieve the feature: " + ex);
+		}
 
 		// So, does the URL for the feature we want (amongst all the features
 		// ServiceImpl gets) match what we expect?
@@ -75,22 +88,32 @@ public class ServiceImplTest {
 	@Test
 	public void testGetFeatureNotFound() {
 		/*
-		 * Here we mock httpsevices (sending a request for all resources for
+		 * Here we mock http services (sending a request for all resources for
 		 * this feature). The unit test is asserting that FeatureImpl filters
 		 * the response and returns the a ResourceImpl with a set of resources
 		 * for this feature.
 		 */
-		doAnswer(new Answer<ServiceRequest>() {
-			public ServiceRequest answer(InvocationOnMock invocation)
-					throws Throwable {
-				return resResponse;
-			}
-		}).when(httpSvcs).processRequest(resRequest,
-				"http://api.sportingsolutions.com/rels/features/list",
-				"UnifiedDataAPI");
+
+		try {
+			doAnswer(new Answer<ServiceRequest>() {
+				public ServiceRequest answer(InvocationOnMock invocation)
+						throws Throwable {
+					return resResponse;
+				}
+			}).when(httpSvcs).processRequest(resRequest,
+					"http://api.sportingsolutions.com/rels/features/list",
+					"UnifiedDataAPI");
+		} catch (Exception ex) {
+			fail("Error while retrieving feature list: " + ex);
+		}
 
 		service.setHttpSvcs(httpSvcs);
-		responseFeature = (FeatureImpl) service.getFeature("Skittles");
+
+		try {
+			responseFeature = (FeatureImpl) service.getFeature("Skittles");
+		} catch (Exception ex) {
+			fail("Error while retrieving feature: " + ex);
+		}
 
 		// We should get nothing back at all
 		assertNull(responseFeature);
@@ -99,22 +122,33 @@ public class ServiceImplTest {
 	@Test
 	public void testGetResources() {
 		/*
-		 * Here we mock httpsevices (sending a request for all resources for
+		 * Here we mock http services (sending a request for all resources for
 		 * this feature). The unit test is asserting that FeatureImpl filters
 		 * the response and returns the a ResourceImpl with a set of resources
 		 * for this feature.
 		 */
-		doAnswer(new Answer<ServiceRequest>() {
-			public ServiceRequest answer(InvocationOnMock invocation)
-					throws Throwable {
-				return resResponse;
-			}
-		}).when(httpSvcs).processRequest(resRequest,
-				"http://api.sportingsolutions.com/rels/features/list",
-				"UnifiedDataAPI");
+
+		try {
+			doAnswer(new Answer<ServiceRequest>() {
+				public ServiceRequest answer(InvocationOnMock invocation)
+						throws Throwable {
+					return resResponse;
+				}
+			}).when(httpSvcs).processRequest(resRequest,
+					"http://api.sportingsolutions.com/rels/features/list",
+					"UnifiedDataAPI");
+
+		} catch (Exception ex) {
+			fail("Error while retrieving features list: " + ex);
+		}
 
 		service.setHttpSvcs(httpSvcs);
-		List<Feature> responseSet = service.getFeatures();
+		List<Feature> responseSet = new ArrayList<Feature>();
+		try {
+			responseSet = service.getFeatures();
+		} catch (Exception ex) {
+			fail("Error while trying to retrieve feature list: " + ex);
+		}
 
 		// So, does the ID we should get for this resource match the name we've
 		// given it?

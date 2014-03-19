@@ -24,15 +24,16 @@ import org.apache.log4j.Logger;
  * The WorkQueueMonitor picks up a UOW from WorkQueue, passes it to an instance of FixtureActionProcessor which retrieves 
  * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
  * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
- * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
+ * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the thread-pool 
  * by the JVM.
  *
- * An alternative design would be to have a theadpool of WorkQueue Listener objects (FixtureActionProcessor) called directly
+ * An alternative design would be to have a thread-pool of WorkQueue Listener objects (FixtureActionProcessor) called directly
  * by RabitMqConsumer, but I chose this design as a centralised control point and to minimise the amount of concerns leaked
  * between modules.
  * 
  */
 public class WorkQueueMonitor implements Runnable {
+	
 	private static Logger logger = Logger.getLogger(WorkQueueMonitor.class);
 	private static WorkQueueMonitor monitor = null;
 	private WorkQueue workQueue = WorkQueue.getWorkQueue();
@@ -40,8 +41,7 @@ public class WorkQueueMonitor implements Runnable {
 	private static final String THREAD_NAME = "Work_Queue_Thread";
 	private static boolean terminate = false;
 
-	private WorkQueueMonitor() {
-	}
+	private WorkQueueMonitor() {}
 
 	public static WorkQueueMonitor getMonitor() {
 		try {
@@ -70,21 +70,26 @@ public class WorkQueueMonitor implements Runnable {
 	 */
 	@Override
 	public void run() {
+		
 		terminate = false;
 		logger.info("Work queue Monitor initialized and waiting");
 		Thread.currentThread().setName(THREAD_NAME);
+		
 		// Monitor the queue
 		while (true) {
 			// When a UOW comes along call FixtureActionProcessor to grab the
 			// associated ResourceImpl and process it.
 			String task = workQueue.getTask();
-			logger.debug("Queue Read: " + task.substring(0, 40));
-			try {
-				FixtureActionProcessor processor = new FixtureActionProcessor(
-						task);
-				ActionThreadExecutor.executeTask(processor);
-			} catch (Exception ex) {
-				logger.error("Work queue monitor has been interrupted");
+			
+			if (task != null) {
+
+				logger.debug("Queue Read: " + task.substring(0, 40));
+				try {
+					FixtureActionProcessor processor = new FixtureActionProcessor(task);
+					ActionThreadExecutor.executeTask(processor);
+				} catch (Exception ex) {
+					logger.error("An error occured while processing task: " + ex);
+				}
 			}
 
 			if (terminate == true) {

@@ -30,9 +30,9 @@ public interface Resource {
 
 	public Summary getContent();
 
-	public String getSnapshot();
+	public String getSnapshot() throws Exception;
 
-	public void startStreaming(List<Event> streamingEvents);
+	public void startStreaming(List<Event> streamingEvents) throws Exception;
 
 	public void stopStreaming();
 

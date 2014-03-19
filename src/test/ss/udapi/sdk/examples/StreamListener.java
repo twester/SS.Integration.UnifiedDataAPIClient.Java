@@ -45,50 +45,49 @@ public class StreamListener {
 		return this.fixtureEnded;
 	}
 
-	public StreamListener(Resource gtpFixture, Integer currentEpoch) {
+	public StreamListener(Resource gtpFixture, Integer currentEpoch)
+			throws Exception {
+
 		this.fixtureEnded = false;
 		this.gtpFixture = gtpFixture;
 		this.currentEpoch = currentEpoch;
 		listen();
 	}
 
-	private void listen() {
-		try {
-			List<Event> streamingEvents = new ArrayList<Event>();
+	private void listen() throws Exception {
 
-			streamingEvents.add(new ConnectedEvent() {
-				public void onEvent(String message) {
-					logger.info(String.format("Stream Connected for %1$s",
-							gtpFixture.getName()));
-				}
-			});
+		List<Event> streamingEvents = new ArrayList<Event>();
 
-			streamingEvents.add(new StreamEvent() {
-				public void onEvent(String message) {
-					logger.info(String.format(
-							"Streaming Message Arrived for %1$s",
-							gtpFixture.getName()));
-					handleStreamMessage(message);
-				}
-			});
+		streamingEvents.add(new ConnectedEvent() {
+			public void onEvent(String message) {
+				logger.info(String.format("Stream Connected for %1$s",
+						gtpFixture.getName()));
+			}
+		});
 
-			streamingEvents.add(new DisconnectedEvent() {
-				public void onEvent(String message) {
-					logger.info(String.format("Stream Disconnected for %1$s",
-							gtpFixture.getName()));
-				}
-			});
+		streamingEvents.add(new StreamEvent() {
+			public void onEvent(String message) {
+				logger.info(String.format("Streaming Message Arrived for %1$s",
+						gtpFixture.getName()));
+				handleStreamMessage(message);
+			}
+		});
 
-			streamingEvents.add(new SynchronizationEvent() {
-				public void onEvent(String message) {
-					handleSyncEvent();
-				}
-			});
+		streamingEvents.add(new DisconnectedEvent() {
+			public void onEvent(String message) {
+				logger.info(String.format("Stream Disconnected for %1$s",
+						gtpFixture.getName()));
+			}
+		});
 
-			gtpFixture.startStreaming(streamingEvents);
-		} catch (Exception ex) {
-			logger.error(ex);
-		}
+		streamingEvents.add(new SynchronizationEvent() {
+			public void onEvent(String message) {
+				handleSyncEvent();
+			}
+		});
+
+		gtpFixture.startStreaming(streamingEvents);
+
 	}
 
 	private void handleStreamMessage(String streamString) {
@@ -161,6 +160,7 @@ public class StreamListener {
 	}
 
 	private void handleSyncEvent() {
+
 		logger.warn(String.format("Stream out of sync for %1$s",
 				gtpFixture.getName()));
 
@@ -171,19 +171,23 @@ public class StreamListener {
 
 		logger.info(String.format("Get UDAPI Snapshot for %1$s",
 				gtpFixture.getName()));
-		String snapshotString = gtpFixture.getSnapshot();
-		logger.info(String.format(
-				"Successfully retrieved UDAPI Snapshot for %1$s",
-				gtpFixture.getName()));
+		try {
+			String snapshotString = gtpFixture.getSnapshot();
+			logger.info(String.format(
+					"Successfully retrieved UDAPI Snapshot for %1$s",
+					gtpFixture.getName()));
 
-		Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
-		currentEpoch = fixtureSnapshot.getEpoch();
+			Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
+			currentEpoch = fixtureSnapshot.getEpoch();
 
-		// process the snapshot here
-		logger.info(snapshotString);
+			// process the snapshot here
+			logger.info(snapshotString);
 
-		if (fixtureSnapshot.getMatchStatus() != "50") {
-			gtpFixture.unpauseStreaming();
+			if (fixtureSnapshot.getMatchStatus() != "50") {
+				gtpFixture.unpauseStreaming();
+			}
+		} catch (Exception ex) {
+			logger.error("Error processing sync event: " + ex);
 		}
 	}
 }

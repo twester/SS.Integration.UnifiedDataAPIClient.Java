@@ -19,6 +19,7 @@ package ss.udapi.sdk.model;
  * behaviour.
  */
 public class Participant {
+	
 	private String Name;
 	private Integer Id;
 

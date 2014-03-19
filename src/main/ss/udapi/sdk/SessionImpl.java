@@ -39,8 +39,8 @@ import org.apache.log4j.Logger;
  * 
  */
 public class SessionImpl implements Session {
-	private static Logger logger = Logger
-			.getLogger(SessionImpl.class.getName());
+	
+	private static Logger logger = Logger.getLogger(SessionImpl.class.getName());
 	private static HttpServices httpSvcs = new HttpServices();
 	private ServiceRequest sessionResponse;
 	private ServiceRequest availableServices;
@@ -50,13 +50,13 @@ public class SessionImpl implements Session {
 	/*
 	 * Constructor used by the factory to create new instances.
 	 */
-	protected SessionImpl(URL serverURL, Credentials credentials) {
-		logger.info("Logging into system at url: ["
-				+ serverURL.toExternalForm() + "]");
+	protected SessionImpl(URL serverURL, Credentials credentials) throws Exception {
+		
+		logger.info("Logging into system at url: [" + serverURL.toExternalForm() + "]");
 		this.serverURL = serverURL;
 
 		/*
-		 * This is not strictly part of the session initialization but is needed
+		 * This is not strictly part of the session initialisation but is needed
 		 * for any services to work :-(
 		 */
 		ServiceThreadExecutor.createExecutor();
@@ -69,27 +69,32 @@ public class SessionImpl implements Session {
 	/*
 	 * Carries out the initial login into the system.
 	 */
-	private void GetRoot(URL serverURL, Credentials credentials,
-			Boolean authenticate) {
+	private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate) throws Exception {
+		
 		boolean compressionEnabled = false;
 		if (serverURL.toString().length() > 0) {
 			SystemProperties.setProperty("ss.url", serverURL.getPath());
 		}
-		if (authenticate = true) {
+		
+		if (authenticate == true) {
+			
 			if (credentials != null) {
 				SystemProperties.setProperty("ss.username",
 						credentials.getUserName());
 				SystemProperties.setProperty("ss.password",
 						credentials.getPassword());
 			}
-			sessionResponse = httpSvcs.getSession(serverURL.toExternalForm(),
-					compressionEnabled);
+			
+			sessionResponse = httpSvcs.getSession(serverURL.toExternalForm(), compressionEnabled);
 			availableServices = httpSvcs.processLogin(sessionResponse,
 					"http://api.sportingsolutions.com/rels/login", "Login");
 		} else {
 			availableServices = httpSvcs.processLogin(sessionResponse,
 					"http://api.sportingsolutions.com/rels/login", "Login");
 		}
+		
+		if(availableServices != null)
+			serviceRestItems = availableServices.getServiceRestItems();
 	}
 
 	/**
@@ -99,56 +104,52 @@ public class SessionImpl implements Session {
 	 *            Name of service which will be retrieved from all services
 	 *            available for this account.
 	 */
-	public Service getService(String svcName) {
+	public Service getService(String svcName) throws Exception {
+		
 		logger.info("Retrieving service: " + svcName);
 
 		if (serviceRestItems == null) {
-			GetRoot(serverURL, null, false);
-			serviceRestItems = availableServices.getServiceRestItems();
+			GetRoot(serverURL, null, false);			
 		}
 
-		if (serviceRestItems != null) { // If we end up with no results at all
-										// return null
-			Service service = null;
+		// If we end up with no results at all return null
+		if (serviceRestItems != null) { 
 			for (RestItem restItem : serviceRestItems) {
 				if (restItem.getName().equals(svcName)) {
-					service = new ServiceImpl(restItem, availableServices);
+					return new ServiceImpl(restItem, availableServices);
 				}
 			}
-			serviceRestItems = null;
-			return service;
 		}
+		
 		return null;
 	}
 
 	/**
 	 * Retrieves all available services available for this account.
 	 */
-	public List<Service> getServices() {
+	public List<Service> getServices() throws Exception {
+		
 		logger.info("Rerieving all services...");
 
 		if (serviceRestItems == null) {
-			GetRoot(serverURL, null, false);
-			serviceRestItems = availableServices.getServiceRestItems();
+			GetRoot(serverURL, null, false);			
 		}
 
-		List<Service> serviceSet = new ArrayList<Service>(); // If we end up
-																// with no
-																// results at
-																// all return
-																// null
+		// If we end up with no results at all return null
+		List<Service> serviceSet = new ArrayList<Service>();
+		
 		if (serviceRestItems != null) {
 			for (RestItem restItem : serviceRestItems) {
 				serviceSet.add(new ServiceImpl(restItem, availableServices));
 			}
 		}
-		serviceRestItems = null;
+		
 		return serviceSet;
 	}
 
 	// Setter for unit testing
-	protected void setHttpSvcs(HttpServices httpSvcs, URL serverURL,
-			Credentials credentials) {
+	protected void setHttpSvcs(HttpServices httpSvcs, URL serverURL, Credentials credentials) throws Exception {
+		
 		SessionImpl.httpSvcs = httpSvcs;
 
 		this.serverURL = serverURL;
@@ -162,8 +163,7 @@ public class SessionImpl implements Session {
 
 	// Getter for unit testing
 	protected String getServiceHref() {
-		return availableServices.getServiceRestItems().get(0).getLinks().get(0)
-				.getHref();
+		return availableServices.getServiceRestItems().get(0).getLinks().get(0).getHref();
 	}
 
 }

@@ -19,22 +19,22 @@ import java.util.concurrent.LinkedBlockingQueue;
 import org.apache.log4j.Logger;
 
 /* All activity received from the MQ system is simply pulled of the MQ queues and put into this work queue.  By RabbitMQ
- * consumer to minimize the amount of processing that thread does.
+ * consumer to minimise the amount of processing that thread does.
  * 
  * The WorkQueueMonitor picks up a UOW from WorkQueue, passes it to an instance of FixtureActionProcessor which retrieves 
  * the instance of ResourceImpl associated with that MQ Queue (via a lookup on ResourceWorkerMap).  It then executes the 
  * UOW within that ResourceImpl using one of the threads from this executor service's thread pool.  The UOW from MQ is 
- * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the threadpool 
+ * wrapped up in a FixtureActionProcessor.  When the task in this thread completes the thread is returned to the thread-pool 
  * by the JVM.
  */
 public class WorkQueue {
-	private static WorkQueue workQueue = null;
+	
+	// note that this DS is thread-safe
 	private static LinkedBlockingQueue<String> internalQueue = new LinkedBlockingQueue<String>();
-
+	private static WorkQueue workQueue = null;
 	private static Logger logger = Logger.getLogger(WorkQueue.class);
 
-	private WorkQueue() {
-	}
+	private WorkQueue() {}
 
 	public static WorkQueue getWorkQueue() {
 		if (workQueue == null) {
@@ -44,12 +44,15 @@ public class WorkQueue {
 	}
 
 	// RabbitMQ consumer drops messages retrieved from MQ into this WorkQueue
-	public void addTask(String task) {
+	public boolean addTask(String task) {
 		try {
 			internalQueue.put(task);
-		} catch (Exception ex) {
+			return true;
+		} catch (InterruptedException ex) {
 			logger.error("WorkQueue management interrupted", ex);
 		}
+		
+		return false;
 	}
 
 	// WorkQueueMonitorpulls messages retrieved this WorkQueue and initiates
@@ -62,7 +65,7 @@ public class WorkQueue {
 			// using any resources up to the point where we have something to
 			// offer.
 			task = internalQueue.take();
-		} catch (Exception ex) {
+		} catch (InterruptedException ex) {
 			logger.error("WorkQueue management interrupted", ex);
 		}
 		return task;

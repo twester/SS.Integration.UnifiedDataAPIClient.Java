@@ -21,6 +21,7 @@ import java.util.List;
  * behaviour.
  */
 public class Summary {
+	
 	private String Id;
 	private String Date;
 	private String StartTime;

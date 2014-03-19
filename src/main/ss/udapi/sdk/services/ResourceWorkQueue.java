@@ -28,12 +28,12 @@ import org.apache.log4j.Logger;
  * methods exposed to the public API.
  */
 public class ResourceWorkQueue {
+	
 	private static ResourceWorkQueue workQueue = null;
 	private static ConcurrentHashMap<String, LinkedBlockingQueue<String>> map = new ConcurrentHashMap<String, LinkedBlockingQueue<String>>();
 	private static Logger logger = Logger.getLogger(ResourceWorkQueue.class);
 
-	private ResourceWorkQueue() {
-	}
+	private ResourceWorkQueue() {}
 
 	public synchronized static ResourceWorkQueue getResourceWorkQueue() {
 		if (workQueue == null) {
@@ -45,8 +45,9 @@ public class ResourceWorkQueue {
 	// A new fixture has been registered which created a new instance of
 	// ResourceImpl which in turn creates a new queue here
 	public static LinkedBlockingQueue<String> addQueue(String resourceId) {
-		map.put(resourceId, new LinkedBlockingQueue<String>());
-		return map.get(resourceId);
+		LinkedBlockingQueue<String> val = new LinkedBlockingQueue<String>();
+		map.put(resourceId, val);
+		return val;
 	}
 
 	// The fixture is no longer active, has been deleted and we're cleaning as
@@ -57,16 +58,25 @@ public class ResourceWorkQueue {
 
 	// Add a new UOW for the associated resource/fixture. Currently
 	// FixtureActionProcessor does this.
-	public void addUOW(String resourceId, String task) {
+	public boolean addUOW(String resourceId, String task) {
 		logger.debug("Added echo alert" + task.substring(0, 10) + " for ["
 				+ resourceId + "]");
 		LinkedBlockingQueue<String> queue = map.get(resourceId);
+		
+		if (queue == null)
+			return false;
+		
 		queue.add(task);
+		return true;
 	}
 
 	// ResourceImpl pulls the UOW to work on it.
 	public String removeUOW(String resourceId) {
 		LinkedBlockingQueue<String> queue = map.get(resourceId);
+		
+		if (queue == null)
+			return null;
+		
 		return queue.poll();
 	}
 

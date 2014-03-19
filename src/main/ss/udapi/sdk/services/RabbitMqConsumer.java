@@ -41,8 +41,8 @@ public class RabbitMqConsumer extends DefaultConsumer {
 
 	// Message received from MQ
 	@Override
-	public void handleDelivery(String cTag, Envelope envelope,
-			AMQP.BasicProperties properties, byte[] bodyByteArray) {
+	public void handleDelivery(String cTag, Envelope envelope, AMQP.BasicProperties properties, byte[] bodyByteArray) {
+		
 		// we're running and receiving so the connection hasn't been broken or
 		// has been restored
 		connectShutDownLogged = false;
@@ -57,12 +57,13 @@ public class RabbitMqConsumer extends DefaultConsumer {
 		 * CtagResourceMap which is maintained by MQListener (as it
 		 * creates/destroys queue listeners).
 		 */
-		if (msgHead
-				.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",") != true) {
+		if (msgHead.equals("{\"Relation\":\"http://api.sportingsolutions.com/rels/stream/echo\",") != true) {
+			
 			WorkQueue myQueue = WorkQueue.getWorkQueue();
-			myQueue.addTask(body);
-			logger.debug("Consumer: " + cTag + " received non echo message: "
-					+ msgHead);
+			if(myQueue.addTask(body))
+				logger.debug("Consumer: " + cTag + " received non echo message: " + msgHead);
+			else
+				logger.warn("Error on adding a non echo message on consumer: " + cTag);
 		}
 
 		// We successfully got an echo response or some work from a queue, so
@@ -81,10 +82,10 @@ public class RabbitMqConsumer extends DefaultConsumer {
 	 */
 	@Override
 	public void handleCancelOk(String cTag) {
+		
 		logger.debug("Consumer: " + cTag + " disconnected");
 		String resourceId = CtagResourceMap.getResource(cTag);
-		ResourceImpl resource = (ResourceImpl) ResourceWorkerMap
-				.getResourceImpl(resourceId);
+		ResourceImpl resource = (ResourceImpl) ResourceWorkerMap.getResourceImpl(resourceId);
 		resource.mqDisconnectEvent();
 		MQListener.removeMapping(cTag);
 	}
@@ -111,6 +112,7 @@ public class RabbitMqConsumer extends DefaultConsumer {
 	 */
 	@Override
 	public void handleShutdownSignal(String cTag, ShutdownSignalException signal) {
+		
 		if (connectShutDownLogged == false) {
 			connectShutDownLogged = true; // so we don't end up logging it for
 											// each cTag

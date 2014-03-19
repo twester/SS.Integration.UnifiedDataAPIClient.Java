@@ -27,11 +27,18 @@ public class StreamingProgram {
 		// BasicConfigurator.configure();
 		PropertyConfigurator.configure(args[0]);
 
-		GTPService theService = new GTPService(args[1]);
-		theService.start();
-		Scanner theScanner = new Scanner(System.in);
-		while (!theScanner.nextLine().equals(""))
-			;
+		GTPService theService;
+		try {
+			
+			theService = new GTPService(args[1]);
+			theService.start();
+			Scanner theScanner = new Scanner(System.in);
+			while (!theScanner.nextLine().equals(""));
+
+			theScanner.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

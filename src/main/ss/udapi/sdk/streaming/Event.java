@@ -16,7 +16,7 @@ package ss.udapi.sdk.streaming;
 
 /**
  * Interface for all Event classes. Used by Action to identify the type of event
- * being coummincated to client code from the SDK.
+ * being communicated to client code from the SDK.
  */
 public interface Event {
 

@@ -28,8 +28,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.log4j.Logger;
 
-import com.rabbitmq.client.AlreadyClosedException;
-
 import ss.udapi.sdk.services.JsonHelper;
 import ss.udapi.sdk.model.ServiceRequest;
 import ss.udapi.sdk.model.StreamEcho;
@@ -38,6 +36,7 @@ import ss.udapi.sdk.model.StreamEcho;
  * Uses EchoResourceMap to manage the count of echo failures for each resource/fixture.
  */
 public class EchoSender implements Runnable {
+	
 	private static Logger logger = Logger.getLogger(EchoSender.class);
 	private static EchoSender instance = null;
 	private static HttpServices httpSvcs = new HttpServices();
@@ -56,8 +55,7 @@ public class EchoSender implements Runnable {
 		}
 	}
 
-	public static EchoSender getEchoSender(String amqpDest,
-			ServiceRequest resources) {
+	public static EchoSender getEchoSender(String amqpDest, ServiceRequest resources) {
 		try {
 			echoSenderLock.lock();
 			logger.debug("Retrieving EchoSender or create it if it doesn't exist");
@@ -77,6 +75,7 @@ public class EchoSender implements Runnable {
 
 	@Override
 	public void run() {
+		
 		terminate = false;
 		logger.info("Starting echos.");
 		EchoResourceMap echoMap = EchoResourceMap.getEchoMap();
@@ -84,8 +83,7 @@ public class EchoSender implements Runnable {
 		// Get the connection details for the MQ box.
 		String path = amqpURI.getRawPath();
 		String queue = path.substring(path.indexOf('/', 1) + 1);
-		String virtualHost = uriDecode(amqpURI.getPath().substring(1,
-				path.indexOf('/', 1)));
+		String virtualHost = uriDecode(amqpURI.getPath().substring(1, path.indexOf('/', 1)));
 
 		// Prepare a simple message to send to the echo system. This message
 		// will come back in each resource's MQ queue.
@@ -102,21 +100,22 @@ public class EchoSender implements Runnable {
 		while (true) {
 			try {
 
-				// Send the message to the Sporting Solution's endpoint.
+				// Send the message to the Sporting Solution's end-point.
 				httpSvcs.processRequest(
 						resources,
 						"http://api.sportingsolutions.com/rels/stream/batchecho",
 						resources.getServiceRestItems().get(0).getName(),
 						stringStreamEcho);
+				
 				logger.info("Batch echo sent: " + stringStreamEcho);
 
-				// Ater the message is sent increase the numebr of echos sent
+				// After the message is sent increase the number of echos sent
 				// for all resources.
 				// The number of missed echos is configured in:
 				// conf/sdk.properties using "ss.echo_max_missed_echos"
 				Set<String> defaulters = echoMap.incrAll(Integer
-						.parseInt(SystemProperties
-								.get("ss.echo_max_missed_echos")));
+						.parseInt(SystemProperties.get("ss.echo_max_missed_echos")));
+				
 				Iterator<String> keyIter = defaulters.iterator();
 
 				/*
@@ -133,26 +132,21 @@ public class EchoSender implements Runnable {
 					String resourceId = keyIter.next();
 					logger.warn("Attempting to disconnect resource: "
 							+ resourceId
-							+ " maximum number of echo retries reached");
+							+ " due maximum number of echo retries reached");
 					MQListener.disconnect(resourceId);
 				}
 
 				// The interval between echos is configured in:
 				// conf/sdk.properties using "ss.echo_sender_interval"
-				Thread.sleep(Integer.parseInt(SystemProperties
-						.get("ss.echo_sender_interval")) * 1000);
+				Thread.sleep(Integer.parseInt(SystemProperties.get("ss.echo_sender_interval")) * 1000);
 
 				if (terminate == true) {
 					return;
 				}
-
-			} catch (InterruptedException ex) {
-				logger.error("Echo Thread disrupted" + ex);
-			} catch (AlreadyClosedException ex) {
-				logger.warn("Tried to close an MQ connection that was already closed"
-						+ ex);
+				
+			} catch (Exception ex) {
+				logger.error("An error occured: " + ex);
 			}
-
 		}
 	}
 

@@ -18,11 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Actions communicable to the client code via observers.
+ * Actions that can be communicated to the client code via observers.
  */
 public abstract class Action implements Runnable {
 
-	// Only the events that match the subtype Action i.e.
+	// Only the events that match the sub-type Action i.e.
 	// a ConnectedAction will only have ConnectEvents in the
 	// matchedEvent list
 	private List<Event> matchedEvents;
@@ -49,14 +49,14 @@ public abstract class Action implements Runnable {
 	}
 
 	/**
-	 * Called by SDK nees to inform client about this event, typically by
-	 * passing the payload received from the MQ system.
+	 * Called by SDK needs to inform client about this event, typically by
+	 * passing the pay-load received from the MQ system.
 	 * 
 	 * @param message
 	 *            Message from RabbitMQ to be passed onto the client code for
 	 *            this type of event.
 	 * @throws Exception
-	 *             Unexpected event occured while communicating with client
+	 *             Unexpected event occurred while communicating with client
 	 *             code.
 	 */
 	public void execute(String message) throws Exception {

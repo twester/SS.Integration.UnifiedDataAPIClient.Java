@@ -14,10 +14,11 @@
 
 package ss.udapi.sdk.services;
 
-/* Object used by ResourceImpl to pass details about details to MQListener requesting that a resouce by bound to a queue on MQ
+/* Object used by ResourceImpl to pass details about details to MQListener requesting that a resource by bound to a queue on MQ
  * Consists of the resouceID, all resources available 
  */
 public class ResourceSession {
+	
 	private String amqpDest = null;
 	private String resourceId = null;
 

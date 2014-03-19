@@ -14,10 +14,10 @@
 
 package ss.udapi.sdk.services;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,29 +28,30 @@ import org.apache.log4j.Logger;
  * a property was not found in the properties file.
  */
 public class SystemProperties {
+	
 	private static boolean propertiesLoaded = false;
 	private static Properties systemProperties;
+	
 	/*
 	 * using ConcurrentHashMap instead of another instance of properties as it
-	 * is, er... concurrency aware and as values can chnage during
-	 * initialization depending on supplied arguments.
+	 * is, er... concurrency aware and as values can change during
+	 * initialisation depending on supplied arguments.
 	 */
 	private static ConcurrentHashMap<String, String> ourMap = new ConcurrentHashMap<String, String>();
 	private static Logger logger = Logger.getLogger(SystemProperties.class);
 
-	private SystemProperties() {
-	}
+	private SystemProperties() {}
 
 	public static String get(String key) {
-		if (propertiesLoaded == false) {
-			getSystemProperties();
-			propertiesLoaded = true;
-		}
+		getSystemProperties();
 		return ourMap.get(key);
 	}
 
 	private synchronized static void getSystemProperties() {
 
+		if (propertiesLoaded == true)
+			return;
+		
 		systemProperties = new Properties();
 		logger.debug("Loading properties file");
 
@@ -63,8 +64,15 @@ public class SystemProperties {
 		ourMap.put("ss.echo_max_missed_echos", "3");
 		ourMap.put("ss.workerThreads", "20");
 
+		FileInputStream stream = null;
 		try {
-			systemProperties.load(new FileInputStream("sdk.properties"));
+			
+			File f = new File("sdk.properties");
+			if(f.exists()) {
+				stream = new FileInputStream("sdk.properties");
+				systemProperties.load(stream);
+			}
+			
 			Set<String> propNames = ourMap.keySet();
 			String readPropVal = null;
 
@@ -80,8 +88,18 @@ public class SystemProperties {
 					ourMap.put(propName, readPropVal);
 				}
 			}
+			
+			propertiesLoaded = true;
+			
 		} catch (IOException ex) {
-			logger.error("Can't load the properties file.  sdk.properties");
+			logger.error("Can't load the properties file:  sdk.properties");
+		}
+		finally {
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (Exception ex1) {}
+			}
 		}
 	}
 

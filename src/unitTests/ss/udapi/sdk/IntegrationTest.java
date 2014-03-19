@@ -109,7 +109,7 @@ public class IntegrationTest {
 		responseSR.setAuthToken("AUTH_TOKEN_01");
 		responseSR.setServiceRestItems(responseItems);
 
-		// Here we mock httpsevices. It still's try to connect but we have a
+		// Here we mock http services. It still's try to connect but we have a
 		// response ready for the call
 		doAnswer(new Answer<ServiceRequest>() {
 			public ServiceRequest answer(InvocationOnMock invocation)
@@ -178,8 +178,12 @@ public class IntegrationTest {
 
 		// Here we build the queue ResourceImpl is going to connect to and we
 		// will later publish to
-		resourceImpl.startStreaming(createListeners());
-
+		try {
+			resourceImpl.startStreaming(createListeners());
+		}catch(Exception ex) {
+			fail("Error while starting streaming: " + ex);
+		}
+		
 		// Have a rest to let all the services start up properly
 		try {
 			Thread.sleep(5000);
@@ -229,7 +233,11 @@ public class IntegrationTest {
 
 		// Here we build the queue ResourceImpl is going to connect to and we
 		// will later publish to
-		resourceImpl.startStreaming(createListeners());
+		try {
+			resourceImpl.startStreaming(createListeners());
+		}catch (Exception ex) {
+			fail("Error while starting streaming service: " + ex);
+		}
 
 		// Have a rest to let all the services start up properly
 		try {
@@ -286,9 +294,15 @@ public class IntegrationTest {
 				// hasn't been open...
 			}
 		}
+		
 		// Here we build the queue ResourceImpl is going to connect to and we
 		// will later publish to
-		resourceImpl.startStreaming(createListeners());
+		try {
+			resourceImpl.startStreaming(createListeners());
+		}catch (Exception ex) {
+			fail("Error while starting streaming service: " + ex);
+		}
+		
 		// Have a rest to let the echo count expire
 		try {
 			Thread.sleep(30000);

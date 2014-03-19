@@ -23,8 +23,8 @@ public interface Feature {
 
 	public String getName();
 
-	public Resource getResource(String resourceName);
+	public Resource getResource(String resourceName) throws Exception;
 
-	public List<Resource> getResources();
+	public List<Resource> getResources() throws Exception;
 
 }

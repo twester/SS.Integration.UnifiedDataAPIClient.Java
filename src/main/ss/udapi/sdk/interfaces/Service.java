@@ -23,8 +23,8 @@ public interface Service {
 
 	public String getName();
 
-	public List<Feature> getFeatures();
+	public List<Feature> getFeatures() throws Exception;
 
-	public Feature getFeature(String featureName);
+	public Feature getFeature(String featureName) throws Exception;
 
 }

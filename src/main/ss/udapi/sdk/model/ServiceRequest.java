@@ -21,11 +21,12 @@ import java.util.List;
  * undefined behaviour.
  */
 /*
- * Used to pass the HTTP session authentication token and RestItem colletions
+ * Used to pass the HTTP session authentication token and RestItem collections
  * between HTTP calls during normal communications with the Sporting Solutions
- * system endpoint.
+ * system end-point.
  */
 public class ServiceRequest {
+	
 	private String authToken = null;
 	private List<RestItem> serviceRestItems = null;
 
@@ -44,5 +45,4 @@ public class ServiceRequest {
 	public void setServiceRestItems(List<RestItem> serviceRestItems) {
 		this.serviceRestItems = serviceRestItems;
 	}
-
 }

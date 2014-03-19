@@ -26,7 +26,7 @@ import com.google.gson.reflect.TypeToken;
  * Converts a JSON object into either:
  * 
  * 1) A String ready for either passing into a resource for processing, or for sending to the Sporting Solutions systems. 
- * 2) A RestItem which is used by HTTPServices to find individual endpoints amongst all the available ones in a resource.
+ * 2) A RestItem which is used by HTTPServices to find individual end-points amongst all the available ones in a resource.
  *  
  */
 public class JsonHelper {

@@ -21,6 +21,7 @@ import java.util.List;
  * behaviour.
  */
 public class RestItem {
+	
 	/* Using Upper case so that deserialization from json works */
 	private String Name;
 	private Summary Content;

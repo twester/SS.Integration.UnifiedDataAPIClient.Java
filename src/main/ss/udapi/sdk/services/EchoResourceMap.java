@@ -32,12 +32,12 @@ import org.apache.log4j.Logger;
  * 
  */
 public class EchoResourceMap {
+	
 	private static Logger logger = Logger.getLogger(EchoResourceMap.class);
 	private static EchoResourceMap echoMap;
 	private static ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<String, Integer>();
 
-	private EchoResourceMap() {
-	}
+	private EchoResourceMap() {}
 
 	public synchronized static EchoResourceMap getEchoMap() {
 		if (echoMap == null) {

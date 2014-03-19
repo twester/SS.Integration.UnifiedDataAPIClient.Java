@@ -19,6 +19,7 @@ package ss.udapi.sdk.model;
  * behaviour.
  */
 public class StreamEcho {
+	
 	private String host;
 	private String queue;
 	private String message;

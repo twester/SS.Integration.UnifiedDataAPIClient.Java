@@ -23,9 +23,9 @@ import org.apache.log4j.Logger;
 
 /* Threadpool for the main services used by the SDK */
 public class ServiceThreadExecutor {
+	
 	private static Executor exec;
-	private static Logger logger = Logger
-			.getLogger(ServiceThreadExecutor.class);
+	private static Logger logger = Logger.getLogger(ServiceThreadExecutor.class);
 	private static ConcurrentHashMap<String, FutureTask<String>> map = new ConcurrentHashMap<String, FutureTask<String>>();
 
 	/*
@@ -48,8 +48,9 @@ public class ServiceThreadExecutor {
 	}
 
 	public static void executeTask(Runnable task) {
-		String taskName = task.toString().substring(0,
-				task.toString().indexOf('@'));
+		String taskName = task.toString().substring(0, task.toString().indexOf('@'));
+		
+		
 		synchronized (ServiceThreadExecutor.class) {
 			if (map.containsKey(taskName) == false) {
 				FutureTask<String> futureTask = new FutureTask<String>(task,

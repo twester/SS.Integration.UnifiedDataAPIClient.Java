@@ -19,6 +19,7 @@ package ss.udapi.sdk.model;
  * behaviour.
  */
 public class Tag {
+	
 	private String Value;
 	private String Key;
 	private Integer Id;
