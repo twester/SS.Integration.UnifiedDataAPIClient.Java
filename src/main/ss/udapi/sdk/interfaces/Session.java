@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -16,7 +16,13 @@ package ss.udapi.sdk.interfaces;
 
 import java.util.List;
 
+/**
+ * Please see implementing classes
+ */
 public interface Session {
-	public Service getService(String name);
-	public List<Service> getServices();
+
+	public Service getService(String name) throws Exception;
+
+	public List<Service> getServices() throws Exception;
+
 }

@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,28 +14,39 @@
 
 package ss.udapi.sdk.model;
 
+/**
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
+ */
 public class RestLink {
-	/*Using Uppercase so that deserialization from json works*/
+	
+	/* Using Uppercase so that deserialization from json works */
 	private String Relation;
 	private String Href;
 	private String[] Verbs;
-	
+
 	public void setRelation(String relation) {
 		this.Relation = relation;
 	}
+
 	public String getRelation() {
 		return Relation;
 	}
+
 	public void setHref(String href) {
 		this.Href = href;
 	}
+
 	public String getHref() {
 		return Href;
 	}
+
 	public void setVerbs(String[] verbs) {
 		this.Verbs = verbs;
 	}
+
 	public String[] getVerbs() {
 		return Verbs;
 	}
+
 }

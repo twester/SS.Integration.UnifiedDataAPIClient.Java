@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,22 +14,29 @@
 
 package ss.udapi.sdk.model;
 
+/**
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
+ */
 public class Participant {
-	
-	public void setName(String name) {
-		this.Name = name;
-	}
-	public String getName() {
-		return Name;
-	}
-	
-	public void setId(Integer id) {
-		this.Id = id;
-	}
-	public Integer getId() {
-		return Id;
-	}
 	
 	private String Name;
 	private Integer Id;
+
+	public void setName(String name) {
+		this.Name = name;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setId(Integer id) {
+		this.Id = id;
+	}
+
+	public Integer getId() {
+		return Id;
+	}
+
 }

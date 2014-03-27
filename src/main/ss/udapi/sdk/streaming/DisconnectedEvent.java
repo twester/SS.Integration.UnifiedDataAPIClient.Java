@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,6 +14,9 @@
 
 package ss.udapi.sdk.streaming;
 
-public interface DisconnectedEvent extends Event{
+/**
+ * Please see Interface.
+ */
+public interface DisconnectedEvent extends Event {
 
 }

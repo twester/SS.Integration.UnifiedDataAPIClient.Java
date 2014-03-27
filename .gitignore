@@ -1,6 +1,7 @@
-
 bin/
 .project
 build/
-*.log
+dist/
+example.log.*
 html/
+TEST*txt

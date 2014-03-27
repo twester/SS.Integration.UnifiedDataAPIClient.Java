@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,143 +14,156 @@
 
 package ss.udapi.sdk;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
-import ss.udapi.sdk.clients.RestHelper;
-import ss.udapi.sdk.extensions.JsonHelper;
 import ss.udapi.sdk.interfaces.Credentials;
 import ss.udapi.sdk.interfaces.Service;
 import ss.udapi.sdk.interfaces.Session;
 import ss.udapi.sdk.model.RestItem;
-import ss.udapi.sdk.model.RestLink;
+import ss.udapi.sdk.model.ServiceRequest;
+import ss.udapi.sdk.ServiceImpl;
+import ss.udapi.sdk.services.CtagResourceMap;
+import ss.udapi.sdk.services.HttpServices;
+import ss.udapi.sdk.services.ResourceWorkerMap;
+import ss.udapi.sdk.services.ServiceThreadExecutor;
+import ss.udapi.sdk.services.SystemProperties;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
-public class SessionImpl extends Endpoint implements Session {
+import org.apache.log4j.Logger;
 
+/**
+ * Object which logs into a Sporting Solutions server and provides access to
+ * subscribed services. Sessions cannot be instantiated directly, they can only
+ * be created through the SessionFactory class.
+ * 
+ */
+public class SessionImpl implements Session {
+	
 	private static Logger logger = Logger.getLogger(SessionImpl.class.getName());
-
-	private Boolean isCompressed = false;
+	private static HttpServices httpSvcs = new HttpServices();
+	private ServiceRequest sessionResponse;
+	private ServiceRequest availableServices;
 	private URL serverURL;
-	
 	private List<RestItem> serviceRestItems;
-	
-	public SessionImpl(URL serverURL, Credentials credentials){
+
+	/*
+	 * Constructor used by the factory to create new instances.
+	 */
+	protected SessionImpl(URL serverURL, Credentials credentials) throws Exception {
+		
+		logger.info("Logging into system at url: [" + serverURL.toExternalForm() + "]");
 		this.serverURL = serverURL;
-		headers = new HashMap<String,String>();
-		GetRoot(serverURL,credentials, true);
+
+		/*
+		 * This is not strictly part of the session initialisation but is needed
+		 * for any services to work :-(
+		 */
+		ServiceThreadExecutor.createExecutor();
+		CtagResourceMap.initCtagMap();
+		ResourceWorkerMap.initWorkerMap();
+
+		GetRoot(serverURL, credentials, true);
 	}
-	
-	private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate){
-		logger.debug(String.format("Connecting to %1$s", serverURL));
+
+	/*
+	 * Carries out the initial login into the system.
+	 */
+	private void GetRoot(URL serverURL, Credentials credentials, Boolean authenticate) throws Exception {
 		
-		HttpURLConnection theConnection = RestHelper.createConnection(serverURL, null, "GET", "application/json", 20000, headers, isCompressed);
+		boolean compressionEnabled = false;
+		if (serverURL.toString().length() > 0) {
+			SystemProperties.setProperty("ss.url", serverURL.getPath());
+		}
 		
-		InputStream inputStream = null;
-		try{
-			if(authenticate){
-				if(theConnection.getResponseCode() == 401){
-					logger.debug("Not authenticated. Logging on");
-					inputStream = theConnection.getErrorStream();
-					
-					String rawJson = RestHelper.getResponse(inputStream, isCompressed);
-					List<RestItem> restItems = JsonHelper.toRestItems(rawJson);
-					
-					String url = "";
-					for(RestItem restItem:restItems){
-						for(RestLink restLink:restItem.getLinks()){
-							if(restLink.getRelation().equals("http://api.sportingsolutions.com/rels/login")){
-								url = restLink.getHref();
-								break;
-							}
-						}
-						if(!url.isEmpty()){
-							break;
-						}
-					}
-					URL theURL = null;
-					try{
-						theURL = new URL(url);
-					}catch(MalformedURLException ex){
-						logger.warn("Malformed Login URL", ex);
-					}
-					
-					serviceRestItems = Login(theURL, credentials);
-					logger.info("Logged in successfully");
-				}
-			}else{
-				inputStream = theConnection.getInputStream();
-				
-				String rawJson = RestHelper.getResponse(inputStream, isCompressed);
-				serviceRestItems = JsonHelper.toRestItems(rawJson);
+		if (authenticate == true) {
+			
+			if (credentials != null) {
+				SystemProperties.setProperty("ss.username",
+						credentials.getUserName());
+				SystemProperties.setProperty("ss.password",
+						credentials.getPassword());
 			}
-		}catch(Exception ex){
-			logger.warn("Get Request Failed", ex);
+			
+			sessionResponse = httpSvcs.getSession(serverURL.toExternalForm(), compressionEnabled);
+			availableServices = httpSvcs.processLogin(sessionResponse,
+					"http://api.sportingsolutions.com/rels/login", "Login");
+		} else {
+			availableServices = httpSvcs.processLogin(sessionResponse,
+					"http://api.sportingsolutions.com/rels/login", "Login");
 		}
+		
+		if(availableServices != null)
+			serviceRestItems = availableServices.getServiceRestItems();
 	}
-	
-	private List<RestItem> Login(URL loginURL, Credentials credentials){
-		Map<String,String> headers = new HashMap<String,String>();
-		headers.put("X-Auth-User", credentials.getUserName());
-		headers.put("X-Auth-Key", credentials.getPassword());
+
+	/**
+	 * Retrieves a specific service from those available for this account.
+	 * 
+	 * @param svcName
+	 *            Name of service which will be retrieved from all services
+	 *            available for this account.
+	 */
+	public Service getService(String svcName) throws Exception {
 		
-		HttpURLConnection theConnection = RestHelper.createConnection(loginURL, null, "POST", "application/json", 60000, headers, isCompressed);
-		Map<String, List<String>> responseMap = theConnection.getHeaderFields();
-		
-		this.headers.put("X-Auth-Token", responseMap.get("X-Auth-Token").get(0));
-		String rawJson = "";
-		try {
-			rawJson = RestHelper.getResponse(theConnection.getInputStream(), isCompressed);
-		} catch (IOException ex) {
-			logger.warn("Unable to read response", ex);
+		logger.info("Retrieving service: " + svcName);
+
+		if (serviceRestItems == null) {
+			GetRoot(serverURL, null, false);			
 		}
-		return JsonHelper.toRestItems(rawJson);
-	}
-	
-	public Service getService(String name) {
-		logger.info(String.format("Get Service %1$s",name));
-		
-		if(serviceRestItems == null){
-			GetRoot(serverURL,null,false);
-		}
-		
-		if(serviceRestItems != null){
-			Service result = null;
-			for(RestItem restItem:serviceRestItems){
-				if(restItem.getName().equals(name)){
-					result = new ServiceImpl(headers,restItem);
+
+		// If we end up with no results at all return null
+		if (serviceRestItems != null) { 
+			for (RestItem restItem : serviceRestItems) {
+				if (restItem.getName().equals(svcName)) {
+					return new ServiceImpl(restItem, availableServices);
 				}
 			}
-			serviceRestItems = null;
-			return result;
 		}
+		
 		return null;
 	}
 
-	public List<Service> getServices() {
-		logger.info("Get all available services..");
+	/**
+	 * Retrieves all available services available for this account.
+	 */
+	public List<Service> getServices() throws Exception {
 		
-		if(serviceRestItems == null){
-			GetRoot(serverURL,null,false);
+		logger.info("Rerieving all services...");
+
+		if (serviceRestItems == null) {
+			GetRoot(serverURL, null, false);			
 		}
+
+		// If we end up with no results at all return null
+		List<Service> serviceSet = new ArrayList<Service>();
 		
-		List<Service> result = new ArrayList<Service>();
-		if(serviceRestItems != null){
-			for(RestItem restItem:serviceRestItems){
-				result.add(new ServiceImpl(headers,restItem));
+		if (serviceRestItems != null) {
+			for (RestItem restItem : serviceRestItems) {
+				serviceSet.add(new ServiceImpl(restItem, availableServices));
 			}
 		}
-		serviceRestItems = null;
-		return result;
+		
+		return serviceSet;
+	}
+
+	// Setter for unit testing
+	protected void setHttpSvcs(HttpServices httpSvcs, URL serverURL, Credentials credentials) throws Exception {
+		
+		SessionImpl.httpSvcs = httpSvcs;
+
+		this.serverURL = serverURL;
+
+		CtagResourceMap.initCtagMap();
+		ResourceWorkerMap.initWorkerMap();
+
+		GetRoot(serverURL, credentials, true);
+
+	}
+
+	// Getter for unit testing
+	protected String getServiceHref() {
+		return availableServices.getServiceRestItems().get(0).getLinks().get(0).getHref();
 	}
 
 }

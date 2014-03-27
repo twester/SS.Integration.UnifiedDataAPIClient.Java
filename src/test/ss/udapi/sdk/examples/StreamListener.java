@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -35,127 +35,159 @@ import com.google.gson.JsonParser;
 
 public class StreamListener {
 
-	private static Logger logger = Logger.getLogger(StreamListener.class.getName());
+	private static Logger logger = Logger.getLogger(StreamListener.class
+			.getName());
 	private Integer currentEpoch;
 	private Resource gtpFixture;
 	private Boolean fixtureEnded;
-	
-	public Boolean getFixtureEnded(){
+
+	public Boolean getFixtureEnded() {
 		return this.fixtureEnded;
 	}
-	
-	public StreamListener(Resource gtpFixture, Integer currentEpoch){
+
+	public StreamListener(Resource gtpFixture, Integer currentEpoch)
+			throws Exception {
+
 		this.fixtureEnded = false;
 		this.gtpFixture = gtpFixture;
 		this.currentEpoch = currentEpoch;
 		listen();
 	}
-	
-	private void listen(){
-		try{
-			List<Event> streamingEvents = new ArrayList<Event>();
-			
-			streamingEvents.add(new ConnectedEvent() {
-				public void onEvent(String message) {
-					logger.info(String.format("Stream Connected for %1$s", gtpFixture.getName()));
-				}
-			});
-				   
-			streamingEvents.add(new StreamEvent() {
-				public void onEvent(String message) {
-					logger.info(String.format("Streaming Message Arrived for %1$s", gtpFixture.getName()));
-					handleStreamMessage(message);
-			    }
-			});
-			
-			streamingEvents.add(new DisconnectedEvent() {
-				public void onEvent(String message){
-					logger.info(String.format("Stream Disconnected for %1$s", gtpFixture.getName()));
-				}
-			});
-			
-			streamingEvents.add(new SynchronizationEvent(){
-				public void onEvent(String message) {
-					handleSyncEvent();
-				}
-			});
-			
-			gtpFixture.startStreaming(streamingEvents);
-		}catch(Exception ex){
-			logger.error(ex);
-		}
+
+	private void listen() throws Exception {
+
+		List<Event> streamingEvents = new ArrayList<Event>();
+
+		streamingEvents.add(new ConnectedEvent() {
+			public void onEvent(String message) {
+				logger.info(String.format("Stream Connected for %1$s",
+						gtpFixture.getName()));
+			}
+		});
+
+		streamingEvents.add(new StreamEvent() {
+			public void onEvent(String message) {
+				logger.info(String.format("Streaming Message Arrived for %1$s",
+						gtpFixture.getName()));
+				handleStreamMessage(message);
+			}
+		});
+
+		streamingEvents.add(new DisconnectedEvent() {
+			public void onEvent(String message) {
+				logger.info(String.format("Stream Disconnected for %1$s",
+						gtpFixture.getName()));
+			}
+		});
+
+		streamingEvents.add(new SynchronizationEvent() {
+			public void onEvent(String message) {
+				handleSyncEvent();
+			}
+		});
+
+		gtpFixture.startStreaming(streamingEvents);
+
 	}
-	
-	private void handleStreamMessage(String streamString){
-		try{
+
+	private void handleStreamMessage(String streamString) {
+		try {
 			logger.info(streamString);
-			
+
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			Gson gson = gsonBuilder.create();
-			
-			JsonObject jsonObject = new JsonParser().parse(streamString).getAsJsonObject();
-			Fixture fixtureDelta = gson.fromJson(jsonObject.get("Content"), Fixture.class);
-			
-			logger.info(String.format("Attempting to process Markets and Selctions for %1$s", gtpFixture.getName()));
-			
-			if(fixtureDelta.getEpoch() > currentEpoch){
-				
-				if(fixtureDelta.getLastEpochChangeReason() != null && Arrays.asList(fixtureDelta.getLastEpochChangeReason()).contains(10)){
-					logger.info(String.format("Fixture %1$s has been deleted from the GTP Fixture Factory.", gtpFixture.getName()));
+
+			JsonObject jsonObject = new JsonParser().parse(streamString)
+					.getAsJsonObject();
+			Fixture fixtureDelta = gson.fromJson(jsonObject.get("Content"),
+					Fixture.class);
+
+			logger.info(String.format(
+					"Attempting to process Markets and Selctions for %1$s",
+					gtpFixture.getName()));
+
+			if (fixtureDelta.getEpoch() > currentEpoch) {
+
+				if (fixtureDelta.getLastEpochChangeReason() != null
+						&& Arrays.asList(
+								fixtureDelta.getLastEpochChangeReason())
+								.contains(10)) {
+					logger.info(String
+							.format("Fixture %1$s has been deleted from the GTP Fixture Factory.",
+									gtpFixture.getName()));
 					gtpFixture.stopStreaming();
 					this.fixtureEnded = true;
-				}else{
-					logger.info(String.format("Epoch changed for %1$s from %2$s to %3$s", gtpFixture.getName(), currentEpoch, fixtureDelta.getEpoch()));
+				} else {
+					logger.info(String.format(
+							"Epoch changed for %1$s from %2$s to %3$s",
+							gtpFixture.getName(), currentEpoch,
+							fixtureDelta.getEpoch()));
 					gtpFixture.pauseStreaming();
-					
-					logger.info(String.format("Get UDAPI Snapshot for %1$s", gtpFixture.getName()));
+
+					logger.info(String.format("Get UDAPI Snapshot for %1$s",
+							gtpFixture.getName()));
 					String snapshotString = gtpFixture.getSnapshot();
-					logger.info(String.format("Successfully retrieved UDAPI Snapshot for %1$s", gtpFixture.getName()));
-					
-					Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
+					logger.info(String.format(
+							"Successfully retrieved UDAPI Snapshot for %1$s",
+							gtpFixture.getName()));
+
+					Fixture fixtureSnapshot = gson.fromJson(snapshotString,
+							Fixture.class);
 					currentEpoch = fixtureSnapshot.getEpoch();
-					
-					//process the snapshot here
+
+					// process the snapshot here
 					logger.info(snapshotString);
-					
-					if(!fixtureDelta.getMatchStatus().equalsIgnoreCase("50")){
+
+					if (!fixtureDelta.getMatchStatus().equalsIgnoreCase("50")) {
 						gtpFixture.unpauseStreaming();
-					}else{
-						logger.info(String.format("Stopping Streaming for %1$s with id %2$s, Match Status is Match Over", gtpFixture.getName(), gtpFixture.getId()));
+					} else {
+						logger.info(String
+								.format("Stopping Streaming for %1$s with id %2$s, Match Status is Match Over",
+										gtpFixture.getName(),
+										gtpFixture.getId()));
 						gtpFixture.stopStreaming();
 						this.fixtureEnded = true;
 					}
 				}
-				
-			}else if(fixtureDelta.getEpoch() == currentEpoch){
-				//process the delta
+
+			} else if (fixtureDelta.getEpoch() == currentEpoch) {
+				// process the delta
 				logger.info(fixtureDelta.getMarkets().size());
 			}
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			logger.error(ex);
 		}
 	}
-	
-	private void handleSyncEvent(){
-		logger.warn(String.format("Stream out of sync for %1$s", gtpFixture.getName()));
-		
+
+	private void handleSyncEvent() {
+
+		logger.warn(String.format("Stream out of sync for %1$s",
+				gtpFixture.getName()));
+
 		gtpFixture.pauseStreaming();
-		
+
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
-		
-		logger.info(String.format("Get UDAPI Snapshot for %1$s", gtpFixture.getName()));
-		String snapshotString = gtpFixture.getSnapshot();
-		logger.info(String.format("Successfully retrieved UDAPI Snapshot for %1$s", gtpFixture.getName()));
-		
-		Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
-		currentEpoch = fixtureSnapshot.getEpoch();
-		
-		//process the snapshot here
-		logger.info(snapshotString);
-		
-		if(fixtureSnapshot.getMatchStatus() != "50"){
-			gtpFixture.unpauseStreaming();
+
+		logger.info(String.format("Get UDAPI Snapshot for %1$s",
+				gtpFixture.getName()));
+		try {
+			String snapshotString = gtpFixture.getSnapshot();
+			logger.info(String.format(
+					"Successfully retrieved UDAPI Snapshot for %1$s",
+					gtpFixture.getName()));
+
+			Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
+			currentEpoch = fixtureSnapshot.getEpoch();
+
+			// process the snapshot here
+			logger.info(snapshotString);
+
+			if (fixtureSnapshot.getMatchStatus() != "50") {
+				gtpFixture.unpauseStreaming();
+			}
+		} catch (Exception ex) {
+			logger.error("Error processing sync event: " + ex);
 		}
 	}
 }

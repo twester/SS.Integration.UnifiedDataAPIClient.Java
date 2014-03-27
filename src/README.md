@@ -1,6 +1,5 @@
 /*! \mainpage GTP SDK 
-
-This is the master repository for the Sporting Solutions Unified Data API Client for the .Net Framework.
+This is the master repository for the Sporting Solutions Unified Data API Client for Java.
 The SDK provides an easy to use interface into the Sporting Solutions Unified Data API.  
 
 Usage of this SDK requires a GTP username and password (available on request), it's usage is authorised only for current or prospective clients.
@@ -9,38 +8,53 @@ Any bug reports, comments, feedback or enhancements requests are gratefully rece
 
 Dependencies
 ----------------------
-You will need [Microsoft .NET Framework 4.0](http://www.microsoft.com/download/en/details.aspx?id=17718) to compile and use the library on Windows
+You will need [Oracle JDK 6](http://www.oracle.com/technetwork/java/javasebusiness/downloads/java-archive-downloads-javase6-419409.html) to compile and use the library
 
 Licence
 ----------------------
-Sporting Solutions Unified Data API Client for the .Net Framework is licenced under the terms of the Apache Licence Version 2.0, please see the included Licence.txt file
+Sporting Solutions Unified Data API Client for Java is licenced under the terms of the Apache Licence Version 2.0, please see the included Licence.txt file
 
 Getting Started
 ----------------------
-```c#	
-ICredentials credentials = new Credentials { UserName = "jim@bookies", Password = "password" };
-var theSession = SessionFactory.CreateSession(new Uri("http://{url here}"), credentials);
+```java	
+Credentials credentials = new CredentialsImpl ("jim@bookies","password" );
+URL theURL = new URL("http://{enter url here}");
+Session theSession = SessionFactory.createSession(theURL, credentials);
 
 //Get the Unified Data API Service
-var theService = theSession.GetService("UnifiedDataAPI");
+Service theService = theSession.getService("UnifiedDataAPI");
 
 //Sports are features, so lets get Tennis
-var theFeature = theService.GetFeature("Tennis");
+Feature theFeature = theService.getFeature("Tennis");
 
 //Events are resources, lets get all the events for Tennis
-var theResources = theFeature.GetResources();
+List<Resource> theResources = theFeature.getResources();
 
 //Grab the first event, this is only an example after all
-var theEvent = theResources.First();
+Resource theEvent = theResources.get(0);
 
-var theSnapshot = theEvent.GetSnapshot();
-System.Console.WriteLine(theSnapshot);
+String theSnapshot = theEvent.getSnapshot();
+System.out.println(theSnapshot);
 
 //Set up the Stream Event handlers
-theEvent.StreamConnected += (sender, args) => System.Console.WriteLine("Stream Connected");
-theEvent.StreamEvent += (sender, args) => System.Console.WriteLine(args.Update);
-theEvent.StreamDisconnected += (sender, args) => System.Console.WriteLine("Stream Disconnected");
+List<Event> streamingEvents = new ArrayList<Event>();
+streamingEvents.add(new ConnectedEvent() {
+	public void onEvent(String message) {
+		System.out.println("Stream Connected");
+	}
+});
+	   
+streamingEvents.add(new StreamEvent() {
+	public void onEvent(String message) {
+		System.out.println("Message Arrived :" + message);
+	}
+});
 
-theEvent.StartStreaming();
+streamingEvents.add(new DisconnectedEvent() {
+	public void onEvent(String message){
+		System.out.println("Stream Disconnected");
+	}
+});
+		
+theEvent.startStreaming(streamingEvents);
 ```
-

@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,48 +14,108 @@
 
 package ss.udapi.sdk;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
 import ss.udapi.sdk.interfaces.Feature;
 import ss.udapi.sdk.interfaces.Resource;
 import ss.udapi.sdk.model.RestItem;
+import ss.udapi.sdk.model.ServiceRequest;
+import ss.udapi.sdk.services.HttpServices;
 
-public class FeatureImpl extends Endpoint implements Feature{
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+/**
+ * Features provide access to available resources for that feature.
+ * 
+ */
+public class FeatureImpl implements Feature {
 	
-	Logger logger = Logger.getLogger(FeatureImpl.class.getName());
-	
-	FeatureImpl(Map<String,String> headers, RestItem restItem){
-		super(headers,restItem);
-		logger.debug(String.format("Instantiated Feature %1$s",restItem.getName()));
-	}
-	
-	public String getName() {
-		return state.getName();
+	private static Logger logger = Logger.getLogger(FeatureImpl.class.getName());
+	private static HttpServices httpSvcs = new HttpServices();
+	private ServiceRequest availableFeatures;
+	private RestItem restItem;
+
+	protected FeatureImpl(RestItem restItem, ServiceRequest availableFeatures) {
+		
+		if (restItem == null)
+			throw new IllegalArgumentException("restItem cannot be null");
+		
+		this.restItem = restItem;
+		this.availableFeatures = availableFeatures;
+		logger.info("Instantiated feature: " + restItem.getName());
 	}
 
-	public Resource getResource(String resourceName) {
-		logger.info(String.format("Get resource %1$s from %2$s",resourceName, getName()));
-		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/resources/list");
-		for(RestItem restItem:restItems){
-			if(restItem.getName().equals(resourceName)){
-				return new ResourceImpl(headers, restItem);
+	/**
+	 * Retrieves a specific resource from those available for this feature.
+	 * 
+	 * @param resourceName
+	 *            Name of resource which will be retrieved from all resources
+	 *            available for this account.
+	 */
+	public Resource getResource(String resourceName) throws Exception {
+		
+		logger.info("Retrieving resource: " + resourceName);
+
+		ServiceRequest availableResources = httpSvcs.processRequest(
+				availableFeatures,
+				"http://api.sportingsolutions.com/rels/resources/list",
+				restItem.getName());
+		
+		if (availableResources == null) 
+			return null;
+		
+		List<RestItem> restItems = availableResources.getServiceRestItems();
+		for (RestItem searchRestItem : restItems) {
+			if (searchRestItem.getName().equals(resourceName)) {
+				return new ResourceImpl(searchRestItem, availableResources);
 			}
 		}
+		
 		return null;
 	}
 
-	public List<Resource> getResources() {
-		logger.info(String.format("Get all available resources from %1$s",getName()));
-		List<Resource> result = new ArrayList<Resource>();
-		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/resources/list");
-		for(RestItem restItem:restItems){
-			result.add(new ResourceImpl(headers, restItem));
+	/**
+	 * Retrieves all available resources available for this feature.
+	 */
+	public List<Resource> getResources() throws Exception {
+		
+		logger.info("Retrieving all resources");
+
+		ServiceRequest availableResources = httpSvcs.processRequest(
+				availableFeatures,
+				"http://api.sportingsolutions.com/rels/resources/list",
+				restItem.getName());
+		
+		List<Resource> resourceSet = new ArrayList<Resource>();
+		
+		if(availableResources == null)
+			return resourceSet;
+		
+		List<RestItem> restItems = availableResources.getServiceRestItems();
+		
+		for (RestItem searchRestItem : restItems) {
+			resourceSet.add(new ResourceImpl(searchRestItem, availableResources));
 		}
-		return result;
+		
+		return resourceSet;
+	}
+
+	/**
+	 * Retrieves the feature name.
+	 */
+	public String getName() {
+		return restItem.getName();
+	}
+
+	// Setter for unit testing
+	protected void setHttpSvcs(HttpServices httpSvcs) {
+		FeatureImpl.httpSvcs = httpSvcs;
+	}
+
+	// Getter for unit testing
+	protected String getFeatureHref() {
+		return restItem.getLinks().get(0).getHref();
 	}
 
 }

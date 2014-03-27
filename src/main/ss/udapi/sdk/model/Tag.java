@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,30 +14,38 @@
 
 package ss.udapi.sdk.model;
 
+/**
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
+ */
 public class Tag {
-	
-	public void setValue(String value) {
-		this.Value = value;
-	}
-	public String getValue() {
-		return Value;
-	}
-	
-	public void setKey(String key) {
-		this.Key = key;
-	}
-	public String getKey() {
-		return Key;
-	}
-	
-	public void setId(Integer id) {
-		this.Id = id;
-	}
-	public Integer getId() {
-		return Id;
-	}
 	
 	private String Value;
 	private String Key;
 	private Integer Id;
+
+	public void setValue(String value) {
+		this.Value = value;
+	}
+
+	public String getValue() {
+		return Value;
+	}
+
+	public void setKey(String key) {
+		this.Key = key;
+	}
+
+	public String getKey() {
+		return Key;
+	}
+
+	public void setId(Integer id) {
+		this.Id = id;
+	}
+
+	public Integer getId() {
+		return Id;
+	}
+
 }

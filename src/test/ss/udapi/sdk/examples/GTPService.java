@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -41,127 +41,174 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class GTPService {
-	
+
 	private static Logger logger = Logger.getLogger(GTPService.class.getName());
-	
+
 	private Timer theTimer;
 	private List<String> sportsList;
-	private ConcurrentHashMap<String,StreamListener> listeners;
-	private ConcurrentHashMap<String,Boolean> activeFixtures;
-	
+	private ConcurrentHashMap<String, StreamListener> listeners;
+	private ConcurrentHashMap<String, Boolean> activeFixtures;
+
 	private Properties theProperties;
-	
-	public GTPService(String propertyFile){
-		
+
+	public GTPService(String propertyFile) throws IOException {
+
 		theProperties = new Properties();
 		try {
-			theProperties.load(new FileInputStream(propertyFile));
+			FileInputStream stream = new FileInputStream(propertyFile);
+			theProperties.load(stream);
+			stream.close();
 		} catch (IOException ex) {
-			logger.error("Can't load the properties file.",ex);
+			logger.error("Can't load the properties file.", ex);
+			throw ex;
+		}
+
+		sportsList = new ArrayList<String>();
+		// sportsList.add("Tennis");
+		sportsList.add("Football");
+		// sportsList.add("Basketball");
+		// sportsList.add("Baseball");
+		// sportsList.add("IceHockey");
+		// sportsList.add("TestCricket");
+		// sportsList.add("HorseRacing");
+		listeners = new ConcurrentHashMap<String, StreamListener>();
+		activeFixtures = new ConcurrentHashMap<String, Boolean>();
+	}
+
+	public void start() throws Exception {
+
+		logger.debug("Starting GTPService");
+		logger.info("Connecting to UDAPI....");
+		Credentials credentials = new CredentialsImpl(
+				theProperties.getProperty("ss.username"),
+				theProperties.getProperty("ss.password"));
+		Session theSession = SessionFactory.createSession(
+				new URL(theProperties.getProperty("ss.url")), credentials);
+		logger.info("Successfully connected to UDAPI");
+		
+		logger.debug("UDAPI, Getting Service");
+		final Service theService = theSession.getService("UnifiedDataAPI");
+		logger.debug("UDAPI, Retrieved Service");
+
+		// use this code to get the list of available features
+		// associated to the account
+		sportsList.clear();
+		for(final Feature sport:theService.getFeatures()) {
+			sportsList.add(sport.getName());
 		}
 		
-		sportsList = new ArrayList<String>();
-		sportsList.add("Tennis");
-//		sportsList.add("Football");
-	//	sportsList.add("Basketball");
-	//	sportsList.add("Baseball");
-//		sportsList.add("IceHockey");
-//		sportsList.add("TestCricket");
-		listeners = new ConcurrentHashMap<String,StreamListener>();
-		activeFixtures = new ConcurrentHashMap<String,Boolean>();
-	}
-	
-	public void start(){
-		try{
-			logger.debug("Starting GTPService");
-			logger.info("Connecting to UDAPI....");
-			Credentials credentials = new CredentialsImpl(theProperties.getProperty("ss.username"),theProperties.getProperty("ss.password"));
-			Session theSession = SessionFactory.createSession(new URL(theProperties.getProperty("ss.url")), credentials);
-			logger.info("Successfully connected to UDAPI");
-			logger.debug("UDAPI, Getting Service");
-			final Service theService = theSession.getService("UnifiedDataAPI");
-			logger.debug("UDAPI, Retrieved Service");
-			
-			logger.info("Starting Timer...");
-			theTimer = new Timer(true);
-			theTimer.scheduleAtFixedRate(new TimerTask(){public void run(){
+		logger.info("Starting Timer...");
+		theTimer = new Timer(true);
+		theTimer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
 				timerEvent(theService);
-			}}, 0, 60000);
-		}catch(Exception ex){
-			logger.error(ex);
-		}
+			}
+		}, 0, 30000);
+
 	}
-	
-	private void timerEvent(Service theService){
-		try{
-			for(final String sport:sportsList){
+
+	private void timerEvent(Service theService) {
+		
+		for (final String sport : sportsList) {
+		
+			try {
 				Feature theFeature = theService.getFeature(sport);
-				if(theFeature != null){
-					logger.info(String.format("Get the list of available fixtures for %1$s from GTP", sport));
+				if (theFeature != null) {
+
+					logger.info(String
+							.format("Get the list of available fixtures for %1$s from GTP",
+									sport));
+
 					List<Resource> fixtures = theFeature.getResources();
-					
-					if(fixtures != null && !fixtures.isEmpty()){
+
+					if (fixtures != null && !fixtures.isEmpty()) {
 						ExecutorService exec = Executors.newFixedThreadPool(10);
-						try{
-							for(final Resource resource:fixtures){
-								exec.submit(new Runnable(){
+						try {
+							for (final Resource resource : fixtures) {
+								exec.submit(new Runnable() {
 									@Override
-									public void run(){
-										processFixture(resource,sport);
+									public void run() {
+										processFixture(resource, sport);
 									}
 								});
 							}
-						}finally{
+						} finally {
 							exec.shutdown();
 						}
-					}else{
-						logger.info(String.format("There are currently no %1$s fixtures in UDAPI", sport));
+					} else {
+						logger.info(String
+								.format("There are currently no %1$s fixtures in UDAPI",
+										sport));
 					}
-				}else{
+				} else {
 					logger.info(String.format("Cannot find %1$s in UDAPI....", sport));
 				}
+				
+			} catch (Exception ex) {
+				logger.error(ex);
 			}
-		}catch(Exception ex){
-			logger.error(ex);
+			
 		}
 	}
-	
-	private void processFixture(Resource fixture, String sport){
-		if(!activeFixtures.containsKey(fixture.getId()) && !listeners.containsKey(fixture.getId())){
-			activeFixtures.put(fixture.getId(),true);
+
+	private void processFixture(Resource fixture, String sport) {
+		
+		if (!activeFixtures.containsKey(fixture.getId())
+				&& !listeners.containsKey(fixture.getId())) {
 			
+			activeFixtures.put(fixture.getId(), true);
+
 			Integer matchStatus = 0;
-			if(fixture.getContent() != null){
+			if (fixture.getContent() != null) {
 				matchStatus = fixture.getContent().getMatchStatus();
 			}
-			
-			if(matchStatus != 50){
-				
+
+			if (matchStatus != 50) {
+
 				GsonBuilder gsonBuilder = new GsonBuilder();
 				Gson gson = gsonBuilder.create();
+
+				logger.info(String.format(
+						"Get UDAPI Snapshot for %1$s id %2$s",
+						fixture.getName(), fixture.getId()));
 				
-				logger.info(String.format("Get UDAPI Snapshot for %1$s id %2$s", fixture.getName(), fixture.getId()));
-				String snapshotString = fixture.getSnapshot();
-				logger.info(String.format("Successfully retrieved UDAPI Snapshot for %1$s id %2$s", fixture.getName(), fixture.getName()));
-				
-				Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
-				Integer epoch = fixtureSnapshot.getEpoch();
-				
-				//do something with the snapshot here
-				
-				StreamListener streamListener = new StreamListener(fixture,epoch);
-				listeners.put(fixture.getId(), streamListener);
-				
-			}else{
-				logger.info(String.format("Fixture %1$s id %2$s has finished. Will not process.", fixture.getName(), fixture.getId()));
+				try {
+
+					String snapshotString = fixture.getSnapshot();
+					logger.info(String
+							.format("Successfully retrieved UDAPI Snapshot for %1$s id %2$s",
+									fixture.getName(), fixture.getId()));
+
+					Fixture fixtureSnapshot = gson.fromJson(snapshotString, Fixture.class);
+					Integer epoch = fixtureSnapshot.getEpoch();
+
+					// do something with the snapshot here
+
+					StreamListener streamListener = new StreamListener(fixture, epoch);
+					listeners.put(fixture.getId(), streamListener);
+					
+				} catch (Exception e) {
+					logger.error(e);
+				}
+
+			} else {
+				logger.info(String.format(
+						"Fixture %1$s id %2$s has finished. Will not process.",
+						fixture.getName(), fixture.getId()));
 			}
+			
 			activeFixtures.remove(fixture.getId());
-		}else{
-			logger.info(String.format("Fixture %1$s id %2$s is currently being processed", fixture.getName(), fixture.getId()));
-			if(listeners.containsKey(fixture.getId())){
-				if(listeners.get(fixture.getId()).getFixtureEnded()){
+			
+		} else {
+			
+			logger.info(String.format(
+					"Fixture %1$s id %2$s is currently being processed",
+					fixture.getName(), fixture.getId()));
+			if (listeners.containsKey(fixture.getId())) {
+				if (listeners.get(fixture.getId()).getFixtureEnded()) {
 					listeners.remove(fixture.getId());
-					logger.info(String.format("Fixture %1$s if %2$s is over", fixture.getId(), fixture.getName()));
+					logger.info(String.format("Fixture %1$s id %2$s is over",
+							fixture.getName(), fixture.getId()));
 				}
 			}
 		}

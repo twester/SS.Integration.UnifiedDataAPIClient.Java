@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -19,18 +19,26 @@ import java.util.Scanner;
 import org.apache.log4j.PropertyConfigurator;
 
 public class StreamingProgram {
-	
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//BasicConfigurator.configure();
+		// BasicConfigurator.configure();
 		PropertyConfigurator.configure(args[0]);
-		
-		GTPService theService = new GTPService(args[1]);
-		theService.start();
-		Scanner theScanner = new Scanner(System.in);
-		while(!theScanner.nextLine().equals(""));
+
+		GTPService theService;
+		try {
+			
+			theService = new GTPService(args[1]);
+			theService.start();
+			Scanner theScanner = new Scanner(System.in);
+			while (!theScanner.nextLine().equals(""));
+
+			theScanner.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,21 +14,30 @@
 
 package ss.udapi.sdk.interfaces;
 
-import java.util.List;
-
 import ss.udapi.sdk.model.Summary;
 import ss.udapi.sdk.streaming.Event;
 
+import java.util.List;
 
+/**
+ * Please see implementing classes
+ */
 public interface Resource {
+
 	public String getId();
+
 	public String getName();
+
 	public Summary getContent();
-	
-	public String getSnapshot();
-	public void startStreaming(List<Event> streamingEvents);
+
+	public String getSnapshot() throws Exception;
+
+	public void startStreaming(List<Event> streamingEvents) throws Exception;
+
 	public void stopStreaming();
-	public void pauseStreaming();	
+
+	public void pauseStreaming();
+
 	public void unpauseStreaming();
 
 }

@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -16,25 +16,30 @@ package ss.udapi.sdk.model;
 
 import java.util.List;
 
+/**
+ * Model used for JSON mapping - Direct use of this class will lead to undefined
+ * behaviour.
+ */
 public class RestItem {
-	/*Using Upper case so that deserialization from json works*/
+	
+	/* Using Upper case so that deserialization from json works */
 	private String Name;
 	private Summary Content;
 	private List<RestLink> Links;
 
-	public String getName(){
+	public String getName() {
 		return Name;
 	}
-	
-	public void setName(String name){
+
+	public void setName(String name) {
 		this.Name = name;
 	}
-	
-	public Summary getContent(){
+
+	public Summary getContent() {
 		return Content;
 	}
-	
-	public void setContent(Summary content){
+
+	public void setContent(Summary content) {
 		this.Content = content;
 	}
 
@@ -45,4 +50,5 @@ public class RestItem {
 	public List<RestLink> getLinks() {
 		return Links;
 	}
+
 }

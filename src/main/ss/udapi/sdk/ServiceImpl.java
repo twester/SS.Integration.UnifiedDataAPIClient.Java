@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -14,48 +14,107 @@
 
 package ss.udapi.sdk;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.log4j.Logger;
-
 import ss.udapi.sdk.interfaces.Feature;
 import ss.udapi.sdk.interfaces.Service;
 import ss.udapi.sdk.model.RestItem;
+import ss.udapi.sdk.model.ServiceRequest;
+import ss.udapi.sdk.services.HttpServices;
 
-public class ServiceImpl extends Endpoint implements Service {
+import java.util.ArrayList;
+import java.util.List;
 
-	Logger logger = Logger.getLogger(ServiceImpl.class.getName());
+import org.apache.log4j.Logger;
+
+/**
+ * Services provide access to available features for that service.
+ * 
+ */
+public class ServiceImpl implements Service {
 	
-	ServiceImpl(Map<String,String> headers, RestItem restItem){
-		super(headers,restItem);
-		logger.debug(String.format("Instantiated Service %1$s", restItem.getName()));
+	private Logger logger = Logger.getLogger(ServiceImpl.class.getName());
+	private ServiceRequest availableServices;
+	private RestItem restItem;
+	private static HttpServices httpSvcs = new HttpServices();
+
+	protected ServiceImpl(RestItem restItem, ServiceRequest availableServices) {
+		
+		if (restItem == null)
+			throw new IllegalArgumentException("restItem cannot be null");
+		
+		this.restItem = restItem;
+		this.availableServices = availableServices;
+		logger.info("Instantiated Service: " + restItem.getName());
 	}
-	
+
+	/**
+	 * Retrieves a specific feature from those available for this service.
+	 * 
+	 * @param featureName
+	 *            Name of feature which will be retrieved from all features
+	 *            available for this service.
+	 */
+	public Feature getFeature(String featureName) throws Exception {
+		
+		logger.info("Retrieving feature: " + featureName);
+
+		ServiceRequest availableFeatures = httpSvcs.processRequest(
+				availableServices, 
+				"http://api.sportingsolutions.com/rels/features/list", 
+				restItem.getName());
+	    
+		if(availableFeatures == null)
+			return null;
+		
+		List<RestItem> restItems = availableFeatures.getServiceRestItems();
+	    for(RestItem searchRestItem:restItems){
+	      if (searchRestItem.getName().equals(featureName)) {
+	        return new FeatureImpl(searchRestItem, availableFeatures);
+	      }
+	    }
+	    
+	    return null;
+	}
+
+	/**
+	 * Retrieves all available features available for this service.
+	 */
+	public List<Feature> getFeatures() throws Exception {
+
+		logger.info("Retrieving all features");
+
+		ServiceRequest availableFeatures = httpSvcs.processRequest(
+				availableServices,
+				"http://api.sportingsolutions.com/rels/features/list",
+				restItem.getName());
+		
+		List<Feature> featureSet = new ArrayList<Feature>();
+		if(availableFeatures == null)
+			return featureSet;
+		
+		List<RestItem> restItems = availableFeatures.getServiceRestItems();
+		
+		for (RestItem searchRestItem : restItems) {
+			featureSet.add(new FeatureImpl(searchRestItem, availableFeatures));
+		}
+		
+		return featureSet;
+	}
+
+	/**
+	 * Retrieves the service name.
+	 */
 	public String getName() {
-		return state.getName();
+		return restItem.getName();
 	}
 
-	public List<Feature> getFeatures() {
-		logger.info(String.format("Get all available services from %1$s", getName()));
-		List<Feature> result = new ArrayList<Feature>();
-		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/features/list");
-		for(RestItem restItem:restItems){
-			result.add(new FeatureImpl(headers, restItem));
-		}
-		return result;
+	// Setter for unit testing
+	protected void setHttpSvcs(HttpServices httpSvcs) {
+		ServiceImpl.httpSvcs = httpSvcs;
 	}
 
-	public Feature getFeature(String featureName) {
-		logger.info(String.format("Get feature %1$s from %2$s", featureName, getName()));
-		List<RestItem> restItems = FindRelationAndFollow("http://api.sportingsolutions.com/rels/features/list");
-		for(RestItem restItem:restItems){
-			if(restItem.getName().equals(featureName)){
-				return new FeatureImpl(headers, restItem);
-			}
-		}
-		return null;
+	// Getter for unit testing
+	protected String getServiceHref() {
+		return availableServices.getServiceRestItems().get(0).getLinks().get(0).getHref();
 	}
 
 }

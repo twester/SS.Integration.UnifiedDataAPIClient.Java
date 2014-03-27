@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -16,9 +16,15 @@ package ss.udapi.sdk.interfaces;
 
 import java.util.List;
 
+/**
+ * Please see implementing classes
+ */
 public interface Service {
+
 	public String getName();
-	
-	public List<Feature> getFeatures();
-	public Feature getFeature(String featureName);
+
+	public List<Feature> getFeatures() throws Exception;
+
+	public Feature getFeature(String featureName) throws Exception;
+
 }

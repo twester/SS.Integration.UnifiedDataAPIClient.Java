@@ -1,4 +1,4 @@
-//Copyright 2012 Spin Services Limited
+//Copyright 2014 Spin Services Limited
 
 //Licensed under the Apache License, Version 2.0 (the "License");
 //you may not use this file except in compliance with the License.
@@ -19,11 +19,22 @@ import java.net.URL;
 import ss.udapi.sdk.interfaces.Credentials;
 import ss.udapi.sdk.interfaces.Session;
 
-
+/**
+ * Factory which supplies session instances to the client.
+ * 
+ */
 public class SessionFactory {
-	
-	public static Session createSession(URL rootURL, Credentials credentials)  {
+
+	/**
+	 * @param rootURL
+	 *            Server end-point as supplied by Sporting Solutions.
+	 * @param credentials
+	 *            Credentials associated with a valid account grating access to
+	 *            the Sporting Solutions Service.
+	 * @return A session which provides access to services.
+	 */
+	public static Session createSession(URL rootURL, Credentials credentials) throws Exception {
 		return new SessionImpl(rootURL, credentials);
 	}
-	
+
 }

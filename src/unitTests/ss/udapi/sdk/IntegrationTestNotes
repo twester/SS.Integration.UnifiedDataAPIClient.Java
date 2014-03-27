@@ -1,0 +1,77 @@
+In order to run the integration test a docker container must be created with RabbitMQ.
+This will then be run inside a VM to provide MQ services.
+
+Commands in square brackets should be entered ad verbum.
+
+============================================================
+SYSTEM CONFIGURATION
+
+In order to set up your environment follow these steps (ignore steps 1 & 2 if vagrant 1.4.3 is already available):
+
+  1) install virtual box:
+          https://www.virtualbox.org/wiki/Downloads
+  2) install install-vagrant-on-windows-7
+          http://www.vagrantup.com/downloads.html
+  3) install git
+          http://git-scm.com/downloads
+  4) install docker
+          git clone https://github.com/dotcloud/docker.git
+          
+
+
+
+Now configure the environment by issuing the following commands within the docker directory,
+these are only needed following a fresh installation:
+
+    [vagrant up]
+    [vagrant halt]    # to clear out some gunk
+    [vagrant up]
+
+         
+         
+Log into vagrant (using putty or your favourite ssh client) as user "vagrant".           
+            
+Copy the file:
+    "initRabbitMq.sh"
+from this package into the vagrant's home directory (the default one when you log on as vagrant), and issue the command:
+    [chmod 744 initRabbitMq.sh]
+while logged onto vagrant copy the file:
+    "Dockerfile"
+in this package and issue the command (be sure to include the final period):
+
+    [sudo docker build -t sporting/rabbitmq .]
+    
+to create the container we will use from now on as our test instance of rabbitmq.
+
+
+
+    
+    
+    
+    
+
+============================================================
+TESTING ENVIRONMENT 
+
+These steps need to be carried out everytime to start up the VM and allow connectivity to RabbitMQ services,
+presumably within the build system
+
+    1) set up portforward:  vm(vagrant):5672 -> host_running_tests:5672
+    2) set up portforward:  vm(vagrant):15672 -> host_running_tests:15672
+    3) bring up the Vm with this command (if it's not already running)
+            [vagrant up]
+    4) then bring up the docker container which hosts activeMQ with this command
+            [docker run -d -p 15672:15672 -p 5672:5672 sporting/rabbitmq]
+    5) now issue the command
+            [./initRabbitMq.sh]
+       to create the users and vhost for the integration tests.
+  
+You may now run the tests from build.xml with:
+
+  [ant runAlltests]
+  
+
+Once completed the docker container can be stopped with (be sure to use back ticks not quotes):
+
+  [docker stop `docker ps -a|grep "sporting/rabbit"|cut -b 1-12`]
+  
