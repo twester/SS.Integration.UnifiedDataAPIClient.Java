@@ -17,6 +17,7 @@ package ss.udapi.sdk.services;
 import ss.udapi.sdk.model.RestItem;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.*;
@@ -34,9 +35,12 @@ public class JsonHelper {
 	public static List<RestItem> toRestItems(String json) {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		Gson gson = gsonBuilder.create();
+		
 
-		Type myListType = new TypeToken<List<RestItem>>() {
-		}.getType();
+		Type myListType = new TypeToken<List<RestItem>>() {}.getType();
+		if(json == null || json == "" || json.equals("\"\""))
+			return new ArrayList<RestItem>();
+		
 		List<RestItem> links = gson.fromJson(json, myListType);
 		return links;
 	}
