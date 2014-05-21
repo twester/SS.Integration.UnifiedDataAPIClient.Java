@@ -38,7 +38,7 @@ public class JsonHelper {
 		
 
 		Type myListType = new TypeToken<List<RestItem>>() {}.getType();
-		if(json == null || json == "" || json.equals("\"\""))
+		if(json == null || json.equals("") || json.equals("\"\""))
 			return new ArrayList<RestItem>();
 		
 		List<RestItem> links = gson.fromJson(json, myListType);
