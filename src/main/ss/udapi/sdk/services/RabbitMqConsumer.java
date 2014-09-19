@@ -119,7 +119,6 @@ public class RabbitMqConsumer extends DefaultConsumer {
 
 			String hardError = "";
 			String applInit = "";
-			String reason = "";
 
 			if (signal.isHardError()) {
 				hardError = "connection";
@@ -133,10 +132,9 @@ public class RabbitMqConsumer extends DefaultConsumer {
 				applInit = "broker";
 			}
 
-			reason = signal.getReason().toString();
 			logger.error("Connectivity to MQ has failed.  It was caused by "
 					+ applInit + " at the " + hardError
-					+ " level.  Reason received " + reason);
+					+ " level.  Reason received " + signal.getReason());
 		}
 		String resourceId = CtagResourceMap.getResource(cTag);
 		ResourceImpl resource = (ResourceImpl) ResourceWorkerMap
